@@ -1,0 +1,1 @@
+PZNS_JobFarmer = {};
