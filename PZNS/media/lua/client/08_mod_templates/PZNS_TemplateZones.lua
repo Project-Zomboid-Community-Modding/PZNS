@@ -1,1 +1,0 @@
-PZNS_ZoneChopWood = {};

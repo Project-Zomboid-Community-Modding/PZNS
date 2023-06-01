@@ -1,0 +1,43 @@
+local PZNS_UtilsDataGroups = require("02_mod_utils/PZNS_UtilsDataGroups");
+local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
+local PZNS_UtilsDataZones = require("02_mod_utils/PZNS_UtilsDataZones");
+local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
+
+-- Cows: Sandbox Options if needed
+-- Events.OnInitGlobalModData.Add(Get_PZNS_NPCBehaviorOptions_Sandbox);
+-- Events.OnInitGlobalModData.Add(Get_PZNS_NPCGroupsOptions_Sandbox);
+-- Events.OnInitGlobalModData.Add(Get_PZNS_NPCConfigOptions_Sandbox);
+-- Events.OnInitGlobalModData.Add(Get_PZNS_TimelineOptions_Sandbox);
+--
+Events.OnGameStart.Add(PZNS_UtilsDataGroups.PZNS_GetCreateActiveGroupsModData);
+Events.OnGameStart.Add(PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData);
+Events.OnGameStart.Add(PZNS_UtilsDataZones.PZNS_GetCreateActiveZonesModData);
+
+-- Cows: Perhaps someone else can come up with the multiplayer group creation...
+Events.OnGameStart.Add(PZNS_UtilsDataNPCs.PZNS_InitLoadNPCsData);
+Events.OnGameStart.Add(PZNS_LocalPlayerGroupCreation);
+Events.OnGameStart.Add(PZNS_UpdateISWorldMapRender);
+
+-- Cows: Events that should load after all other game start events.
+local function PZNS_Events()
+    Events.OnKeyPressed.Add(PZNS_KeyBindAction);
+    Events.OnWeaponSwing.Add(PZNS_WeaponSwing);
+    --
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugBuild);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWorld);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWipe);
+    --
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuZones);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuJobs);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuOrders);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuNPCInventory);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuSquareObjects);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuInvite);
+    --
+    Events.EveryOneMinute.Add(PZNS_WorldUtils.PZNS_SpawnNPCIfSquareIsLoaded);
+    Events.OnRenderTick.Add(PZNS_UpdateAllJobsRoutines);
+    Events.OnRenderTick.Add(PZNS_RenderNPCsText);
+end
+
+Events.OnGameStart.Add(PZNS_Events);
+Events.OnSave.Add(PZNS_UtilsDataNPCs.PZNS_SaveAllNPCData);

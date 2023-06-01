@@ -40,3 +40,4 @@ luac.out
 *.hex
 
 PZNS/.libraries/
+PZNS_Framework/.libraries/
