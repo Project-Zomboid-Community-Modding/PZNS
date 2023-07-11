@@ -257,6 +257,9 @@ function PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor)
         return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    if (npcIsoPlayer == nil) then
+        return;
+    end
     -- Cows: Stop aiming and stop attacking
     npcIsoPlayer:NPCSetAiming(false);
     npcIsoPlayer:NPCSetAttack(false);
@@ -419,6 +422,9 @@ function PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevel(npcSurvivor)
         return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    if (npcIsoPlayer == nil) then
+        return;
+    end
     --
     if (npcIsoPlayer:isAlive() == true) then
         npcIsoPlayer:getStats():setAnger(0.0);

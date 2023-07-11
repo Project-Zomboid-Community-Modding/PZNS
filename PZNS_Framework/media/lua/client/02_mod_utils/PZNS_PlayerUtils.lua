@@ -6,6 +6,7 @@ function PZNS_LocalPlayerGroupCreation()
     local mpPlayerID = 0;
     local playerGroupID = "Player" .. tostring(mpPlayerID) .. "Group";
     local playerGroup = PZNS_NPCGroupsManager.getGroupByID(playerGroupID);
+    getSpecificPlayer(mpPlayerID):getModData().survivorID = "Player" .. tostring(mpPlayerID);
     --
     if (playerGroup == nil) then
         playerGroup = PZNS_NPCGroupsManager.createGroup(playerGroupID);

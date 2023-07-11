@@ -1,5 +1,6 @@
 --- Cows: Placeholder flags for main options / sandbox options...
 IsDebugModeActive = true;
-IsNPCsNeedsActive = false;
 IsInfiniteAmmoActive = true;
+IsNPCsNeedsActive = false;
+IsPVPActive = false;
 GroupSizeLimit = 8;
