@@ -1,5 +1,6 @@
 local PZNS_CombatUtils = require("02_mod_utils/PZNS_CombatUtils");
 local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
+
 --[[
     WIP - Cows: Should add a check for ranged weaponry and if ammo is loaded the gun...
     Currently as-is, damage is done without ammo consideration
@@ -17,11 +18,8 @@ local function calculateNPCDamage(npcIsoPlayer, victim)
     --
     local aimingLevel = npcIsoPlayer:getPerkLevel(Perks.FromString("Aiming"));
     local npcWeapon = npcIsoPlayer:getPrimaryHandItem();
-    local weaponAimingModifier = npcWeapon:getAimingPerkHitChanceModifier();
-    local weaponDamage = npcWeapon:getMaxDamage(); -- Cows: Need to look at redoing weapon damage... otherwise NPC melee weapons will destroy everything.
-    local weaponHitChance = npcWeapon:getHitChance();
-    local skillHitChance = weaponAimingModifier * aimingLevel;
-    local actualHitChance = weaponHitChance + skillHitChance;
+    local actualHitChance = PZNS_CombatUtils.PZNS_CalculateHitChance(npcWeapon, aimingLevel, 0);
+    local weaponDamage = npcWeapon:getMaxDamage(); -- Cows: Need to look at redoing weapon damage... otherwise NPC melee weapons will destroy everything at max damage.
     --
     if (npcWeapon:isRanged()) then
         if (actualHitChance > ZombRand(100)) then
@@ -32,6 +30,10 @@ local function calculateNPCDamage(npcIsoPlayer, victim)
     end
 end
 
+---comment
+---@param npcSurvivor any
+---@param npcIsoPlayer IsoPlayer
+---@param targetObject IsoPlayer | IsoZombie
 local function meleeAttack(npcSurvivor, npcIsoPlayer, targetObject)
     if (npcSurvivor.attackTicks >= meleeTicks) then
         local isTargetAlive = targetObject:isAlive();
@@ -48,6 +50,10 @@ local function meleeAttack(npcSurvivor, npcIsoPlayer, targetObject)
     end
 end
 
+---comment
+---@param npcSurvivor any
+---@param npcIsoPlayer IsoPlayer
+---@param targetObject IsoPlayer | IsoZombie
 local function rangedAttack(npcSurvivor, npcIsoPlayer, targetObject)
     if (npcSurvivor.attackTicks >= rangedTicks) then
         local isTargetAlive = targetObject:isAlive();
@@ -140,9 +146,13 @@ local function rangeWeaponHandler(isoPlayer, playerWeapon)
 end
 
 ---comment
----@param isoPlayer any
+---@param isoPlayer IsoPlayer
 ---@param playerWeapon any
 function PZNS_WeaponSwing(isoPlayer, playerWeapon)
+    -- These weapon swing rules only applies to NPCs.
+    if (isoPlayer:isNPC() ~= true) then
+        return;
+    end
     local npcSurvivorID = isoPlayer:getModData().survivorID;
     -- Cows: Only NPCs should have isoPlayer moddata.
     if (npcSurvivorID ~= nil) then
