@@ -110,18 +110,6 @@ function PZNS_WorldUtils.PZNS_SpawnNPCIfSquareIsLoaded()
     end
 end
 
----comment
----@param targetObject any
----@return boolean
-function PZNS_WorldUtils.PZNS_IsTargetInvalidForDamage(targetObject)
-    -- Cows: If targetObject is not an IsoPlayer or IsoZombie, it is invalid for damage.
-    if not (instanceof(targetObject, "IsoPlayer") == true or instanceof(targetObject, "IsoZombie") == true) then
-        return true;
-    end
-
-    return false;
-end
-
 --- Cows: Checks if zombie is active/isAlive.
 ---@param currentObject any
 ---@return boolean

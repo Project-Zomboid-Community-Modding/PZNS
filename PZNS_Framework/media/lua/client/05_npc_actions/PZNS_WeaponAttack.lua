@@ -1,3 +1,4 @@
+local PZNS_CombatUtils = require("02_mod_utils/PZNS_CombatUtils");
 local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 --[[
     WIP - Cows: Should add a check for ranged weaponry and if ammo is loaded the gun...
@@ -10,7 +11,7 @@ local rangedTicks = 60; -- Cows: As ticks are inconsistent between machines... t
 ---@param npcIsoPlayer any
 ---@param victim any
 local function calculateNPCDamage(npcIsoPlayer, victim)
-    if (PZNS_WorldUtils.PZNS_IsTargetInvalidForDamage(victim) == true) then
+    if (PZNS_CombatUtils.PZNS_IsTargetInvalidForDamage(victim) == true) then
         return;
     end
     --
@@ -79,7 +80,7 @@ function PZNS_WeaponAttack(npcSurvivor)
     --
     if (targetObject ~= nil) then
         -- Cows: Check if the entity the NPC is aiming at is valid
-        if (PZNS_WorldUtils.PZNS_IsTargetInvalidForDamage(targetObject) == true) then
+        if (PZNS_CombatUtils.PZNS_IsTargetInvalidForDamage(targetObject) == true) then
             npcIsoPlayer:NPCSetAttack(false);
             -- PZNS_NPCSpeak(npcSurvivor, "No target to attack");
         else

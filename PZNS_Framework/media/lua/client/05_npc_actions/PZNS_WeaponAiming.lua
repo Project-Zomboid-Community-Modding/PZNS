@@ -1,3 +1,4 @@
+local PZNS_CombatUtils = require("02_mod_utils/PZNS_CombatUtils");
 local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 
 local spottingRange = 30; -- Cows: Perhaps a user option in the future...
@@ -15,7 +16,7 @@ function PZNS_WeaponAiming(npcSurvivor)
     --
     if (targetObject ~= nil) then
         -- Cows: Check if the entity the NPC is aiming at exists
-        if (PZNS_WorldUtils.PZNS_IsTargetInvalidForDamage(targetObject) == true) then
+        if (PZNS_CombatUtils.PZNS_IsTargetInvalidForDamage(targetObject) == true) then
             npcIsoPlayer:NPCSetAiming(false);
             return;
         else
