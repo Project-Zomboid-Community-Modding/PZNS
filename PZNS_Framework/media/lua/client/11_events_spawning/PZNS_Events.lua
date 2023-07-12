@@ -26,9 +26,11 @@ local function PZNS_Events()
     Events.OnWeaponSwing.Add(PZNS_WeaponSwing);
     Events.OnWeaponHitCharacter.Add(PZNS_CombatUtils.PZNS_CalculatePlayerDamage);
     --
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugBuild);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWorld);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWipe);
+    if (IsDebugModeActive == true) then
+        Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugBuild);
+        Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWorld);
+        Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWipe);
+    end
     --
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuZones);
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuJobs);
