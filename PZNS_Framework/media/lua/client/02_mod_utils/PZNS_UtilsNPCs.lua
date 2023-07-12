@@ -447,6 +447,18 @@ function PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevel(npcSurvivor)
     end
 end
 
+--- Cows: Clears ALL npcs' needs on call.
+function PZNS_UtilsNPCs.PZNS_ClearAllNPCsAllNeedsLevel()
+    local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+    --
+    for survivorID, v in pairs(activeNPCs) do
+        local npcSurvivor = activeNPCs[survivorID];
+        if (npcSurvivor.isAlive == true) then
+            PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevel(npcSurvivor);
+        end
+    end
+end
+
 --- WIP - Cows: Check and update the npcSurvivor isStuckTicks (depending on the npcSurvivor currentAction?)
 ---@param npcSurvivor any
 function PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor)

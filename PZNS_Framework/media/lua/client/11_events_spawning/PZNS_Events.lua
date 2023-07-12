@@ -2,13 +2,14 @@ local PZNS_CombatUtils = require("02_mod_utils/PZNS_CombatUtils");
 local PZNS_UtilsDataGroups = require("02_mod_utils/PZNS_UtilsDataGroups");
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsDataZones = require("02_mod_utils/PZNS_UtilsDataZones");
+local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 
 -- Cows: Sandbox Options if needed
 -- Events.OnInitGlobalModData.Add(Get_PZNS_NPCBehaviorOptions_Sandbox);
 -- Events.OnInitGlobalModData.Add(Get_PZNS_NPCGroupsOptions_Sandbox);
 -- Events.OnInitGlobalModData.Add(Get_PZNS_NPCConfigOptions_Sandbox);
--- Events.OnInitGlobalModData.Add(Get_PZNS_TimelineOptions_Sandbox);
+Events.OnInitGlobalModData.Add(PZNS_GetSandboxOptions);
 --
 Events.OnGameStart.Add(PZNS_UtilsDataGroups.PZNS_GetCreateActiveGroupsModData);
 Events.OnGameStart.Add(PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData);
@@ -26,11 +27,9 @@ local function PZNS_Events()
     Events.OnWeaponSwing.Add(PZNS_WeaponSwing);
     Events.OnWeaponHitCharacter.Add(PZNS_CombatUtils.PZNS_CalculatePlayerDamage);
     --
-    if (IsDebugModeActive == true) then
-        Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugBuild);
-        Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWorld);
-        Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWipe);
-    end
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugBuild);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWorld);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWipe);
     --
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuZones);
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuJobs);
@@ -39,6 +38,9 @@ local function PZNS_Events()
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuSquareObjects);
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuInvite);
     --
+    if (IsNPCsNeedsActive ~= true) then
+        Events.EveryHours.Add(PZNS_UtilsNPCs.PZNS_ClearAllNPCsAllNeedsLevel);
+    end
     Events.EveryOneMinute.Add(PZNS_WorldUtils.PZNS_SpawnNPCIfSquareIsLoaded);
     Events.OnRenderTick.Add(PZNS_UpdateAllJobsRoutines);
     Events.OnRenderTick.Add(PZNS_RenderNPCsText);
