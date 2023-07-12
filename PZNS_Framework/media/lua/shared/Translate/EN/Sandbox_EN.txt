@@ -12,5 +12,15 @@ Sandbox_EN = {
 
 	Sandbox_PZNS_Framework_GroupSizeLimit = "Group Size Limit",
 	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "Sets the limit of NPCs a group may have",
-	
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Companion Follow Range",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Sets the distance at which NPCs will try to follow the player",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Companion Run Range",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Sets the distance at which NPCs will start running to catch up",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "Companion Idles at Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "Sets the Tick counter at which NPCs will begin idle behaviors",
+
+
 }

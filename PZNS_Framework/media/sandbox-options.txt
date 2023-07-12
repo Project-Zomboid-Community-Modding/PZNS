@@ -38,3 +38,39 @@ option PZNS_Framework.GroupSizeLimit
 	page = PZNS_Framework,
 	translation = PZNS_Framework_GroupSizeLimit,
 }
+
+
+option PZNS_Framework.CompanionFollowRange
+{
+	type = integer,
+	min = 1,
+	max = 30,
+	default = 3,
+
+	page = PZNS_Framework,
+	translation = PZNS_Framework_CompanionFollowRange,
+}
+
+
+option PZNS_Framework.CompanionRunRange
+{
+	type = integer,
+	min = 1,
+	max = 50,
+	default = 5,
+
+	page = PZNS_Framework,
+	translation = PZNS_Framework_CompanionRunRange,
+}
+
+
+option PZNS_Framework.CompanionIdleTicks
+{
+	type = integer,
+	min = 500,
+	max = 10000,
+	default = 500,
+
+	page = PZNS_Framework,
+	translation = PZNS_Framework_CompanionIdleTicks,
+}

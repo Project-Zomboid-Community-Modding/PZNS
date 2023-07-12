@@ -3,10 +3,6 @@ local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
 local PZNS_GeneralAI = require("07_npc_ai/PZNS_GeneralAI");
 --
-local followRange = 3;        -- Cows: Perhaps a user option in the future...
-local runRange = 5;           -- Cows: Perhaps a user option in the future...
-local idleActionOnTick = 500; -- Cows: Perhaps a user option in the future...
-
 --- Cows: Gets the target IsoPlayer object by targetID.
 ---@param targetID string
 ---@return IsoPlayer
@@ -29,7 +25,7 @@ end
 local function isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer)
     local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
     --
-    if (distanceFromTarget > followRange) then
+    if (distanceFromTarget > CompanionFollowRange) then
         return false;
     end
 
@@ -98,7 +94,7 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
         end
     end
     -- Cows: Check the distance from target and start running if too far from target.
-    if (distanceFromTarget > runRange) then
+    if (distanceFromTarget > CompanionRunRange) then
         PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
     else
         local actionsCount = PZNS_UtilsNPCs.PZNS_GetNPCActionsQueuedCount(npcSurvivor);
@@ -156,7 +152,7 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
                     return; -- Cows: Stop processing and start attacking.
                 end
                 --Cows: Check if companion has idled for too long and take action.
-                if (npcSurvivor.idleTicks >= idleActionOnTick) then
+                if (npcSurvivor.idleTicks >= CompanionIdleTicks) then
                     -- Cows: Do Idle stuff, eat, wash, read books?
                     -- PZNS_NPCSpeak(npcSurvivor,
                     --     "I am getting bored here... idleTicks: " .. tostring(npcSurvivor.idleTicks), "InfoOnly"

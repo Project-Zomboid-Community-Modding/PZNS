@@ -6,4 +6,7 @@ function PZNS_GetSandboxOptions()
     IsInfiniteAmmoActive = pzns_options.IsInfiniteAmmoActive;
     IsNPCsNeedsActive = pzns_options.IsNPCsNeedsActive;
     GroupSizeLimit = pzns_options.GroupSizeLimit;
+    CompanionFollowRange = pzns_options.CompanionFollowRange;
+    CompanionRunRange = pzns_options.CompanionRunRange;
+    CompanionIdleTicks = pzns_options.CompanionIdleTicks;
 end
