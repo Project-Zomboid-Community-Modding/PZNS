@@ -87,7 +87,7 @@ function PZNS_DebuggerUtils.LogNPCsModData()
 end
 
 ---comment
-function LogNPCGroupsModData()
+function PZNS_DebuggerUtils.LogNPCGroupsModData()
     local modData = PZNS_UtilsDataGroups.PZNS_GetCreateActiveGroupsModData();
     local isLoggingLocalFunction = true;
     --
@@ -132,7 +132,7 @@ function PZNS_DebuggerUtils.PZNS_WipeAllData()
 end
 
 --- Cows: Get all the ModData tables.
-function PZNS_GetAllModDataTables()
+function PZNS_DebuggerUtils.PZNS_LogAllModDataTables()
     local isLoggingLocalFunction = true;
     --
     if (isLoggingLocalFunction) then
