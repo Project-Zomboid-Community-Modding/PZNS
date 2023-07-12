@@ -1,9 +1,9 @@
+local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 --[[
     Cows: The differences between an action, an order, and a job is that an "action" can be queued, rearranged, or cleared as needed.
     An order may be made up of multiple actions and possibly carried out differently depending on job.
     A Job is a collection of actions and orders while conditionally carrying out said actions and orders.
 --]]
-local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 PZNS_CellZombiesList = {}; -- Cows: Init PZNS_CellZombiesList as an empty table, which can then be used by all NPCs to evaluate the zombie threat.
 
 local function doNothing()

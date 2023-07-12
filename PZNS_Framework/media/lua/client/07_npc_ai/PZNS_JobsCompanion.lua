@@ -1,12 +1,14 @@
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
-local followRange = 3;
-local runRange = 5;
-local idleActionOnTick = 200;
+local PZNS_GeneralAI = require("07_npc_ai/PZNS_GeneralAI");
+--
+local followRange = 3;        -- Cows: Perhaps a user option in the future...
+local runRange = 5;           -- Cows: Perhaps a user option in the future...
+local idleActionOnTick = 500; -- Cows: Perhaps a user option in the future...
 
----comment
----@param targetID any
+--- Cows: Gets the target IsoPlayer object by targetID.
+---@param targetID string
 ---@return IsoPlayer
 local function getTargetIsoPlayerByID(targetID)
     local targetIsoPlayer;
@@ -20,9 +22,9 @@ local function getTargetIsoPlayerByID(targetID)
     return targetIsoPlayer;
 end
 
----comment
----@param npcIsoPlayer any
----@param targetIsoPlayer any
+--- Cows: Checks if npc is within the follow range of the target.
+---@param npcIsoPlayer IsoPlayer
+---@param targetIsoPlayer IsoPlayer
 ---@return boolean
 local function isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer)
     local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
@@ -34,9 +36,9 @@ local function isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer)
     return true;
 end
 
----comment
+--- Cows: NPC companion will attempt to enter the car the target is in.
 ---@param npcSurvivor any
----@param targetIsoPlayer any
+---@param targetIsoPlayer IsoPlayer
 local function jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
@@ -51,10 +53,10 @@ local function jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer)
     end
 end
 
----comment
+--- Cows: Offsets the target square so the npc doesn't run into the target
 ---@param currentSquare any
 ---@param targetSquare any
----@param offset any
+---@param offset number
 ---@return unknown
 local function offsetTargetSquare(currentSquare, targetSquare, offset)
     --
@@ -68,11 +70,16 @@ end
 
 --- Cows: Move the npcSurvivor relative to the target.
 ---@param npcSurvivor any
----@param targetIsoPlayer any
+---@param targetIsoPlayer IsoPlayer
 local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local npcSquareX = npcIsoPlayer:getX();
     local npcSquareY = npcIsoPlayer:getY();
+    npcIsoPlayer:NPCSetAiming(false);
+    npcIsoPlayer:NPCSetAttack(false);
+    --
+    local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
+    npcIsoPlayer:faceThisObject(targetIsoPlayer);
     --
     local targetX = targetIsoPlayer:getX();
     local targetY = targetIsoPlayer:getY();
@@ -80,10 +87,6 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
     -- Cows: Offset by 1 square to ensure the npcSurvivor companion doesn't push into the followed target.
     targetX = offsetTargetSquare(npcSquareX, targetX, 1);
     targetY = offsetTargetSquare(npcSquareY, targetY, 1);
-
-    local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
-    npcIsoPlayer:faceThisObject(targetIsoPlayer);
-
     -- Cows: Auto Close doors
     if (npcIsoPlayer:getLastSquare() ~= nil) then
         local cs = npcIsoPlayer:getCurrentSquare()
@@ -94,10 +97,7 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
             tempdoor:ToggleDoor(npcIsoPlayer);
         end
     end
-
-    npcIsoPlayer:NPCSetAiming(false);
-    npcIsoPlayer:NPCSetAttack(false);
-
+    -- Cows: Check the distance from target and start running if too far from target.
     if (distanceFromTarget > runRange) then
         PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
     else
@@ -111,9 +111,10 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
 end
 
 
----comment
+
+--- Cows: The "Companion" Job only works if the npcSurvivor and its target exists.
 ---@param npcSurvivor any
----@param targetID IsoPlayer
+---@param targetID string
 function PZNS_JobCompanion(npcSurvivor, targetID)
     if (npcSurvivor == nil) then
         return nil;
@@ -122,7 +123,7 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local targetIsoPlayer = getTargetIsoPlayerByID(targetID);
     --
-    if (npcIsoPlayer) then
+    if (npcIsoPlayer and targetIsoPlayer) then
         -- Cows: Check if npcSurvivor is not holding in place
         if (npcSurvivor.isHoldingInPlace ~= true) then
             local isTargetInCar = targetIsoPlayer:getVehicle();
@@ -133,7 +134,7 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
                 jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer);
                 -- Cows: Else check if npcSurvivor and follow target are both in a car
             elseif (isTargetInCar ~= nil and isSelfInCar ~= nil) then
-                -- WIP - Cows: perhaps NPCs can attack targets while in the car with a gun?...
+                -- WIP - Cows: perhaps NPCs can attack hostiles while in the car with a gun?...
                 npcSurvivor.idleTicks = 0;
 
                 -- Cows: Check if target is NOT in a car and exit the car if self is in one.
@@ -145,42 +146,33 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
                 if (isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer) == false or canSeeTarget == false) then
                     npcSurvivor.idleTicks = 0;
                     jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
-                    return; -- Cows: Stop processing and start running to followed target.
+                    return; -- Cows: Stop processing and start moving to target.
                 end
-
                 --
-                local isThreatInSight = PZNS_CanSeeAimTarget(npcSurvivor);
-                if (isThreatInSight == true) then
+                local isThreatFound = PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor);
+                if (isThreatFound == true) then
                     npcSurvivor.idleTicks = 0;
-                    PZNS_NPCAimAttack(npcSurvivor);
+                    PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor);
                     return; -- Cows: Stop processing and start attacking.
-                    -- Cows: Check for threats before committing to idle actions.
                 end
-                --
-                local isThreatFound = PZNS_CheckZombieThreat(npcSurvivor);
-                if (isThreatFound == false and npcSurvivor.idleTicks < idleActionOnTick) then
-                    npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
-                elseif (isThreatFound == false and npcSurvivor.idleTicks >= idleActionOnTick) then
+                --Cows: Check if companion has idled for too long and take action.
+                if (npcSurvivor.idleTicks >= idleActionOnTick) then
                     -- Cows: Do Idle stuff, eat, wash, read books?
+                    -- PZNS_NPCSpeak(npcSurvivor,
+                    --     "I am getting bored here... idleTicks: " .. tostring(npcSurvivor.idleTicks), "InfoOnly"
+                    -- );
                 else
-                    npcSurvivor.idleTicks = 0;
-                    PZNS_NPCAimAttack(npcSurvivor);
+                    npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
                 end
             end
         else
             -- Cows: else assume the npcSurvivor is holding in place.
-            local isThreatInSight = PZNS_CanSeeAimTarget(npcSurvivor);
-            --
-            if (isThreatInSight == true) then
-                npcSurvivor.idleTicks = 0;
-                PZNS_NPCAimAttack(npcSurvivor);
-                return; -- Cows: Stop processing and start attacking.
-            end
-            local isThreatFound = PZNS_CheckZombieThreat(npcSurvivor);
-            --
+            -- Cows: Check if threat is in sight.
+            local isThreatFound = PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor);
             if (isThreatFound == true) then
                 npcSurvivor.idleTicks = 0;
-                PZNS_NPCAimAttack(npcSurvivor);
+                PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor);
+                return; -- Cows: Stop processing and start attacking.
             end
         end
     end

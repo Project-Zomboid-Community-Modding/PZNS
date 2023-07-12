@@ -1,13 +1,16 @@
 local PZNS_UtilsZones = require("02_mod_utils/PZNS_UtilsZones");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
-
+local PZNS_GeneralAI = require("07_npc_ai/PZNS_GeneralAI");
+--
 local isCellChecked = false; -- WIP - Cows: Considered using "npcSurvivor.isJobRefreshed"... but that means there will be multiple refresh which may be very bad
-local dropZoneRadius = 15;
+local dropZoneRadius = 15; -- WIP - Cows: Perhaps a user option in the future...
 --
 local isRenderingGrabSquareHighlight = false; -- WIP - Cows: This is intended for local debug.
 local debugGrabSquare = nil;                  -- WIP - Cows: This is intended for local debug.
 local debugDropSquare = nil;                  -- WIP - Cows: This is intended for local debug.
---
+---comment
+---@param inputSquares any
+---@return table
 local function getCorpseSquares(inputSquares)
     local corpseSquares = {};
 
@@ -22,7 +25,9 @@ local function getCorpseSquares(inputSquares)
 
     return corpseSquares;
 end
---
+
+---comment
+---@return table
 local function checkCellForCorpseSquares()
     --
     local workZone = PZNS_UtilsZones.PZNS_GetGroupZoneBoundary("Player0Group", "ZoneDropCorpses");
@@ -67,7 +72,6 @@ local function renderDropSquare()
     end
 end
 
-
 ---comment
 ---@param npcSurvivor any
 function PZNS_JobUndertaker(npcSurvivor)
@@ -85,17 +89,10 @@ function PZNS_JobUndertaker(npcSurvivor)
     --
     if (npcSurvivor.canAttack == true) then
         --
-        local isThreatInSight = PZNS_CanSeeAimTarget(npcSurvivor);
-        if (isThreatInSight == true) then
-            PZNS_NPCSpeak(npcSurvivor, "Spotted Threat, Attacking", "InfoOnly");
-            PZNS_NPCAimAttack(npcSurvivor);
-            return; -- Cows: Stop processing and start attacking.
-        end
-        --
-        local isThreatFound = PZNS_CheckZombieThreat(npcSurvivor);
+        local isThreatFound = PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor);
         if (isThreatFound == true) then
             PZNS_NPCSpeak(npcSurvivor, "Found Threat, Attacking", "InfoOnly");
-            PZNS_NPCAimAttack(npcSurvivor);
+            PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor);
             return; -- Cows: Stop processing and start attacking.
         end
     end
