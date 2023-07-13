@@ -60,25 +60,26 @@ end
 function PZNS_UtilsNPCs.PZNS_AddItemToInventoryNPCSurvivor(npcSurvivor, itemID)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
-        return;
+        return nil;
     end
     local item = instanceItem(itemID);
     --
     if (item ~= nil) then
         npcIsoPlayer:getInventory():AddItem(item);
     end
+    return item
 end
 
 --- Cows: Simple code to remove item to npcSurvivor inventory.
 ---@param npcSurvivor any
----@param item Item
-function PZNS_UtilsNPCs.PZNS_RemoveItemFromInventoryNPCSurvivor(npcSurvivor, item)
+---@param itemID integer
+function PZNS_UtilsNPCs.PZNS_RemoveItemFromInventoryNPCSurvivor(npcSurvivor, itemID)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
-        return;
+        return false;
     end
     -- WIP - Cows: Need to specify the amount? Item ID?
-    npcIsoPlayer:getInventory():removeItemWithID(item);
+    return npcIsoPlayer:getInventory():removeItemWithID(itemID);
 end
 
 --- Cows: Simple code to add clothingItem to npcSurvivor inventory and wear it.
@@ -87,7 +88,7 @@ end
 function PZNS_UtilsNPCs.PZNS_AddEquipClothingNPCSurvivor(npcSurvivor, clothingID)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
-        return;
+        return nil;
     end
     local clothingItem = instanceItem(clothingID);
     --
@@ -99,6 +100,7 @@ function PZNS_UtilsNPCs.PZNS_AddEquipClothingNPCSurvivor(npcSurvivor, clothingID
             npcIsoPlayer:setWornItem(bodyPartLocation, clothingItem);
         end
     end
+    return clothingItem
 end
 
 --- Cows: Simple code to add weaponItem to npcSurvivor inventory and equip it.
@@ -107,11 +109,19 @@ end
 function PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, weaponID)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
-        return;
+        return nil;
     end
     local weaponItem = instanceItem(weaponID);
     --
     if (weaponItem ~= nil) then
+        --removes already equipped item if any
+        local previousPHandItem = npcIsoPlayer:getPrimaryHandItem();
+        if previousPHandItem then
+            local previousSHandItem = npcIsoPlayer:getSecondaryHandItem();
+            if previousSHandItem == previousPHandItem then
+                npcIsoPlayer:setSecondaryHandItem(nil);
+            end
+        end
         npcIsoPlayer:getInventory():AddItem(weaponItem);
         npcIsoPlayer:setPrimaryHandItem(weaponItem);
         --
@@ -130,6 +140,7 @@ function PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, weaponID)
             npcIsoPlayer:setSecondaryHandItem(weaponItem);
         end
     end
+    return weaponItem or npcIsoPlayer:getPrimaryHandItem();
 end
 
 --- WIP - Cows: Simple code to equip the last weapon the npcSurvivor had.
@@ -137,12 +148,14 @@ end
 function PZNS_UtilsNPCs.PZNS_EquipLastWeaponNPCSurvivor(npcSurvivor)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
-        return;
+        return nil;
     end
-    local weaponItem = instanceItem(npcSurvivor.lastEquippedRangeWeapon);
+    local weaponItem = nil
     --
-    if (npcSurvivor.isMeleeOnly == true) then
+    if (npcSurvivor.isMeleeOnly == true) then -- TODO reuse item from inventory if any of the same type
         weaponItem = instanceItem(npcSurvivor.lastEquippedMeleeWeapon);
+    else
+        weaponItem = instanceItem(npcSurvivor.lastEquippedRangeWeapon);
     end
     --
     if (weaponItem ~= nil) then
@@ -164,6 +177,7 @@ function PZNS_UtilsNPCs.PZNS_EquipLastWeaponNPCSurvivor(npcSurvivor)
             npcIsoPlayer:setSecondaryHandItem(weaponItem);
         end
     end
+    return weaponItem or npcIsoPlayer:getPrimaryHandItem()
 end
 
 ---comment
