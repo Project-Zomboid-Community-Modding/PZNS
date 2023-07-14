@@ -42,17 +42,18 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
             -- Cows: Clear the existing queued actions for the npcSurvivor when an Order is issued.
             PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
             PZNS_NPCSpeak(npcSurvivor, "Order " .. PZNS_NPCOrdersText[orderKey] .. "  acknowledged!", "Friendly");
+            local playerSurvivor = getSpecificPlayer(mpPlayerID);
             --
             if (orderKey == "FollowMe" or orderKey == "AimAtMe") then
-                getSpecificPlayer(mpPlayerID):Say(npcSurvivor.forename ..
+                playerSurvivor:Say(npcSurvivor.forename ..
                     ", " .. PZNS_NPCOrdersText[orderKey] .. ", " .. followTargetID
                 );
                 PZNS_NPCOrderActions[orderKey](npcSurvivor, followTargetID);
             elseif (orderKey == "HoldPosition") then
-                getSpecificPlayer(mpPlayerID):Say(npcSurvivor.forename .. ", " .. PZNS_NPCOrdersText[orderKey]);
+                playerSurvivor:Say(npcSurvivor.forename .. ", " .. PZNS_NPCOrdersText[orderKey]);
                 PZNS_NPCOrderActions[orderKey](npcSurvivor, square);
             else
-                getSpecificPlayer(mpPlayerID):Say(npcSurvivor.forename .. ", " .. PZNS_NPCOrdersText[orderKey]);
+                playerSurvivor:Say(npcSurvivor.forename .. ", " .. PZNS_NPCOrdersText[orderKey]);
                 PZNS_NPCOrderActions[orderKey](npcSurvivor);
             end
         end

@@ -60,11 +60,12 @@ function PZNS_PlayerUtils.PZNS_GetPlayerCellGridSquare(mpPlayerID)
     if (mpPlayerID ~= nil) then
         localPlayerID = mpPlayerID;
     end
+    local playerSurvivor = getSpecificPlayer(localPlayerID);
     --
     local gridSquare = getCell():getGridSquare(
-        getSpecificPlayer(localPlayerID):getX(),
-        getSpecificPlayer(localPlayerID):getY(),
-        getSpecificPlayer(localPlayerID):getZ()
+        playerSurvivor:getX(),
+        playerSurvivor:getY(),
+        playerSurvivor:getZ()
     );
     return gridSquare;
 end
