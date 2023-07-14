@@ -358,7 +358,7 @@ function PZNS_CreateInventoryTransferPanel(survivorID, mpPlayerID)
     npcTransferPanel = PanelInventoryTransfer:new(
         200,
         20,
-        900,
+        950,
         300,
         survivorID,
         mpPlayerID
