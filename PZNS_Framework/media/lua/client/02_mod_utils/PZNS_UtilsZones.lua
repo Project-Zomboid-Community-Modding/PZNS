@@ -5,10 +5,10 @@
 --]]
 local PZNS_UtilsDataZones = require("02_mod_utils/PZNS_UtilsDataZones");
 
-PZNS_IsCreatingZone = false;
-PZNS_IsShowingZone = false;
-PZNS_IsZoneActive = false;
--- Cows: The zoneKeys also serves as zoneType.
+PZNS_IsCreatingZone = false; -- WIP - Cows: Need to rethink how Global variables are used...
+PZNS_IsShowingZone = false;  -- WIP - Cows: Need to rethink how Global variables are used...
+PZNS_IsZoneActive = false;   -- WIP - Cows: Need to rethink how Global variables are used...
+-- WIP - Cows: Need to rethink how Global variables are used... Cows: The zoneKeys also serves as zoneType.
 PZNS_ZonesText = {
     -- ZoneChopWood = "Chop Wood Zone",
     -- ZoneConstruction = "Construction Zone",
@@ -18,7 +18,7 @@ PZNS_ZonesText = {
     -- ZoneStoreFood = "Food Store Zone",
     -- ZoneStoreWood = "Wood Store Zone",
 };
---- WIP - Cows: Color for each zone type... but rendering multiple zones highlight kills the game performance... so it is unused for now.
+-- WIP - Cows: Need to rethink how Global variables are used... Cows: Color for each zone type... but rendering multiple zones highlight kills the game performance...
 PZNS_ZoneColors = {
     -- ZoneChopWood = ColorInfo.new(0, 0, 0, 0.8),
     -- ZoneConstruction = ColorInfo.new(0, 0, 0, 0.8),
