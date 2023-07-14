@@ -3,6 +3,24 @@ local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
 
+---Cows: Checks the distance between the playerSurvivor and the npc
+function PZNS_CheckDistToNPCInventory()
+    if PZNS_ActiveInventoryNPC == nil then
+        return;
+    end
+    local playerSurvivor = getSpecificPlayer(0);
+    local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
+    -- Cows: Check and reset the PZNS_ActiveInventoryNPC if the NPC is beyond 2 squares away.
+    if (npcIsoPlayer) then
+        local npcDistanceFromPlayer = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(playerSurvivor, npcIsoPlayer);
+        --
+        if (npcDistanceFromPlayer > 2) then
+            PZNS_ActiveInventoryNPC = {};
+            Events.OnPlayerMove.Remove(PZNS_CheckDistToNPCInventory);
+        end
+    end
+end
+
 ---comment
 ---@param mpPlayerID any
 ---@param npcSurvivor any

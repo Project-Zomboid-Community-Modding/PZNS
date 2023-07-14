@@ -3,24 +3,6 @@ local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
     Cows: This is based on Aiteron's NPC Mod https://github.com/aiteron/NPC/blob/master/media/lua/client/NPC-Mod/UI/NPCInventoryUI.lua
 --]]
 
----Cows: Checks the distance between the playerSurvivor and the npc
-function PZNS_CheckDistToNPCInventory()
-    if PZNS_ActiveInventoryNPC == nil then
-        return;
-    end
-    local playerSurvivor = getSpecificPlayer(0);
-    local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
-    -- Cows: Check and reset the PZNS_ActiveInventoryNPC if the NPC is beyond 2 squares away.
-    if (npcIsoPlayer) then
-        local npcDistanceFromPlayer = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(playerSurvivor, npcIsoPlayer);
-        --
-        if (npcDistanceFromPlayer > 2) then
-            PZNS_ActiveInventoryNPC = {};
-            Events.OnPlayerMove.Remove(PZNS_CheckDistToNPCInventory);
-        end
-    end
-end
-
 ---Cows: Adds a button to the right panel of the inventory UI which allows the access to the NPC inventory.
 ---@param page any
 ---@param step any
