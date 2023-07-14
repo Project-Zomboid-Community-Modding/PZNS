@@ -6,13 +6,13 @@ This is an effort to standardize NPC management and spawning while offering the 
 All functions in PZNS will have working examples for modders to follow so that they create and spawn their own npc creations in-game.  
 
 ## __**HELP WANTED AND NEEDED**__  
-- UI Window for inventory transfers
 - UI Window for inspecting NPCs.
 - UI Window for group management (currently it is all done via context menu).
 - Main Menu Options or Sandbox Options (Debug Mode Toggle and key bindings).
 - More NPC Actions
 - More NPC Orders
 - More NPC Jobs
+- UI Window for inventory transfers (Mostly done, needs more polish and testing).
 - Preset Speech texts for NPCs *(Low priority)*
 - Resolving more issues as they become known... (too much unknown at this point).
 
