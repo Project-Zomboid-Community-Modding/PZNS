@@ -12,6 +12,8 @@ local function openNPCInventory(mpPlayerID, npcSurvivor)
         return;
     end
     PZNS_NPCsManager.setActiveInventoryNPCBySurvivorID(npcSurvivor.survivorID);
+    -- Cows: Force reload the container window.
+    ISPlayerData[mpPlayerID + 1].lootInventory:refreshBackpacks();
     Events.OnPlayerMove.Add(PZNS_CheckDistToNPCInventory);
 end
 
