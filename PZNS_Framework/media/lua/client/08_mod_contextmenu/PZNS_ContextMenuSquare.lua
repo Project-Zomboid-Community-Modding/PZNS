@@ -103,10 +103,11 @@ function PZNS_CreateSquareGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupI
     local groupMembers = PZNS_NPCGroupsManager.getGroupByID(groupID);
     --
     if (groupMembers) then
+        local playerSurvivor = getSpecificPlayer(mpPlayerID);
         for survivorID, v in pairs(groupMembers) do
             local npcSurvivor = activeNPCs[survivorID];
             local callbackFunction = function()
-                getSpecificPlayer(mpPlayerID):Say(npcSurvivor.forename .. ", " ..
+                playerSurvivor:Say(npcSurvivor.forename .. ", " ..
                     PZNS_SquareContextActionsText[orderKey]
                 );
                 PZNS_NPCSpeak(npcSurvivor,

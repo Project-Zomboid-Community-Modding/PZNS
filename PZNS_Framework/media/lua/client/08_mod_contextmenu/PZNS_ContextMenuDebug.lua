@@ -6,92 +6,102 @@ local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_PlayerUtils = require("02_mod_utils/PZNS_PlayerUtils");
 --
 local function addFiveCannedTunasToLocalPlayer()
+    local playerSurvivor = getSpecificPlayer(0);
     for i = 1, 5 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.TunaTin");
+        playerSurvivor:getInventory():AddItem("Base.TunaTin");
     end
 end
 
 local function addTenPlanksToLocalPlayer()
+    local playerSurvivor = getSpecificPlayer(0);
     for i = 1, 10 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.Plank");
+        playerSurvivor:getInventory():AddItem("Base.Plank");
     end
 end
 
 local function addFiveNailsBoxesToLocalPlayer()
+    local playerSurvivor = getSpecificPlayer(0);
     for i = 1, 3 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.NailsBox");
+        playerSurvivor:getInventory():AddItem("Base.NailsBox");
     end
 end
 
 local function addFivePropanTanksToLocalPlayer()
+    local playerSurvivor = getSpecificPlayer(0);
     for i = 1, 5 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.PropaneTank");
+        playerSurvivor:getInventory():AddItem("Base.PropaneTank");
     end
 end
 
 local function addMetalSheetsToLocalPlayer()
+    local playerSurvivor = getSpecificPlayer(0);
     for i = 1, 5 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.SheetMetal");
+        playerSurvivor:getInventory():AddItem("Base.SheetMetal");
     end
 end
 
 local function addBigPoleFenceGate()
-    getSpecificPlayer(0):getInventory():AddItem("Base.WeldingRods");
+    local playerSurvivor = getSpecificPlayer(0);
+    playerSurvivor:getInventory():AddItem("Base.WeldingRods");
     for i = 1, 5 do
-        getSpecificPlayer(0):getInventory():AddItem("MetalPipe");
+        playerSurvivor:getInventory():AddItem("MetalPipe");
     end
     for i = 1, 4 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.ScrapMetal");
+        playerSurvivor:getInventory():AddItem("Base.ScrapMetal");
     end
     for i = 1, 2 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.Hinge");
+        playerSurvivor:getInventory():AddItem("Base.Hinge");
     end
 end
 --
 local function addBigWiredWallMaterialsToLocalPlayer()
-    getSpecificPlayer(0):getInventory():AddItem("Base.Wire");
+    local playerSurvivor = getSpecificPlayer(0);
+    playerSurvivor:getInventory():AddItem("Base.Wire");
     for i = 1, 4 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.ScrapMetal");
+        playerSurvivor:getInventory():AddItem("Base.ScrapMetal");
     end
     for i = 1, 3 do
-        getSpecificPlayer(0):getInventory():AddItem("MetalPipe");
+        playerSurvivor:getInventory():AddItem("MetalPipe");
     end
 end
 
 local function addToolsToLocalPlayer()
-    getSpecificPlayer(0):getInventory():AddItem("Base.TinOpener");
-    getSpecificPlayer(0):getInventory():AddItem("Base.Screwdriver");
-    getSpecificPlayer(0):getInventory():AddItem("Base.Wrench");
-    getSpecificPlayer(0):getInventory():AddItem("Base.PipeWrench");
-    getSpecificPlayer(0):getInventory():AddItem("Base.Hammer");
-    getSpecificPlayer(0):getInventory():AddItem("Base.WeldingMask");
-    getSpecificPlayer(0):getInventory():AddItem("Base.BlowTorch");
+    local playerSurvivor = getSpecificPlayer(0);
+    playerSurvivor:getInventory():AddItem("Base.TinOpener");
+    playerSurvivor:getInventory():AddItem("Base.Screwdriver");
+    playerSurvivor:getInventory():AddItem("Base.Wrench");
+    playerSurvivor:getInventory():AddItem("Base.PipeWrench");
+    playerSurvivor:getInventory():AddItem("Base.Hammer");
+    playerSurvivor:getInventory():AddItem("Base.WeldingMask");
+    playerSurvivor:getInventory():AddItem("Base.BlowTorch");
 end
 
 local function addBooksToLocalPlayer()
-    getSpecificPlayer(0):getInventory():AddItem("Base.ElectronicsMag4");
-    getSpecificPlayer(0):getInventory():AddItem("Base.FishingMag1");
-    getSpecificPlayer(0):getInventory():AddItem("Base.FishingMag2");
-    getSpecificPlayer(0):getInventory():AddItem("Base.MechanicMag1");
-    getSpecificPlayer(0):getInventory():AddItem("Base.MechanicMag2");
-    getSpecificPlayer(0):getInventory():AddItem("Base.MechanicMag3");
+    local playerSurvivor = getSpecificPlayer(0);
+    playerSurvivor:getInventory():AddItem("Base.ElectronicsMag4");
+    playerSurvivor:getInventory():AddItem("Base.FishingMag1");
+    playerSurvivor:getInventory():AddItem("Base.FishingMag2");
+    playerSurvivor:getInventory():AddItem("Base.MechanicMag1");
+    playerSurvivor:getInventory():AddItem("Base.MechanicMag2");
+    playerSurvivor:getInventory():AddItem("Base.MechanicMag3");
 end
 
 local function addMedicalToLocalPlayer()
-    getSpecificPlayer(0):getInventory():AddItem("Base.SutureNeedleHolder");
+    local playerSurvivor = getSpecificPlayer(0);
+    playerSurvivor:getInventory():AddItem("Base.SutureNeedleHolder");
     for i = 1, 3 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.Antibiotics");
-        getSpecificPlayer(0):getInventory():AddItem("Base.BathTowel");
-        getSpecificPlayer(0):getInventory():AddItem("Base.Disinfectant");
-        getSpecificPlayer(0):getInventory():AddItem("Base.Pills");
-        getSpecificPlayer(0):getInventory():AddItem("Base.PillsBeta");
-        getSpecificPlayer(0):getInventory():AddItem("Base.PillsAntiDep");
-        getSpecificPlayer(0):getInventory():AddItem("Base.PillsSleepingTablets");
-        getSpecificPlayer(0):getInventory():AddItem("Base.Splint");
+        playerSurvivor:getInventory():AddItem("Base.Antibiotics");
+        playerSurvivor:getInventory():AddItem("Base.BathTowel");
+        playerSurvivor:getInventory():AddItem("Base.Disinfectant");
+        playerSurvivor:getInventory():AddItem("Base.Pills");
+        playerSurvivor:getInventory():AddItem("Base.PillsBeta");
+        playerSurvivor:getInventory():AddItem("Base.PillsAntiDep");
+        playerSurvivor:getInventory():AddItem("Base.PillsSleepingTablets");
+        playerSurvivor:getInventory():AddItem("Base.Splint");
     end
     for i = 1, 5 do
-        getSpecificPlayer(0):getInventory():AddItem("Base.AlcoholBandage");
-        getSpecificPlayer(0):getInventory():AddItem("Base.SutureNeedle");
+        playerSurvivor:getInventory():AddItem("Base.AlcoholBandage");
+        playerSurvivor:getInventory():AddItem("Base.SutureNeedle");
     end
 end
 
@@ -208,7 +218,7 @@ function PZNS_ContextMenuDebugWorld(mpPlayerID, context, worldobjects)
         worldobjects,
         nil
     );
-    local square = PZNS_PlayerUtils.PZNS_GetPlayerMouseGridSquare(mpPlayerID);
+    local square = PZNS_PlayerUtils.PZNS_GetPlayerMouseGridSquare(0);
     context:addSubMenu(submenu_1_Option, submenu_1);
     --
     for debugKey, debugText in pairs(PZNS_DebugWorldText) do
