@@ -1,3 +1,5 @@
+PZNS_ActiveInventoryNPC = {}; -- WIP - Cows: Need to rethink how Global variables are used...
+
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_NPCsManager = {};
 
@@ -99,6 +101,14 @@ function PZNS_NPCsManager.deleteActiveNPCBySurvivorID(survivorID)
         end
         activeNPCs[survivorID] = nil;
     end
+end
+
+---comment
+---@param survivorID any
+function PZNS_NPCsManager.setActiveInventoryNPCBySurvivorID(survivorID)
+    local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+    local npcSurvivor = activeNPCs[survivorID];
+    PZNS_ActiveInventoryNPC = npcSurvivor;
 end
 
 return PZNS_NPCsManager;
