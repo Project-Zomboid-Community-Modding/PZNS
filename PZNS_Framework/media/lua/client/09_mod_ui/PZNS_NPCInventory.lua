@@ -21,11 +21,11 @@ function PZNS_CheckDistToNPCInventory()
     end
 end
 
----comments
+---Cows: Adds a button to the right panel of the inventory UI which allows the access to the NPC inventory.
 ---@param page any
 ---@param step any
 function PZNS_AddNPCInv(page, step)
-    if page == ISPlayerData[1].lootInventory and step == "buttonsAdded" then
+    if page == ISPlayerData[1].lootInventory and step == "beforeFloor" then
         local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
 
         if (npcIsoPlayer) then
