@@ -197,7 +197,7 @@ end
 function PZNS_UtilsZones.PZNS_StartSelectingZone(groupID, zoneType)
     --
     PZNS_IsCreatingZone = true;
-    local baseBounds = PZNS_UtilsDataZones.PZNS_GetGroupZoneBoundary(groupID, zoneType);
+    local baseBounds = PZNS_UtilsZones.PZNS_GetGroupZoneBoundary(groupID, zoneType);
     --
     if (baseBounds ~= nil) then
         zoneHighlightX1 = baseBounds[1];
