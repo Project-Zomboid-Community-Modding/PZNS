@@ -13,9 +13,9 @@ function PZNS_KeyBindAction(keyNum)
         k72 = PZNS_DebuggerUtils.PZNS_LogPlayerCellGridSquare, -- numpad 8
         k73 = PZNS_DebuggerUtils.PZNS_LogPlayerCustomization,  -- numpad 9
         k74 = doNothing,                                       -- numpad -
-        k75 = doNothing,                                       -- numpad 4
-        k76 = doNothing,                                       -- numpad 5
-        k77 = doNothing,                                       -- numpad 6
+        k75 = PZNS_DebuggerUtils.LogNPCGroupsModData,          -- numpad 4
+        k76 = PZNS_DebuggerUtils.LogNPCsModData,               -- numpad 5
+        k77 = PZNS_DebuggerUtils.LogZonesModData,              -- numpad 6
         k78 = doNothing,                                       -- numpad +
         k79 = PZNSTest_logTemplateNPCsInfo,                    -- numpad 1 -- WIP - Cows: For now, this only prints the npcSurvivor info.
         k80 = doNothing,                                       -- numpad 2

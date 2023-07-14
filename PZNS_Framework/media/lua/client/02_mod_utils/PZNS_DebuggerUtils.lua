@@ -90,11 +90,12 @@ end
 function PZNS_DebuggerUtils.LogNPCGroupsModData()
     local modData = PZNS_UtilsDataGroups.PZNS_GetCreateActiveGroupsModData();
     local isLoggingLocalFunction = true;
+    local memberCount = 0;
     --
     if (isLoggingLocalFunction) then
-        for k1, v1 in pairs(modData) do
+        for groupID, v1 in pairs(modData) do
             PZNS_DebuggerUtils.CreateLogLine("LogNPCGroupsModData", isLoggingLocalFunction,
-                "k1: " .. tostring(k1) .. " | v1: " .. tostring(v1)
+                "groupID: " .. tostring(groupID) .. " | v1: " .. tostring(v1)
             );
             --
             if (type(v1) == "table") then
@@ -102,8 +103,36 @@ function PZNS_DebuggerUtils.LogNPCGroupsModData()
                     PZNS_DebuggerUtils.CreateLogLine("LogNPCGroupsModData", isLoggingLocalFunction,
                         "k2: " .. tostring(k2) .. " | v2: " .. tostring(v2)
                     );
+                    --
+                    if not (k2 == "groupID " and k2 == "groupLeader") then
+                        memberCount = memberCount + 1;
+                    end
                 end
+                PZNS_DebuggerUtils.CreateLogLine("LogNPCGroupsModData", isLoggingLocalFunction, "memberCount: " .. tostring(memberCount));
                 PZNS_DebuggerUtils.CreateLogLine("LogNPCGroupsModData", isLoggingLocalFunction, "");
+            end
+        end
+    end
+end
+
+---comment
+function PZNS_DebuggerUtils.LogZonesModData()
+    local zonesModData = PZNS_UtilsDataZones.PZNS_GetCreateActiveZonesModData();
+    local isLoggingLocalFunction = true;
+    --
+    if (isLoggingLocalFunction) then
+        for k1, v1 in pairs(zonesModData) do
+            PZNS_DebuggerUtils.CreateLogLine("LogZonesModData", isLoggingLocalFunction,
+                "k1: " .. tostring(k1) .. " | v1: " .. tostring(v1)
+            );
+            --
+            if (type(v1) == "table") then
+                for k2, v2 in pairs(v1) do
+                    PZNS_DebuggerUtils.CreateLogLine("LogZonesModData", isLoggingLocalFunction,
+                        "k2: " .. tostring(k2) .. " | v2: " .. tostring(v2)
+                    );
+                end
+                PZNS_DebuggerUtils.CreateLogLine("LogZonesModData", isLoggingLocalFunction, "");
             end
         end
     end
