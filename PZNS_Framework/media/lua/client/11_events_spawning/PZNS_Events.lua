@@ -38,6 +38,9 @@ local function PZNS_Events()
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuSquareObjects);
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuInvite);
     --
+    Events.OnRefreshInventoryWindowContainers.Add(PZNS_AddNPCInv);
+    Events.OnFillInventoryObjectContextMenu.Add(PZNS_NPCInventoryContext);
+    --
     if (IsNPCsNeedsActive ~= true) then
         Events.EveryHours.Add(PZNS_UtilsNPCs.PZNS_ClearAllNPCsAllNeedsLevel);
     end

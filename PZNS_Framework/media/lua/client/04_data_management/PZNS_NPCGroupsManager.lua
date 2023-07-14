@@ -48,4 +48,21 @@ function PZNS_NPCGroupsManager.removeNPCFromGroupBySurvivorID(groupID, survivorI
     end
 end
 
+--- Cows: Get the group members count by the input groupID.
+---@param groupID any
+function PZNS_NPCGroupsManager.getGroupMembersCount(groupID)
+    local members = PZNS_NPCGroupsManager.getGroupByID(groupID);
+    local memberCount = 0;
+    --
+    if (members ~= nil) then
+        for k1, v1 in pairs(members) do
+            if not (k1 == "groupID " and k1 == "groupLeader") then
+                memberCount = memberCount + 1;
+            end
+        end
+    end
+    --
+    return memberCount;
+end
+
 return PZNS_NPCGroupsManager;
