@@ -2,7 +2,8 @@
     Cows: This file is intended for ALL functions related to the creation, deletion, load,
     and editing of all NPC mod file data and moddata.
 --]]
-PZNS_ActiveNPCs = {}; -- Cows: This variable should never be referenced directly, but through the corresponding management functions.
+PZNS_ActiveNPCs = {}; -- WIP - Cows: Need to rethink how Global variables are used...
+-- Cows: This variable should never be referenced directly, but through the corresponding management functions.
 local PZNS_UtilsDataNPCs = {};
 
 --- Cows: Gets or creates the moddata for NPCs

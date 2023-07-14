@@ -2,7 +2,8 @@
     Cows: This file is intended for ALL functions related to the creation, deletion, load,
     and editing of all zones related moddata.
 --]]
-PZNS_ActiveZones = {}; -- Cows: This variable should never be referenced directly, but through the corresponding management functions.
+PZNS_ActiveZones = {}; -- WIP - Cows: Need to rethink how Global variables are used...
+-- Cows: This variable should never be referenced directly, but through the corresponding management functions.
 local PZNS_UtilsDataZones = {};
 
 --- Cows: Gets or creates the moddata for PZNS Groups Zones
