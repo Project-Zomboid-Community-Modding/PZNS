@@ -2,5 +2,5 @@ name=PZNS_Framework
 poster=poster.png
 id=PZNS_Framework
 description=Project Zomboid NPC Spawning Framework
-url=https://github.com/shadowhunter100/SuperbSurvivorsContinued
+url=https://github.com/shadowhunter100/PZNS
 versionMin=41.1
