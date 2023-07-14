@@ -70,6 +70,25 @@ function PZNS_UtilsNPCs.PZNS_AddItemToInventoryNPCSurvivor(npcSurvivor, itemID)
     return item
 end
 
+--- Ed: Tweaked with for loop to spawn multiple items by count.
+---@param npcSurvivor any
+---@param itemID string
+---@param count integer
+function PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, itemID, count)
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    if (npcIsoPlayer == nil) then
+        return;
+    end
+    --
+    for i = 0, count 
+    do 
+        local item = instanceItem(itemID);
+        if (item ~= nil) then
+            npcIsoPlayer:getInventory():AddItem(item);
+        end
+    end
+end
+
 --- Cows: Simple code to remove item to npcSurvivor inventory.
 ---@param npcSurvivor any
 ---@param itemID integer
