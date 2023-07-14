@@ -95,7 +95,7 @@ function PZNS_UtilsNPCs.PZNS_AddEquipClothingNPCSurvivor(npcSurvivor, clothingID
         npcIsoPlayer:getInventory():AddItem(clothingItem);
         local bodyPartLocation = clothingItem:getBodyLocation();
         --
-        if (bodyPartLocation ~= nil) then
+        if (bodyPartLocation ~= nil and bodyPartLocation ~= '') then
             npcIsoPlayer:setWornItem(bodyPartLocation, clothingItem);
         end
     end
