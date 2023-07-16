@@ -9,6 +9,6 @@ require "11_events_spawning/PZNS_Events";
 
 --- Cows: these template spawns are intended for testing and debugging.
 function PZNSTest_logTemplateNPCsInfo()
-    PZNS_ShowNpcSurvivorInfo(PZNS_NPCsManager.getActiveNPCBySurvivorID("PZNS_ChrisTester"));
-    PZNS_ShowNpcSurvivorInfo(PZNS_NPCsManager.getActiveNPCBySurvivorID("PZNS_JillTester"));
+    -- PZNS_ShowNPCSurvivorInfo(PZNS_NPCsManager.getActiveNPCBySurvivorID("PZNS_ChrisTester"));
+    PZNS_ShowNPCSurvivorInfo(PZNS_NPCsManager.getActiveNPCBySurvivorID("PZNS_JillTester"));
 end
