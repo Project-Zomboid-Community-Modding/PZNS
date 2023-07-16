@@ -19,6 +19,7 @@ Events.OnGameStart.Add(PZNS_UtilsDataZones.PZNS_GetCreateActiveZonesModData);
 Events.OnGameStart.Add(PZNS_UtilsDataNPCs.PZNS_InitLoadNPCsData);
 Events.OnGameStart.Add(PZNS_LocalPlayerGroupCreation);
 Events.OnGameStart.Add(PZNS_UpdateISWorldMapRender);
+Events.OnGameStart.Add(PZNS_CreateNPCPanelInfo);
 Events.OnGameStart.Add(PZNS_CreatePVPButton);
 
 -- Cows: Events that should load after all other game start events.
