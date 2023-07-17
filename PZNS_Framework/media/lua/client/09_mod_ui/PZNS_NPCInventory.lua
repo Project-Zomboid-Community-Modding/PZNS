@@ -33,7 +33,6 @@ function PZNS_AddNPCInv(page, step)
         end
     end
 end
-
 ---comment
 ---@param npcIsoPlayer any
 ---@param items any
@@ -80,7 +79,6 @@ end
 
 --- WIP - Cows: Need to consider preset weapons or "last equipped" weapons...
 local function NPCEquipWeapon(npcIsoPlayer, item, primary, twohands)
-
     if twohands then
         if npcIsoPlayer:getPrimaryHandItem() then
             ISTimedActionQueue.add(ISUnequipAction:new(npcIsoPlayer, npcIsoPlayer:getPrimaryHandItem(), 50));
@@ -196,7 +194,8 @@ function PZNS_NPCInventoryContext(player, context, items)
             context:addSubMenu(option, subMenu);
             context2 = subMenu;
 
-            local location = itemExtraOption:IsClothing() and itemExtraOption:getBodyLocation() or itemExtraOption:canBeEquipped();
+            local location = itemExtraOption:IsClothing() and itemExtraOption:getBodyLocation() or
+            itemExtraOption:canBeEquipped();
             local existingItem = getWornItemInLocation(npcIsoPlayer, location);
 
             if existingItem ~= itemExtraOption then
@@ -253,24 +252,7 @@ function PZNS_NPCInventoryContext(player, context, items)
         context:addOption("NPC: Unequip", npcIsoPlayer, NPCUnequip, items);
     end
 end
-
-local temp2 = ISInventoryPaneContextMenu.dropItem;
-ISInventoryPaneContextMenu.dropItem = function(item, player)
-    if not PZNS_ActiveInventoryNPC then
-        temp2(item, player)
-        return
-    end
-
-    local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
-    if npcIsoPlayer:getInventory():containsRecursive(item) then
-        local container = ItemContainer.new("floor", nil, nil, 10, 10);
-        container:setExplored(true);
-        ISTimedActionQueue.add(ISInventoryTransferAction:new(npcIsoPlayer, item, item:getContainer(), container));
-    else
-        temp2(item, player);
-    end
-end
-
+--
 local temp = ISInventoryPane.transferItemsByWeight;
 function ISInventoryPane:transferItemsByWeight(items, container)
     if not PZNS_ActiveInventoryNPC then
@@ -279,15 +261,40 @@ function ISInventoryPane:transferItemsByWeight(items, container)
     end
 
     local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
-    if npcIsoPlayer:getInventory():containsRecursive(items[1]) then
-        for i, item in ipairs(items) do
-            ISTimedActionQueue.add(ISInventoryTransferAction:new(npcIsoPlayer, item, item:getContainer(), container));
+    if (npcIsoPlayer ~= nil) then
+        if npcIsoPlayer:getInventory():containsRecursive(items[1]) then
+            for i, item in ipairs(items) do
+                ISTimedActionQueue.add(ISInventoryTransferAction:new(npcIsoPlayer, item, item:getContainer(), container));
+            end
+        else
+            temp(self, items, container);
         end
     else
         temp(self, items, container);
     end
 end
+--
+local temp2 = ISInventoryPaneContextMenu.dropItem;
+ISInventoryPaneContextMenu.dropItem = function(item, player)
+    if not PZNS_ActiveInventoryNPC then
+        temp2(item, player)
+        return
+    end
 
+    local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
+    if (npcIsoPlayer ~= nil) then
+        if npcIsoPlayer:getInventory():containsRecursive(item) then
+            local container = ItemContainer.new("floor", nil, nil, 10, 10);
+            container:setExplored(true);
+            ISTimedActionQueue.add(ISInventoryTransferAction:new(npcIsoPlayer, item, item:getContainer(), container));
+        else
+            temp2(item, player);
+        end
+    else
+        temp2(item, player);
+    end
+end
+--
 local temp3 = ISInventoryPaneContextMenu.transferItems;
 ISInventoryPaneContextMenu.transferItems = function(items, playerInv, player, dontWalk)
     if not PZNS_ActiveInventoryNPC then
@@ -297,15 +304,19 @@ ISInventoryPaneContextMenu.transferItems = function(items, playerInv, player, do
 
     items = ISInventoryPane.getActualItems(items);
     local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
-    if npcIsoPlayer:getInventory():containsRecursive(items[1]) then
-        for i, item in ipairs(items) do
-            ISTimedActionQueue.add(ISInventoryTransferAction:new(npcIsoPlayer, item, item:getContainer(), playerInv));
+    if (npcIsoPlayer ~= nil) then
+        if npcIsoPlayer:getInventory():containsRecursive(items[1]) then
+            for i, item in ipairs(items) do
+                ISTimedActionQueue.add(ISInventoryTransferAction:new(npcIsoPlayer, item, item:getContainer(), playerInv));
+            end
+        else
+            temp3(items, playerInv, player, dontWalk);
         end
     else
         temp3(items, playerInv, player, dontWalk);
     end
 end
-
+--
 local temp4 = ISInventoryPaneContextMenu.onGrabHalfItems;
 ISInventoryPaneContextMenu.onGrabHalfItems = function(items, player)
     if not PZNS_ActiveInventoryNPC then
@@ -315,24 +326,28 @@ ISInventoryPaneContextMenu.onGrabHalfItems = function(items, player)
 
     items = ISInventoryPane.getActualItems(items)
     local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
-    if npcIsoPlayer:getInventory():containsRecursive(items[1]) then
-        local countNeed = #items / 2;
-        local count = 0;
-        for i, k in ipairs(items) do
-            ISTimedActionQueue.add(
-                ISInventoryTransferAction:new(npcIsoPlayer, k, k:getContainer(),
-                getPlayerInventory(player).inventory)
-            );
-            count = count + 1;
-            if count >= countNeed then 
-                return;
-             end
+    if (npcIsoPlayer ~= nil) then
+        if npcIsoPlayer:getInventory():containsRecursive(items[1]) then
+            local countNeed = #items / 2;
+            local count = 0;
+            for i, k in ipairs(items) do
+                ISTimedActionQueue.add(
+                    ISInventoryTransferAction:new(npcIsoPlayer, k, k:getContainer(),
+                        getPlayerInventory(player).inventory)
+                );
+                count = count + 1;
+                if count >= countNeed then
+                    return;
+                end
+            end
+        else
+            temp4(items, player);
         end
     else
         temp4(items, player);
     end
 end
-
+--
 local temp5 = ISInventoryPaneContextMenu.onGrabOneItems;
 ISInventoryPaneContextMenu.onGrabOneItems = function(items, player)
     if not PZNS_ActiveInventoryNPC then
@@ -342,20 +357,23 @@ ISInventoryPaneContextMenu.onGrabOneItems = function(items, player)
 
     items = ISInventoryPane.getActualItems(items);
     local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
-    --
-    if npcIsoPlayer:getInventory():containsRecursive(items[1]) then
-        for i, item in ipairs(items) do
-            ISTimedActionQueue.add(ISInventoryTransferAction:new(
-                npcIsoPlayer, item, item:getContainer(),
-                getPlayerInventory(player).inventory)
-            );
-            return;
+    if (npcIsoPlayer ~= nil) then
+        if npcIsoPlayer:getInventory():containsRecursive(items[1]) then
+            for i, item in ipairs(items) do
+                ISTimedActionQueue.add(ISInventoryTransferAction:new(
+                    npcIsoPlayer, item, item:getContainer(),
+                    getPlayerInventory(player).inventory)
+                );
+                return;
+            end
+        else
+            temp5(items, player);
         end
     else
         temp5(items, player);
     end
 end
-
+--
 local temp6 = ISInventoryPaneContextMenu.wearItem;
 ISInventoryPaneContextMenu.wearItem = function(item, player)
     if not PZNS_ActiveInventoryNPC then
@@ -364,13 +382,17 @@ ISInventoryPaneContextMenu.wearItem = function(item, player)
     end
 
     local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
-    if item:isEquipped() then
-        ISTimedActionQueue.add(ISUnequipAction:new(npcIsoPlayer, item, 50));
+    if (npcIsoPlayer ~= nil) then
+        if item:isEquipped() then
+            ISTimedActionQueue.add(ISUnequipAction:new(npcIsoPlayer, item, 50));
+        else
+            temp6(item, player);
+        end
     else
         temp6(item, player);
     end
 end
-
+--
 local temp7 = ISInventoryPaneContextMenu.onInspectClothing;
 ISInventoryPaneContextMenu.onInspectClothing = function(playerObj, clothing)
     if not PZNS_ActiveInventoryNPC then
@@ -379,8 +401,12 @@ ISInventoryPaneContextMenu.onInspectClothing = function(playerObj, clothing)
     end
 
     local npcIsoPlayer = PZNS_ActiveInventoryNPC.npcIsoPlayerObject;
-    if clothing:isEquipped() then
-        ISTimedActionQueue.add(ISUnequipAction:new(npcIsoPlayer, clothing, 50));
+    if (npcIsoPlayer ~= nil) then
+        if clothing:isEquipped() then
+            ISTimedActionQueue.add(ISUnequipAction:new(npcIsoPlayer, clothing, 50));
+        else
+            temp7(playerObj, clothing);
+        end
     else
         temp7(playerObj, clothing);
     end
