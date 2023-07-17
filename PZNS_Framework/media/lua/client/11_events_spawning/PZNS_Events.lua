@@ -36,6 +36,7 @@ local function PZNS_Events()
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuJobs);
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuOrders);
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuNPCInventory);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuNPCInfo);
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuSquareObjects);
     Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuInvite);
     --
