@@ -252,14 +252,14 @@ end
 
 ---comment
 ---@param npcSurvivor any
----@param groupID string
+---@param groupID string | nil
 function PZNS_UtilsNPCs.PZNS_SetNPCGroupID(npcSurvivor, groupID)
     npcSurvivor.groupID = groupID;
 end
 
 ---comment
 ---@param npcSurvivor any
----@param jobName any
+---@param jobName string
 function PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, jobName)
     if (npcSurvivor == nil) then
         return;

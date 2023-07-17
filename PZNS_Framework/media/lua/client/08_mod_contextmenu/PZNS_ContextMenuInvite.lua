@@ -29,11 +29,12 @@ function PZNS_ContextMenuInvite(mpPlayerID, context, worldobjects)
                     playerSurvivor:Say("Inviting... " .. npcSurvivor.survivorName);
                     -- Cows: Remove the npcSurvivor from its original group if it was in a group
                     if (npcSurvivor.groupID ~= nil) then
-                        PZNS_NPCGroupsManager.removeNPCFromGroupBySurvivorID(npcSurvivor.groupID,
-                            npcSurvivor.survivorID);
+                        PZNS_NPCGroupsManager.removeNPCFromGroupBySurvivorID(
+                            npcSurvivor.groupID, npcSurvivor.survivorID
+                        );
                     end
-                    PZNS_UtilsNPCs.PZNS_SetNPCGroupID(npcSurvivor, playerGroupID);                      -- Cows: Update the npcSurvivor groupID
-                    PZNS_NPCGroupsManager.addNPCToGroup(npcSurvivor, playerGroupID);     -- Cows: Add the npcSurvivor to the group's moddata
+                    PZNS_UtilsNPCs.PZNS_SetNPCGroupID(npcSurvivor, playerGroupID);   -- Cows: Update the npcSurvivor groupID
+                    PZNS_NPCGroupsManager.addNPCToGroup(npcSurvivor, playerGroupID); -- Cows: Add the npcSurvivor to the group's moddata
                 end
                 -- Cows: Check if the npcSurvivor is NOT in a group or in a different group... Perhaps we can use "affection" at this point for invite-able NPCs.
                 if (npcSurvivor.groupID == nil or npcSurvivor.groupID ~= playerGroupID) then
