@@ -14,7 +14,7 @@ function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jobName)
     if (activeNPCs == nil or groupMembers == nil) then
         return;
     end
-
+    --
     for survivorID, v in pairs(groupMembers) do
         local npcSurvivor = activeNPCs[survivorID];
         -- Cows: conditionally set the callback function for the context menu option.
@@ -23,13 +23,14 @@ function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jobName)
                 PZNS_JobCompanion(npcSurvivor, followTargetID);
             end
             PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, jobName);
+            parentContextMenu:setVisible(false);
         end
         --
         if (npcSurvivor ~= nil) then
             local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
             local isNPCSquareLoaded = PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor);
-            -- Cows: Check and make sure the NPC is both alive and loaded in the current game world. 
-            if (npcIsoPlayer:isAlive()  and isNPCSquareLoaded == true) then
+            -- Cows: Check and make sure the NPC is both alive and loaded in the current game world.
+            if (npcIsoPlayer:isAlive() and isNPCSquareLoaded == true) then
                 parentContextMenu:addOption(
                     getText(npcSurvivor.survivorName),
                     nil,
