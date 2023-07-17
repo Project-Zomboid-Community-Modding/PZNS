@@ -1,8 +1,9 @@
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 
----comment
+---Cows: Perhaps reset the speech text based on the npc's affection value? Higher = friendlier
 ---@param npcSurvivor any
 local function resetSpeechText(npcSurvivor)
+    npcSurvivor.textObject:setDefaultColors(230, 230, 230, 0.8); -- White text
     npcSurvivor.textObject:ReadString(
         npcSurvivor.survivorName
     );
@@ -53,7 +54,7 @@ function PZNS_NPCSpeak(npcSurvivor, text, intention)
         elseif (intention == "Positive") then
             npcSurvivor.textObject:setDefaultColors(0, 0, 225, 0.8);     -- Blue
         elseif (intention == "Negative") then
-            npcSurvivor.textObject:setDefaultColors(240, 120, 0, 0.8);   -- Orange
+            npcSurvivor.textObject:setDefaultColors(250, 100, 0, 0.8);   -- Orange
         elseif (intention == "Neutral") then
             npcSurvivor.textObject:setDefaultColors(230, 230, 0, 0.8);   -- Yellow
         end
