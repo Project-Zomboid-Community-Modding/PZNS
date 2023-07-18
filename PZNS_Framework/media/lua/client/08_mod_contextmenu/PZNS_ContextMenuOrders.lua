@@ -1,6 +1,7 @@
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_PlayerUtils = require("02_mod_utils/PZNS_PlayerUtils");
+local PZNS_PresetsSpeeches = require("03_mod_core/PZNS_PresetsSpeeches");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 
 PZNS_NPCOrdersText = {
@@ -41,19 +42,47 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
         local callbackFunction = function()
             -- Cows: Clear the existing queued actions for the npcSurvivor when an Order is issued.
             PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
-            PZNS_NPCSpeak(npcSurvivor, "Order " .. PZNS_NPCOrdersText[orderKey] .. "  acknowledged!", "Friendly");
             local playerSurvivor = getSpecificPlayer(mpPlayerID);
+            playerSurvivor:Say(npcSurvivor.forename .. ", " .. PZNS_NPCOrdersText[orderKey]);
             --
             if (orderKey == "FollowMe" or orderKey == "AimAtMe") then
-                playerSurvivor:Say(npcSurvivor.forename ..
-                    ", " .. PZNS_NPCOrdersText[orderKey] .. ", " .. followTargetID
-                );
+                if (npcSurvivor.speechTable ~= nil) then
+                    if (npcSurvivor.speechTable.PZNS_OrderSpeechFollow) then
+                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechFollow, "Friendly"
+                        );
+                    end
+                else
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechFollow, "Friendly"
+                    );
+                end
                 PZNS_NPCOrderActions[orderKey](npcSurvivor, followTargetID);
             elseif (orderKey == "HoldPosition") then
-                playerSurvivor:Say(npcSurvivor.forename .. ", " .. PZNS_NPCOrdersText[orderKey]);
+                if (npcSurvivor.speechTable ~= nil) then
+                    if (npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition) then
+                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition, "Friendly"
+                        );
+                    end
+                else
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechHoldPosition, "Friendly"
+                    );
+                end
                 PZNS_NPCOrderActions[orderKey](npcSurvivor, square);
             else
-                playerSurvivor:Say(npcSurvivor.forename .. ", " .. PZNS_NPCOrdersText[orderKey]);
+                if (npcSurvivor.speechTable ~= nil) then
+                    if (npcSurvivor.speechTable.PZNS_OrderConfirmed) then
+                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
+                        );
+                    end
+                else
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
+                    );
+                end
                 PZNS_NPCOrderActions[orderKey](npcSurvivor);
             end
         end

@@ -1,5 +1,6 @@
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
+local PZNS_PresetsSpeeches = require("03_mod_core/PZNS_PresetsSpeeches");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 --[[
     Cows: The differences between an action, an order, and a job is that an "action" can be queued, rearranged, or cleared as needed.
@@ -36,12 +37,20 @@ function PZNS_UpdateNPCJobRoutine(npcSurvivor)
     end
     -- Cows: Check if the NPC's job is currently "Remove" or "Remove Grom Group".
     if (npcSurvivor.jobName == "Remove" or npcSurvivor.jobName == "Remove From Group") then
-        -- WIP - Cows: Being removed from the group which should make the NPC angry/very angry.
-        PZNS_NPCSpeak(npcSurvivor, "Why me?", "Negative");
+        -- WIP - Cows: Being removed from the group which should make the NPC angry.
+        if (PZNS_UtilsNPCs.PZNS_IsNPCSpeechTableValid(npcSurvivor.speechTable.PZNS_JobSpeechRemoveFromGroup) == true) then
+            PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                npcSurvivor, npcSurvivor.speechTable.PZNS_JobSpeechRemoveFromGroup, "Neutral"
+            );
+        else
+            PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                npcSurvivor, PZNS_PresetsSpeeches.PZNS_JobSpeechRemoveFromGroup, "Neutral"
+            );
+        end
         PZNS_NPCGroupsManager.removeNPCFromGroupBySurvivorID(npcSurvivor.groupID, npcSurvivor.survivorID);
         PZNS_UtilsNPCs.PZNS_SetNPCGroupID(npcSurvivor, nil);
         PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Guard"); -- WIP - Cows: Currently there is no NPC "wandering" AI nor job... so this is a placeholder
-        return;                                               -- Cows: Stop Processing, the npc is no longer in the group.
+        return;                                              -- Cows: Stop Processing, the npc is no longer in the group.
     end
     -- Cows: Only update living npcSurvivor routine.
     if (npcSurvivor.isAlive == true) then
