@@ -46,6 +46,8 @@ function PZNS_SpawnChrisTester(mpPlayerID)
                     PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, "Base.BaseballBat");
                 end
                 PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, "Base.Pistol");
+                PZNS_UtilsNPCs.PZNS_AddItemToInventoryNPCSurvivor(npcSurvivor, "Base.9mmClip");
+                PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, "Base.Bullets9mm", 15);
                 -- Cows: Set the job...
                 PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Companion");
                 PZNS_UtilsNPCs.PZNS_SetNPCFollowTargetID(npcSurvivor, playerID);
