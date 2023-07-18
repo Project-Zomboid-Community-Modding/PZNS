@@ -40,7 +40,7 @@ function PZNS_UpdateNPCJobRoutine(npcSurvivor)
         PZNS_NPCSpeak(npcSurvivor, "Why me?", "Negative");
         PZNS_NPCGroupsManager.removeNPCFromGroupBySurvivorID(npcSurvivor.groupID, npcSurvivor.survivorID);
         PZNS_UtilsNPCs.PZNS_SetNPCGroupID(npcSurvivor, nil);
-        PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Wander"); -- WIP - Cows: Currently there is no NPC "wandering" AI nor job... so this is a placeholder
+        PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Guard"); -- WIP - Cows: Currently there is no NPC "wandering" AI nor job... so this is a placeholder
         return;                                               -- Cows: Stop Processing, the npc is no longer in the group.
     end
     -- Cows: Only update living npcSurvivor routine.
