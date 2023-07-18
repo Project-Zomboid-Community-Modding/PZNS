@@ -22,10 +22,12 @@ All functions in PZNS will have working examples for modders to follow so that t
    - If the same attack action is called in PZNS, the attack action will be queued about 10-25 times (Yeah, I got shot about 20 times during testing).  
 - **There will be NO loose files in the mod folder; all NPC data are saved in the ``Saves/Sandbox`` folder or saved as ``ModData``**  
   - Also the debug context menu has a WIPE ALL DATA command, meaning all loose files and data will be cleared from the save... which *should* mean the mod will be safe to deactivate and/or remove afterward.  
+- There won't be a massive project full of broken things that are tightly coupled and can't be untangled.  
 - Subsequent NPC mods can simply reference the framework as a requirement and load after it without needing to write data management code.  
-  - Working on the PZNS Rosewood Police as an example.
-  - https://github.com/shadowhunter100/PZNS_RosewoodPolice    
-  - So there won't be a massive project full of broken things that are tightly coupled and can't be untangled.  
+   - NPC Group Example - PZNS Rosewood Police 
+     - https://github.com/shadowhunter100/PZNS_RosewoodPolice
+   - Standalone NPC Example - Agent Wong
+     - https://github.com/shadowhunter100/PZNS_AgentWong
 
 ## __**ALL WORK WILL BE CREDITED ACCORDING TO THE PULL REQUESTS ON GITHUB.**__  
 - I have zero intention of taking credit for work that is not mine.  
