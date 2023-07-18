@@ -31,11 +31,11 @@ function PZNS_NPCSurvivor:newSurvivor(
         currentAction = "",                     -- Cows: This is a value to check for NPCs to queue or not queue up more actions.
         isStuckTicks = 0,                       -- Cows: This is a value to check if NPC is "stuck" or doing nothing even though it has a job.
         followTargetID = "",                    -- Cows: Used to follow a specified object managed by PZNS IDs
-        speechTable = nil,                      -- WIP - Cows: Likely more useful when custom speech tables are created and mapped to specified NPCs.
+        speechTable = nil,                      -- Cows: Used when adding speech table(s), if nil, NPCs should use PresetsSpeeches instead.
         lastEquippedMeleeWeapon = "",           -- WIP - Cows: Added so that NPCs can resume using this melee weapon after completing an action.
         lastEquippedRangeWeapon = "",           -- WIP - Cows: Added so that NPCs can resume using this range weapon after completing an action.
         idleTicks = 0,                          -- Cows: Used to track how long an NPC is idle for before they take some general AI stuff.
-        actionTicks = 30,                       -- Cows: Need some ticks to control how often the actionQueues are updated... Otherwise the NPCs will continue to queue actions every tick endlessly...
+        actionTicks = 30,                       -- WIP - Cows: Need some ticks to control how often the actionQueues are updated... Otherwise the NPCs will continue to queue actions every tick endlessly...
         attackTicks = 0,                        -- Cows: I thought it was stupid at first, but after observing an NPC queue up 20+ attacks in a a single frame...
         speechTicks = 0,                        -- Cows: Tracks the ticks between speech text... ticks are inconsistent, but there are currently no other short duration timers.
         aimTarget = "",                         -- Cows: Placeholder; technically should always be a game object... but Java API has a "NPCSetAiming()" call which is confusing...
