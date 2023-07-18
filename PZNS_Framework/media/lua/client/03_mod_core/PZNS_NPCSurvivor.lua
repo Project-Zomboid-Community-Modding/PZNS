@@ -31,7 +31,7 @@ function PZNS_NPCSurvivor:newSurvivor(
         currentAction = "",                     -- Cows: This is a value to check for NPCs to queue or not queue up more actions.
         isStuckTicks = 0,                       -- Cows: This is a value to check if NPC is "stuck" or doing nothing even though it has a job.
         followTargetID = "",                    -- Cows: Used to follow a specified object managed by PZNS IDs
-        speechTableID = nil,                    -- WIP - Cows: Likely more useful when custom speech tables are created and mapped to specified NPCs.
+        speechTable = nil,                      -- WIP - Cows: Likely more useful when custom speech tables are created and mapped to specified NPCs.
         lastEquippedMeleeWeapon = "",           -- WIP - Cows: Added so that NPCs can resume using this melee weapon after completing an action.
         lastEquippedRangeWeapon = "",           -- WIP - Cows: Added so that NPCs can resume using this range weapon after completing an action.
         idleTicks = 0,                          -- Cows: Used to track how long an NPC is idle for before they take some general AI stuff.
@@ -41,6 +41,7 @@ function PZNS_NPCSurvivor:newSurvivor(
         aimTarget = "",                         -- Cows: Placeholder; technically should always be a game object... but Java API has a "NPCSetAiming()" call which is confusing...
         canAttack = true,                       -- Cows: Placeholder; Java API has a "NPCSetAttack()" call which is confusing; as it appears to force the NPC to attack.
         textObject = nil,                       -- Cows: This should handle all the text displayed by the NPC.
+        ------ IsoPlayer Spawning Related below ------
         isAlive = true,                         -- WIP - Technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
         isSpawned = false,                      -- WIP - Technically part of IsoPlayer... but "isExistInTheWorld()" seems very inconsistent...
         forename = "",                          -- Cows: Placeholder; technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
@@ -50,8 +51,6 @@ function PZNS_NPCSurvivor:newSurvivor(
         squareY = nil,                          -- Cows: Placeholder; technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
         squareZ = nil,                          -- Cows: Placeholder; technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
         npcIsoPlayerObject = npcIsoPlayerObject -- Cows: objects cannot be saved to moddata...
-        -- npcHomeZoneID = nil,                    -- Cows: Probably useless, zone ownership are based by groupID for simplified management.
-        -- npcWorkZoneID = nil,                    -- Cows: Probably useless, as a job in a group should go to the designated group work zone.
     };
 
     return npcSurvivor;
