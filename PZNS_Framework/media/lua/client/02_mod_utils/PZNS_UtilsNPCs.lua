@@ -80,8 +80,8 @@ function PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, itemID,
         return;
     end
     --
-    for i = 1, count 
-    do 
+    for i = 1, count
+    do
         local item = instanceItem(itemID);
         if (item ~= nil) then
             npcIsoPlayer:getInventory():AddItem(item);
@@ -281,6 +281,32 @@ function PZNS_UtilsNPCs.PZNS_SetNPCFollowTargetID(npcSurvivor, targetID)
     if (targetID) then
         npcSurvivor.followTargetID = targetID;
     end
+end
+
+--- Cows: Assigns a speech table to the npcSurvivor.
+---@param npcSurvivor any
+---@param speechTable table | nil
+function PZNS_UtilsNPCs.PZNS_SetNPCSpeechTable(npcSurvivor, speechTable)
+    if (npcSurvivor == nil) then
+        return;
+    end
+
+    if (speechTable) then
+        npcSurvivor.speechTable = speechTable;
+    end
+end
+
+--- Cows: Have the NPC speak using the input speech table with a specified intention.
+---@param npcSurvivor any
+---@param speechTable table
+---@param intention string | nil
+function PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(npcSurvivor, speechTable, intention)
+    if (npcSurvivor == nil or speechTable == nil) then
+        return;
+    end
+    local tableSize = #speechTable;
+    local rolled = ZombRand(tableSize) + 1;
+    PZNS_NPCSpeak(npcSurvivor, speechTable[rolled], intention);
 end
 
 --- Cows: Clears the queued ISTimedActionQueue
