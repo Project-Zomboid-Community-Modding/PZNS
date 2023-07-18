@@ -80,7 +80,7 @@ function PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, itemID,
         return;
     end
     --
-    for i = 0, count 
+    for i = 1, count 
     do 
         local item = instanceItem(itemID);
         if (item ~= nil) then
