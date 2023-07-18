@@ -3,6 +3,7 @@ local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
+local PZNS_SpeechTableJill = require("10_mod_templates/PZNS_SpeechTableJill");
 
 local npcSurvivorID = "PZNS_JillTester";
 
@@ -30,6 +31,7 @@ function PZNS_SpawnJillTester(mpPlayerID)
             );
             --
             if (npcSurvivor ~= nil) then
+                PZNS_UtilsNPCs.PZNS_SetNPCSpeechTable(npcSurvivor, PZNS_SpeechTableJill);
                 PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Strength", 5);
                 PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Fitness", 5);
                 PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Aiming", 5);
