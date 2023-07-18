@@ -113,11 +113,6 @@ local function getNPCSurvivorTextInfo(npcSurvivor)
     else -- Cows: Else npcSurvivor does not exist.
         return "";
     end
-    -- WIP - Cows: Now show the panel
-
-    PZNS_DebuggerUtils.CreateLogLine("PZNS_PanelWindows", isLoggingLocalFunction,
-        "panelTextInfo: " .. panelTextInfo
-    );
     return panelTextInfo;
 end
 
