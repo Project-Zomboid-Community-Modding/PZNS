@@ -18,18 +18,17 @@ local function orderChrisReload()
     local chrisHandItem = chrisIsoPlayer:getPrimaryHandItem();
     if (chrisHandItem) then
         chrisHandItem:setCurrentAmmoCount(0);
-        PZNS_NPCSpeak(chrisSurvivor, "Reloading Gun as Ordered...", "InfoOnly");
+        PZNS_NPCSpeak(chrisSurvivor, "Gun is empty, need to reload", "InfoOnly");
         -- Cows: Get Ammo Type.
         local chris_ammoType = chrisHandItem:getAmmoType();
         --
         if chris_ammoType then
             local chris_inventory = chrisIsoPlayer:getInventory();
             local chris_bullets = chris_inventory:getItemCountRecurse(chris_ammoType);
-            if (chris_bullets < 15) then
-                PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(chrisSurvivor, chris_ammoType, 15);
+            if (chris_bullets < 12) then
+                PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(chrisSurvivor, chris_ammoType, 12);
             end
         end
-        PZNS_WeaponReload(chrisSurvivor);
     end
 end
 
@@ -41,7 +40,7 @@ local function orderJillReload()
     if (jillHandItem) then
         jillHandItem:setCurrentAmmoCount(0);
 
-        PZNS_NPCSpeak(jillSurvivor, "Reloading Gun as Ordered...", "InfoOnly");
+        PZNS_NPCSpeak(jillSurvivor, "Gun is empty, need to reload", "InfoOnly");
         local jill_ammoType = jillHandItem:getAmmoType();
         --
         if jill_ammoType then
@@ -51,10 +50,6 @@ local function orderJillReload()
                 PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(jillSurvivor, jill_ammoType, 15);
             end
         end
-        -- Cows: WIP - So how can all 3 actions be chained/queued together in one sequence? Also, this reload type doesn't seem apply to shotguns nor single reloads (revolvers)
-        PZNS_GunMagazineEject(jillSurvivor);
-        PZNS_GunMagazineReload(jillSurvivor);
-        PZNS_GunMagazineInsert(jillSurvivor);
     end
 end
 

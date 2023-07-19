@@ -106,8 +106,6 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
     end
 end
 
-
-
 --- Cows: The "Companion" Job only works if the npcSurvivor and its target exists.
 ---@param npcSurvivor any
 ---@param targetID string
@@ -144,12 +142,9 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
                     jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
                     return; -- Cows: Stop processing and start moving to target.
                 end
-                --
-                local isThreatFound = PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor);
-                if (isThreatFound == true) then
+                if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
                     npcSurvivor.idleTicks = 0;
-                    PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor);
-                    return; -- Cows: Stop processing and start attacking.
+                    return; -- Cows Stop Processing and let the NPC finish its actions.
                 end
                 --Cows: Check if companion has idled for too long and take action.
                 if (npcSurvivor.idleTicks >= CompanionIdleTicks) then
@@ -163,12 +158,9 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
             end
         else
             -- Cows: else assume the npcSurvivor is holding in place.
-            -- Cows: Check if threat is in sight.
-            local isThreatFound = PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor);
-            if (isThreatFound == true) then
+            if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
                 npcSurvivor.idleTicks = 0;
-                PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor);
-                return; -- Cows: Stop processing and start attacking.
+                return; -- Cows Stop Processing and let the NPC finish its actions.
             end
         end
     end

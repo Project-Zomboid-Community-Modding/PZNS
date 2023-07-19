@@ -88,12 +88,9 @@ function PZNS_JobUndertaker(npcSurvivor)
     end
     --
     if (npcSurvivor.canAttack == true) then
-        --
-        local isThreatFound = PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor);
-        if (isThreatFound == true) then
-            PZNS_NPCSpeak(npcSurvivor, "Found Threat, Attacking", "InfoOnly");
-            PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor);
-            return; -- Cows: Stop processing and start attacking.
+        if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
+            npcSurvivor.idleTicks = 0;
+            return; -- Cows Stop Processing and let the NPC finish its actions.
         end
     end
     --

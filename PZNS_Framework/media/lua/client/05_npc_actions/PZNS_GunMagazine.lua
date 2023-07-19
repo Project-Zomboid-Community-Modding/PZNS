@@ -14,9 +14,9 @@ function PZNS_GunMagazineEject(npcSurvivor)
         if (npcHandItem:IsWeapon() == true and npcHandItem:isRanged() == true) then
             if (npcHandItem:isContainsClip()) then
                 -- Cows: This is a modified copy from 'ISReloadWeaponAction.BeginAutomaticReload'
-                local ejectAction = ISEjectMagazine:new(npcIsoPlayer, npcHandItem);
-                PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, ejectAction);
-                return ejectAction;
+                local ejectMagAction = ISEjectMagazine:new(npcIsoPlayer, npcHandItem);
+                PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, ejectMagAction);
+                return ejectMagAction;
             end
         end
     end
@@ -52,9 +52,9 @@ function PZNS_GunMagazineReload(npcSurvivor)
         end
         --
         if (magazine) then
-            local reloadAction = ISLoadBulletsInMagazine:new(npcIsoPlayer, magazine, count);
-            PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, reloadAction);
-            return reloadAction;
+            local reloadMagAction = ISLoadBulletsInMagazine:new(npcIsoPlayer, magazine, count);
+            PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, reloadMagAction);
+            return reloadMagAction;
         end
     end
 end
@@ -72,9 +72,9 @@ function PZNS_GunMagazineInsert(npcSurvivor)
     if (npcHandItem:IsWeapon() == true and npcHandItem:isRanged() == true) then
         local magazine = npcHandItem:getBestMagazine(npcIsoPlayer);
         if (magazine) then
-            local insertAction = ISInsertMagazine:new(npcIsoPlayer, npcHandItem, magazine);
-            PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, insertAction);
-            return insertAction;
+            local insertMagAction = ISInsertMagazine:new(npcIsoPlayer, npcHandItem, magazine);
+            PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, insertMagAction);
+            return insertMagAction;
         end
     end
 end
