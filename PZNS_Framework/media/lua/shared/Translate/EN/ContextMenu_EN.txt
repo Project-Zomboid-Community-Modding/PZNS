@@ -46,6 +46,7 @@ ContextMenu_EN = {
 		ContextMenu_PZNS_Grab_Corpse = "Grab Corpse",
 		ContextMenu_PZNS_Wash_Clothes = "Wash Clothes",
 		ContextMenu_PZNS_Wash_Self = "Wash Self",
+		ContextMenu_PZNS_PZNS_Square = "PZNS Square",
 		
 		ContextMenu_PZNS_Chop_Wood_Zone = "Chop Wood Zone",
 		ContextMenu_PZNS_Construction_Zone = "Construction Zone",

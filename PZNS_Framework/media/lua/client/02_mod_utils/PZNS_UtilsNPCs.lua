@@ -319,6 +319,8 @@ function PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor)
     if (npcIsoPlayer == nil) then
         return;
     end
+    -- Cows: Reset the actionTicks, so NPC can restart their actions
+    npcSurvivor.actionTicks = 0;
     -- Cows: Stop aiming and stop attacking
     npcIsoPlayer:NPCSetAiming(false);
     npcIsoPlayer:NPCSetAttack(false);
@@ -337,7 +339,7 @@ function PZNS_UtilsNPCs.PZNS_GetNPCActionsQueue(npcSurvivor)
     return npcActionQueue;
 end
 
----comment
+---
 ---@param npcSurvivor any
 ---@return integer | nil
 function PZNS_UtilsNPCs.PZNS_GetNPCActionsQueuedCount(npcSurvivor)
@@ -345,17 +347,7 @@ function PZNS_UtilsNPCs.PZNS_GetNPCActionsQueuedCount(npcSurvivor)
         return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    local npcActionQueue = ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer);
-    local actionsCount = 0;
-    --
-    for k1, v1 in pairs(npcActionQueue) do
-        if (k1 == "queue") then
-            for k2, v2 in pairs(v1) do
-                actionsCount = actionsCount + 1;
-            end
-        end
-    end
-
+    local actionsCount =  #ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer.queue);
     return actionsCount;
 end
 

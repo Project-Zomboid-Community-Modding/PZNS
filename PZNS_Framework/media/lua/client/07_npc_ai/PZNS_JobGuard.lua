@@ -10,14 +10,9 @@ function PZNS_JobGuard(npcSurvivor)
     if (npcSurvivor == nil) then
         return nil;
     end
-
-    local isThreatFound = PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor);
-    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    --
-    if (isThreatFound == true) then
+    if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
         npcSurvivor.idleTicks = 0;
-        PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor);
-        return; -- Cows: Stop processing and start attacking.
+        return; -- Cows Stop Processing and let the NPC finish its actions.
     end
     -- Cows: Have the guard patrol the paremeter of the ZoneHome if it exists.
     if (npcSurvivor.isHoldingInPlace ~= true) then

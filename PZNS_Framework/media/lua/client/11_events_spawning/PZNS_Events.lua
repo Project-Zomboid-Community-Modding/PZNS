@@ -24,7 +24,7 @@ Events.OnGameStart.Add(PZNS_CreatePVPButton);
 
 -- Cows: Events that should load after all other game start events.
 local function PZNS_Events()
-    Events.OnKeyPressed.Add(PZNS_KeyBindAction);
+    -- Events.OnKeyPressed.Add(PZNS_KeyBindAction);
     Events.OnWeaponSwing.Add(PZNS_WeaponSwing);
     Events.OnWeaponHitCharacter.Add(PZNS_CombatUtils.PZNS_CalculatePlayerDamage);
     --

@@ -80,7 +80,7 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
         --
         local bodydamage = victim:getBodyDamage()
         local bodypart = bodydamage:getBodyPart(BodyPartType.FromIndex(bodypartIndex));
-        --
+        -- WIP - Cows: So This is why some NPCS can't be killed in SuperbSurvivors... defense penetration is between 0 and 100 vs. whatever defense
         if (ZombRand(0, 100) < victim:getBodyPartClothingDefense(bodypartIndex, isEdgedWeapon, isBullet)) then
             isDefensePenetrated = false;
         end
