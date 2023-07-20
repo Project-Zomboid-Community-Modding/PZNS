@@ -3,12 +3,21 @@ local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 ---@param npcSurvivor any
 function PZNS_WeaponReload(npcSurvivor)
     if (npcSurvivor == nil) then
-        return nil;
+        return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    if (npcIsoPlayer == nil) then
+        return;
+    end
     local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
     local magazineType = npcHandItem:getMagazineType();
 
+    if (npcIsoPlayer:NPCGetAiming() == true) then
+        npcIsoPlayer:NPCSetAiming(false);
+    end
+    if (npcIsoPlayer:isAttacking() == true) then
+        npcIsoPlayer:NPCSetAttack(false);
+    end
     local actionsCount = PZNS_UtilsNPCs.PZNS_GetNPCActionsQueuedCount(npcSurvivor);
     local actionQueue = ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer);
     local lastAction = actionQueue.queue[#actionQueue.queue];

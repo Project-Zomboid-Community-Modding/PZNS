@@ -41,16 +41,10 @@ function PZNS_GeneralAI.PZNS_IsReloadNeeded(npcSurvivor)
                             and lastAction.Type ~= "ISInsertMagazine"
                             and lastAction.Type ~= "ISRackFirearm"
                             and lastAction.Type ~= "ISReloadWeaponAction"
+                            and lastAction.Type ~= "ISWalkToTimedAction"  -- Cows: Well, reload while walking IS possible...
                         ) then
                         PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
                     end
-                end
-
-                if (npcIsoPlayer:NPCGetAiming() == true) then
-                    npcIsoPlayer:NPCSetAiming(false);
-                end
-                if (npcIsoPlayer:isAttacking() == true) then
-                    npcIsoPlayer:NPCSetAttack(false);
                 end
                 return true;
             end
