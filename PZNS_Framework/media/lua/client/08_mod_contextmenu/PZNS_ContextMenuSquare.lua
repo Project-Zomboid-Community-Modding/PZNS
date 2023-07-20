@@ -5,12 +5,12 @@ local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager"
 
 ---@diagnostic disable: duplicate-doc-alias
 PZNS_SquareContextActionsText = {
-    Drink = "Drink",
-    Eat = "Eat",
-    GrabItem = "Grab Item",
-    GrabCorpse = "Grab Corpse",
-    WashClothes = "Wash Clothes",
-    WashSelf = "Wash Self"
+    Drink = getText("ContextMenu_PZNS_Drink"),
+    Eat = getText("ContextMenu_PZNS_Eat"),
+    GrabItem = getText("ContextMenu_PZNS_Grab_Item"),
+    GrabCorpse = getText("ContextMenu_PZNS_Grab_Corpse"),
+    WashClothes = getText("ContextMenu_PZNS_Wash_Clothes"),
+    WashSelf = getText("ContextMenu_PZNS_Wash_Self")
 };
 --
 PZNS_SquareContextActions = {
@@ -131,7 +131,7 @@ function PZNS_CreateSquareGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupI
                 -- Cows: Check and make sure the NPC is both alive and loaded in the current game world.
                 if (npcIsoPlayer:isAlive() == true and isNPCSquareLoaded == true) then
                     parentContextMenu:addOption(
-                        getText(npcSurvivor.survivorName),
+                        npcSurvivor.survivorName,
                         nil,
                         callbackFunction
                     );
@@ -161,7 +161,7 @@ function PZNS_ContextMenuSquareObjects(mpPlayerID, context, worldobjects)
     if (deadBody ~= nil) then
         local grabCorpseSubMenu = squareSubMenu:getNew(context);
         local grabCorpseSubMenu_Option = squareSubMenu:addOption(
-            getText(PZNS_SquareContextActionsText["GrabCorpse"]),
+            PZNS_SquareContextActionsText["GrabCorpse"],
             worldobjects,
             nil
         );
@@ -179,7 +179,7 @@ function PZNS_ContextMenuSquareObjects(mpPlayerID, context, worldobjects)
     if (isDrinkingWaterFound == true) then
         local drinkSubMenu = squareSubMenu:getNew(context);
         local drinkSubMenu_Option = squareSubMenu:addOption(
-            getText(PZNS_SquareContextActionsText["Drink"]),
+            PZNS_SquareContextActionsText["Drink"],
             worldobjects,
             nil
         );
@@ -193,14 +193,14 @@ function PZNS_ContextMenuSquareObjects(mpPlayerID, context, worldobjects)
         --
         local washClothesSubMenu = squareSubMenu:getNew(context);
         local washClothesSubMenu_Option = squareSubMenu:addOption(
-            getText(PZNS_SquareContextActionsText["WashClothes"]),
+            PZNS_SquareContextActionsText["WashClothes"],
             worldobjects,
             nil
         );
         --
         local washSelfSubMenu = squareSubMenu:getNew(context);
         local washSelfSubMenu_Option = squareSubMenu:addOption(
-            getText(PZNS_SquareContextActionsText["WashSelf"]),
+            PZNS_SquareContextActionsText["WashSelf"],
             worldobjects,
             nil
         );
@@ -219,7 +219,7 @@ function PZNS_ContextMenuSquareObjects(mpPlayerID, context, worldobjects)
             or isWashWaterFound == true
         ) then
         local squareSubMenu_Option = context:addOption(
-            getText("PZNS_Square"),
+            getText("ContextMenu_PZNS_PZNS_Square"),
             worldobjects,
             nil
         );

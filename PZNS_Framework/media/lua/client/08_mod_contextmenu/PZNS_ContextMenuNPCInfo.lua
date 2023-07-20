@@ -20,7 +20,7 @@ end
 function PZNS_ContextMenuNPCInfo(mpPlayerID, context, worldobjects)
     local infoSubMenu_1 = context:getNew(context);
     local infoSubMenu_1_Option = context:addOption(
-        getText("PZNS_NPC_Info"),
+        getText("ContextMenu_PZNS_PZNS_NPC_Info"),
         worldobjects,
         nil
     );
@@ -44,7 +44,7 @@ function PZNS_ContextMenuNPCInfo(mpPlayerID, context, worldobjects)
                             openNPCInfoPanel(npcSurvivor);
                         end
                         infoSubMenu_1:addOption(
-                            getText(npcSurvivor.survivorName),
+                            npcSurvivor.survivorName,
                             nil,
                             callbackFunction
                         );

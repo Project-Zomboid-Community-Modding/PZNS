@@ -120,16 +120,16 @@ local function spawnZombiesAtSquare(targetSquare)
 end
 --
 local PZNS_DebugBuildText = {
-    SpawnMedical = "Spawn Medical",
-    SpawnBooks = "Spawn Books",
-    SpawnCannedTuna = "Spawn 5 Canned Tuna",
-    SpawnNails = "Spawn 5 Nails Boxes",
-    SpawnPlanks = "Spawn 10 Planks",
-    SpawnPropaneTank = "Spawn 5 Propane Tank",
-    SpawnMetalSheets = "Spawn 5 Metal Sheets",
-    SpawnBigFenceGate = "Spawn 1 Big Fence Gate",
-    SpawnBigWiredWall = "Spawn 1 Wired Wall",
-    SpawnTools = "Spawn Tools",
+    SpawnMedical = getText("ContextMenu_PZNS_Spawn_Medical"),
+    SpawnBooks = getText("ContextMenu_PZNS_Spawn_Books"),
+    SpawnCannedTuna = getText("ContextMenu_PZNS_Spawn_5_Canned_Tuna"),
+    SpawnNails = getText("ContextMenu_PZNS_Spawn_5_Nails_Boxes"),
+    SpawnPlanks = getText("ContextMenu_PZNS_Spawn_10_Planks"),
+    SpawnPropaneTank = getText("ContextMenu_PZNS_Spawn_5_Propane_Tanks"),
+    SpawnMetalSheets = getText("ContextMenu_PZNS_Spawn_5_Metal_Sheets"),
+    SpawnBigFenceGate = getText("ContextMenu_PZNS_Spawn_1_Big_Fence_Gate"),
+    SpawnBigWiredWall = getText("ContextMenu_PZNS_Spawn_1_Wired_Wall"),
+    SpawnTools = getText("ContextMenu_PZNS_Spawn_Tools"),
 };
 ---
 local PZNS_DebugBuild = {
@@ -156,7 +156,7 @@ function PZNS_ContextMenuDebugBuild(mpPlayerID, context, worldobjects)
     --
     local submenu_1 = context:getNew(context);
     local submenu_1_Option = context:addOption(
-        getText("PZNS_Debug_Build"),
+        getText("ContextMenu_PZNS_PZNS_Debug_Build"),
         worldobjects,
         nil
     );
@@ -168,7 +168,7 @@ function PZNS_ContextMenuDebugBuild(mpPlayerID, context, worldobjects)
         end
         --
         submenu_1:addOption(
-            getText(debugText),
+            debugText,
             nil,
             callbackFunction
         );
@@ -189,11 +189,11 @@ end
 
 --
 local PZNS_DebugWorldText = {
-    ClearPlayerNeeds = "Clear Player Needs",
-    ClearAllNPCsNeeds = "Clear All NPCs Needs",
-    SpawnChris = "(Re)Spawn Chris Tester",
-    SpawnJill = "(Re)Spawn Jill Tester",
-    SpawnZombie = "Spawn Zombie"
+    ClearPlayerNeeds = getText("ContextMenu_PZNS_Clear_Player_Needs"),
+    ClearAllNPCsNeeds = getText("ContextMenu_PZNS_Clear_All_NPCs_Needs"),
+    SpawnChris = getText("ContextMenu_PZNS_ReSpawn_Chris_Tester"),
+    SpawnJill = getText("ContextMenu_PZNS_ReSpawn_Jill_Tester"),
+    SpawnZombie = getText("ContextMenu_PZNS_Spawn_Zombie")
 };
 ---
 local PZNS_DebugWorld = {
@@ -214,7 +214,7 @@ function PZNS_ContextMenuDebugWorld(mpPlayerID, context, worldobjects)
     end
     local submenu_1 = context:getNew(context);
     local submenu_1_Option = context:addOption(
-        getText("PZNS_Debug_World"),
+        getText("ContextMenu_PZNS_PZNS_Debug_World"),
         worldobjects,
         nil
     );
@@ -232,7 +232,7 @@ function PZNS_ContextMenuDebugWorld(mpPlayerID, context, worldobjects)
         end
         --
         submenu_1:addOption(
-            getText(debugText),
+            debugText,
             nil,
             callbackFunction
         );
@@ -241,10 +241,10 @@ end
 
 --
 local PZNS_DebugWipeText = {
-    WipeNPCs = "Wipe NPC Data",
-    WipeGroups = "Wipe Groups Data",
-    WipeZones = "Wipe Zones Data",
-    WipeAll = "Wipe All Data"
+    WipeNPCs = getText("ContextMenu_PZNS_Wipe_NPC_Data"),
+    WipeGroups = getText("ContextMenu_PZNS_Wipe_Groups_Data"),
+    WipeZones = getText("ContextMenu_PZNS_Wipe_Zones_Data"),
+    WipeAll = getText("ContextMenu_PZNS_Wipe_All_Data")
 };
 ---
 local PZNS_DebugWipe = {
@@ -264,7 +264,7 @@ function PZNS_ContextMenuDebugWipe(mpPlayerID, context, worldobjects)
     end
     local submenu_1 = context:getNew(context);
     local submenu_1_Option = context:addOption(
-        getText("PZNS_Debug_WipeData"),
+        getText("ContextMenu_PZNS_PZNS_Debug_WipeData"),
         worldobjects,
         nil
     );
@@ -276,7 +276,7 @@ function PZNS_ContextMenuDebugWipe(mpPlayerID, context, worldobjects)
         end
         --
         submenu_1:addOption(
-            getText(debugText),
+            debugText,
             nil,
             callbackFunction
         );

@@ -13,12 +13,12 @@ local function doNothing()
 end
 -- WIP - Cows: Need to rethink how Global variables are used...
 PZNS_JobsText = {
-    Companion = "Companion",
-    -- Farmer = "Farmer",     -- WIP - Cows: Commented out until implementation is ready.
-    -- Engineer = "Engineer", -- WIP - Cows: Commented out until implementation is ready.
-    Guard = "Guard",
-    Undertaker = "Undertaker",
-    Remove = "Remove From Group"
+    Companion = getText("ContextMenu_PZNS_Companion"),
+    -- Farmer = getText("ContextMenu_PZNS_Farmer"),     -- WIP - Cows: Commented out until implementation is ready.
+    -- Engineer = getText("ContextMenu_PZNS_Engineer"),, -- WIP - Cows: Commented out until implementation is ready.
+    Guard = getText("ContextMenu_PZNS_Guard"),
+    Undertaker = getText("ContextMenu_PZNS_Undertaker"),
+    Remove = getText("ContextMenu_PZNS_Remove_From_Group")
 };
 -- WIP - Cows: Need to rethink how Global variables are used...
 PZNS_Jobs = {

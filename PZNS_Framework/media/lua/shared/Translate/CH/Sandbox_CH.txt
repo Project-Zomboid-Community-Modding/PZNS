@@ -1,0 +1,26 @@
+Sandbox_CH = {
+Sandbox_PZNS_Framework = "PZNS 框架",
+	
+Sandbox_PZNS_Framework_IsDebugModeActive = "打開調試模式",
+Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "選中以打開，取消選中以關閉",
+
+Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC 拥有无限弹药?",
+Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "選中以打開，取消選中以關閉",
+
+Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(未完成)NPC 有生活需求",
+Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(未完成)選中以打開，取消選中以關閉，NPC 需要食物和水",
+
+Sandbox_PZNS_Framework_GroupSizeLimit = "(未完成)派系大小限制",
+Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(未完成)設置派系的大小限制",
+
+Sandbox_PZNS_Framework_CompanionFollowRange = "同伴跟隨範圍",
+Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "設置 NPC 跟隨玩家的距離",
+
+Sandbox_PZNS_Framework_CompanionRunRange = "同伴跑步範圍",
+Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "設置 NPC 開始奔跑追趕的距離",
+
+Sandbox_PZNS_Framework_CompanionIdleTicks = "(未完成)同伴在滴答點處閒置",
+Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(未完成)同伴在滴答點處閒置",
+
+
+}
