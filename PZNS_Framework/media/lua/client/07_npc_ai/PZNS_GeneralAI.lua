@@ -11,12 +11,14 @@ local PZNS_GeneralAI = {};
 function PZNS_GeneralAI.PZNS_CanSeeAimTarget(npcSurvivor)
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    -- Cows: Can only see if npcSurvivor is Alive.
-    if (npcIsoPlayer:isAlive() == true) then
-        --
-        if (PZNS_WorldUtils.PZNS_IsObjectZombieActive(npcSurvivor.aimTarget) == true) then
-            local canSeeTarget = npcIsoPlayer:CanSee(npcSurvivor.aimTarget); -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
-            return canSeeTarget;
+    if (npcIsoPlayer) then
+        -- Cows: Can only see if npcSurvivor is Alive.
+        if (npcIsoPlayer:isAlive() == true) then
+            --
+            if (PZNS_WorldUtils.PZNS_IsObjectZombieActive(npcSurvivor.aimTarget) == true) then
+                local canSeeTarget = npcIsoPlayer:CanSee(npcSurvivor.aimTarget); -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
+                return canSeeTarget;
+            end
         end
     end
     npcSurvivor.aimTarget = nil;
@@ -28,11 +30,13 @@ end
 function PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor)
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    -- Cows: Can only aim and/or attack if npcSurvivor is Alive.
-    if (npcIsoPlayer:isAlive() == true) then
-        if (npcSurvivor.aimTarget ~= nil) then
-            PZNS_WeaponAiming(npcSurvivor); -- Cows: Aim before attacking
-            PZNS_WeaponAttack(npcSurvivor); -- Cows: Permission to attack is handled in the function.
+    if (npcIsoPlayer) then
+        -- Cows: Can only aim and/or attack if npcSurvivor is Alive.
+        if (npcIsoPlayer:isAlive() == true) then
+            if (npcSurvivor.aimTarget ~= nil) then
+                PZNS_WeaponAiming(npcSurvivor); -- Cows: Aim before attacking
+                PZNS_WeaponAttack(npcSurvivor); -- Cows: Permission to attack is handled in the function.
+            end
         end
     end
 end
