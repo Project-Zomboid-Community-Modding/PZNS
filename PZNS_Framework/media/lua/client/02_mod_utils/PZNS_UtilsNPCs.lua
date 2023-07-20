@@ -377,10 +377,13 @@ function PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor)
         return false;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    local npcSquare = npcIsoPlayer:getSquare();
     --
-    if (npcSquare ~= nil) then
-        return true;
+    if (npcIsoPlayer) then
+        local npcSquare = npcIsoPlayer:getSquare();
+        --
+        if (npcSquare ~= nil) then
+            return true;
+        end
     end
     return false;
 end

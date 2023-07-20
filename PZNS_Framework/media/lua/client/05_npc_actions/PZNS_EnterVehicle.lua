@@ -9,15 +9,19 @@ function PZNS_EnterVehicleAsPassenger(npcSurvivor, targetIsoPlayer)
     -- local driverSeat = driverVehicle:getSeat(targetIsoPlayer);
     local numOfSeats = driverVehicle:getScript():getPassengerCount();
 
-    -- Cows: Enter the first available seat that is not the driver seat.
-    for i = 1, numOfSeats do
-        --
-        if (driverVehicle:isSeatOccupied(i) ~= true) then
-            local enterCarAction = ISEnterVehicle:new(npcIsoPlayer, driverVehicle, i);
-            local closeCarDoorAction = ISCloseVehicleDoor:new(npcIsoPlayer, driverVehicle, i);
-            PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, enterCarAction);
-            PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, closeCarDoorAction);
-            break;
+    if (npcIsoPlayer) then
+        if (npcIsoPlayer:isAlive() == true) then
+            -- Cows: Enter the first available seat that is not the driver seat.
+            for i = 1, numOfSeats do
+                --
+                if (driverVehicle:isSeatOccupied(i) ~= true) then
+                    local enterCarAction = ISEnterVehicle:new(npcIsoPlayer, driverVehicle, i);
+                    local closeCarDoorAction = ISCloseVehicleDoor:new(npcIsoPlayer, driverVehicle, i);
+                    PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, enterCarAction);
+                    PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, closeCarDoorAction);
+                    break;
+                end
+            end
         end
     end
 end
@@ -26,11 +30,13 @@ end
 ---@param npcSurvivor any
 function PZNS_ExitVehicle(npcSurvivor)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    local currentVehicle = npcIsoPlayer:getVehicle();
-    local currentSeat = npcIsoPlayer:getVehicle():getSeat(npcIsoPlayer);
-    --
-    local exitCarAction = ISExitVehicle:new(npcIsoPlayer);
-    local closeCarDoorAction = ISCloseVehicleDoor:new(npcIsoPlayer, currentVehicle, currentSeat);
-    PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, exitCarAction);
-    PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, closeCarDoorAction);
+    if (npcIsoPlayer) then
+        local currentVehicle = npcIsoPlayer:getVehicle();
+        local currentSeat = npcIsoPlayer:getVehicle():getSeat(npcIsoPlayer);
+        --
+        local exitCarAction = ISExitVehicle:new(npcIsoPlayer);
+        local closeCarDoorAction = ISCloseVehicleDoor:new(npcIsoPlayer, currentVehicle, currentSeat);
+        PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, exitCarAction);
+        PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, closeCarDoorAction);
+    end
 end
