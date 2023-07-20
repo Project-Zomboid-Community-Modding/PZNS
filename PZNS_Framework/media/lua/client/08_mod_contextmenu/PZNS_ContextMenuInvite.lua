@@ -26,7 +26,6 @@ function PZNS_ContextMenuInvite(mpPlayerID, context, worldobjects)
             if (currentObj ~= playerSurvivor and currentObj:isAlive() == true) then
                 local npcSurvivor = PZNS_NPCsManager.getActiveNPCBySurvivorID(currentObj:getModData().survivorID);
                 local callbackFunction = function()
-                    playerSurvivor:Say("Inviting... " .. npcSurvivor.survivorName);
                     -- Cows: Remove the npcSurvivor from its original group if it was in a group
                     if (npcSurvivor.groupID ~= nil) then
                         PZNS_NPCGroupsManager.removeNPCFromGroupBySurvivorID(
@@ -40,7 +39,7 @@ function PZNS_ContextMenuInvite(mpPlayerID, context, worldobjects)
                 if (npcSurvivor.groupID == nil or npcSurvivor.groupID ~= playerGroupID) then
                     isInviteeFound = true;
                     inviteSubMenu:addOption(
-                        getText(npcSurvivor.survivorName),
+                        npcSurvivor.survivorName,
                         nil,
                         callbackFunction
                     );
@@ -51,7 +50,7 @@ function PZNS_ContextMenuInvite(mpPlayerID, context, worldobjects)
     --
     if (isInviteeFound == true) then
         local inviteSubMenu_Option = context:addOption(
-            getText("PZNS_Invite"),
+            getText("ContextMenu_PZNS_PZNS_Invite"),
             worldobjects,
             nil
         );

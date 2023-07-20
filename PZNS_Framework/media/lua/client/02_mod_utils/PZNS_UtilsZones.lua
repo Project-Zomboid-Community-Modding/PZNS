@@ -10,13 +10,13 @@ PZNS_IsShowingZone = false;  -- WIP - Cows: Need to rethink how Global variables
 PZNS_IsZoneActive = false;   -- WIP - Cows: Need to rethink how Global variables are used...
 -- WIP - Cows: Need to rethink how Global variables are used... Cows: The zoneKeys also serves as zoneType.
 PZNS_ZonesText = {
-    -- ZoneChopWood = "Chop Wood Zone",
-    -- ZoneConstruction = "Construction Zone",
-    ZoneDropCorpses = "Corpse Drop Zone",
-    -- ZoneFarm = "Farm Zone",
-    ZoneHome = "Home Zone",
-    -- ZoneStoreFood = "Food Store Zone",
-    -- ZoneStoreWood = "Wood Store Zone",
+    -- ZoneChopWood = getText("ContextMenu_PZNS_Chop_Wood_Zone",
+    -- ZoneConstruction = getText("ContextMenu_PZNS_Construction_Zone",
+    ZoneDropCorpses = getText("ContextMenu_PZNS_Corpse_Drop_Zone"),
+    -- ZoneFarm = getText("ContextMenu_PZNS_Farm_Zone",
+    ZoneHome = getText("ContextMenu_PZNS_Home_Zone"),
+    -- ZoneStoreFood = getText("ContextMenu_PZNS_Food_Store_Zone",
+    -- ZoneStoreWood = getText("ContextMenu_PZNS_Wood_Store_Zone",
 };
 -- WIP - Cows: Need to rethink how Global variables are used... Cows: Color for each zone type... but rendering multiple zones highlight kills the game performance...
 PZNS_ZoneColors = {

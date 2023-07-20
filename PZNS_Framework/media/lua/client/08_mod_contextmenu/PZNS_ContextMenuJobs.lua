@@ -32,7 +32,7 @@ function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jobName)
             -- Cows: Check and make sure the NPC is both alive and loaded in the current game world.
             if (npcIsoPlayer:isAlive() and isNPCSquareLoaded == true) then
                 parentContextMenu:addOption(
-                    getText(npcSurvivor.survivorName),
+                    npcSurvivor.survivorName,
                     nil,
                     callbackFunction
                 );
@@ -49,7 +49,7 @@ end
 function PZNS_ContextMenuJobs(mpPlayerID, context, worldobjects)
     local jobsSubMenu_1 = context:getNew(context);
     local jobsSubMenu_1_Option = context:addOption(
-        getText("PZNS_Jobs"),
+        getText("ContextMenu_PZNS_PZNS_Jobs"),
         worldobjects,
         nil
     );
@@ -60,7 +60,7 @@ function PZNS_ContextMenuJobs(mpPlayerID, context, worldobjects)
     for jobKey, jobText in pairs(PZNS_JobsText) do
         local jobSubMenu_2 = jobsSubMenu_1:getNew(context);
         local jobSubMenu_2_Option = jobsSubMenu_1:addOption(
-            getText(jobText),
+            jobText,
             worldobjects,
             nil
         );

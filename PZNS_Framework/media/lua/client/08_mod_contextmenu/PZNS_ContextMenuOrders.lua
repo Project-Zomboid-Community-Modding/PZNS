@@ -5,11 +5,11 @@ local PZNS_PresetsSpeeches = require("03_mod_core/PZNS_PresetsSpeeches");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 
 PZNS_NPCOrdersText = {
-    HoldPosition = "Hold Position",
-    FollowMe = "Follow Me",
+    HoldPosition = getText("ContextMenu_PZNS_Hold_Position"),
+    FollowMe = getText("ContextMenu_PZNS_Follow_Me"),
     -- AimAtMe = "Aim At Me",-- Cows: Meant for debugging
-    Attack = "Attack Aimed Target",
-    AttackStop = "Stop Attacking"
+    Attack = getText("ContextMenu_PZNS_Attack_Aimed_Target"),
+    AttackStop = getText("ContextMenu_PZNS_Stop_Attacking")
 };
 ---
 PZNS_NPCOrderActions = {
@@ -93,7 +93,7 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
             -- Cows: Check and make sure the NPC is both alive and loaded in the current game world.
             if (npcIsoPlayer:isAlive() == true and isNPCSquareLoaded == true) then
                 parentContextMenu:addOption(
-                    getText(npcSurvivor.survivorName),
+                    npcSurvivor.survivorName,
                     nil,
                     callbackFunction
                 );
@@ -110,7 +110,7 @@ end
 function PZNS_ContextMenuOrders(mpPlayerID, context, worldobjects)
     local orderSubMenu = context:getNew(context);
     local orderSubMenu_Option = context:addOption(
-        getText("PZNS_Orders"),
+        getText("ContextMenu_PZNS_PZNS_Orders"),
         worldobjects,
         nil
     );
@@ -121,7 +121,7 @@ function PZNS_ContextMenuOrders(mpPlayerID, context, worldobjects)
     for orderKey, orderText in pairs(PZNS_NPCOrdersText) do
         local orderAction = orderSubMenu:getNew(context);
         local orderAction_Option = orderSubMenu:addOption(
-            getText(orderText),
+            orderText,
             worldobjects,
             nil
         );

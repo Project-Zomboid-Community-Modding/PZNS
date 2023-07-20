@@ -1,11 +1,11 @@
 VERSION = 1,
+
 option PZNS_Framework.IsDebugModeActive
 {
 	type = boolean,
 	default = true,
 
-	page = PZNS_Framework,
-	translation = PZNS_Framework_IsDebugModeActive,
+	page = PZNS_Framework, translation = PZNS_Framework_IsDebugModeActive,
 }
 
 option PZNS_Framework.IsInfiniteAmmoActive
@@ -13,8 +13,7 @@ option PZNS_Framework.IsInfiniteAmmoActive
 	type = boolean,
 	default = true,
 
-	page = PZNS_Framework,
-	translation = PZNS_Framework_IsInfiniteAmmoActive,
+	page = PZNS_Framework, translation = PZNS_Framework_IsInfiniteAmmoActive,
 }
 
 
@@ -23,8 +22,7 @@ option PZNS_Framework.IsNPCsNeedsActive
 	type = boolean,
 	default = false,
 
-	page = PZNS_Framework,
-	translation = PZNS_Framework_IsNPCsNeedsActive,
+	page = PZNS_Framework, translation = PZNS_Framework_IsNPCsNeedsActive,
 }
 
 
@@ -35,8 +33,7 @@ option PZNS_Framework.GroupSizeLimit
 	max = 20,
 	default = 8,
 
-	page = PZNS_Framework,
-	translation = PZNS_Framework_GroupSizeLimit,
+	page = PZNS_Framework, translation = PZNS_Framework_GroupSizeLimit,
 }
 
 
@@ -47,8 +44,7 @@ option PZNS_Framework.CompanionFollowRange
 	max = 30,
 	default = 3,
 
-	page = PZNS_Framework,
-	translation = PZNS_Framework_CompanionFollowRange,
+	page = PZNS_Framework, translation = PZNS_Framework_CompanionFollowRange,
 }
 
 
@@ -59,8 +55,7 @@ option PZNS_Framework.CompanionRunRange
 	max = 30,
 	default = 5,
 
-	page = PZNS_Framework,
-	translation = PZNS_Framework_CompanionRunRange,
+	page = PZNS_Framework, translation = PZNS_Framework_CompanionRunRange,
 }
 
 
@@ -71,6 +66,5 @@ option PZNS_Framework.CompanionIdleTicks
 	max = 10000,
 	default = 500,
 
-	page = PZNS_Framework,
-	translation = PZNS_Framework_CompanionIdleTicks,
+	page = PZNS_Framework, translation = PZNS_Framework_CompanionIdleTicks,
 }
