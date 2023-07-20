@@ -61,7 +61,7 @@ function PZNS_NPCSpeak(npcSurvivor, text, intention)
 
         npcSurvivor.speechTicks = 0; -- Cows: Reset speechTicks so the text stays rendered.
         npcSurvivor.textObject:ReadString(
-            getText(tostring(text) .. "\n" .. npcSurvivor.survivorName)
+            tostring(text) .. "\n" .. npcSurvivor.survivorName
         );
     end
 end

@@ -3,12 +3,12 @@ local PZNS_UtilsZones = require("02_mod_utils/PZNS_UtilsZones");
 local PZNS_NPCZonesManager = require("04_data_management/PZNS_NPCZonesManager");
 
 local contextMenu_ZoneControlsText = {
-    CreateZone = "Create Zone",
-    DeleteZone = "Delete Zone",
-    CancelZone = "Cancel Zone Selection",
-    SetZoneBoundary = "Set Zone Boundary",
-    ShowZoneBoundary = "Show Zone Boundary",
-    HideZoneBoundary = "Hide Zone Boundary"
+    CreateZone = getText("ContextMenu_PZNS_Create_Zone"),
+    DeleteZone = getText("ContextMenu_PZNS_Delete_Zone"),
+    CancelZone = getText("ContextMenu_PZNS_Cancel_Zone_Selection"),
+    SetZoneBoundary = getText("ContextMenu_PZNS_Set_Zone_Boundary"),
+    ShowZoneBoundary = getText("ContextMenu_PZNS_Show_Zone_Boundary"),
+    HideZoneBoundary = getText("ContextMenu_PZNS_Hide_Zone_Boundary")
 };
 --- Cows: Need this variable so PZNS_EndSelectingZone() can reference it.
 local currentZoneKey = "";
@@ -31,7 +31,7 @@ function PZNS_CreateZoneTypesMenu(parentContextMenu, controlKey, groupID)
             -- Cows: Only allow deletion of active group zones
             if (isGroupZoneActive ~= nil) then
                 parentContextMenu:addOption(
-                    getText(zoneName),
+                    zoneName,
                     nil,
                     callbackFunction
                 );
@@ -43,7 +43,7 @@ function PZNS_CreateZoneTypesMenu(parentContextMenu, controlKey, groupID)
             -- Cows: Only show active group zones
             if (isGroupZoneActive ~= nil) then
                 parentContextMenu:addOption(
-                    getText(zoneName),
+                    zoneName,
                     nil,
                     callbackFunction
                 );
@@ -56,7 +56,7 @@ function PZNS_CreateZoneTypesMenu(parentContextMenu, controlKey, groupID)
                 PZNS_UtilsZones.PZNS_StartSelectingZone(groupID, zoneKey);
             end
             parentContextMenu:addOption(
-                getText(zoneName),
+                zoneName,
                 nil,
                 callbackFunction
             );
@@ -73,7 +73,7 @@ function PZNS_ContextMenuZones(mpPlayerID, context, worldobjects)
     --
     local zonesSubMenu_1 = context:getNew(context);
     local zonesSubMenu_1_Option = context:addOption(
-        getText("PZNS_Zones"),
+        getText("ContextMenu_PZNS_PZNS_Zones"),
         worldobjects,
         nil
     );
@@ -89,12 +89,12 @@ function PZNS_ContextMenuZones(mpPlayerID, context, worldobjects)
                     currentZoneKey = "";
                     PZNS_CancelCreatingZone();
                 end
-                zonesSubMenu_1:addOption(getText(controlText), nil, callBackFunction);
+                zonesSubMenu_1:addOption(controlText, nil, callBackFunction);
             elseif (controlKey == "SetZoneBoundary") then
                 local callBackFunction = function()
                     PZNS_UtilsZones.PZNS_EndSelectingZone(playerGroupID, currentZoneKey);
                 end
-                zonesSubMenu_1:addOption(getText(controlText), nil, callBackFunction);
+                zonesSubMenu_1:addOption(controlText, nil, callBackFunction);
             end
             -- Cows: Check if PZNS_IsShowingZone is true
         elseif (PZNS_IsShowingZone == true) then
@@ -103,7 +103,7 @@ function PZNS_ContextMenuZones(mpPlayerID, context, worldobjects)
                 local callBackFunction = function()
                     PZNS_UtilsZones.PZNS_HideGroupZoneSquares();
                 end
-                zonesSubMenu_1:addOption(getText(controlText), nil, callBackFunction);
+                zonesSubMenu_1:addOption(controlText, nil, callBackFunction);
             end
         else
             -- Cows: Else render the full zone controls menu.
@@ -117,7 +117,7 @@ function PZNS_ContextMenuZones(mpPlayerID, context, worldobjects)
                     and controlKey ~= "HideZoneBoundary"
                 ) then
                 local submenu_2_Option = zonesSubMenu_1:addOption(
-                    getText(controlText),
+                    controlText,
                     nil,
                     nil
                 );

@@ -189,7 +189,7 @@ function PZNS_NPCInventoryContext(player, context, items)
         local context2
         --
         if (itemExtraOption:IsClothing() or itemExtraOption:IsInventoryContainer()) and itemExtraOption:getClothingExtraSubmenu() then
-            local option = context:addOption("NPC: " .. getText("ContextMenu_Wear"));
+            local option = context:addOption("NPC: " .. getText("ContextMenu_PZNS_Wear"));
             local subMenu = context:getNew(context);
             context:addSubMenu(option, subMenu);
             context2 = subMenu;
@@ -221,35 +221,35 @@ function PZNS_NPCInventoryContext(player, context, items)
     end
     --
     if clothing then
-        context:addOption("NPC: Wear", npcIsoPlayer, NPCWear, clothing, items);
+        context:addOption(getText("ContextMenu_PZNS_NPCWear"), npcIsoPlayer, NPCWear, clothing, items);
     elseif backItem then
-        context:addOption("NPC: Equip on back", npcIsoPlayer, NPCEquipBack, backItem);
+        context:addOption(getText("ContextMenu_PZNS_NPCWearOnBack"), npcIsoPlayer, NPCEquipBack, backItem);
     end
     --
     if hairDye and npcIsoPlayer:getHumanVisual():getHairModel() and npcIsoPlayer:getHumanVisual():getHairModel() ~= "Bald" then
-        context:addOption("NPC Dye hair", hairDye, ISInventoryPaneContextMenu.onDyeHair, npcIsoPlayer, false);
+        context:addOption(getText("ContextMenu_PZNS_NPCDyeHair"), hairDye, ISInventoryPaneContextMenu.onDyeHair, npcIsoPlayer, false);
     end
     --
     if hairDye and npcIsoPlayer:getHumanVisual():getBeardModel() and npcIsoPlayer:getHumanVisual():getBeardModel() ~= "" then
-        context:addOption("NPC Dye beard", hairDye, ISInventoryPaneContextMenu.onDyeHair, npcIsoPlayer, true);
+        context:addOption(getText("ContextMenu_PZNS_NPCDyeBeard"), hairDye, ISInventoryPaneContextMenu.onDyeHair, npcIsoPlayer, true);
     end
     --
     if bothHandsItem then
-        context:addOption("NPC: Equip in Both hands", npcIsoPlayer, NPCEquipWeapon, bothHandsItem, true, true);
+        context:addOption(getText("ContextMenu_PZNS_NPCEquipBothHands"), npcIsoPlayer, NPCEquipWeapon, bothHandsItem, true, true);
     end
     --
     if primaryHandItem then
-        context:addOption("NPC: Equip primary", npcIsoPlayer, NPCEquipWeapon, primaryHandItem, true, false);
+        context:addOption(getText("ContextMenu_PZNS_NPCEquipPrimary"), npcIsoPlayer, NPCEquipWeapon, primaryHandItem, true, false);
     end
     --
     if secondaryHandItem then
-        context:addOption("NPC: Equip secondary", npcIsoPlayer, NPCEquipWeapon, secondaryHandItem, false, false);
+        context:addOption(getText("ContextMenu_PZNS_NPCEquipSecondary"), npcIsoPlayer, NPCEquipWeapon, secondaryHandItem, false, false);
     end
     --
-    context:addOption("NPC: Drop", npcIsoPlayer, NPCDrop, items);
+    context:addOption(getText("ContextMenu_PZNS_NPCDropItem"), npcIsoPlayer, NPCDrop, items);
     --
     if uneqipItem then
-        context:addOption("NPC: Unequip", npcIsoPlayer, NPCUnequip, items);
+        context:addOption(getText("ContextMenu_PZNS_NPCUnquipItem"), npcIsoPlayer, NPCUnequip, items);
     end
 end
 --

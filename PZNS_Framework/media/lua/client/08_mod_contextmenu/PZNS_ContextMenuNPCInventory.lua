@@ -42,7 +42,7 @@ end
 function PZNS_ContextMenuNPCInventory(mpPlayerID, context, worldobjects)
     local inventorySubMenu_1 = context:getNew(context);
     local inventorySubMenu_1_Option = context:addOption(
-        getText("PZNS_Inventory"),
+        getText("ContextMenu_PZNS_PZNS_Inventory"),
         worldobjects,
         nil
     );
@@ -70,7 +70,7 @@ function PZNS_ContextMenuNPCInventory(mpPlayerID, context, worldobjects)
                             openNPCInventory(mpPlayerID, npcSurvivor);
                         end
                         inventorySubMenu_1:addOption(
-                            getText(npcSurvivor.survivorName),
+                            npcSurvivor.survivorName,
                             nil,
                             callbackFunction
                         );

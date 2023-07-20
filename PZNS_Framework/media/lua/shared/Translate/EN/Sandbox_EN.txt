@@ -1,5 +1,5 @@
 Sandbox_EN = {
-	Sandbox_PZNS_Framework = "PZNS_Framework",
+	Sandbox_PZNS_Framework = "PZNS Framework",
 	
 	Sandbox_PZNS_Framework_IsDebugModeActive = "Activate Debug Mode",
 	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Check to activate, uncheck to deactivate",
@@ -7,11 +7,11 @@ Sandbox_EN = {
 	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC has Infinite Ammo?",
 	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Check to activate, uncheck to deactivate - NPCs will have keep shooting without needing ammo in inventory if activated",
 
-	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "NPC has needs",
-	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "Check to activate, uncheck to deactivate - NPCs will need food and water if activated",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP)NPC has needs",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP)Check to activate, uncheck to deactivate - NPCs will need food and water if activated",
 
-	Sandbox_PZNS_Framework_GroupSizeLimit = "Group Size Limit",
-	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "Sets the limit of NPCs a group may have",
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP)Group Size Limit",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP)Sets the limit of NPCs a group may have",
 
 	Sandbox_PZNS_Framework_CompanionFollowRange = "Companion Follow Range",
 	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Sets the distance at which NPCs will try to follow the player",	
@@ -19,8 +19,8 @@ Sandbox_EN = {
 	Sandbox_PZNS_Framework_CompanionRunRange = "Companion Run Range",
 	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Sets the distance at which NPCs will start running to catch up",
 
-	Sandbox_PZNS_Framework_CompanionIdleTicks = "Companion Idles at Tick",
-	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "Sets the Tick counter at which NPCs will begin idle behaviors",
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP)Companion Idles at Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP)Sets the Tick counter at which NPCs will begin idle behaviors",
 
 
 }
