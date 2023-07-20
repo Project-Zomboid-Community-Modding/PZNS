@@ -9,15 +9,17 @@ function PZNS_EnterVehicleAsPassenger(npcSurvivor, targetIsoPlayer)
     -- local driverSeat = driverVehicle:getSeat(targetIsoPlayer);
     local numOfSeats = driverVehicle:getScript():getPassengerCount();
 
-    -- Cows: Enter the first available seat that is not the driver seat.
-    for i = 1, numOfSeats do
-        --
-        if (driverVehicle:isSeatOccupied(i) ~= true) then
-            local enterCarAction = ISEnterVehicle:new(npcIsoPlayer, driverVehicle, i);
-            local closeCarDoorAction = ISCloseVehicleDoor:new(npcIsoPlayer, driverVehicle, i);
-            PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, enterCarAction);
-            PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, closeCarDoorAction);
-            break;
+    if (npcIsoPlayer:isAlive() == true) then
+        -- Cows: Enter the first available seat that is not the driver seat.
+        for i = 1, numOfSeats do
+            --
+            if (driverVehicle:isSeatOccupied(i) ~= true) then
+                local enterCarAction = ISEnterVehicle:new(npcIsoPlayer, driverVehicle, i);
+                local closeCarDoorAction = ISCloseVehicleDoor:new(npcIsoPlayer, driverVehicle, i);
+                PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, enterCarAction);
+                PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, closeCarDoorAction);
+                break;
+            end
         end
     end
 end
