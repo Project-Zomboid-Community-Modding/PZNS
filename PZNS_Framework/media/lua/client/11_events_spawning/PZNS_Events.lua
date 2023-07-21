@@ -6,9 +6,6 @@ local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 
 -- Cows: Sandbox Options if needed
--- Events.OnInitGlobalModData.Add(Get_PZNS_NPCBehaviorOptions_Sandbox);
--- Events.OnInitGlobalModData.Add(Get_PZNS_NPCGroupsOptions_Sandbox);
--- Events.OnInitGlobalModData.Add(Get_PZNS_NPCConfigOptions_Sandbox);
 Events.OnInitGlobalModData.Add(PZNS_GetSandboxOptions);
 --
 Events.OnGameStart.Add(PZNS_UtilsDataGroups.PZNS_GetCreateActiveGroupsModData);
