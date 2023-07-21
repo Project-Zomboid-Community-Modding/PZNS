@@ -1,6 +1,7 @@
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_PlayerUtils = require("02_mod_utils/PZNS_PlayerUtils");
+local PZNS_PresetsSpeeches = require("03_mod_core/PZNS_PresetsSpeeches");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 
 ---@diagnostic disable: duplicate-doc-alias
@@ -110,12 +111,17 @@ function PZNS_CreateSquareGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupI
                 playerSurvivor:Say(npcSurvivor.forename .. ", " ..
                     PZNS_SquareContextActionsText[orderKey]
                 );
-                PZNS_NPCSpeak(npcSurvivor,
-                    "Square Order " ..
-                    PZNS_SquareContextActionsText[orderKey] ..
-                    " acknowledged!",
-                    "Friendly"
-                );
+                if (npcSurvivor.speechTable ~= nil) then
+                    if (npcSurvivor.speechTable.PZNS_OrderConfirmed) then
+                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
+                        );
+                    end
+                else
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
+                    );
+                end
                 --
                 if (orderKey == "GrabCorpse" and deadBody ~= nil) then
                     PZNS_SquareContextActions[orderKey](npcSurvivor, square, deadBody);

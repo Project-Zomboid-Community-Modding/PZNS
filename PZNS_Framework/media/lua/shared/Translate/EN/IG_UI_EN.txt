@@ -1,4 +1,50 @@
 IGUI_EN = {
 
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Whatever you say.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "I'm on it",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Alright",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Understood, I will hold this place.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "I am now holding this location...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Guard duty huh...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Understood, Following",
+IGUI_PZNS_Speech_Preset_Follow_02 = "I got your back",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Alright, lead the way.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Fine, I'm leaving then",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Why me?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "You'll regret this decision!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "I need something to do here...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "What is my next task?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "It's a slow day at work...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "I don't have a weapon!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "No Permission to attack",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "No Workzone for Undertaker...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "OK",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Got it",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "On my way.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Understood, I'll be here",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Copy, holding position.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "I'll be over here then.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "I'm on your six.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Coming over now.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Take the point.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Are you sure? Take care of yourself.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Look out for those freaks.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Don't let your guard down.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "We're wasting time here...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Don't expect me to make a sandwich...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "What should I do next?...",
+
 }
 

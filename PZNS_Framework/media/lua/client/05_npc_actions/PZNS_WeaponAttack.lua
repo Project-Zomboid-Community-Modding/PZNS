@@ -103,11 +103,11 @@ function PZNS_WeaponAttack(npcSurvivor)
                     --
                     npcSurvivor.attackTicks = npcSurvivor.attackTicks + 1;
                 else
-                    PZNS_NPCSpeak(npcSurvivor, "I don't have a weapon!", "Negative");
+                    PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_NeedWeapon_01"), "Negative");
                     npcIsoPlayer:NPCSetAttack(false);
                 end
             else
-                PZNS_NPCSpeak(npcSurvivor, "No Permission to attack", "InfoOnly");
+                PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_CannotAttack_01"), "InfoOnly");
                 npcIsoPlayer:NPCSetAttack(false);
             end
         end

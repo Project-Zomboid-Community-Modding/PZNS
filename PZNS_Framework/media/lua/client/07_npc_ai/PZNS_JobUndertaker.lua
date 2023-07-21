@@ -83,7 +83,7 @@ function PZNS_JobUndertaker(npcSurvivor)
     local groupDropSquare = PZNS_UtilsZones.PZNS_CheckGroupWorkZoneExists(npcSurvivor.groupID, "ZoneDropCorpses");
     -- Cows: Check if WorkZone exists.
     if (groupDropSquare == nil) then
-        PZNS_NPCSpeak(npcSurvivor, "No Workzone for Undertaker...", "Negative");
+        PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker"), "Negative");
         return;
     end
     --
@@ -109,7 +109,7 @@ function PZNS_JobUndertaker(npcSurvivor)
             Events.OnRenderTick.Remove(renderGrabSquare);
             isRenderingGrabSquareHighlight = false;
         end
-        PZNS_NPCSpeak(npcSurvivor, "Walking to dropoff...", "InfoOnly");
+        -- PZNS_NPCSpeak(npcSurvivor, "Walking to dropoff...", "InfoOnly");
         PZNS_MoveToDropItem(npcSurvivor, groupDropSquare, inventoryCorpse);
         -- Cows: Reset the cell check and npc jobSquare
         if (isCellChecked == true) then
@@ -118,14 +118,14 @@ function PZNS_JobUndertaker(npcSurvivor)
             debugGrabSquare = nil;
         end
     else -- Cows: Else the NPC needs to look at nearby squares around ZoneDropCorpses for a corpse to grab.
-        PZNS_NPCSpeak(npcSurvivor, "Looking for pickup...", "InfoOnly");
+        -- PZNS_NPCSpeak(npcSurvivor, "Looking for pickup...", "InfoOnly");
         --
         if (npcSurvivor.jobSquare ~= nil) then
             local squareDeadBodys = npcSurvivor.jobSquare:getDeadBodys();
             --
             if (squareDeadBodys:size() > 0) then
                 local deadBody = squareDeadBodys:get(0);
-                PZNS_NPCSpeak(npcSurvivor, "Moving to grab corpse...", "InfoOnly");
+                -- PZNS_NPCSpeak(npcSurvivor, "Moving to grab corpse...", "InfoOnly");
                 PZNS_MoveToGrabCorpse(npcSurvivor, npcSurvivor.jobSquare, deadBody);
                 --
                 if (isRenderingGrabSquareHighlight == false) then
