@@ -19,7 +19,6 @@ function PZNS_GeneralAI.PZNS_IsReloadNeeded(npcSurvivor)
         local npc_inventory = npcIsoPlayer:getInventory();
         ---@type HandWeapon
         local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
-        local ammoType = npcHandItem:getAmmoType();
         local ammoCount = 0;
         -- Cows: No Item in hand, no reload needed
         if (npcHandItem == nil) then
@@ -27,7 +26,7 @@ function PZNS_GeneralAI.PZNS_IsReloadNeeded(npcSurvivor)
         end
         -- Cows: Ranged weapon
         if (npcHandItem:IsWeapon() == true and npcHandItem:isRanged() == true) then
-
+            local ammoType = npcHandItem:getAmmoType();
             ammoCount = npc_inventory:getItemCountRecurse(ammoType);
             -- Cows: Check if the gun has no ammo and there are ammo in the backpack.
             if (npcHandItem:getCurrentAmmoCount() == 0 and ammoCount > 0) then
