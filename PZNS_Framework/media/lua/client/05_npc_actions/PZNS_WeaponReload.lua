@@ -39,15 +39,15 @@ function PZNS_WeaponReload(npcSurvivor)
                     PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
                 end
             end
-            PZNS_NPCSpeak(npcSurvivor, "Reloading... Inserting Mag into Gun");
+            -- PZNS_NPCSpeak(npcSurvivor, "Reloading... Inserting Mag into Gun");
             PZNS_GunMagazineInsert(npcSurvivor);
         else
             if (npcHandItem:isContainsClip()) then
-                PZNS_NPCSpeak(npcSurvivor, "Reloading... Ejecting Mag");
+                -- PZNS_NPCSpeak(npcSurvivor, "Reloading... Ejecting Mag");
                 PZNS_GunMagazineEject(npcSurvivor);
             end
             if (magazine) then
-                PZNS_NPCSpeak(npcSurvivor, "Reloading... Inserting Ammo into Mag");
+                -- PZNS_NPCSpeak(npcSurvivor, "Reloading... Inserting Ammo into Mag");
                 PZNS_GunMagazineReload(npcSurvivor);
             end
         end

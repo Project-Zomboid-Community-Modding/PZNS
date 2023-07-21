@@ -1,4 +1,50 @@
 IGUI_CN = {
 
+IGUI_PZNS_Speech_Preset_Confirm_01 = "随你说做吧",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "知道了",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "好吧",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "明白了，我会守住这个地方",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "我会在这里保持位置....",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "做警卫值班啊...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "知道了，现在跟着你",
+IGUI_PZNS_Speech_Preset_Follow_02 = "我会支持你",
+IGUI_PZNS_Speech_Preset_Follow_03 = "好了，你带路吧",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "好吧，那我走了",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "我为什么要去？",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "你会后悔这个决定的！",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "为什么这里无事可做啊?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "我的下一份工作是什么？",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "我在这里很无聊...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "我没有武器!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "我没有攻击权限",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "没有堆放尸体的工作区...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "OK",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "明白了",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "我会去做的",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "明白了，我会在这里",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "好，我会保持位置",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "我会留在这里",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "我在你的六点后",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "我现在就过来.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "好，请带路吧",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "确定吗？那么请照顾好自己吧",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "当心那些怪胎.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "不要放松啊!",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "为什么我们在这里浪费时间...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "别指望我做三明治...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "接下来我应该怎么做?...",
+
 }
 

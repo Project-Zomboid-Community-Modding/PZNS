@@ -1,33 +1,33 @@
 local PZNS_SpeechTableJill = {};
 
 PZNS_SpeechTableJill.PZNS_OrderConfirmed = {
-    "OK",
-    "Got it",
-    "On my way."
+    getText("IGUI_PZNS_Speech_JillTester_Confirm_01"),
+    getText("IGUI_PZNS_Speech_JillTester_Confirm_02"),
+    getText("IGUI_PZNS_Speech_JillTester_Confirm_03"),
 };
 
 PZNS_SpeechTableJill.PZNS_OrderSpeechHoldPosition = {
-    "Understood, I'll be here",
-    "Copy, holding position.",
-    "I'll be over here then."
+    getText("IGUI_PZNS_Speech_JillTester_HoldPosition_01"),
+    getText("IGUI_PZNS_Speech_JillTester_HoldPosition_02"),
+    getText("IGUI_PZNS_Speech_JillTester_HoldPosition_03"),
 };
 
 PZNS_SpeechTableJill.PZNS_OrderSpeechFollow = {
-    "I'm on your six.",
-    "Coming over now.",
-    "Take the point."
+    getText("IGUI_PZNS_Speech_JillTester_Follow_01"),
+    getText("IGUI_PZNS_Speech_JillTester_Follow_02"),
+    getText("IGUI_PZNS_Speech_JillTester_Follow_03"),
 };
 
 PZNS_SpeechTableJill.PZNS_JobSpeechRemoveFromGroup = {
-    "Are you sure? Take care of yourself.",
-    "Look out for those freaks.",
-    "Don't let your guard down."
+    getText("IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01"),
+    getText("IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02"),
+    getText("IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03"),
 };
 
 PZNS_SpeechTableJill.PZNS_JobSpeechIdle = {
-    "We're wasting time here...",
-    "Don't expect me to make a sandwich...",
-    "What should I do next?..."
+    getText("IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01"),
+    getText("IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02"),
+    getText("IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03"),
 };
 
 return PZNS_SpeechTableJill;
