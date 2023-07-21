@@ -18,6 +18,7 @@ Events.OnGameStart.Add(PZNS_LocalPlayerGroupCreation);
 Events.OnGameStart.Add(PZNS_UpdateISWorldMapRender);
 Events.OnGameStart.Add(PZNS_CreateNPCPanelInfo);
 Events.OnGameStart.Add(PZNS_CreatePVPButton);
+Events.OnGameStart.Add(PZNS_ResetJillTesterSpeechTable);
 
 -- Cows: Events that should load after all other game start events.
 local function PZNS_Events()

@@ -77,3 +77,11 @@ function PZNS_DeleteJillTester(mpPlayerID)
     PZNS_NPCGroupsManager.removeNPCFromGroupBySurvivorID(playerGroupID, npcSurvivorID); -- Cows: REMOVE THE NPC FROM THEIR GROUP BEFORE DELETING THEM! OTHERWISE IT'S A NIL REFERENCE
     PZNS_NPCsManager.deleteActiveNPCBySurvivorID(npcSurvivorID);
 end
+
+--- Cows: Automatically Re-set the custom npc speech table, this is to ensure the custom npc always uses the latest speech table if an update occurs.
+function PZNS_ResetJillTesterSpeechTable()
+    local npcSurvivor = PZNS_NPCsManager.getActiveNPCBySurvivorID(npcSurvivorID);
+    if (npcSurvivor ~= nil) then
+        PZNS_UtilsNPCs.PZNS_SetNPCSpeechTable(npcSurvivor, PZNS_SpeechTableJill);
+    end
+end
