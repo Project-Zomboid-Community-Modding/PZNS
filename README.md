@@ -46,6 +46,10 @@ Candle by Jab (jabdoesthings)
 Umbrella by Jab (jabdoesthings)  
 - https://github.com/asledgehammer/Umbrella
 
+The outfits Featured in the Screenshots are all outfits made by Satispie
+- Chris - https://steamcommunity.com/sharedfiles/filedetails/?id=2903317798
+- Jill - https://steamcommunity.com/sharedfiles/filedetails/?id=2903870282
+
 # Special Thanks - Consultations (Discord)
 - Aiteron (aiteron)  
 - Chuck (chuck)  
