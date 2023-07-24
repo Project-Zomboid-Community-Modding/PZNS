@@ -2,16 +2,15 @@ local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 ---comment
 ---@param npcSurvivor any
 function PZNS_WeaponReload(npcSurvivor)
-    if (npcSurvivor == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    if (npcIsoPlayer == nil) then
+    local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
+    if (npcHandItem == nil) then
         return;
     end
-    local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
-    local magazineType = npcHandItem:getMagazineType();
-
+    --
     if (npcIsoPlayer:NPCGetAiming() == true) then
         npcIsoPlayer:NPCSetAiming(false);
     end
@@ -22,6 +21,7 @@ function PZNS_WeaponReload(npcSurvivor)
     local actionQueue = ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer);
     local lastAction = actionQueue.queue[#actionQueue.queue];
     -- Cows: Magazine based reload
+    local magazineType = npcHandItem:getMagazineType();
     if (magazineType ~= nil) then
         -- Cows: If there are more than 3 actions queued, reset the queue so the NPC can start reloading right away.
         if (actionsCount > 3) then

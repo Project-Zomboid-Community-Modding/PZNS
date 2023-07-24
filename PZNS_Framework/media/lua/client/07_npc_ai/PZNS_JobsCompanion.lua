@@ -115,66 +115,67 @@ end
 ---@param npcSurvivor any
 ---@param targetID string
 function PZNS_JobCompanion(npcSurvivor, targetID)
-    if (npcSurvivor == nil) then
-        return nil;
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return;
     end
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local targetIsoPlayer = getTargetIsoPlayerByID(targetID);
     --
-    if (npcIsoPlayer and targetIsoPlayer) then
-        -- Cows: Check if npcSurvivor is not holding in place
-        if (npcSurvivor.isHoldingInPlace ~= true) then
-            local isTargetInCar = targetIsoPlayer:getVehicle();
-            local isSelfInCar = npcIsoPlayer:getVehicle();
-            -- Cows: Check if target is in a car and if npcSurvivor is not in a car.
-            if (isTargetInCar ~= nil and isSelfInCar == nil) then
-                npcSurvivor.idleTicks = 0;
-                jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer);
-                -- Cows: Else check if npcSurvivor and follow target are both in a car
-            elseif (isTargetInCar ~= nil and isSelfInCar ~= nil) then
-                -- WIP - Cows: perhaps NPCs can attack hostiles while in the car with a gun?...
-                npcSurvivor.idleTicks = 0;
+    if (targetIsoPlayer == nil) then
+        return;
+    end
+    -- Cows: Check if npcSurvivor is not holding in place
+    if (npcSurvivor.isHoldingInPlace ~= true) then
+        local isTargetInCar = targetIsoPlayer:getVehicle();
+        local isSelfInCar = npcIsoPlayer:getVehicle();
+        -- Cows: Check if target is in a car and if npcSurvivor is not in a car.
+        if (isTargetInCar ~= nil and isSelfInCar == nil) then
+            npcSurvivor.idleTicks = 0;
+            jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer);
+            -- Cows: Else check if npcSurvivor and follow target are both in a car
+        elseif (isTargetInCar ~= nil and isSelfInCar ~= nil) then
+            -- WIP - Cows: perhaps NPCs can attack hostiles while in the car with a gun?...
+            npcSurvivor.idleTicks = 0;
 
-                -- Cows: Check if target is NOT in a car and exit the car if self is in one.
-            elseif (isTargetInCar == nil and isSelfInCar ~= nil) then
-                PZNS_ExitVehicle(npcSurvivor);
-            else -- Cows: Else assume both npcSurvivor and target are on foot.
-                -- Cows: Companion is currently being forced to move, presumably to keep up with the target.
-                if (npcSurvivor.isForcedMoving == true) then
-                    npcSurvivor.idleTicks = 0;
-                    jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
-                    return; -- Cows: Stop processing and start moving to target.
-                end
-
-                local canSeeTarget = npcIsoPlayer:CanSee(targetIsoPlayer);
-                -- Cows: Check if npcSurvivor is NOT near their follow target...
-                if (isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer) == false or canSeeTarget == false) then
-                    npcSurvivor.idleTicks = 0;
-                    jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
-                    return; -- Cows: Stop processing and start moving to target.
-                    -- Cows: Else Check if the NPC is busy in combat related stuff.
-                elseif (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
-                    npcSurvivor.idleTicks = 0;
-                    return; -- Cows Stop Processing and let the NPC finish its actions.
-                end
-                --Cows: Check if companion has idled for too long and take action.
-                if (npcSurvivor.idleTicks >= CompanionIdleTicks) then
-                    -- Cows: Do Idle stuff, eat, wash, read books?
-                    -- PZNS_NPCSpeak(npcSurvivor,
-                    --     "I am getting bored here... idleTicks: " .. tostring(npcSurvivor.idleTicks), "InfoOnly"
-                    -- );
-                else
-                    npcSurvivor.isForcedMoving = false;
-                    npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
-                end
-            end
-        else
-            -- Cows: else assume the npcSurvivor is holding in place.
-            if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
+            -- Cows: Check if target is NOT in a car and exit the car if self is in one.
+        elseif (isTargetInCar == nil and isSelfInCar ~= nil) then
+            PZNS_ExitVehicle(npcSurvivor);
+        else     -- Cows: Else assume both npcSurvivor and target are on foot.
+            -- Cows: Companion is currently being forced to move, presumably to keep up with the target.
+            if (npcSurvivor.isForcedMoving == true) then
                 npcSurvivor.idleTicks = 0;
-                return; -- Cows Stop Processing and let the NPC finish its actions.
+                jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
+                return;     -- Cows: Stop processing and start moving to target.
             end
+
+            local canSeeTarget = npcIsoPlayer:CanSee(targetIsoPlayer);
+            -- Cows: Check if npcSurvivor is NOT near their follow target...
+            if (isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer) == false or canSeeTarget == false) then
+                npcSurvivor.idleTicks = 0;
+                jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
+                return;     -- Cows: Stop processing and start moving to target.
+                -- Cows: Else Check if the NPC is busy in combat related stuff.
+            elseif (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
+                npcSurvivor.idleTicks = 0;
+                return;     -- Cows Stop Processing and let the NPC finish its actions.
+            end
+            --Cows: Check if companion has idled for too long and take action.
+            if (npcSurvivor.idleTicks >= CompanionIdleTicks) then
+                -- Cows: Do Idle stuff, eat, wash, read books?
+                -- PZNS_NPCSpeak(npcSurvivor,
+                --     "I am getting bored here... idleTicks: " .. tostring(npcSurvivor.idleTicks), "InfoOnly"
+                -- );
+            else
+                npcSurvivor.isForcedMoving = false;
+                npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
+            end
+        end
+    else
+        -- Cows: else assume the npcSurvivor is holding in place.
+        if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
+            npcSurvivor.idleTicks = 0;
+            return;     -- Cows Stop Processing and let the NPC finish its actions.
         end
     end
 end

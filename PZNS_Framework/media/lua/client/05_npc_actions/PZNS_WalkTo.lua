@@ -6,8 +6,8 @@ local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 ---@param squareY any
 ---@param squareZ any
 function PZNS_WalkToSquareXYZ(npcSurvivor, squareX, squareY, squareZ)
-    if (npcSurvivor == nil) then
-        return nil;
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local targetSquare = getCell():getGridSquare(

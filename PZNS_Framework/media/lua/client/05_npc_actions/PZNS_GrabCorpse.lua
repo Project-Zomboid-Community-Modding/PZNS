@@ -5,7 +5,7 @@ local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 ---@param targetBody any
 function PZNS_GrabCorpse(npcSurvivor, targetBody)
     --
-    if (npcSurvivor == nil or targetBody == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false or targetBody == nil) then
         return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
