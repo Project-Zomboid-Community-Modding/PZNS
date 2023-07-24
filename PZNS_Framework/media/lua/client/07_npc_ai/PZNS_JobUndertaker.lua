@@ -56,19 +56,23 @@ local function checkCellForCorpseSquares()
     return cellCorpseSquares;
 end
 
----comment
+--- Cows: Only render if the grab square is not nil and on screen.
 local function renderGrabSquare()
     if (debugGrabSquare ~= nil) then
-        debugGrabSquare:getFloor():setHighlightColor(PZNS_ZoneColors["ZoneDropCorpsesColor"]);
-        debugGrabSquare:getFloor():setHighlighted(true);
+        if (debugGrabSquare:IsOnScreen()) then
+            debugGrabSquare:getFloor():setHighlightColor(PZNS_ZoneColors["ZoneDropCorpsesColor"]);
+            debugGrabSquare:getFloor():setHighlighted(true);
+        end
     end
 end
 
----comment
+--- Cows: Only render if the drop square is not nil and on screen.
 local function renderDropSquare()
     if (debugDropSquare ~= nil) then
-        debugDropSquare:getFloor():setHighlightColor(PZNS_ZoneColors["ZoneDropCorpsesColor"]);
-        debugDropSquare:getFloor():setHighlighted(true);
+        if (debugDropSquare:IsOnScreen()) then
+            debugDropSquare:getFloor():setHighlightColor(PZNS_ZoneColors["ZoneDropCorpsesColor"]);
+            debugDropSquare:getFloor():setHighlighted(true);
+        end
     end
 end
 

@@ -55,7 +55,7 @@ function PZNS_GeneralAI.PZNS_IsReloadNeeded(npcSurvivor)
     return false;
 end
 
----comment
+--- WIP - Cows: Perhaps this needs a distance check as well? Apparently NPCs can "see" more than 30 squares away (or off-screen).
 ---@param npcSurvivor any
 ---@return boolean
 function PZNS_GeneralAI.PZNS_CanSeeAimTarget(npcSurvivor)
@@ -64,12 +64,16 @@ function PZNS_GeneralAI.PZNS_CanSeeAimTarget(npcSurvivor)
     end
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    if (npcIsoPlayer) then
-        -- Cows: Can only see if npcSurvivor is Alive.
-        if (npcIsoPlayer:isAlive() == true) then
-            --
-            if (PZNS_WorldUtils.PZNS_IsObjectZombieActive(npcSurvivor.aimTarget) == true) then
-                local canSeeTarget = npcIsoPlayer:CanSee(npcSurvivor.aimTarget); -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
+    -- Cows: Can only see if npcSurvivor is Alive.
+    if (npcIsoPlayer:isAlive() == true) then
+        --
+        if (PZNS_WorldUtils.PZNS_IsObjectZombieActive(npcSurvivor.aimTarget) == true) then
+            local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
+                npcIsoPlayer,
+                npcSurvivor.aimTarget
+            );
+            if (distanceFromTarget <= 30) then
+                local canSeeTarget = npcIsoPlayer:CanSee(npcSurvivor.aimTarget);     -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
                 return canSeeTarget;
             end
         end
@@ -108,12 +112,14 @@ function PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor)
     local isThreatInSight = PZNS_GeneralAI.PZNS_CanSeeAimTarget(npcSurvivor);
     -- Cows: check if any threats are found.
     if (isThreatInSight == true) then
+        -- PZNS_NPCSpeak(npcSurvivor, "Threat is in Sight! Now Busy in combat", "InfoOnly");
         return true;
     end
     -- Cows: Check for other threats
     local isThreatFound = PZNS_CheckZombieThreat(npcSurvivor);
     -- Cows: check if any threats are found.
     if (isThreatFound == true) then
+        -- PZNS_NPCSpeak(npcSurvivor, "Threat Found! Now Busy in combat", "InfoOnly");
         return true;
     end
     return false;
