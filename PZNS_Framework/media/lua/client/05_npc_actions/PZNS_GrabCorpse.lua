@@ -1,6 +1,6 @@
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 
----comment
+--- WIP - Cows: Errors are throw while grabbing a corpse, seems related to forced Equip/Unequip weapons when a heavy object is carried...
 ---@param npcSurvivor any
 ---@param targetBody any
 function PZNS_GrabCorpse(npcSurvivor, targetBody)
