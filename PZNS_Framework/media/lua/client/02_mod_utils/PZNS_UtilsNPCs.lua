@@ -347,7 +347,7 @@ function PZNS_UtilsNPCs.PZNS_GetNPCActionsQueuedCount(npcSurvivor)
         return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    local actionsCount =  #ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer.queue);
+    local actionsCount = #ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer.queue);
     return actionsCount;
 end
 
@@ -529,6 +529,18 @@ function PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor)
         npcSurvivor.isStuckTicks = npcSurvivor.isStuckTicks + 1;
     end
     PZNS_NPCSpeak(npcSurvivor, "isStuckTicks: " .. tostring(npcSurvivor.isStuckTicks), "InfoOnly");
+end
+
+--- Cows: This is to streamline the multiple npcIsoPlayerObject checks...
+function PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor)
+    if (npcSurvivor == nil) then
+        return false;
+    end
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    if (npcIsoPlayer == nil) then
+        return false;
+    end
+    return true;
 end
 
 return PZNS_UtilsNPCs;
