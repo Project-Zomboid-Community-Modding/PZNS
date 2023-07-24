@@ -1,5 +1,5 @@
 local PZNS_CombatUtils = require("02_mod_utils/PZNS_CombatUtils");
-local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
+local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 
 --[[
     WIP - Cows: Should add a check for ranged weaponry and if ammo is loaded the gun...
@@ -73,52 +73,50 @@ end
 ---comment
 ---@param npcSurvivor any
 function PZNS_WeaponAttack(npcSurvivor)
-    --
-    if (npcSurvivor == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
-    --
-    local targetObject = npcSurvivor.aimTarget;
-    local npcCanAttack = npcSurvivor.canAttack;
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
-    local isNPCHandItemWeapon = npcHandItem:IsWeapon();
     --
-    if (targetObject ~= nil) then
-        -- Cows: Check if the entity the NPC is aiming at is valid
-        if (PZNS_CombatUtils.PZNS_IsTargetInvalidForDamage(targetObject) == true) then
-            npcIsoPlayer:NPCSetAttack(false);
-            -- PZNS_NPCSpeak(npcSurvivor, "No target to attack");
-        else
-            -- Cows: Else check if NPC can attack
-            if (npcCanAttack) then
-                if (isNPCHandItemWeapon == true) then
-                    -- Cows: Melee and Ranged weapons are handled separately...
-                    if (npcHandItem:isRanged() == true) then
-                        rangedAttack(npcSurvivor, npcIsoPlayer, targetObject);
-                    else
-                        npcIsoPlayer:NPCSetMelee(true);
-                        meleeAttack(npcSurvivor, npcIsoPlayer, targetObject);
-                    end
-                    --
-                    npcSurvivor.attackTicks = npcSurvivor.attackTicks + 1;
-                else
-                    PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_NeedWeapon_01"), "Negative");
-                    npcIsoPlayer:NPCSetAttack(false);
-                end
-            else
-                PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_CannotAttack_01"), "InfoOnly");
-                npcIsoPlayer:NPCSetAttack(false);
-            end
-        end
-    else
-        -- PZNS_NPCSpeak(npcSurvivor, "No target to attack");
+    local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
+    if (npcHandItem == nil) then
+        return;
+    end
+    local isNPCHandItemWeapon = npcHandItem:IsWeapon();
+    if (isNPCHandItemWeapon == false) then
+        PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_NeedWeapon_01"), "Negative");
+        npcIsoPlayer:NPCSetAttack(false);
+    end
+    -- Cows: Check if the entity the NPC is aiming at exists
+    local targetObject = npcSurvivor.aimTarget;
+    if (targetObject == nil) then
         npcIsoPlayer:NPCSetAttack(false);
         npcSurvivor.attackTicks = 0;
+        return;
+    end
+    -- Cows: Check if the entity the NPC is aiming at is valid
+    if (PZNS_CombatUtils.PZNS_IsTargetInvalidForDamage(targetObject) == true) then
+        npcIsoPlayer:NPCSetAttack(false);
+        return;
+    end
+    -- Cows: Check if NPC can attack
+    local npcCanAttack = npcSurvivor.canAttack;
+    if (npcCanAttack ~= true) then
+        PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_CannotAttack_01"), "InfoOnly");
+        npcIsoPlayer:NPCSetAttack(false);
+        return;
+    end
+    -- Cows: Melee and Ranged weapons are handled separately...
+    if (npcHandItem:isRanged() == true) then
+        rangedAttack(npcSurvivor, npcIsoPlayer, targetObject);
+    else
+        npcIsoPlayer:NPCSetMelee(true);
+        meleeAttack(npcSurvivor, npcIsoPlayer, targetObject);
     end
     --
+    npcSurvivor.attackTicks = npcSurvivor.attackTicks + 1;
+    --
 end
-
 --- Cows: Based on "SuperSurvivorsOnSwing()"
 ---@param isoPlayer any
 ---@param playerWeapon any

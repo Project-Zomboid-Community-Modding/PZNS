@@ -1,9 +1,10 @@
+local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
+
 ---comment
 ---@param npcSurvivor any
 ---@param targetSquare IsoGridSquare
 function PZNS_HoldPosition(npcSurvivor, targetSquare)
-    --
-    if (npcSurvivor == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
     --

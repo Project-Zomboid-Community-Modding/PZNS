@@ -131,7 +131,7 @@ end
 ---@param squareY any
 ---@param squareZ any
 function PZNS_RunToSquareXYZ(npcSurvivor, squareX, squareY, squareZ)
-    if (npcSurvivor == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;

@@ -13,6 +13,9 @@ local PZNS_GeneralAI = {};
 ---@param npcSurvivor any
 ---@return boolean
 function PZNS_GeneralAI.PZNS_IsReloadNeeded(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return false;
+    end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     -- Cows: Can only if npcSurvivor is Alive.
     if (npcIsoPlayer:isAlive() == true) then
@@ -56,6 +59,9 @@ end
 ---@param npcSurvivor any
 ---@return boolean
 function PZNS_GeneralAI.PZNS_CanSeeAimTarget(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return false;
+    end
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer) then
@@ -75,6 +81,9 @@ end
 --- Cows: Have the NPC aim and attack their aimed target.
 ---@param npcSurvivor any
 function PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return false;
+    end
     ---@type IsoPlayer
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer) then
@@ -92,6 +101,9 @@ end
 ---@param npcSurvivor any
 ---@return boolean
 function PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return false;
+    end
     -- Cows: Check if threat is in sight.
     local isThreatInSight = PZNS_GeneralAI.PZNS_CanSeeAimTarget(npcSurvivor);
     -- Cows: check if any threats are found.
@@ -111,6 +123,9 @@ end
 ---@param npcSurvivor any
 ---@return boolean
 function PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return false;
+    end
     -- Cows: action ticks can go over 200 if the reload action was interrupted midway.
     if (npcSurvivor.actionTicks > 200) then
         npcSurvivor.actionTicks = 0;

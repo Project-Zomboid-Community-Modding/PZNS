@@ -6,7 +6,7 @@ local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 ---@param square IsoGridSquare
 ---@param deadBody IsoDeadBody
 function PZNS_MoveToGrabCorpse(npcSurvivor, square, deadBody)
-    if (npcSurvivor == nil or square == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false or square == nil) then
         return;
     end
     --

@@ -1,3 +1,4 @@
+local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_GeneralAI = require("07_npc_ai/PZNS_GeneralAI");
 --
 local followRange = 3;
@@ -7,8 +8,8 @@ local idleActionOnTick = 200;
 ---comment
 ---@param npcSurvivor any
 function PZNS_JobGuard(npcSurvivor)
-    if (npcSurvivor == nil) then
-        return nil;
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return;
     end
     if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
         npcSurvivor.idleTicks = 0;

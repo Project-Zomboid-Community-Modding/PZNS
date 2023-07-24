@@ -75,9 +75,8 @@ end
 ---comment
 ---@param npcSurvivor any
 function PZNS_JobUndertaker(npcSurvivor)
-    --
-    if (npcSurvivor == nil) then
-        return nil;
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local groupDropSquare = PZNS_UtilsZones.PZNS_CheckGroupWorkZoneExists(npcSurvivor.groupID, "ZoneDropCorpses");

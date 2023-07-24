@@ -1,3 +1,5 @@
+local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
+
 function PZNS_DrinkWater(npcSurvivor)
     --
     if (npcSurvivor == nil) then
@@ -51,7 +53,6 @@ function PZNS_WashClothesAtSquare(npcSurvivor, targetSquare)
     end
     --
     npcSurvivor.aimTarget = nil;
-    npcSurvivor.isHoldingInPlace = true;
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local squareObjects = targetSquare:getObjects();
     local objectsListSize = squareObjects:size() - 1;
@@ -76,15 +77,12 @@ end
 ---@param npcSurvivor any
 ---@param targetSquare IsoGridSquare
 function PZNS_WashSelfAtSquare(npcSurvivor, targetSquare)
-    --
-    if (npcSurvivor == nil or targetSquare == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false or targetSquare == nil) then
         return;
     end
     --
     npcSurvivor.aimTarget = nil;
-    npcSurvivor.isHoldingInPlace = true;
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    --
     local squareObjects = targetSquare:getObjects();
     local objectsListSize = squareObjects:size() - 1;
     --
