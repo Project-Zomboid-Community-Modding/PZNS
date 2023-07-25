@@ -151,4 +151,66 @@ function PZNS_WorldUtils.PZNS_ClearZombiesFromSquare(targetSquare, squareRadius)
     end
 end
 
+--- Cows: Gets a list of buildings in the cell.
+function PZNS_WorldUtils.PZNS_GetCellBuildingsList()
+    local buildingsList = getCell():getBuildingList();
+    return buildingsList;
+end
+
+--- Cows: 
+---@param buildingsList ArrayList
+---@return any returns a random building from the buildingsList
+function PZNS_WorldUtils.PZNS_GetRandomBuildingFromCell(buildingsList)
+    local building = buildingsList[ZombRand(0, buildingsList:size() - 1)];
+    return building;
+end
+
+---
+---@param building IsoBuilding
+---@return any returns a list of rooms in the specified building.
+function PZNS_WorldUtils.PZNS_GetBuildingRooms(building)
+    local bdef = building:getDef();
+    local rooms = bdef:getRooms();
+    return rooms;
+end
+
+---
+---@param building IsoBuilding
+---@return any returns a random rooms in the specified building.
+function PZNS_WorldUtils.PZNS_GetBuildingRandomRoom(building)
+    local randomRoom = building:getRandomRoom();
+    return randomRoom;
+end
+
+---
+---@param room IsoRoom
+---@return any returns a list of squares in the specified room.
+function PZNS_WorldUtils.PZNS_GetBuildingRoomSquares(room)
+    local squares = room:getSquares();
+    return squares;
+end
+
+---
+---@param room IsoRoom
+---@return any returns a random free square in the specified room.
+function PZNS_WorldUtils.PZNS_GetBuildingRoomRandomFreeSquare(room)
+    local squares = room:getRandomFreeSquare();
+    return squares;
+end
+
+--- Cows: Based on 'GetRandomBuildingSquare()' from SuperSurvivorContextUtilities.lua
+---@param building IsoBuilding
+---@return any returns a random square inside of the building
+function PZNS_WorldUtils.PZNS_GetBuildingRandomSquare(building)
+    local bdef = building:getDef();
+    local x = ZombRand(bdef:getX(), (bdef:getX() + bdef:getW()));
+    local y = ZombRand(bdef:getY(), (bdef:getY() + bdef:getH()));
+    local sq = getCell():getGridSquare(x, y, 0);
+
+    if (sq) then
+        return sq;
+    end
+    return nil;
+end
+
 return PZNS_WorldUtils;
