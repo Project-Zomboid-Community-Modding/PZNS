@@ -13,6 +13,10 @@ function PZNS_JobGuard(npcSurvivor)
         npcSurvivor.idleTicks = 0;
         return; -- Cows Stop Processing and let the NPC finish its actions.
     end
+    -- Cows: No Group means no zone to guard... for now.
+    if (npcSurvivor.groupID == nil) then
+        return;
+    end
     ---@type IsoPlayer
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     -- Cows: Have the guard patrol the perimeter of the ZoneHome if it exists.
