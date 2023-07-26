@@ -141,12 +141,12 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
             -- Cows: Check if target is NOT in a car and exit the car if self is in one.
         elseif (isTargetInCar == nil and isSelfInCar ~= nil) then
             PZNS_ExitVehicle(npcSurvivor);
-        else     -- Cows: Else assume both npcSurvivor and target are on foot.
+        else -- Cows: Else assume both npcSurvivor and target are on foot.
             -- Cows: Companion is currently being forced to move, presumably to keep up with the target.
             if (npcSurvivor.isForcedMoving == true) then
                 npcSurvivor.idleTicks = 0;
                 jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
-                return;     -- Cows: Stop processing and start moving to target.
+                return; -- Cows: Stop processing and start moving to target.
             end
 
             local canSeeTarget = npcIsoPlayer:CanSee(targetIsoPlayer);
@@ -154,11 +154,11 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
             if (isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer) == false or canSeeTarget == false) then
                 npcSurvivor.idleTicks = 0;
                 jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
-                return;     -- Cows: Stop processing and start moving to target.
+                return; -- Cows: Stop processing and start moving to target.
                 -- Cows: Else Check if the NPC is busy in combat related stuff.
             elseif (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
                 npcSurvivor.idleTicks = 0;
-                return;     -- Cows Stop Processing and let the NPC finish its actions.
+                return; -- Cows Stop Processing and let the NPC finish its actions.
             end
             --Cows: Check if companion has idled for too long and take action.
             if (npcSurvivor.idleTicks >= CompanionIdleTicks) then
@@ -175,7 +175,13 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
         -- Cows: else assume the npcSurvivor is holding in place.
         if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
             npcSurvivor.idleTicks = 0;
-            return;     -- Cows Stop Processing and let the NPC finish its actions.
+            return; -- Cows Stop Processing and let the NPC finish its actions.
+        end
+        --
+        if (npcSurvivor.jobSquare) then
+            local squareX, squareY, squareZ = npcSurvivor.jobSquare:getX(), npcSurvivor.jobSquare:getY(),
+                npcSurvivor.jobSquare:getZ();
+            PZNS_RunToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
         end
     end
 end
