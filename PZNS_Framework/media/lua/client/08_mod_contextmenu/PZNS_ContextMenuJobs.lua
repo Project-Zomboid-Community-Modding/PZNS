@@ -1,5 +1,6 @@
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
+local PZNS_PresetsSpeeches = require("03_mod_core/PZNS_PresetsSpeeches");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 
 ---comment
@@ -19,8 +20,25 @@ function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jobName)
         local npcSurvivor = activeNPCs[survivorID];
         -- Cows: conditionally set the callback function for the context menu option.
         local callbackFunction = function()
+            npcSurvivor.jobSquare = nil;
             if (jobName == "Companion") then
                 PZNS_JobCompanion(npcSurvivor, followTargetID);
+            end
+            --
+            if (npcSurvivor.speechTable ~= nil) then
+                if (npcSurvivor.speechTable.PZNS_OrderConfirmed ~= nil) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
+                    );
+                else
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
+                    );
+                end
+            else
+                PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                    npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
+                );
             end
             PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, jobName);
             parentContextMenu:setVisible(false);

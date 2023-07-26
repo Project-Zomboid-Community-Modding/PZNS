@@ -10,4 +10,5 @@ function PZNS_Follow(npcSurvivor, targetID)
     npcSurvivor.isHoldingInPlace = false;
     npcSurvivor.jobName = "Companion";
     npcSurvivor.followTargetID = targetID;
+    npcSurvivor.jobSquare = nil;
 end
