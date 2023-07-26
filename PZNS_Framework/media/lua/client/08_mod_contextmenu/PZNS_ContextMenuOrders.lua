@@ -40,6 +40,7 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
         local npcSurvivor = activeNPCs[survivorID];
         -- Cows: Conditionally set the callback function for the context menu option.
         local callbackFunction = function()
+            npcSurvivor.jobSquare = nil;
             -- Cows: Clear the existing queued actions for the npcSurvivor when an Order is issued.
             PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
             local playerSurvivor = getSpecificPlayer(mpPlayerID);
@@ -50,6 +51,10 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
                     if (npcSurvivor.speechTable.PZNS_OrderSpeechFollow) then
                         PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                             npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechFollow, "Friendly"
+                        );
+                    else
+                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechFollow, "Friendly"
                         );
                     end
                 else
@@ -64,6 +69,10 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
                         PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                             npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition, "Friendly"
                         );
+                    else
+                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechHoldPosition, "Friendly"
+                        );
                     end
                 else
                     PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
@@ -76,6 +85,10 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
                     if (npcSurvivor.speechTable.PZNS_OrderConfirmed) then
                         PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                             npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
+                        );
+                    else
+                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
                         );
                     end
                 else

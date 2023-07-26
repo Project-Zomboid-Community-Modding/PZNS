@@ -38,10 +38,16 @@ function PZNS_UpdateNPCJobRoutine(npcSurvivor)
     -- Cows: Check if the NPC's job is currently "Remove" or "Remove Grom Group".
     if (npcSurvivor.jobName == "Remove" or npcSurvivor.jobName == "Remove From Group") then
         -- WIP - Cows: Being removed from the group which should make the NPC angry.
-        if (PZNS_UtilsNPCs.PZNS_IsNPCSpeechTableValid(npcSurvivor.speechTable.PZNS_JobSpeechRemoveFromGroup) == true) then
-            PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                npcSurvivor, npcSurvivor.speechTable.PZNS_JobSpeechRemoveFromGroup, "Neutral"
-            );
+        if (npcSurvivor.speechTable ~= nil) then
+            if (npcSurvivor.speechTable.PZNS_JobSpeechRemoveFromGroup ~= nil) then
+                PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                    npcSurvivor, npcSurvivor.speechTable.PZNS_JobSpeechRemoveFromGroup, "Neutral"
+                );
+            else
+                PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                    npcSurvivor, PZNS_PresetsSpeeches.PZNS_JobSpeechRemoveFromGroup, "Neutral"
+                );
+            end
         else
             PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                 npcSurvivor, PZNS_PresetsSpeeches.PZNS_JobSpeechRemoveFromGroup, "Neutral"
