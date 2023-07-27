@@ -1,6 +1,6 @@
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 
----comment
+--- Cows: Have the specified NPC move to the square specified by xyz coordinates.
 ---@param npcSurvivor any
 ---@param squareX any
 ---@param squareY any
