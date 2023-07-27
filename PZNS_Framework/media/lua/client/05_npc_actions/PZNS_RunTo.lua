@@ -125,7 +125,7 @@ function PZNS_RunToTimedAction:new(character, location, additionalTest, addition
     return o;
 end
 
----comment
+--- Cows: Have the specified NPC move to the square specified by xyz coordinates.
 ---@param npcSurvivor any
 ---@param squareX any
 ---@param squareY any

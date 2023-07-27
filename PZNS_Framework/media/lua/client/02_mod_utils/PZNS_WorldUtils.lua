@@ -176,7 +176,7 @@ end
 
 ---
 ---@param building IsoBuilding
----@return any returns a random rooms in the specified building.
+---@return any returns a random room in the specified building.
 function PZNS_WorldUtils.PZNS_GetBuildingRandomRoom(building)
     local randomRoom = building:getRandomRoom();
     return randomRoom;
