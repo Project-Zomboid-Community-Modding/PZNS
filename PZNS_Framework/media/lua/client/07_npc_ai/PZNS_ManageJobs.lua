@@ -9,8 +9,6 @@ local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager"
 --]]
 PZNS_CellZombiesList = {}; -- Cows: Init PZNS_CellZombiesList as an empty table, which can then be used by all NPCs to evaluate the zombie threat.
 
-local function doNothing()
-end
 -- WIP - Cows: Need to rethink how Global variables are used...
 PZNS_JobsText = {
     Companion = getText("ContextMenu_PZNS_Companion"),
@@ -19,7 +17,8 @@ PZNS_JobsText = {
     Guard = getText("ContextMenu_PZNS_Guard"),
     Undertaker = getText("ContextMenu_PZNS_Undertaker"),
     Remove = getText("ContextMenu_PZNS_Remove_From_Group"),
-    WanderInBuilding = "Wander In Building"
+    WanderInBuilding = "Wander In Building",
+    WanderInCell = "Wander In Cell"
 };
 -- WIP - Cows: Need to rethink how Global variables are used...
 PZNS_Jobs = {
@@ -27,8 +26,7 @@ PZNS_Jobs = {
     -- Farmer = doNothing, -- WIP - Cows: Commented out until implementation is ready.
     -- Engineer = doNothing, -- WIP - Cows: Commented out until implementation is ready.
     Guard = PZNS_JobGuard,
-    Undertaker = PZNS_JobUndertaker,
-    Remove = doNothing
+    Undertaker = PZNS_JobUndertaker
 };
 
 --- Cows: Helper function for PZNS_UpdateAllJobsRoutines(), can also be used to update an npc's routine when their job is changed.
@@ -78,6 +76,8 @@ function PZNS_UpdateNPCJobRoutine(npcSurvivor)
             end
         else
             if (npcSurvivor.jobName == "Wander In Building") then
+                PZNS_JobWanderInBuilding(npcSurvivor);
+            elseif (npcSurvivor.jobName == "Wander In Cell") then
                 PZNS_JobWanderInBuilding(npcSurvivor);
             else
                 PZNS_NPCSpeak(npcSurvivor, "I am not doing a known job", "InfoOnly");
