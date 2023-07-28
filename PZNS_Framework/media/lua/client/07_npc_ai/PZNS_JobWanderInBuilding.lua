@@ -75,6 +75,7 @@ function PZNS_JobWanderInBuilding(npcSurvivor)
             if (distanceFromTarget < 1) then
                 -- Cows: Allow the NPC to idle for a moment before restarting its routine.
                 if (npcSurvivor.idleTicks >= 600) then
+                    PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start moving.
                     npcSurvivor.jobSquare = nil;
                 end
                 return;-- Cows: Stop processing, the NPC is already at it's destination.
@@ -86,11 +87,13 @@ function PZNS_JobWanderInBuilding(npcSurvivor)
                     local isStuck = npcIsoPlayer:getLastSquare() == npcPlayerSquare;
                     if (isStuck == true) then
                         -- Cows: Only need 1 for the stuck interval check, isStuckTicks starts at 0 and is inside the moveTickInterval.
-                        -- Cows: This means the stuck check is done twice at 0 and 1, at 200 and 400 ticks respectively.
-                        PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, 1);
-                        if (npcSurvivor.isStuckTicks >= 1) then
+                        -- Cows: This means the stuck check is done twice at 1 and 2, at 200 and 400 ticks respectively.
+                        PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, 2);
+                        if (npcSurvivor.isStuckTicks >= 2) then
                             npcSurvivor.jobSquare = nil;
                         end
+                    else
+                        npcSurvivor.isStuckTicks = 0;
                     end
                     --
                     if (npcSurvivor.jobSquare) then
