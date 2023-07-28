@@ -27,7 +27,7 @@ function PZNS_JobWanderInBuilding(npcSurvivor)
             local targetBuilding = npcPlayerSquare:getBuilding();
             PZNS_GeneralAI.PZNS_ExploreTargetBuilding(npcSurvivor, targetBuilding);
         else
-            -- Cows: use idleTicks instead of action ticks, because the NPC is wandering around without a goal. Also because other actions may use actionTicks.
+            -- Cows: use idleTicks instead of action ticks, because the NPC is wandering around without a group goal. Also because other actions may use actionTicks.
             npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
             -- Cows: Else assume the NPC is moving inside the building it is in.
             local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
