@@ -79,15 +79,16 @@ function PZNS_JobWanderInBuilding(npcSurvivor)
                 end
                 return;-- Cows: Stop processing, the NPC is already at it's destination.
             else
-                -- Cows: Else Update the movement calculation every 300 ticks to reduce action queuing and resume the movement.
-                local moveTickInterval = 300;
+                -- Cows: Else Update the movement calculation every 200 ticks to reduce action queuing and resume the movement.
+                local moveTickInterval = 200;
                 if (npcSurvivor.idleTicks >= moveTickInterval) then
                     -- Cows: Check the NPC at regular intervals to see if it is stuck in the same square...
                     local isStuck = npcIsoPlayer:getLastSquare() == npcPlayerSquare;
                     if (isStuck == true) then
-                        -- Cows: only need 2 for the stuck interval check, because the moveTickInterval is 300; 2 * 300 = 600 ticks to confirm the NPC is stuck.
-                        PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, 2);
-                        if (npcSurvivor.isStuckTicks >= 2) then
+                        -- Cows: Only need 1 for the stuck interval check, isStuckTicks starts at 0 and is inside the moveTickInterval.
+                        -- Cows: This means the stuck check is done twice at 0 and 1, at 200 and 400 ticks respectively.
+                        PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, 1);
+                        if (npcSurvivor.isStuckTicks >= 1) then
                             npcSurvivor.jobSquare = nil;
                         end
                     end
