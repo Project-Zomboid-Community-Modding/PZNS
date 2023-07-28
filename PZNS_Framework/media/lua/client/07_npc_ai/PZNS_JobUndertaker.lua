@@ -5,9 +5,9 @@ local PZNS_GeneralAI = require("07_npc_ai/PZNS_GeneralAI");
 local isCellChecked = false; -- WIP - Cows: Considered using "npcSurvivor.isJobRefreshed"... but that means there will be multiple refresh which may be very bad
 local dropZoneRadius = 15; -- WIP - Cows: Perhaps a user option in the future...
 --
-local isRenderingGrabSquareHighlight = false; -- WIP - Cows: This is intended for local debug.
-local debugGrabSquare = nil;                  -- WIP - Cows: This is intended for local debug.
-local debugDropSquare = nil;                  -- WIP - Cows: This is intended for local debug.
+local isRenderingGrabSquareHighlight = false; -- Cows: This is intended for local debug.
+local debugGrabSquare = nil;                  -- Cows: This is intended for local debug.
+local debugDropSquare = nil;                  -- Cows: This is intended for local debug.
 ---comment
 ---@param inputSquares any
 ---@return table
