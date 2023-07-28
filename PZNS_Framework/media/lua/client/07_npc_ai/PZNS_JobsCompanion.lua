@@ -123,6 +123,12 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local targetIsoPlayer = getTargetIsoPlayerByID(targetID);
+    -- Cows: Sneak if the follow target is sneaking.
+    if (targetIsoPlayer:isSneaking()) then
+        npcIsoPlayer:setSneaking(true);
+    else
+        npcIsoPlayer:setSneaking(false);
+    end
     --
     if (targetIsoPlayer == nil) then
         return;
@@ -170,7 +176,7 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
             end
         end
     else
-        -- Cows: else assume the npcSurvivor is holding in place.
+        -- Cows: Else assume the npcSurvivor is holding in place.
         if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
             return; -- Cows Stop Processing and let the NPC finish its actions.
         end
