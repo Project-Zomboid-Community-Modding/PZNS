@@ -279,7 +279,6 @@ end
 
 --- Cows Logs the current IsoPlayer's grid square coords
 ---@param mpPlayerID number
----@return IsoGridSquare
 function PZNS_DebuggerUtils.PZNS_LogPlayerCellGridSquare(mpPlayerID)
     local isLoggingLocalFunction = true;
     local localPlayerID = 0;
@@ -294,13 +293,6 @@ function PZNS_DebuggerUtils.PZNS_LogPlayerCellGridSquare(mpPlayerID)
         " | playerY: " .. tostring(playerSurvivor:getY()) ..
         " | playerZ: " .. tostring(playerSurvivor:getZ())
     );
-    --
-    local gridSquare = getCell():getGridSquare(
-        playerSurvivor:getX(),
-        playerSurvivor:getY(),
-        playerSurvivor:getZ()
-    );
-    return gridSquare;
 end
 
 --- Cows Logs the current player's customized isoplayer avatar.
