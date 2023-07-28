@@ -18,7 +18,8 @@ PZNS_JobsText = {
     -- Engineer = getText("ContextMenu_PZNS_Engineer"),, -- WIP - Cows: Commented out until implementation is ready.
     Guard = getText("ContextMenu_PZNS_Guard"),
     Undertaker = getText("ContextMenu_PZNS_Undertaker"),
-    Remove = getText("ContextMenu_PZNS_Remove_From_Group")
+    Remove = getText("ContextMenu_PZNS_Remove_From_Group"),
+    WanderInBuilding = "Wander In Building"
 };
 -- WIP - Cows: Need to rethink how Global variables are used...
 PZNS_Jobs = {
@@ -29,6 +30,7 @@ PZNS_Jobs = {
     Undertaker = PZNS_JobUndertaker,
     Remove = doNothing
 };
+
 --- Cows: Helper function for PZNS_UpdateAllJobsRoutines(), can also be used to update an npc's routine when their job is changed.
 ---@param npcSurvivor any
 function PZNS_UpdateNPCJobRoutine(npcSurvivor)
@@ -58,14 +60,27 @@ function PZNS_UpdateNPCJobRoutine(npcSurvivor)
         PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Guard"); -- WIP - Cows: Currently there is no NPC "wandering" AI nor job... so this is a placeholder
         return;                                              -- Cows: Stop Processing, the npc is no longer in the group.
     end
+    if (npcSurvivor.jobName == nil) then
+         return;
+    end
+    if (npcSurvivor.jobName == "") then
+        return;
+    end
     -- Cows: Only update living npcSurvivor routine.
     if (npcSurvivor.isAlive == true) then
+        -- Cows: This job name mapping only works if the job name is ONE WORD.
         if (PZNS_Jobs[npcSurvivor.jobName] ~= nil) then
             --
             if (npcSurvivor.jobName == "Companion") then
                 PZNS_Jobs[npcSurvivor.jobName](npcSurvivor, npcSurvivor.followTargetID);
             else
                 PZNS_Jobs[npcSurvivor.jobName](npcSurvivor);
+            end
+        else
+            if (npcSurvivor.jobName == "Wander In Building") then
+                PZNS_JobWanderInBuilding(npcSurvivor);
+            else
+                PZNS_NPCSpeak(npcSurvivor, "I am not doing a known job", "InfoOnly");
             end
         end
     end
@@ -79,8 +94,8 @@ function PZNS_UpdateAllJobsRoutines()
     -- Cows: Go through all the active NPCs and update their job routines
     for survivorID, v1 in pairs(activeNPCs) do
         local npcSurvivor = activeNPCs[survivorID];
-        -- Cows: Only update living npcSurvivors
-        if (npcSurvivor.isAlive == true) then
+        -- Cows: Only update spawned and living npcSurvivors
+        if (npcSurvivor.isSpawned  == true and npcSurvivor.isAlive == true) then
             PZNS_UpdateNPCJobRoutine(npcSurvivor);
         end
     end
