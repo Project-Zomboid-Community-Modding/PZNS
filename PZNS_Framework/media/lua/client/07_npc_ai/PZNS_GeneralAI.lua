@@ -206,29 +206,25 @@ end
 function PZNS_GeneralAI.PZNS_ExploreTargetBuilding(npcSurvivor, targetBuilding)
     -- Cows: Check if the target building is nil, if true, stop
     if (targetBuilding == nil) then
-        PZNS_NPCSpeak(npcSurvivor, "I have no building to explore...", "InfoOnly");
         return;
     end
     -- Cows: Now we assume there is a target building for the NPC to explore, hopefully with a room and square.
     local randomRoom = PZNS_WorldUtils.PZNS_GetBuildingRandomRoom(targetBuilding);
-    if (randomRoom) then
-        local randomRoomSquare = PZNS_WorldUtils.PZNS_GetRoomRandomFreeSquare(randomRoom);
-        if (randomRoomSquare) then
-            npcSurvivor.idleTicks = 0;
-            npcSurvivor.isStuckTicks = 0;
-            npcSurvivor.jobSquare = randomRoomSquare;
-            local squareX = npcSurvivor.jobSquare:getX();
-            local squareY = npcSurvivor.jobSquare:getY();
-            local squareZ = npcSurvivor.jobSquare:getZ();
-            PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start moving.
-            PZNS_WalkToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
-        else
-            -- Cows: At this point, there is no square to move to... what should the NPC do in this case?
-            PZNS_NPCSpeak(npcSurvivor, "I have no square to move to...", "InfoOnly");
-        end
+    if (randomRoom == nil) then
+        return;
+    end
+    local randomRoomSquare = PZNS_WorldUtils.PZNS_GetRoomRandomFreeSquare(randomRoom);
+    if (randomRoomSquare) then
+        npcSurvivor.idleTicks = 0;
+        npcSurvivor.isStuckTicks = 0;
+        npcSurvivor.jobSquare = randomRoomSquare;
+        local squareX = npcSurvivor.jobSquare:getX();
+        local squareY = npcSurvivor.jobSquare:getY();
+        local squareZ = npcSurvivor.jobSquare:getZ();
+        PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start moving.
+        PZNS_WalkToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
     else
-        -- Cows: At this point, there is no room to move to... what should the NPC do in this case?
-        PZNS_NPCSpeak(npcSurvivor, "I have no room to move to...", "InfoOnly");
+        -- Cows: At this point, there is no square to move to... what should the NPC do in this case?
     end
 end
 
