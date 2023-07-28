@@ -96,7 +96,7 @@ local function spawnNPCIsoPlayer(npcSurvivor)
     end
 end
 --- Cows: A function to spawn/despawn NPCs when they become unloaded off-screen.
---- WIP - Cows: There may be some sync issues because the "spawning" depends on the file in the save folder.
+--- Cows: There may be some sync issues because the "spawning" depends on the file in the save folder.
 function PZNS_WorldUtils.PZNS_SpawnNPCIfSquareIsLoaded()
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     -- Cows: check if activeNPCs is not nil and loaded.
@@ -213,4 +213,20 @@ function PZNS_WorldUtils.PZNS_GetBuildingRandomSquare(building)
     return nil;
 end
 
+--- Get an adjacent square based on a direction
+--- Cows: Based on GetAdjSquare() from 'SuperSurvivorContextUtilities.lua', but won't need the alias.
+---@param square any
+---@param dir string
+---@return IsoGridSquare the adjacent square
+function PZNS_WorldUtils.PZNS_GetAdjSquare(square, dir)
+	if (dir == 'N') then
+		return getCell():getGridSquare(square:getX(), square:getY() - 1, square:getZ());
+	elseif (dir == 'E') then
+		return getCell():getGridSquare(square:getX() + 1, square:getY(), square:getZ());
+	elseif (dir == 'S') then
+		return getCell():getGridSquare(square:getX(), square:getY() + 1, square:getZ());
+	else
+		return getCell():getGridSquare(square:getX() - 1, square:getY(), square:getZ());
+	end
+end
 return PZNS_WorldUtils;
