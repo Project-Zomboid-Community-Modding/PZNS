@@ -78,7 +78,7 @@ function PZNS_UpdateNPCJobRoutine(npcSurvivor)
             if (npcSurvivor.jobName == "Wander In Building") then
                 PZNS_JobWanderInBuilding(npcSurvivor);
             elseif (npcSurvivor.jobName == "Wander In Cell") then
-                PZNS_JobWanderInBuilding(npcSurvivor);
+                PZNS_JobWanderInCell(npcSurvivor);
             else
                 PZNS_NPCSpeak(npcSurvivor, "I am not doing a known job", "InfoOnly");
             end
