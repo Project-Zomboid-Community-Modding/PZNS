@@ -13,8 +13,8 @@ function PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData()
 end
 
 --- Cows: Load NPCs Data
---- WIP - Cows: Need to account for inventory, traits, skills, and all the other mod-related data...
---- WIP - Cows: This is because objects cannot be saved to moddata, and everything must be reloaded whenever the game starts.
+--- Cows: Need to account for inventory, traits, skills, and all the other mod-related data...
+--- Cows: This is because objects cannot be saved to moddata, and everything must be reloaded whenever the game starts.
 function PZNS_UtilsDataNPCs.PZNS_InitLoadNPCsData()
     --
     if (PZNS_ActiveNPCs) then
@@ -101,8 +101,8 @@ end
 
 --- Cows: Save ALL ActiveNPCs Data
 function PZNS_UtilsDataNPCs.PZNS_SaveAllNPCData()
-    for k, v in pairs(PZNS_ActiveNPCs) do
-        PZNS_UtilsDataNPCs.PZNS_SaveNPCData(k, v);
+    for npcSurvivorID, npcSurvivor in pairs(PZNS_ActiveNPCs) do
+        PZNS_UtilsDataNPCs.PZNS_SaveNPCData(npcSurvivorID, npcSurvivor);
     end
 end
 
@@ -157,6 +157,22 @@ end
 function PZNS_UtilsDataNPCs.PZNS_ClearNPCModData()
     PZNS_ActiveNPCs = {};
     ModData.remove("PZNS_ActiveNPCs");
+end
+
+--- WIP - Cows: Check if the NPC save file exists in the game save directory.
+function PZNS_UtilsDataNPCs.PZNS_CheckIfSaveFileExists(npcSurvivorID)
+    local npcFileName = PZNS_UtilsDataNPCs.PZNS_GetGameSaveDir() .. tostring(npcSurvivorID);
+    return false;
+end
+
+--- WIP - Cows: Called to clean up PZNS_ActiveNPCs moddata if save file doesn't exist for the NPC.
+function PZNS_UtilsDataNPCs.PZNS_RemoveAllNPCsWithoutSaveFile()
+    for npcSurvivorID, npcSurvivor in pairs(PZNS_ActiveNPCs) do
+        local isFileExists = PZNS_UtilsDataNPCs.PZNS_CheckIfSaveFileExists(npcSurvivorID);
+        if (isFileExists == false) then
+            PZNS_ActiveNPCs[npcSurvivorID] = nil;
+        end
+    end
 end
 
 return PZNS_UtilsDataNPCs;
