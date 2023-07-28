@@ -15,7 +15,7 @@ function PZNS_MoveToGrabCorpse(npcSurvivor, square, deadBody)
     local squareX, squareY, squareZ = square:getX(), square:getY(), square:getZ();
     --
     if (distanceFromPickup <= 1) then
-        PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor);
+        PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, 150);
         --
         if (npcSurvivor.currentAction ~= "GrabCorpse") then
             PZNS_GrabCorpse(npcSurvivor, deadBody);
