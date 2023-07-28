@@ -55,6 +55,7 @@ function PZNS_JobWanderInBuilding(npcSurvivor)
         end
     else
         -- Cows: Else assume the npcSurvivor is holding in place, but will attempt to walk to any assigned jobSquare.
+        npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
         PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor);
     end
 end
