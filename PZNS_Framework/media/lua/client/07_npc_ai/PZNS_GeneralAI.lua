@@ -43,7 +43,7 @@ function PZNS_GeneralAI.PZNS_IsReloadNeeded(npcSurvivor)
                             and lastAction.Type ~= "ISInsertMagazine"
                             and lastAction.Type ~= "ISRackFirearm"
                             and lastAction.Type ~= "ISReloadWeaponAction"
-                            and lastAction.Type ~= "ISWalkToTimedAction"  -- Cows: Well, reload while walking IS possible...
+                            and lastAction.Type ~= "ISWalkToTimedAction" -- Cows: Well, reload while walking IS possible...
                         ) then
                         PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
                     end
@@ -73,7 +73,7 @@ function PZNS_GeneralAI.PZNS_CanSeeAimTarget(npcSurvivor)
                 npcSurvivor.aimTarget
             );
             if (distanceFromTarget <= 30) then
-                local canSeeTarget = npcIsoPlayer:CanSee(npcSurvivor.aimTarget);     -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
+                local canSeeTarget = npcIsoPlayer:CanSee(npcSurvivor.aimTarget); -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
                 return canSeeTarget;
             end
         end
@@ -90,13 +90,11 @@ function PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor)
     end
     ---@type IsoPlayer
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    if (npcIsoPlayer) then
-        -- Cows: Can only aim and/or attack if npcSurvivor is Alive.
-        if (npcIsoPlayer:isAlive() == true) then
-            if (npcSurvivor.aimTarget ~= nil) then
-                PZNS_WeaponAiming(npcSurvivor); -- Cows: Aim before attacking
-                PZNS_WeaponAttack(npcSurvivor); -- Cows: Permission to attack is handled in the function.
-            end
+    -- Cows: Can only aim and/or attack if npcSurvivor is Alive.
+    if (npcIsoPlayer:isAlive() == true) then
+        if (npcSurvivor.aimTarget ~= nil) then
+            PZNS_WeaponAiming(npcSurvivor); -- Cows: Aim before attacking
+            PZNS_WeaponAttack(npcSurvivor); -- Cows: Permission to attack is handled in the function.
         end
     end
 end
@@ -156,6 +154,24 @@ function PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor)
         return true; -- Cows: Stop processing and start attacking.
     end
 
+    return false;
+end
+
+--- WIP - Cows: This is a placeholder... Added to allow NPCs to evaluate potential obstacles in their paths...
+---@param npcSurvivor any
+function PZNS_GeneralAI.PZNS_IsPathBlocked(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return true;
+    end
+    ---@type IsoPlayer
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    -- Cows: Check if the NPC is facing a door
+    if (npcIsoPlayer:isFacingObject(IsoDoor, 1) == true) then
+        -- Cows: Check if the door is locked (perhaps also need to check for a key... then follow up with more complicated actions such as unlocking and destroying...)
+        if (IsoDoor:isLocked() == true) then
+            return true;
+        end
+    end
     return false;
 end
 
