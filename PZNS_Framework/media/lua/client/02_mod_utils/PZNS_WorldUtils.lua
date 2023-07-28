@@ -151,21 +151,32 @@ function PZNS_WorldUtils.PZNS_ClearZombiesFromSquare(targetSquare, squareRadius)
     end
 end
 
---- Cows: Gets a list of buildings in the cell.
-function PZNS_WorldUtils.PZNS_GetCellBuildingsList()
-    local buildingsList = getCell():getBuildingList();
-    return buildingsList;
+--- Cows: Gets a list of rooms in the cell.
+---@return ArrayList
+function PZNS_WorldUtils.PZNS_GetCellRoomsList()
+    local roomsList = getCell():getRoomList();
+    return roomsList;
 end
 
---- Cows: 
----@param buildingsList ArrayList
+--- Cows: Gets a random room from the cell rooms list.
+---@param roomsList ArrayList
+---@return IsoRoom
+function PZNS_WorldUtils.PZNS_GetCellRandomRoom(roomsList)
+    local listSize = roomsList:size() - 1;
+    local randomSelect = ZombRand(0, listSize);
+    local randomRoom = roomsList:get(randomSelect);
+    return randomRoom;
+end
+
+--- Cows: Gets the building of the input room.
+---@param inputRoom IsoRoom
 ---@return any returns a random building from the buildingsList
-function PZNS_WorldUtils.PZNS_GetRandomBuildingFromCell(buildingsList)
-    local building = buildingsList[ZombRand(0, buildingsList:size() - 1)];
+function PZNS_WorldUtils.PZNS_GetBuildingFromRoom(inputRoom)
+    local building = inputRoom:getBuilding();
     return building;
 end
 
----
+--- Cows: Gets the list of rooms in the building .
 ---@param building IsoBuilding
 ---@return any returns a list of rooms in the specified building.
 function PZNS_WorldUtils.PZNS_GetBuildingRooms(building)
@@ -174,7 +185,7 @@ function PZNS_WorldUtils.PZNS_GetBuildingRooms(building)
     return rooms;
 end
 
----
+--- Get a random room in the building
 ---@param building IsoBuilding
 ---@return any returns a random room in the specified building.
 function PZNS_WorldUtils.PZNS_GetBuildingRandomRoom(building)
@@ -193,7 +204,7 @@ end
 ---
 ---@param room IsoRoom
 ---@return any returns a random free square in the specified room.
-function PZNS_WorldUtils.PZNS_GetBuildingRoomRandomFreeSquare(room)
+function PZNS_WorldUtils.PZNS_GetRoomRandomFreeSquare(room)
     local squares = room:getRandomFreeSquare();
     return squares;
 end
@@ -219,14 +230,15 @@ end
 ---@param dir string
 ---@return IsoGridSquare the adjacent square
 function PZNS_WorldUtils.PZNS_GetAdjSquare(square, dir)
-	if (dir == 'N') then
-		return getCell():getGridSquare(square:getX(), square:getY() - 1, square:getZ());
-	elseif (dir == 'E') then
-		return getCell():getGridSquare(square:getX() + 1, square:getY(), square:getZ());
-	elseif (dir == 'S') then
-		return getCell():getGridSquare(square:getX(), square:getY() + 1, square:getZ());
-	else
-		return getCell():getGridSquare(square:getX() - 1, square:getY(), square:getZ());
-	end
+    if (dir == 'N') then
+        return getCell():getGridSquare(square:getX(), square:getY() - 1, square:getZ());
+    elseif (dir == 'E') then
+        return getCell():getGridSquare(square:getX() + 1, square:getY(), square:getZ());
+    elseif (dir == 'S') then
+        return getCell():getGridSquare(square:getX(), square:getY() + 1, square:getZ());
+    else
+        return getCell():getGridSquare(square:getX() - 1, square:getY(), square:getZ());
+    end
 end
+
 return PZNS_WorldUtils;
