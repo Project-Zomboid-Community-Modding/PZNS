@@ -21,6 +21,7 @@ function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jobName)
         -- Cows: conditionally set the callback function for the context menu option.
         local callbackFunction = function()
             npcSurvivor.jobSquare = nil;
+            npcSurvivor.isHoldingInPlace = false;
             if (jobName == "Companion") then
                 PZNS_JobCompanion(npcSurvivor, followTargetID);
             end
