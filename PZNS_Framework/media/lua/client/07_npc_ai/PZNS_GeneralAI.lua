@@ -31,8 +31,11 @@ function PZNS_GeneralAI.PZNS_IsReloadNeeded(npcSurvivor)
         if (npcHandItem:IsWeapon() == true and npcHandItem:isRanged() == true) then
             local ammoType = npcHandItem:getAmmoType();
             ammoCount = npc_inventory:getItemCountRecurse(ammoType);
-            -- Cows: Check if the gun has no ammo and there are ammo in the backpack.
-            if (npcHandItem:getCurrentAmmoCount() == 0 and ammoCount > 0) then
+            -- Cows: Check if the gun has no ammo and there are ammo in the backpack or there is a magazine type but no magazine is in the gun.
+            if (npcHandItem:getCurrentAmmoCount() == 0 and ammoCount > 0
+                    or (npcHandItem:getMagazineType() ~= nil and npcHandItem:isContainsClip() == false)
+                )
+            then
                 local actionQueue = ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer);
                 local lastAction = actionQueue.queue[#actionQueue.queue];
                 -- Cows: Look at 'ISGrabItemAction:checkQueueList()' in the vanilla TIS code as example reference.
@@ -145,15 +148,171 @@ function PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor)
         else
             npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
         end
+        npcSurvivor.idleTicks = 0;
         return true; -- Cows: Stop processing and start reloading.
     end
     --
     local isThreatFound = PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor);
     if (isThreatFound == true) then
         PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor);
+        npcSurvivor.idleTicks = 0;
         return true; -- Cows: Stop processing and start attacking.
     end
 
+    return false;
+end
+
+--- WIP - Cows: This is a simplified movement function, doesn't update as often as companion movement because non-companions do not need to keep up with their target.
+---@param npcSurvivor any
+function PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return true;
+    end
+    ---@type IsoPlayer
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    local npcPlayerSquare = npcIsoPlayer:getSquare();
+    -- Cows: If the NPC has no jobSquare, stop processing.
+    if (npcSurvivor.jobSquare == nil) then
+        return;
+    end
+    -- Cows: Else Update the movement calculation every 200 ticks to reduce action queuing and resume the movement.
+    local moveTickInterval = 200;
+    if (npcSurvivor.idleTicks >= moveTickInterval) then
+        -- Cows: Check the NPC at regular intervals to see if it is stuck in the same square...
+        local isStuck = npcIsoPlayer:getLastSquare() == npcPlayerSquare;
+        if (isStuck == true) then
+            -- Cows: Only need 1 for the stuck interval check, isStuckTicks starts at 0 and is inside the moveTickInterval.
+            -- Cows: This means the stuck check is done twice at 1 and 2, at 200 and 400 ticks respectively.
+            PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, 2);
+            if (npcSurvivor.isStuckTicks >= 2) then
+                npcSurvivor.jobSquare = nil;
+            end
+        else
+            npcSurvivor.isStuckTicks = 0;
+        end
+        --
+        if (npcSurvivor.jobSquare) then
+            local squareX = npcSurvivor.jobSquare:getX();
+            local squareY = npcSurvivor.jobSquare:getY();
+            local squareZ = npcSurvivor.jobSquare:getZ();
+            PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start moving.
+            PZNS_WalkToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
+        end
+        npcSurvivor.idleTicks = 0;
+    end
+end
+
+-- Cows: Helper function for exploring a specified target building.
+function PZNS_GeneralAI.PZNS_ExploreTargetBuilding(npcSurvivor, targetBuilding)
+    -- Cows: Check if the target building is nil, if true, stop
+    if (targetBuilding == nil) then
+        PZNS_NPCSpeak(npcSurvivor, "I have no building to explore...", "InfoOnly");
+        return;
+    end
+    -- Cows: Now we assume there is a target building for the NPC to explore, hopefully with a room and square.
+    local randomRoom = PZNS_WorldUtils.PZNS_GetBuildingRandomRoom(targetBuilding);
+    if (randomRoom) then
+        local randomRoomSquare = PZNS_WorldUtils.PZNS_GetRoomRandomFreeSquare(randomRoom);
+        if (randomRoomSquare) then
+            npcSurvivor.idleTicks = 0;
+            npcSurvivor.isStuckTicks = 0;
+            npcSurvivor.jobSquare = randomRoomSquare;
+            local squareX = npcSurvivor.jobSquare:getX();
+            local squareY = npcSurvivor.jobSquare:getY();
+            local squareZ = npcSurvivor.jobSquare:getZ();
+            PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start moving.
+            PZNS_WalkToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
+        else
+            -- Cows: At this point, there is no square to move to... what should the NPC do in this case?
+            PZNS_NPCSpeak(npcSurvivor, "I have no square to move to...", "InfoOnly");
+        end
+    else
+        -- Cows: At this point, there is no room to move to... what should the NPC do in this case?
+        PZNS_NPCSpeak(npcSurvivor, "I have no room to move to...", "InfoOnly");
+    end
+end
+
+--- Cows: Check if the NPC next to a door and facing said door.
+---@param npcIsoPlayer IsoPlayer
+---@return IsoDoor | nil
+function PZNS_GeneralAI.PZNS_IsInFrontOfDoor(npcIsoPlayer)
+    if (npcIsoPlayer == nil) then
+        return nil;
+    end
+    local currentSquare = npcIsoPlayer:getCurrentSquare();
+    local direction = tostring(npcIsoPlayer:getDir());
+    local nextSquare = PZNS_WorldUtils.PZNS_GetAdjSquare(currentSquare, direction);
+    --
+    if (currentSquare:getDoorTo(nextSquare) ~= nil) then
+        local isoDoor = currentSquare:getDoorTo(nextSquare):getSquare():getIsoDoor();
+        return isoDoor;
+    end
+    return nil;
+end
+
+--- Cows: Check if the NPC next to a window and facing said window.
+---@param npcIsoPlayer IsoPlayer
+---@return IsoWindow | nil
+function PZNS_GeneralAI.PZNS_IsInFrontOfWindow(npcIsoPlayer)
+    if (npcIsoPlayer == nil) then
+        return nil;
+    end
+    local currentSquare = npcIsoPlayer:getCurrentSquare();
+    local direction = tostring(npcIsoPlayer:getDir());
+    local nextSquare = PZNS_WorldUtils.PZNS_GetAdjSquare(currentSquare, direction);
+    --
+    if currentSquare and nextSquare and currentSquare:getDoorTo(nextSquare) then
+        return currentSquare:getWindowTo(nextSquare);
+    end
+    return nil;
+end
+
+--- Cows: Simple check to see if the NPC is facing a locked or barricaded door.
+---@param npcSurvivor any
+---@return boolean
+function PZNS_GeneralAI.PZNS_IsFacingLockedDoor(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return true;
+    end
+    ---@type IsoPlayer
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    --
+    local door = PZNS_GeneralAI.PZNS_IsInFrontOfDoor(npcIsoPlayer);
+    if (door ~= nil) then
+        local distanceFromDoor = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
+            npcIsoPlayer,
+            door
+        );
+        if (distanceFromDoor < 0.9) then
+            if (door:isLocked() or door:isLockedByKey() or door:isBarricaded()) and (not door:isDestroyed()) then
+                return true;
+            end
+        end
+    end
+    return false;
+end
+--- Cows: Simple check to see if the NPC is facing a locked or barricaded window.
+---@param npcSurvivor any
+---@return boolean
+function PZNS_GeneralAI.PZNS_IsFacingLockedWindow(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return true;
+    end
+    ---@type IsoPlayer
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    --
+    local window = PZNS_GeneralAI.PZNS_IsInFrontOfWindow(npcIsoPlayer);
+    if (window ~= nil) then
+        local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
+            npcIsoPlayer,
+            window
+        );
+        if (distanceFromTarget < 0.9) then
+            if (window:isLocked() or window:isBarricaded()) and (not window:isDestroyed()) then
+                return true;
+            end
+        end
+    end
     return false;
 end
 
@@ -163,16 +322,14 @@ function PZNS_GeneralAI.PZNS_IsPathBlocked(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return true;
     end
-    ---@type IsoPlayer
-    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    -- Cows: Check if the NPC is facing a door
-    if (npcIsoPlayer:isFacingObject(IsoDoor, 1) == true) then
-        -- Cows: Check if the door is locked (perhaps also need to check for a key... then follow up with more complicated actions such as unlocking and destroying...)
-        if (IsoDoor:isLocked() == true) then
-            return true;
-        end
+    -- Cows: Check if the NPC is facing a locked door or locked window
+    local isFacingLockedDoor = PZNS_GeneralAI.PZNS_IsFacingLockedDoor(npcSurvivor);
+    local isFacingLockedWindow = PZNS_GeneralAI.PZNS_IsFacingLockedWindow(npcSurvivor);
+    if (isFacingLockedDoor == true or isFacingLockedWindow == true) then
+        return true;
     end
     return false;
 end
+
 
 return PZNS_GeneralAI;
