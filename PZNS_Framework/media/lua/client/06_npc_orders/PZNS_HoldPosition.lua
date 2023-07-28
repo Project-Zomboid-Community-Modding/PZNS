@@ -27,6 +27,6 @@ function PZNS_HoldPosition(npcSurvivor, targetSquare)
         )
     then
         npcSurvivor.jobSquare = targetSquare;
-        PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ); -- WIP - Cows: NPCs don't actually run... still only walks for whatever reason.
+        PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
     end
 end

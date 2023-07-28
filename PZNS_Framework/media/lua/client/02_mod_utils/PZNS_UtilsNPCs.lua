@@ -513,7 +513,7 @@ function PZNS_UtilsNPCs.PZNS_ClearAllNPCsAllNeedsLevel()
     end
 end
 
---- WIP - Cows: Check and update the npcSurvivor isStuckTicks (depending on the npcSurvivor currentAction?)
+--- Cows: Check and update the npcSurvivor isStuckTicks, using the input tickInterval
 ---@param npcSurvivor any
 ---@param tickInterval number
 function PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, tickInterval)
