@@ -10,7 +10,6 @@ function PZNS_JobGuard(npcSurvivor)
         return;
     end
     if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
-        npcSurvivor.idleTicks = 0;
         return; -- Cows Stop Processing and let the NPC finish its actions.
     end
     -- Cows: No Group means no zone to guard... for now.

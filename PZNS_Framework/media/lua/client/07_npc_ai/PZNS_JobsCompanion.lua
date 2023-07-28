@@ -36,6 +36,7 @@ end
 ---@param npcSurvivor any
 ---@param targetIsoPlayer IsoPlayer
 local function jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer)
+    npcSurvivor.idleTicks = 0;
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
     local targetX = targetIsoPlayer:getX();
@@ -69,6 +70,7 @@ end
 ---@param npcSurvivor any
 ---@param targetIsoPlayer IsoPlayer
 local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
+    npcSurvivor.idleTicks = 0;
     npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
     -- Cows: Update the movement calculation every 30 ticks or so, otherwise NPCs become stuck due to animations.
     if (npcSurvivor.actionTicks >= 30) then
@@ -131,7 +133,6 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
         local isSelfInCar = npcIsoPlayer:getVehicle();
         -- Cows: Check if target is in a car and if npcSurvivor is not in a car.
         if (isTargetInCar ~= nil and isSelfInCar == nil) then
-            npcSurvivor.idleTicks = 0;
             jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer);
             -- Cows: Else check if npcSurvivor and follow target are both in a car
         elseif (isTargetInCar ~= nil and isSelfInCar ~= nil) then
@@ -144,7 +145,6 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
         else -- Cows: Else assume both npcSurvivor and target are on foot.
             -- Cows: Companion is currently being forced to move, presumably to keep up with the target.
             if (npcSurvivor.isForcedMoving == true) then
-                npcSurvivor.idleTicks = 0;
                 jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
                 return; -- Cows: Stop processing and start moving to target.
             end
@@ -152,12 +152,10 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
             local canSeeTarget = npcIsoPlayer:CanSee(targetIsoPlayer);
             -- Cows: Check if npcSurvivor is NOT near their follow target...
             if (isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer) == false or canSeeTarget == false) then
-                npcSurvivor.idleTicks = 0;
                 jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
                 return; -- Cows: Stop processing and start moving to target.
                 -- Cows: Else Check if the NPC is busy in combat related stuff.
             elseif (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
-                npcSurvivor.idleTicks = 0;
                 return; -- Cows Stop Processing and let the NPC finish its actions.
             end
             --Cows: Check if companion has idled for too long and take action.
@@ -174,7 +172,6 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
     else
         -- Cows: else assume the npcSurvivor is holding in place.
         if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
-            npcSurvivor.idleTicks = 0;
             return; -- Cows Stop Processing and let the NPC finish its actions.
         end
         --

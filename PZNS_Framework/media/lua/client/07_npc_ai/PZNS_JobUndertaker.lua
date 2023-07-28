@@ -92,7 +92,6 @@ function PZNS_JobUndertaker(npcSurvivor)
     --
     if (npcSurvivor.canAttack == true) then
         if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
-            npcSurvivor.idleTicks = 0;
             return; -- Cows Stop Processing and let the NPC finish its actions.
         end
     end
