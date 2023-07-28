@@ -15,7 +15,7 @@ function PZNS_MoveToDropItem(npcSurvivor, square, itemToDrop)
     local squareX, squareY, squareZ = square:getX(), square:getY(), square:getZ();
     -- Cows: Make sure the NPC drop off is INSIDE the square, otherwise it will pickup the item right outside the destination square.
     if (distanceFromDropoff <= 0.75) then
-        PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor);
+        PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, 150);
         --
         if (npcSurvivor.currentAction ~= "DropItem") then
             PZNS_DropItem(npcSurvivor, itemToDrop);

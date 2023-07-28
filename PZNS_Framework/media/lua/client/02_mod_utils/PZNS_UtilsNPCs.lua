@@ -515,12 +515,13 @@ end
 
 --- WIP - Cows: Check and update the npcSurvivor isStuckTicks (depending on the npcSurvivor currentAction?)
 ---@param npcSurvivor any
-function PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor)
+---@param tickInterval number
+function PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, tickInterval)
     if (npcSurvivor.isStuckTicks == nil) then
         npcSurvivor.isStuckTicks = 0;
     end
     -- Cows: 50 Ticks per action on average... also need ticks for animations.
-    if (npcSurvivor.isStuckTicks >= 150) then
+    if (npcSurvivor.isStuckTicks > tickInterval) then
         PZNS_NPCSpeak(npcSurvivor, "I was stuck...", "InfoOnly");
         PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
         npcSurvivor.currentAction = "";
@@ -528,7 +529,7 @@ function PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor)
     else
         npcSurvivor.isStuckTicks = npcSurvivor.isStuckTicks + 1;
     end
-    PZNS_NPCSpeak(npcSurvivor, "isStuckTicks: " .. tostring(npcSurvivor.isStuckTicks), "InfoOnly");
+    -- PZNS_NPCSpeak(npcSurvivor, "isStuckTicks: " .. tostring(npcSurvivor.isStuckTicks), "InfoOnly");
 end
 
 --- Cows: This is to streamline the multiple npcIsoPlayerObject checks...
