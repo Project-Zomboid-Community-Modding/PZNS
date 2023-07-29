@@ -43,7 +43,8 @@ function PZNS_UtilsDataNPCs.PZNS_GetGameSaveDir()
         getFileSeparator() ..
         "Saves" ..
         getFileSeparator() ..
-        getWorld():getGameMode() .. getFileSeparator() .. getWorld():getWorld() .. getFileSeparator()
+        getWorld():getGameMode() .. getFileSeparator() .. getWorld():getWorld() .. getFileSeparator() ..
+        "PZNS" .. getFileSeparator() -- Cows: Added a subfolder for PZNS
     );
     return stringPath;
 end
