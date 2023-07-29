@@ -55,3 +55,4 @@ The NPC outfits featured in the screenshots and videos are all outfits made by S
 - Chuck (chuck)  
 - Jab (jabdoesthings)  
 - Notloc (notloc) - For a workaround on getting NPCs to run with B41 API.
+- Poltergeist (poltergeist_ix)
