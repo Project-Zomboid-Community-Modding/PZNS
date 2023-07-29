@@ -16,7 +16,9 @@ function PZNS_WalkToSquareXYZ(npcSurvivor, squareX, squareY, squareZ)
         squareZ  -- Floor level
     );
 
-    npcIsoPlayer:NPCSetRunning(false);
-    local walkAction = ISWalkToTimedAction:new(npcIsoPlayer, targetSquare);
-    PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, walkAction);
+	if targetSquare ~= nil then
+		npcIsoPlayer:NPCSetRunning(false);
+		local walkAction = ISWalkToTimedAction:new(npcIsoPlayer, targetSquare);
+		PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, walkAction);
+	end
 end
