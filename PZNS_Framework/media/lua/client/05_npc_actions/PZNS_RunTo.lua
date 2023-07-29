@@ -141,6 +141,8 @@ function PZNS_RunToSquareXYZ(npcSurvivor, squareX, squareY, squareZ)
         squareZ  -- Floor level
     );
 
-    local runAction = PZNS_RunToTimedAction:new(npcIsoPlayer, targetSquare);
-    PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, runAction);
+	if targetSquare ~= nil then
+		local runAction = PZNS_RunToTimedAction:new(npcIsoPlayer, targetSquare);
+		PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, runAction);
+	end
 end
