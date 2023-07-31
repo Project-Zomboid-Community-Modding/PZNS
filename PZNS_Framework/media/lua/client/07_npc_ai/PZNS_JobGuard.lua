@@ -100,11 +100,6 @@ function PZNS_JobGuard(npcSurvivor)
             end
         end
     else
-        -- Cows: Else assume the npcSurvivor is holding in place.
-        if (npcSurvivor.jobSquare) then
-            local squareX, squareY, squareZ = npcSurvivor.jobSquare:getX(), npcSurvivor.jobSquare:getY(),
-                npcSurvivor.jobSquare:getZ();
-            PZNS_RunToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
-        end
+        PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor);
     end
 end
