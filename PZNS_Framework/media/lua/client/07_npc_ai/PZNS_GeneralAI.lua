@@ -29,6 +29,8 @@ function PZNS_GeneralAI.PZNS_IsNPCArmed(npcSurvivor)
             -- Cows: Check if the gun has ammo
             if (npcHandItem:getCurrentAmmoCount() > 0) then
                 return true;
+            elseif (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
+                return true;
             end
         else
             -- Cows: Else assume the weapon is melee and the NPC is armed.
@@ -317,6 +319,7 @@ function PZNS_GeneralAI.PZNS_IsFacingLockedDoor(npcSurvivor)
     end
     return false;
 end
+
 --- Cows: Simple check to see if the NPC is facing a locked or barricaded window.
 ---@param npcSurvivor any
 ---@return boolean
@@ -356,6 +359,5 @@ function PZNS_GeneralAI.PZNS_IsPathBlocked(npcSurvivor)
     end
     return false;
 end
-
 
 return PZNS_GeneralAI;
