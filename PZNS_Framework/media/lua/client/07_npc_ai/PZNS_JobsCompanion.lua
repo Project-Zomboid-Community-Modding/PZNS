@@ -120,7 +120,7 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
-    --
+    ---@type IsoPlayer
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local targetIsoPlayer = getTargetIsoPlayerByID(targetID);
     -- Cows: Sneak if the follow target is sneaking.
@@ -180,11 +180,29 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
         if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
             return; -- Cows Stop Processing and let the NPC finish its actions.
         end
-        --
-        if (npcSurvivor.jobSquare) then
-            local squareX, squareY, squareZ = npcSurvivor.jobSquare:getX(), npcSurvivor.jobSquare:getY(),
-                npcSurvivor.jobSquare:getZ();
-            PZNS_RunToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
+        if (npcSurvivor.jobSquare == nil) then
+            return; -- Cows Stop Processing as the NPC has no destination
+        end
+        npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
+        if (npcSurvivor.actionTicks >= 30) then
+            PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start moving towards jobSquare.
+            local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
+            local targetX = npcSurvivor.jobSquare:getX();
+            local targetY = npcSurvivor.jobSquare:getY();
+            local targetZ = npcSurvivor.jobSquare:getZ();
+            -- Cows: Check the distance from target and determine how to approach.
+            if (distanceFromTarget < 1) then
+                npcSurvivor.isForcedMoving = false;
+                npcSurvivor.jobSquare = nil;
+                PZNS_WalkToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
+            elseif (distanceFromTarget > 3) then
+                npcSurvivor.isForcedMoving = true;
+                PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
+            else
+                npcSurvivor.isForcedMoving = false;
+                PZNS_WalkToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
+            end
+            npcSurvivor.actionTicks = 0;
         end
     end
 end
