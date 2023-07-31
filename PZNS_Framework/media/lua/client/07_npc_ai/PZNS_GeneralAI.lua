@@ -9,6 +9,36 @@ local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 
 local PZNS_GeneralAI = {};
 
+---Cows: A function to check if the NPC is armed.
+---@param npcSurvivor any
+---@return boolean
+function PZNS_GeneralAI.PZNS_IsNPCArmed(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return false;
+    end
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    ---@type HandWeapon
+    local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
+    -- Cows: No item in hand equals NPC is unarmed.
+    if (npcHandItem == nil) then
+        return false;
+    end
+    -- Cows: Check if theh and item is a weapon.
+    if (npcHandItem:IsWeapon() == true) then
+        if (npcHandItem:isRanged() == true) then
+            -- Cows: Check if the gun has ammo
+            if (npcHandItem:getCurrentAmmoCount() > 0) then
+                return true;
+            end
+        else
+            -- Cows: Else assume the weapon is melee and the NPC is armed.
+            return true;
+        end
+    end
+    -- Cows: Default to false.
+    return false;
+end
+
 ---comment
 ---@param npcSurvivor any
 ---@return boolean
