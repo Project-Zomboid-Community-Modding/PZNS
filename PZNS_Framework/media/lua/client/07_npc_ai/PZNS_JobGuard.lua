@@ -9,8 +9,16 @@ function PZNS_JobGuard(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
-    if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
-        return; -- Cows Stop Processing and let the NPC finish its actions.
+    local isNPCArmed = PZNS_GeneralAI.PZNS_IsNPCArmed(npcSurvivor);
+    -- Cows: Only engage in combat if NPC has permission to attack and NPC is also armed.
+    if (npcSurvivor.canAttack == true and isNPCArmed == true) then
+        if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
+            return; -- Cows Stop Processing and let the NPC finish its actions.
+        end
+    elseif (isNPCArmed == false) then
+        PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_NeedWeapon_01"), "Negative");
+    elseif (npcSurvivor.canAttack == false) then
+        PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_CannotAttack_01"), "InfoOnly");
     end
     -- Cows: No Group means no zone to guard... for now.
     if (npcSurvivor.groupID == nil) then
