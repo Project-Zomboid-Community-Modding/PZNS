@@ -2,8 +2,8 @@ local PZNS_UtilsZones = require("02_mod_utils/PZNS_UtilsZones");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_GeneralAI = require("07_npc_ai/PZNS_GeneralAI");
 --
-local isCellChecked = false; -- WIP - Cows: Considered using "npcSurvivor.isJobRefreshed"... but that means there will be multiple refresh which may be very bad
-local dropZoneRadius = 15; -- WIP - Cows: Perhaps a user option in the future...
+local isCellChecked = false;                  -- WIP - Cows: Considered using "npcSurvivor.isJobRefreshed"... but that means there will be multiple refresh which may be very bad
+local dropZoneRadius = 15;                    -- WIP - Cows: Perhaps a user option in the future...
 --
 local isRenderingGrabSquareHighlight = false; -- Cows: This is intended for local debug.
 local debugGrabSquare = nil;                  -- Cows: This is intended for local debug.
@@ -82,6 +82,7 @@ function PZNS_JobUndertaker(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
+    local isNPCArmed = PZNS_GeneralAI.PZNS_IsNPCArmed(npcSurvivor);
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     local groupDropSquare = PZNS_UtilsZones.PZNS_CheckGroupWorkZoneExists(npcSurvivor.groupID, "ZoneDropCorpses");
     -- Cows: Check if WorkZone exists.
@@ -89,66 +90,72 @@ function PZNS_JobUndertaker(npcSurvivor)
         PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker"), "Negative");
         return;
     end
-    --
-    if (npcSurvivor.canAttack == true) then
+    -- Cows: Only engage in combat if NPC has permission to attack and NPC is also armed.
+    if (npcSurvivor.canAttack == true and isNPCArmed == true) then
         if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
             return; -- Cows Stop Processing and let the NPC finish its actions.
         end
     end
     --
     debugDropSquare = groupDropSquare;
-    -- Cows: Check if the NPC has a male corpse in the inventory.
-    local inventoryCorpse = npcIsoPlayer:getInventory():FindAndReturn("CorpseMale");
-    -- Cows: Then check if there is no corpse in the inventory and look for a female corpse.
-    if (not inventoryCorpse) then
-        inventoryCorpse = npcIsoPlayer:getInventory():FindAndReturn("CorpseFemale");
-    end
-    -- Cows: Check if the NPC has a corpse in the inventory.
-    if (inventoryCorpse ~= nil) then
-        --
-        if (isRenderingGrabSquareHighlight == true) then
-            Events.OnRenderTick.Add(renderDropSquare);
-            Events.OnRenderTick.Remove(renderGrabSquare);
-            isRenderingGrabSquareHighlight = false;
+    -- Cows: Check the job every 30 ticks or so, which should ease the burden of doing everything every tick.
+    npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
+    if (npcSurvivor.actionTicks >= 30) then
+        -- Cows: Check if the NPC has a male corpse in the inventory.
+        local inventoryCorpse = npcIsoPlayer:getInventory():FindAndReturn("CorpseMale");
+        -- Cows: Then check if there is no corpse in the inventory and look for a female corpse.
+        if (not inventoryCorpse) then
+            inventoryCorpse = npcIsoPlayer:getInventory():FindAndReturn("CorpseFemale");
         end
-        -- PZNS_NPCSpeak(npcSurvivor, "Walking to dropoff...", "InfoOnly");
-        PZNS_MoveToDropItem(npcSurvivor, groupDropSquare, inventoryCorpse);
-        -- Cows: Reset the cell check and npc jobSquare
-        if (isCellChecked == true) then
-            isCellChecked = false;
-            npcSurvivor.jobSquare = nil;
-            debugGrabSquare = nil;
-        end
-    else -- Cows: Else the NPC needs to look at nearby squares around ZoneDropCorpses for a corpse to grab.
-        -- PZNS_NPCSpeak(npcSurvivor, "Looking for pickup...", "InfoOnly");
-        --
-        if (npcSurvivor.jobSquare ~= nil) then
-            local squareDeadBodys = npcSurvivor.jobSquare:getDeadBodys();
+        -- Cows: Check if the NPC has a corpse in the inventory.
+        if (inventoryCorpse ~= nil) then
             --
-            if (squareDeadBodys:size() > 0) then
-                local deadBody = squareDeadBodys:get(0);
-                -- PZNS_NPCSpeak(npcSurvivor, "Moving to grab corpse...", "InfoOnly");
-                PZNS_MoveToGrabCorpse(npcSurvivor, npcSurvivor.jobSquare, deadBody);
-                --
-                if (isRenderingGrabSquareHighlight == false) then
-                    Events.OnRenderTick.Add(renderGrabSquare);
-                    Events.OnRenderTick.Remove(renderDropSquare);
-                    isRenderingGrabSquareHighlight = true;
-                end
-                return; -- Cows: Stop processing, there isn't a need to continue and check for corpses in the cell.
-            else
-                -- Cows: Else assume the deadbody is no longer available and move to the next deadbody
-                npcSurvivor.jobSquare = nil;
+            if (isRenderingGrabSquareHighlight == true) then
+                Events.OnRenderTick.Add(renderDropSquare);
+                Events.OnRenderTick.Remove(renderGrabSquare);
+                isRenderingGrabSquareHighlight = false;
             end
-        end
-        local cellCorpseSquares = nil;
-        --
-        if (isCellChecked == false) then
-            cellCorpseSquares = checkCellForCorpseSquares(); -- Cows: Check the cell for corpses.
-            isCellChecked = true;
-        end
-        --
-        if (cellCorpseSquares ~= nil) then
+            -- PZNS_NPCSpeak(npcSurvivor, "Walking to dropoff...", "InfoOnly");
+            PZNS_MoveToDropItem(npcSurvivor, groupDropSquare, inventoryCorpse);
+            -- Cows: Reset the cell check and npc jobSquare
+            if (isCellChecked == true) then
+                isCellChecked = false;
+                npcSurvivor.jobSquare = nil;
+                debugGrabSquare = nil;
+            end
+        else -- Cows: Else the NPC needs to look at nearby squares around ZoneDropCorpses for a corpse to grab.
+            -- PZNS_NPCSpeak(npcSurvivor, "Looking for pickup...", "InfoOnly");
+            --
+            if (npcSurvivor.jobSquare ~= nil) then
+                local squareDeadBodys = npcSurvivor.jobSquare:getDeadBodys();
+                --
+                if (squareDeadBodys:size() > 0) then
+                    local deadBody = squareDeadBodys:get(0);
+                    -- PZNS_NPCSpeak(npcSurvivor, "Moving to grab corpse...", "InfoOnly");
+                    PZNS_MoveToGrabCorpse(npcSurvivor, npcSurvivor.jobSquare, deadBody);
+                    --
+                    if (isRenderingGrabSquareHighlight == false) then
+                        Events.OnRenderTick.Add(renderGrabSquare);
+                        Events.OnRenderTick.Remove(renderDropSquare);
+                        isRenderingGrabSquareHighlight = true;
+                    end
+                    return; -- Cows: Stop processing, there isn't a need to continue and check for corpses in the cell.
+                else
+                    -- Cows: Else assume the deadbody is no longer available and move to the next deadbody
+                    npcSurvivor.jobSquare = nil;
+                end
+            end
+            local cellCorpseSquares = nil;
+            --
+            if (isCellChecked == false) then
+                cellCorpseSquares = checkCellForCorpseSquares(); -- Cows: Check the cell for corpses.
+                isCellChecked = true;
+            end
+            -- Cows: No Corpses in cell, stop processing.
+            if (cellCorpseSquares == nil) then
+                return;
+            end
+            --
             for k, v in pairs(cellCorpseSquares) do
                 local currentSquare = cellCorpseSquares[k];
                 debugGrabSquare = currentSquare;
@@ -163,7 +170,8 @@ function PZNS_JobUndertaker(npcSurvivor)
                         end
                     end
                 end
-            end
+            end -- Cows: End cellCorpseSquares loop.
         end
+        npcSurvivor.actionTicks = 0;
     end
 end
