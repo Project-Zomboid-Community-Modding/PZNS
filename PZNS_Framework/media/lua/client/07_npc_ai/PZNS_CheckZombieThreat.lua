@@ -31,8 +31,6 @@ function PZNS_CheckZombieThreat(npcSurvivor)
                 return true;
             end
         else
-            npcIsoPlayer:NPCSetAiming(false); -- Cows: No Threat, stop aiming.
-            npcIsoPlayer:NPCSetAttack(false); -- Cows: No Threat, stop attacking.
             targetThreatObject = nil;
         end
     end

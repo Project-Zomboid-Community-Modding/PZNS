@@ -44,7 +44,6 @@ local function meleeAttack(npcSurvivor, npcIsoPlayer, targetObject)
             calculateNPCDamage(npcIsoPlayer, targetObject);
         else
             -- PZNS_NPCSpeak(npcSurvivor, "Target is dead");
-            npcIsoPlayer:NPCSetAttack(false);
         end
         npcSurvivor.attackTicks = 0;
     end
@@ -64,7 +63,6 @@ local function rangedAttack(npcSurvivor, npcIsoPlayer, targetObject)
             calculateNPCDamage(npcIsoPlayer, targetObject);
         else
             -- PZNS_NPCSpeak(npcSurvivor, "Target is dead");
-            npcIsoPlayer:NPCSetAttack(false);
         end
         npcSurvivor.attackTicks = 0;
     end
@@ -86,6 +84,9 @@ function PZNS_WeaponAttack(npcSurvivor)
     if (isNPCHandItemWeapon == false) then
         PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_NeedWeapon_01"), "Negative");
         npcIsoPlayer:NPCSetAttack(false);
+        if (npcIsoPlayer:NPCGetAiming() == true) then
+            npcIsoPlayer:NPCSetAiming(false);
+        end
     end
     -- Cows: Check if the entity the NPC is aiming at exists
     local targetObject = npcSurvivor.aimTarget;
@@ -97,6 +98,9 @@ function PZNS_WeaponAttack(npcSurvivor)
     -- Cows: Check if the entity the NPC is aiming at is valid
     if (PZNS_CombatUtils.PZNS_IsTargetInvalidForDamage(targetObject) == true) then
         npcIsoPlayer:NPCSetAttack(false);
+        if (npcIsoPlayer:NPCGetAiming() == true) then
+            npcIsoPlayer:NPCSetAiming(false);
+        end
         return;
     end
     -- Cows: Check if NPC can attack
@@ -104,6 +108,9 @@ function PZNS_WeaponAttack(npcSurvivor)
     if (npcCanAttack ~= true) then
         PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_CannotAttack_01"), "InfoOnly");
         npcIsoPlayer:NPCSetAttack(false);
+        if (npcIsoPlayer:NPCGetAiming() == true) then
+            npcIsoPlayer:NPCSetAiming(false);
+        end
         return;
     end
     -- Cows: Melee and Ranged weapons are handled separately...
@@ -167,7 +174,6 @@ function PZNS_WeaponSwing(isoPlayer, playerWeapon)
                 playerWeapon:getSwingSound(), isoPlayer:getCurrentSquare(), 0.5, range, 1.0, false
             );
         end
-
         isoPlayer:NPCSetAttack(false);
         isoPlayer:NPCSetMelee(false);
     end

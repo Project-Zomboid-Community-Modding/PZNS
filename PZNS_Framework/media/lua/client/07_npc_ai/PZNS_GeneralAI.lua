@@ -191,6 +191,11 @@ function PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor)
         return true; -- Cows: Stop processing and start attacking.
     end
 
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    npcIsoPlayer:NPCSetAttack(false);
+    if (npcIsoPlayer:NPCGetAiming() == true) then
+        npcIsoPlayer:NPCSetAiming(false);
+    end
     return false;
 end
 
