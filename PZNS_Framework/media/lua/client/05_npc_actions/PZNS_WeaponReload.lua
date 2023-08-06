@@ -11,11 +11,9 @@ function PZNS_WeaponReload(npcSurvivor)
         return;
     end
     --
+    npcIsoPlayer:NPCSetAttack(false);
     if (npcIsoPlayer:NPCGetAiming() == true) then
         npcIsoPlayer:NPCSetAiming(false);
-    end
-    if (npcIsoPlayer:isAttacking() == true) then
-        npcIsoPlayer:NPCSetAttack(false);
     end
     local actionsCount = PZNS_UtilsNPCs.PZNS_GetNPCActionsQueuedCount(npcSurvivor);
     local actionQueue = ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer);

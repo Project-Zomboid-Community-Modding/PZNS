@@ -15,19 +15,30 @@ function PZNS_WeaponAiming(npcSurvivor)
     -- Cows: Check if the NPC has an item in hand
     local npcWeapon = npcIsoPlayer:getPrimaryHandItem();
     if (npcWeapon == nil) then
+        if (npcIsoPlayer:NPCGetAiming() == true) then
+            npcIsoPlayer:NPCSetAiming(false);
+        end
         return;
     end
     if (npcWeapon:IsWeapon() ~= true) then
+        if (npcIsoPlayer:NPCGetAiming() == true) then
+            npcIsoPlayer:NPCSetAiming(false);
+        end
         return;
     end
     -- Cows: Check if the entity the NPC is aiming at exists
     local targetObject = npcSurvivor.aimTarget;
     if (targetObject == nil) then
+        if (npcIsoPlayer:NPCGetAiming() == true) then
+            npcIsoPlayer:NPCSetAiming(false);
+        end
         return;
     end
     -- Cows: Check if the target is valid to be damaged.
     if (PZNS_CombatUtils.PZNS_IsTargetInvalidForDamage(targetObject) == true) then
-        npcIsoPlayer:NPCSetAiming(false);
+        if (npcIsoPlayer:NPCGetAiming() == true) then
+            npcIsoPlayer:NPCSetAiming(false);
+        end
         return;
     end
     -- Cows: Get all check values for the NPC before said NPC can aim.
@@ -48,11 +59,11 @@ function PZNS_WeaponAiming(npcSurvivor)
         --
         if (isTargetInAimRange == true) then
             npcIsoPlayer:NPCSetAiming(true);
-        else
-            npcIsoPlayer:NPCSetAiming(false);
+            return;
         end
-    else
-        npcSurvivor.aimTarget = nil;
+    end
+    npcSurvivor.aimTarget = nil;
+    if (npcIsoPlayer:NPCGetAiming() == true) then
         npcIsoPlayer:NPCSetAiming(false);
     end
 end

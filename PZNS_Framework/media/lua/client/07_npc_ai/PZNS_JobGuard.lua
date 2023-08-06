@@ -37,8 +37,6 @@ function PZNS_JobGuard(npcSurvivor)
             -- Cows: let the guard NPC resume its walking patrol along the zone perimeter.
             npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
             if (npcSurvivor.actionTicks >= 30) then
-                npcIsoPlayer:NPCSetAiming(false);
-                npcIsoPlayer:NPCSetAttack(false);
                 local squareX = npcSurvivor.jobSquare:getX();
                 local squareY = npcSurvivor.jobSquare:getY();
                 local squareZ = npcSurvivor.jobSquare:getZ();
@@ -108,6 +106,11 @@ function PZNS_JobGuard(npcSurvivor)
             end
         end
     else
-        PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor);
+        npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
+        if (npcSurvivor.actionTicks >= 30) then
+            PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
+            PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor);
+            npcSurvivor.actionTicks = 0;
+        end
     end
 end

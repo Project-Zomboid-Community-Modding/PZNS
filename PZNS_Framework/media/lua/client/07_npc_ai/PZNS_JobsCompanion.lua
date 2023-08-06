@@ -77,8 +77,10 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
         local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
         local npcSquareX = npcIsoPlayer:getX();
         local npcSquareY = npcIsoPlayer:getY();
-        npcIsoPlayer:NPCSetAiming(false);
         npcIsoPlayer:NPCSetAttack(false);
+        if (npcIsoPlayer:NPCGetAiming() == true) then
+            npcIsoPlayer:NPCSetAiming(false);
+        end
         --
         local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
         npcIsoPlayer:faceThisObject(targetIsoPlayer);
@@ -106,7 +108,6 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
             PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
         else
             npcSurvivor.isForcedMoving = false;
-            PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start walking.
             PZNS_WalkToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
         end
         npcSurvivor.actionTicks = 0;

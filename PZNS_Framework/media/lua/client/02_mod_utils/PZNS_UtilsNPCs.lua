@@ -321,9 +321,11 @@ function PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor)
     end
     -- Cows: Reset the actionTicks, so NPC can restart their actions
     npcSurvivor.actionTicks = 0;
-    -- Cows: Stop aiming and stop attacking
-    npcIsoPlayer:NPCSetAiming(false);
+    -- Cows: Stop attacking and stop aiming
     npcIsoPlayer:NPCSetAttack(false);
+    if (npcIsoPlayer:NPCGetAiming() == true) then
+        npcIsoPlayer:NPCSetAiming(false);
+    end
     ISTimedActionQueue.clear(npcIsoPlayer);
 end
 
