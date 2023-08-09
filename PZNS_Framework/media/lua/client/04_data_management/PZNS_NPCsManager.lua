@@ -113,7 +113,7 @@ function PZNS_NPCsManager.setActiveInventoryNPCBySurvivorID(survivorID)
 end
 
 --- WIP - Cows: Spawn a random raider NPC. 
---- Cows: Seriously, go make your own random spawns, this is an example for debugging and testing.
+--- Cows: Go make your own random spawns, this is an example for debugging and testing.
 ---@param targetSquare IsoGridSquare
 ---@param raiderID string
 ---@return unknown
@@ -166,7 +166,7 @@ function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raider
 end
 
 --- WIP - Cows: Spawn a random NPC.
---- Cows: Seriously, go out and make your own random spawns, this is an example for debugging and testing.
+--- Cows: Go make your own random spawns, this is an example for debugging and testing.
 ---@param targetSquare IsoGridSquare
 ---@param survivorID string
 ---@return unknown
