@@ -4,6 +4,7 @@ local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsDataZones = require("02_mod_utils/PZNS_UtilsDataZones");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_PlayerUtils = require("02_mod_utils/PZNS_PlayerUtils");
+local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
 --
 local function addFiveCannedTunasToLocalPlayer()
     local playerSurvivor = getSpecificPlayer(0);
@@ -107,7 +108,7 @@ end
 
 ---comment
 ---@param targetSquare any
-local function spawnZombiesAtSquare(targetSquare)
+local function spawnZombieAtSquare(targetSquare)
     local squareX = targetSquare:getX();
     local squareY = targetSquare:getY();
     local squareZ = targetSquare:getZ();
@@ -118,6 +119,7 @@ local function spawnZombiesAtSquare(targetSquare)
 
     return spawnedZombie;
 end
+
 --
 local PZNS_DebugBuildText = {
     SpawnMedical = getText("ContextMenu_PZNS_Spawn_Medical"),
@@ -193,7 +195,9 @@ local PZNS_DebugWorldText = {
     ClearAllNPCsNeeds = getText("ContextMenu_PZNS_Clear_All_NPCs_Needs"),
     SpawnChris = getText("ContextMenu_PZNS_ReSpawn_Chris_Tester"),
     SpawnJill = getText("ContextMenu_PZNS_ReSpawn_Jill_Tester"),
-    SpawnZombie = getText("ContextMenu_PZNS_Spawn_Zombie")
+    SpawnZombie = getText("ContextMenu_PZNS_Spawn_Zombie"),
+    SpawnRaider = getText("ContextMenu_PZNS_Spawn_Raider"),
+    SpawnNPCSurvivor = getText("ContextMenu_PZNS_Spawn_Survivor")
 };
 ---
 local PZNS_DebugWorld = {
@@ -201,7 +205,9 @@ local PZNS_DebugWorld = {
     ClearAllNPCsNeeds = PZNS_UtilsNPCs.PZNS_ClearAllNPCsAllNeedsLevel,
     SpawnChris = respawnChristTester,
     SpawnJill = respawnJillTester,
-    SpawnZombie = spawnZombiesAtSquare
+    SpawnZombie = spawnZombieAtSquare,
+    SpawnRaider = PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare,
+    SpawnNPCSurvivor = PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare
 };
 
 --- Cows: mpPlayerID is a placeholder, it doesn't do anything and defaults to 0 in a local game.
@@ -224,8 +230,9 @@ function PZNS_ContextMenuDebugWorld(mpPlayerID, context, worldobjects)
     for debugKey, debugText in pairs(PZNS_DebugWorldText) do
         -- Cows: conditionally set the callback function for the context menu option.
         local callbackFunction = function()
-            if (debugKey ~= "SpawnZombie") then
-                PZNS_DebugWorld[debugKey]();
+            if (debugKey == "SpawnRaider" or debugKey == "SpawnNPCSurvivor") then
+                getSpecificPlayer(0):Say("Spawning Random NPC...");
+                PZNS_DebugWorld[debugKey](square, nil);
             else
                 PZNS_DebugWorld[debugKey](square);
             end
