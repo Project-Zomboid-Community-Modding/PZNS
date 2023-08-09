@@ -118,6 +118,7 @@ function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raider
     local isFemale = ZombRand(100) > 50; -- Cows: 50/50 roll for female spawn
     local raiderForeName = SurvivorFactory.getRandomForename(isFemale);
     local raiderSurname = SurvivorFactory.getRandomSurname();
+    local raiderName = raiderForeName .. " " .. raiderSurname;
     local gameTimeStampString = tostring(getTimestampMs());
     -- Cows: I recommend replacing the "PZNS_Raider_" prefix if another modder wants to create their own random spawns. As long as the ID is unique, there shouldn't be a problem
     local raiderSurvivorID = "PZNS_Raider_" .. raiderForeName .. "_" .. raiderSurname .. "_" .. gameTimeStampString;
@@ -135,6 +136,8 @@ function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raider
     raiderSurvivor.isRaider = true;
     raiderSurvivor.affection = 0; -- Cows: Raiders will never hold any love for players.
     raiderSurvivor.jobName = "Wander In Cell";
+    raiderSurvivor.textObject:setDefaultColors(225, 0, 0, 0.8); -- Red text
+    raiderSurvivor.textObject:ReadString(raiderName);
     raiderSurvivor.canSaveData = false;
     -- Cows: Setup the skills and outfit, plus equipment...
     PZNS_UtilsNPCs.PZNS_SetNPCPerksRandomly(raiderSurvivor);
