@@ -92,6 +92,11 @@ local function spawnNPCIsoPlayer(npcSurvivor)
             -- Cows: Else remove the NPC from the game world to prevent issues from happening.
             npcIsoPlayer:removeFromWorld();
             npcIsoPlayer:removeFromSquare();
+            -- Cows: If the npc cannot be saved, permanently remove from game world.
+            if (npcSurvivor.canSaveData == false) then
+                local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+                activeNPCs[npcSurvivor.survivorID] = nil;
+            end
         end
     end
 end
