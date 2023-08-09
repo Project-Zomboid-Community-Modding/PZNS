@@ -112,8 +112,11 @@ function PZNS_NPCsManager.setActiveInventoryNPCBySurvivorID(survivorID)
     PZNS_ActiveInventoryNPC = npcSurvivor;
 end
 
---- WIP - Cows: Spawn a random raider NPC.
+--- WIP - Cows: Spawn a random raider NPC. 
+--- Cows: Seriously, go make your own random spawns, this is an example for debugging and testing.
 ---@param targetSquare IsoGridSquare
+---@param raiderID string
+---@return unknown
 function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raiderID)
     local isFemale = ZombRand(100) > 50; -- Cows: 50/50 roll for female spawn
     local raiderForeName = SurvivorFactory.getRandomForename(isFemale);
@@ -133,8 +136,8 @@ function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raider
         raiderForeName,
         targetSquare
     );
-    raiderSurvivor.isRaider = true;
-    raiderSurvivor.affection = 0; -- Cows: Raiders will never hold any love for players.
+    raiderSurvivor.isRaider = true;                             -- Cows: MAKE SURE THIS FLAG IS SET TO 'true' - DIFFERENTIATE NORMAL NPCS FROM RAIDERS.
+    raiderSurvivor.affection = 0;                               -- Cows: Raiders will never hold any love for players.
     raiderSurvivor.jobName = "Wander In Cell";
     raiderSurvivor.textObject:setDefaultColors(225, 0, 0, 0.8); -- Red text
     raiderSurvivor.textObject:ReadString(raiderName);
@@ -147,7 +150,15 @@ function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raider
     PZNS_UtilsNPCs.PZNS_AddEquipClothingNPCSurvivor(raiderSurvivor, "Base.Trousers_Denim");
     PZNS_UtilsNPCs.PZNS_AddEquipClothingNPCSurvivor(raiderSurvivor, "Base.Socks");
     PZNS_UtilsNPCs.PZNS_AddEquipClothingNPCSurvivor(raiderSurvivor, "Base.Shoes_ArmyBoots");
-    PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(raiderSurvivor, "Base.BaseballBat");
+    local spawnWithGun = ZombRand(0, 100) > 50;
+    if (spawnWithGun) then
+        PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(raiderSurvivor, "Base.Pistol");
+        PZNS_UtilsNPCs.PZNS_AddItemToInventoryNPCSurvivor(raiderSurvivor, "Base.9mmClip");
+        PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(raiderSurvivor, "Base.Bullets9mm", 15);
+        PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(raiderSurvivor, "Base.Bullets9mm", 15);
+    else
+        PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(raiderSurvivor, "Base.BaseballBat");
+    end
     --
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     activeNPCs[raiderSurvivorID] = raiderSurvivor; -- Cows: This saves it to modData, which allows the npc to run while in-game, but does not create a save file.
@@ -155,7 +166,10 @@ function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raider
 end
 
 --- WIP - Cows: Spawn a random NPC.
+--- Cows: Seriously, go out and make your own random spawns, this is an example for debugging and testing.
 ---@param targetSquare IsoGridSquare
+---@param survivorID string
+---@return unknown
 function PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare(targetSquare, survivorID)
     local isFemale = ZombRand(100) > 50; -- Cows: 50/50 roll for female spawn
     local npcForeName = SurvivorFactory.getRandomForename(isFemale);
@@ -174,7 +188,7 @@ function PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare(targetSquare, survivorI
         npcForeName,
         targetSquare
     );
-    npcSurvivor.affection = ZombRand(100); -- Cows: Random between 0 and 100 affection.
+    npcSurvivor.affection = ZombRand(100); -- Cows: Random between 0 and 100 affection, not everyone will love the player.
     npcSurvivor.jobName = "Wander In Cell";
     npcSurvivor.canSaveData = false;
     -- Cows: Setup the skills and outfit, plus equipment...
@@ -184,7 +198,15 @@ function PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare(targetSquare, survivorI
     PZNS_UtilsNPCs.PZNS_AddEquipClothingNPCSurvivor(npcSurvivor, "Base.Trousers_Denim");
     PZNS_UtilsNPCs.PZNS_AddEquipClothingNPCSurvivor(npcSurvivor, "Base.Socks");
     PZNS_UtilsNPCs.PZNS_AddEquipClothingNPCSurvivor(npcSurvivor, "Base.Shoes");
-    PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, "Base.BaseballBat");
+    local spawnWithGun = ZombRand(0, 100) > 50;
+    if (spawnWithGun) then
+        PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, "Base.Pistol");
+        PZNS_UtilsNPCs.PZNS_AddItemToInventoryNPCSurvivor(npcSurvivor, "Base.9mmClip");
+        PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, "Base.Bullets9mm", 15);
+        PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, "Base.Bullets9mm", 15);
+    else
+        PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, "Base.BaseballBat");
+    end
     --
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     activeNPCs[npcSurvivorID] = npcSurvivor; -- Cows: This saves it to modData, which allows the npc to run while in-game, but does not create a save file.
