@@ -602,4 +602,37 @@ function PZNS_UtilsNPCs.PZNS_IsNPCHostileToOtherNPC(npcSurvivor, npcSurvivor2)
     return false;
 end
 
+--- Cows: This is to streamline complete random rolls of stats for NPCs.
+function PZNS_UtilsNPCs.PZNS_SetNPCPerksRandomly(npcSurvivor)
+    local from1to10 = function() return ZombRand(1, 10); end;
+    local from1to7 = function() return ZombRand(1, 7); end;
+    local from0to3 = function() return ZombRand(0, 3); end;
+    -- WIP - Cows: There seems to be a conflict with 'More Traits'... unsure which perk is affecting it at the moment.
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Strength", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Fitness", from1to7());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Sprinting", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Lightfoot", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Nimble", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Sneak", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Axe", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Blunt", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "SmallBlunt", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "LongBlade", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "SmallBlade", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Spear", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Maintenance", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Woodwork", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Cooking", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Farming", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Doctor", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Electricity", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "MetalWelding", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Mechanics", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Tailoring", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Aiming", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Reloading", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Fishing", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Trapping", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "PlantScavenging", from0to3());
+end
 return PZNS_UtilsNPCs;

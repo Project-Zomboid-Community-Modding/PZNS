@@ -45,7 +45,7 @@ function PZNS_NPCSurvivor:newSurvivor(
         textObject = nil,                       -- Cows: This should handle all the text displayed by the NPC.
         ------ IsoPlayer Spawning Related below ------
         isAlive = true,                         -- WIP - Technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
-        isSpawned = false,                      -- WIP - Technically part of IsoPlayer... but "isExistInTheWorld()" seems very inconsistent...
+        isSpawned = true,                       -- WIP - Technically part of IsoPlayer... but "isExistInTheWorld()" seems very inconsistent...
         forename = "",                          -- Cows: Placeholder; technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
         surname = "",                           -- Cows: Placeholder; technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
         isFemale = false,                       -- Cows: Placeholder; technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
