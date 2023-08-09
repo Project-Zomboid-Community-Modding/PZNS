@@ -19,10 +19,11 @@ function PZNS_NPCSurvivor:newSurvivor(
         survivorID = survivorID,
         survivorName = survivorName,
         groupID = nil,
-        affection = 50,                         -- WIP - Cows: Unused atm; Added this value as a check for invite-able NPCs... between 0 and 100? 0 Means 100% hostility and will attack. Or a simple enum? (1 hostile, 2 neutral, 3 friendly).
+        affection = 50,                         -- WIP - Cows: Added this value as a check for invite-able NPCs... between 0 and 100? 0 Means 100% hostility and will attack.
         isForcedMoving = false,                 -- WIP - Cows: Unused atm; Added this flag to force NPCs to move and disengage from combat/other actions.
         isHoldingInPlace = false,               -- Cows: Prevent current NPC from moving if true
         isMeleeOnly = false,                    -- WIP - Cows: Will eventually be used in more complex combat AI.
+        isRaider = false,                       -- WIP - Cows: Used to test raiding NPCs
         isSavedInWorld = false,                 -- Cows: Added so that NPC can be checked and saved when it is off-screen.
         courage = 50,                           -- WIP - Cows: Considered for evaluating when NPCs should "flee" from hostility
         jobName = "Guard",                      -- Cows: Defaults to a job managed by PZNS
@@ -38,8 +39,9 @@ function PZNS_NPCSurvivor:newSurvivor(
         actionTicks = 0,                        -- Cows: This is a value used to determine the frequency of an action being called, most notably with multi-stage actions (such as reloading).
         attackTicks = 0,                        -- Cows: I thought it was stupid at first, but after observing an NPC queue up 20+ attacks in a a single frame...
         speechTicks = 0,                        -- Cows: Tracks the ticks between speech text... ticks are inconsistent, but there are currently no other short duration timers.
-        aimTarget = "",                         -- Cows: Placeholder; technically should always be a game object... but Java API has a "NPCSetAiming()" call which is confusing...
-        canAttack = true,                       -- Cows: Placeholder; Java API has a "NPCSetAttack()" call which is confusing; as it appears to force the NPC to attack.
+        aimTarget = "",                         -- Cows: Used to identify the object the NPC is to aim at... but Java API has a "NPCSetAiming()" call which is confusing...
+        canAttack = true,                       -- Cows: Added to prevent NPCs from taking attacking actions; Java API has a "NPCSetAttack()" call which is confusing; as it appears to force the NPC to attack.
+        canSaveData = true,                     -- WIP - Cows: Added this flag to determine if NPC can be saved via data management.
         textObject = nil,                       -- Cows: This should handle all the text displayed by the NPC.
         ------ IsoPlayer Spawning Related below ------
         isAlive = true,                         -- WIP - Technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
