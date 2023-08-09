@@ -59,7 +59,7 @@ function PZNS_UpdateNPCJobRoutine(npcSurvivor)
         return;                                              -- Cows: Stop Processing, the npc is no longer in the group.
     end
     if (npcSurvivor.jobName == nil) then
-         return;
+        return;
     end
     if (npcSurvivor.jobName == "") then
         return;
@@ -95,7 +95,7 @@ function PZNS_UpdateAllJobsRoutines()
     for survivorID, v1 in pairs(activeNPCs) do
         local npcSurvivor = activeNPCs[survivorID];
         -- Cows: Only update spawned and living npcSurvivors
-        if (npcSurvivor.isSpawned  == true and npcSurvivor.isAlive == true) then
+        if (npcSurvivor.isSpawned == true and npcSurvivor.isAlive == true) then
             PZNS_UpdateNPCJobRoutine(npcSurvivor);
         end
     end
