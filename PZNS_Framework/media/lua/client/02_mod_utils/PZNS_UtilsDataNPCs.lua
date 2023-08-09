@@ -150,10 +150,11 @@ function PZNS_UtilsDataNPCs.PZNS_SpawnNPCFromModData(npcSurvivor)
     return npcSurvivor;
 end
 
----Cows: Helper function for PZNS_ClearModData()
+---Cows: Helper function for removing specified npc moddata and save file.
 ---@param npcSurvivor any
-function PZNS_UtilsDataNPCs.PZNS_RemoveNPCSaveFile(npcSurvivor)
+function PZNS_UtilsDataNPCs.PZNS_RemoveNPCSaveData(npcSurvivor)
     if (npcSurvivor ~= nil) then
+        PZNS_ActiveNPCs[npcSurvivor.survivorID] = nil;
         local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
         if (npcIsoPlayer ~= nil) then
             npcIsoPlayer:removeSaveFile();
