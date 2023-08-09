@@ -20,7 +20,7 @@ function PZNS_NPCSurvivor:newSurvivor(
         survivorName = survivorName,
         groupID = nil,
         affection = 50,                         -- WIP - Cows: Added this value as a check for invite-able NPCs... between 0 and 100? 0 Means 100% hostility and will attack.
-        isForcedMoving = false,                 -- WIP - Cows: Unused atm; Added this flag to force NPCs to move and disengage from combat/other actions.
+        isForcedMoving = false,                 -- Cows: Added this flag to force NPCs to move and disengage from combat/other actions.
         isHoldingInPlace = false,               -- Cows: Prevent current NPC from moving if true
         isMeleeOnly = false,                    -- WIP - Cows: Will eventually be used in more complex combat AI.
         isRaider = false,                       -- WIP - Cows: Used to test raiding NPCs
