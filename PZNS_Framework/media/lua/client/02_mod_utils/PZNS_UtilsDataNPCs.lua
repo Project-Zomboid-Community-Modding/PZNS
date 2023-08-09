@@ -79,30 +79,38 @@ function PZNS_UtilsDataNPCs.PZNS_SaveNPCData(npcSurvivorID, npcSurvivor)
     if (npcSurvivor == nil) then
         return nil;
     end
-    local fileName = PZNS_UtilsDataNPCs.PZNS_GetGameSaveDir() .. tostring(npcSurvivorID);
-    -- Updated the npcSurvivor attributes/properties as needed before saving.
-    --
-    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    --
-    if (npcIsoPlayer ~= nil) then
-        npcSurvivor.isAlive = npcIsoPlayer:isAlive();
-        npcSurvivor.squareX = npcIsoPlayer:getX();
-        npcSurvivor.squareY = npcIsoPlayer:getY();
-        npcSurvivor.squareZ = npcIsoPlayer:getZ();
+    if (npcSurvivor.canSaveData == true) then
+        local fileName = PZNS_UtilsDataNPCs.PZNS_GetGameSaveDir() .. tostring(npcSurvivorID);
+        -- Update the npcSurvivor attributes/properties as needed before saving.
+        local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
         --
-        if (npcIsoPlayer:getModData().survivorID == nil) then
-            npcIsoPlayer:getModData().survivorID = npcSurvivor.survivorID;
+        if (npcIsoPlayer ~= nil) then
+            npcSurvivor.isAlive = npcIsoPlayer:isAlive();
+            npcSurvivor.squareX = npcIsoPlayer:getX();
+            npcSurvivor.squareY = npcIsoPlayer:getY();
+            npcSurvivor.squareZ = npcIsoPlayer:getZ();
+            --
+            if (npcIsoPlayer:getModData().survivorID == nil) then
+                npcIsoPlayer:getModData().survivorID = npcSurvivor.survivorID;
+            end
+
+            npcIsoPlayer:save(fileName);
         end
-        npcIsoPlayer:save(fileName);
     end
-    -- Actual Saving
+    -- Moddata Saving
     PZNS_ActiveNPCs[npcSurvivorID] = npcSurvivor;
 end
 
 --- Cows: Save ALL ActiveNPCs Data
 function PZNS_UtilsDataNPCs.PZNS_SaveAllNPCData()
     for npcSurvivorID, npcSurvivor in pairs(PZNS_ActiveNPCs) do
-        PZNS_UtilsDataNPCs.PZNS_SaveNPCData(npcSurvivorID, npcSurvivor);
+        -- Cows: Reassign nil to true; always save NPCs unless explicitly false.
+        if (npcSurvivor.canSaveData == nil) then
+            npcSurvivor.canSaveData = true;
+        end
+        if (npcSurvivor.canSaveData == true) then
+            PZNS_UtilsDataNPCs.PZNS_SaveNPCData(npcSurvivorID, npcSurvivor);
+        end
     end
 end
 
@@ -159,13 +167,14 @@ function PZNS_UtilsDataNPCs.PZNS_ClearNPCModData()
     ModData.remove("PZNS_ActiveNPCs");
 end
 
---- WIP - Cows: Check if the NPC save file exists in the game save directory.
+--- WIP - UNUSED CURRENTLY - Cows: Check if the NPC save file exists in the game save directory.
 function PZNS_UtilsDataNPCs.PZNS_CheckIfSaveFileExists(npcSurvivorID)
     local npcFileName = PZNS_UtilsDataNPCs.PZNS_GetGameSaveDir() .. tostring(npcSurvivorID);
     return false;
 end
 
---- WIP - Cows: Called to clean up PZNS_ActiveNPCs moddata if save file doesn't exist for the NPC.
+--- WIP - UNUSED CURRENTLY - Cows: Called to clean up PZNS_ActiveNPCs moddata if save file doesn't exist for the NPC.
+--- Cows: May be useless, because clean up is already done in PZNS_InitLoadNPCsData()
 function PZNS_UtilsDataNPCs.PZNS_RemoveAllNPCsWithoutSaveFile()
     for npcSurvivorID, npcSurvivor in pairs(PZNS_ActiveNPCs) do
         local isFileExists = PZNS_UtilsDataNPCs.PZNS_CheckIfSaveFileExists(npcSurvivorID);
