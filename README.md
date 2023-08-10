@@ -56,3 +56,6 @@ The NPC outfits featured in the screenshots and videos are all outfits made by S
 - Jab (jabdoesthings)  
 - Notloc (notloc) - For a workaround on getting NPCs to run with B41 API.
 - Poltergeist (poltergeist_ix)
+
+# Support me on ko-fi!
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U7U0O1ZTH)
