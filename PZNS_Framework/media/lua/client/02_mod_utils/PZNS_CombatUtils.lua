@@ -39,7 +39,7 @@ function PZNS_CombatUtils.PZNS_CalculateHitChance(selectedWeapon, aimingLevel, m
     return actualHitChance;
 end
 
---- Cows: Function is based on "SuperSurvivorPVPHandle()" in "SuperSurvivorUpdate.lua"
+--- WIP - Cows: Function is based on "SuperSurvivorPVPHandle()" in "SuperSurvivorUpdate.lua"
 ---@param wielder IsoPlayer
 ---@param victim IsoPlayer
 ---@param weapon HandWeapon
@@ -48,7 +48,11 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
     if (instanceof(wielder, "IsoPlayer") ~= true or instanceof(victim, "IsoPlayer") ~= true) then
         return;
     end
-
+    -- Cows: Check if the wielder/attacker is the local player character.
+    local isWielderPlayerCharacter = false;
+    if (wielder:isLocalPlayer()) then
+        isWielderPlayerCharacter = true;
+    end
     -- Cows: Check if the victim is not a local player and calculate how much damage the npc will take from the weapon.
     if not (victim:isLocalPlayer()) then
         --
@@ -56,17 +60,18 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
             victim:StopAllActionQueue();
             victim:faceThisObject(wielder);
         end
-        -- 
-        if weapon:getType() == "BareHands" then
-            return;
-        end
-
+        local bonusDamage = 0;
         local bodypartIndex = ZombRand(BodyPartType.Hand_L:index(), BodyPartType.MAX:index());
         local injuredBodyParts = 0;
         local isDefensePenetrated = true;
         local isBluntWeapon = false; -- Cows: Blunt Damage Type
-        local isEdgedWeapon = false;
+        -- https://projectzomboid.com/modding/zombie/characters/IsoGameCharacter.html#getBodyPartClothingDefense(java.lang.Integer,boolean,boolean)
+        local isEdgedWeapon = false; -- Cows: Apparently, bladed weapons were treated as "bites" in SS/SSC...
         local isBullet = false;
+        -- Cows: Players will get bonus damage based on strength... I haven't figure out how to get the weapon-related skill from the weapon...
+        if (isWielderPlayerCharacter == true) then
+            bonusDamage = wielder:getPerkLevel(Perks.FromString("Strength"));
+        end
         --
         if (weapon:getCategories():contains("Blunt") or weapon:getCategories():contains("SmallBlunt")) then
             isBluntWeapon = true;
@@ -78,10 +83,14 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
             injuredBodyParts = 2;
         end
         --
-        local bodydamage = victim:getBodyDamage()
+        local bodydamage = victim:getBodyDamage();
         local bodypart = bodydamage:getBodyPart(BodyPartType.FromIndex(bodypartIndex));
-        -- WIP - Cows: So This is why some NPCS can't be killed in SuperbSurvivors... defense penetration is between 0 and 100 vs. whatever defense
-        if (ZombRand(0, 100) < victim:getBodyPartClothingDefense(bodypartIndex, isEdgedWeapon, isBullet)) then
+        -- Cows: Perhaps we need to account for "martial artists" and stomping attacks ...
+        if weapon:getType() == "BareHands" then
+            return;
+        end
+        -- Cows: Updated "bite" check to false.
+        if (ZombRand(0, 100) < victim:getBodyPartClothingDefense(bodypartIndex, false, isBullet)) then
             isDefensePenetrated = false;
         end
         --
@@ -105,10 +114,12 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
                 bodypart:setScratched(true, true);
             end
         elseif (isBullet) then
+            -- Cows: Update bonus damage to be based on aim level...
+            bonusDamage = wielder:getPerkLevel(Perks.FromString("Aiming"));
             bodypart:setHaveBullet(true, 0);
         end
-        --
-        local bodypartDamage = weapon:getMaxDamage();
+        -- Cows: Add bonusDamage to weapon damage...
+        local bodypartDamage = weapon:getMaxDamage() + bonusDamage;
         --
         if (bodypartIndex == BodyPartType.Head:index()) then
             bodypartDamage = bodypartDamage * 4.0;
@@ -121,17 +132,29 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
         if (bodypartIndex == BodyPartType.Torso_Upper:index()) then
             bodypartDamage = bodypartDamage * 2.0;
         end
+        getSpecificPlayer(0):Say(
+            "InjuredParts: " .. tostring(injuredBodyParts) ..
+            "Damaged bodyPartIndex: " .. tostring(bodypartIndex) ..
+            " bodyDamage: " .. tostring(bodypartDamage)
+        );
         bodydamage:AddDamage(bodypartIndex, bodypartDamage);
         local stats = victim:getStats();
         --
         if injuredBodyParts == 0 then
-            stats:setPain(stats:getPain() +
-                bodydamage:getInitialThumpPain() * BodyPartType.getPainModifyer(bodypartIndex));
+            stats:setPain(
+                stats:getPain() +
+                bodydamage:getInitialThumpPain() * BodyPartType.getPainModifyer(bodypartIndex)
+            );
         elseif injuredBodyParts == 1 then
-            stats:setPain(stats:getPain() +
-                bodydamage:getInitialScratchPain() * BodyPartType.getPainModifyer(bodypartIndex));
+            stats:setPain(
+                stats:getPain() +
+                bodydamage:getInitialScratchPain() * BodyPartType.getPainModifyer(bodypartIndex)
+            );
         elseif injuredBodyParts == 2 then
-            stats:setPain(stats:getPain() + bodydamage:getInitialBitePain() * BodyPartType.getPainModifyer(bodypartIndex));
+            stats:setPain(
+                stats:getPain() +
+                bodydamage:getInitialBitePain() * BodyPartType.getPainModifyer(bodypartIndex)
+            );
         end
         --
         if stats:getPain() > 100 then
