@@ -233,8 +233,11 @@ end
 --- Cows: Based on GetAdjSquare() from 'SuperSurvivorContextUtilities.lua', but won't need the alias.
 ---@param square any
 ---@param dir string
----@return IsoGridSquare the adjacent square
+---@return IsoGridSquare |nil the adjacent square
 function PZNS_WorldUtils.PZNS_GetAdjSquare(square, dir)
+    if (square == nil or dir == nil) then
+        return;
+    end
     if (dir == 'N') then
         return getCell():getGridSquare(square:getX(), square:getY() - 1, square:getZ());
     elseif (dir == 'E') then
