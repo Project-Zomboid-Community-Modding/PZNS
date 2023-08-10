@@ -32,7 +32,7 @@ PZNS_Jobs = {
 --- Cows: Helper function for PZNS_UpdateAllJobsRoutines(), can also be used to update an npc's routine when their job is changed.
 ---@param npcSurvivor any
 function PZNS_UpdateNPCJobRoutine(npcSurvivor)
-    if (npcSurvivor == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
     -- Cows: Check if the NPC's job is currently "Remove" or "Remove Grom Group".

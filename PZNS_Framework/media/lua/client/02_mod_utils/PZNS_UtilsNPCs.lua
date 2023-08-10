@@ -539,6 +539,9 @@ function PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor)
     if (npcSurvivor == nil) then
         return false;
     end
+    if (npcSurvivor.isSpawned ~= true) then
+        return false;
+    end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
         return false;

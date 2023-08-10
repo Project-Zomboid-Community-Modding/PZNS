@@ -276,7 +276,7 @@ function PZNS_GeneralAI.PZNS_IsInFrontOfDoor(npcIsoPlayer)
     local direction = tostring(npcIsoPlayer:getDir());
     local nextSquare = PZNS_WorldUtils.PZNS_GetAdjSquare(currentSquare, direction);
     --
-    if (currentSquare:getDoorTo(nextSquare) ~= nil) then
+    if (nextSquare and currentSquare:getDoorTo(nextSquare) ~= nil) then
         local isoDoor = currentSquare:getDoorTo(nextSquare):getSquare():getIsoDoor();
         return isoDoor;
     end
