@@ -47,16 +47,14 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
             playerSurvivor:Say(npcSurvivor.forename .. ", " .. PZNS_NPCOrdersText[orderKey]);
             --
             if (orderKey == "FollowMe" or orderKey == "AimAtMe") then
-                if (npcSurvivor.speechTable ~= nil) then
-                    if (npcSurvivor.speechTable.PZNS_OrderSpeechFollow) then
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechFollow, "Friendly"
-                        );
-                    else
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechFollow, "Friendly"
-                        );
-                    end
+                if (npcSurvivor.speechTable == nil) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechFollow, "Friendly"
+                    );
+                elseif (npcSurvivor.speechTable.PZNS_OrderSpeechFollow) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechFollow, "Friendly"
+                    );
                 else
                     PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                         npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechFollow, "Friendly"
@@ -64,16 +62,14 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
                 end
                 PZNS_NPCOrderActions[orderKey](npcSurvivor, followTargetID);
             elseif (orderKey == "HoldPosition") then
-                if (npcSurvivor.speechTable ~= nil) then
-                    if (npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition) then
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition, "Friendly"
-                        );
-                    else
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechHoldPosition, "Friendly"
-                        );
-                    end
+                if (npcSurvivor.speechTable == nil) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechHoldPosition, "Friendly"
+                    );
+                elseif (npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition, "Friendly"
+                    );
                 else
                     PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                         npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechHoldPosition, "Friendly"
@@ -81,16 +77,14 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
                 end
                 PZNS_NPCOrderActions[orderKey](npcSurvivor, square);
             else
-                if (npcSurvivor.speechTable ~= nil) then
-                    if (npcSurvivor.speechTable.PZNS_OrderConfirmed) then
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
-                        );
-                    else
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
-                        );
-                    end
+                if (npcSurvivor.speechTable == nil) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
+                    );
+                elseif (npcSurvivor.speechTable.PZNS_OrderConfirmed) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
+                    );
                 else
                     PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                         npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
