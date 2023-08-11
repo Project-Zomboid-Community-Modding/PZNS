@@ -18,5 +18,4 @@ function PZNS_AimAtPlayer(npcSurvivor, targetID)
     end
     --
     npcSurvivor.aimTarget = targetIsoPlayer;
-    npcSurvivor.isHoldingInPlace = true; -- WIP - Cows: Currently not possible for NPCs to aim while moving.
 end
