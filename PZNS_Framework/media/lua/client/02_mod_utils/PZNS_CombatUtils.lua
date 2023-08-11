@@ -1,6 +1,8 @@
-local PZNS_CombatUtils = {};
+local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
+local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
+local PZNS_PresetsSpeeches = require("03_mod_core/PZNS_PresetsSpeeches");
 
---- Cows: Toggle (active) to attack NPCs or (inactive) prevent friendly fire.
+local PZNS_CombatUtils = {};
 
 ---comment
 ---@param targetObject any
@@ -14,6 +16,7 @@ function PZNS_CombatUtils.PZNS_IsTargetInvalidForDamage(targetObject)
     return false;
 end
 
+--- Cows: Toggle (active) to attack NPCs or (inactive) prevent friendly fire.
 --- Cows: Call the IsoPlayerCoopPVP API to toggle local isoplayer pvp targeting.
 function PZNS_CombatUtils.PZNS_TogglePvP()
     if (IsPVPActive == true) then
@@ -48,13 +51,27 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
     if (instanceof(wielder, "IsoPlayer") ~= true or instanceof(victim, "IsoPlayer") ~= true) then
         return;
     end
-    -- Cows: Check if the wielder/attacker is the local player character.
-    local isWielderPlayerSurvivor = false;
-    if (wielder:isLocalPlayer()) then
-        isWielderPlayerSurvivor = true;
+    -- Cows: Wielder cannot be NPC, this function only applies to players vs. NPCs.
+    if (wielder:getIsNPC() == true) then
+        return;
     end
-    -- Cows: Check if the victim is not a local player and calculate how much damage the npc will take from the weapon.
-    if not (victim:isLocalPlayer()) then
+    -- Cows: Check if the victim is an NPC and calculate how much damage the npc will take from the weapon.
+    if (victim:getIsNPC()) then
+        if (victim:getModData().survivorID ~= nil) then
+            local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+            local npcSurvivor = activeNPCs[victim:getModData().survivorID];
+            local playerGroupID = "Player" .. tostring(0) .. "Group";
+            if (npcSurvivor.groupID ~= playerGroupID) then
+                npcSurvivor.affection = npcSurvivor.affection - 10; -- Cows: Reduce affection whenever hit.
+                if (npcSurvivor ~= nil) then
+                    npcSurvivor.attackTicks = 0;                    -- Cows: Force reset the NPC attack ticks when they're hit, this prevents them from piling on damage.
+                end
+            else
+                PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                    npcSurvivor, PZNS_PresetsSpeeches.PZNS_FriendlyFire, "Friendly"
+                );
+            end
+        end
         --
         if (weapon ~= nil) and (not weapon:isAimedFirearm()) and (weapon:getPushBackMod() > 0.3) then
             victim:StopAllActionQueue();
@@ -69,9 +86,7 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
         local isEdgedWeapon = false; -- Cows: Apparently, bladed weapons were treated as "bites" in SS/SSC...
         local isBullet = false;
         -- Cows: Players will get bonus damage based on strength... I haven't figure out how to get the weapon-related skill from the weapon...
-        if (isWielderPlayerSurvivor == true) then
-            bonusDamage = wielder:getPerkLevel(Perks.FromString("Strength"));
-        end
+        bonusDamage = wielder:getPerkLevel(Perks.FromString("Strength"));
         --
         if (weapon:getCategories():contains("Blunt") or weapon:getCategories():contains("SmallBlunt")) then
             isBluntWeapon = true;
