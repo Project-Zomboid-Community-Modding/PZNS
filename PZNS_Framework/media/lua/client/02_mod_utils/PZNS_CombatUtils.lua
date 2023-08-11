@@ -47,12 +47,8 @@ end
 ---@param victim IsoPlayer
 ---@param weapon HandWeapon
 function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
-    -- Cows: Check and make sure both the wielder and victim are IsoPlayer, we don't care about zombies in this function.
-    if (instanceof(wielder, "IsoPlayer") ~= true or instanceof(victim, "IsoPlayer") ~= true) then
-        return;
-    end
-    -- Cows: Wielder cannot be NPC, this function only applies to players vs. NPCs.
-    if (wielder:getIsNPC() == true) then
+    -- Cows: Check the Wielder cannot be NPC, or the wielder or victim are IsoPlayer. We don't care about zombies in this function.
+    if (wielder:getIsNPC() == true or instanceof(wielder, "IsoPlayer") ~= true or instanceof(victim, "IsoPlayer") ~= true) then
         return;
     end
     -- Cows: Check if the victim is an NPC and calculate how much damage the npc will take from the weapon.
@@ -61,16 +57,34 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
             local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
             local npcSurvivor = activeNPCs[victim:getModData().survivorID];
             local playerGroupID = "Player" .. tostring(0) .. "Group";
+            npcSurvivor.attackTicks = 0; -- Cows: Force reset the NPC attack ticks when they're hit, this prevents them from piling on damage.
+            --
             if (npcSurvivor.groupID ~= playerGroupID) then
-                npcSurvivor.affection = npcSurvivor.affection - 10; -- Cows: Reduce affection whenever hit.
-                if (npcSurvivor ~= nil) then
-                    npcSurvivor.attackTicks = 0;                    -- Cows: Force reset the NPC attack ticks when they're hit, this prevents them from piling on damage.
+                if (npcSurvivor.affection <= 0) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_HostileHit, "Hostile"
+                    );
+                else
+                    npcSurvivor.affection = npcSurvivor.affection - 25; -- Cows: Reduce affection whenever hit.
+                    if (npcSurvivor.affection <= 0) then
+                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_NeutralRevenge, "Hostile"
+                        );
+                    else
+                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_NeutralHit, "Negative"
+                        );
+                    end
                 end
             else
+                npcSurvivor.affection = npcSurvivor.affection - 10; -- Cows: Reduce affection whenever hit.
                 PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                     npcSurvivor, PZNS_PresetsSpeeches.PZNS_FriendlyFire, "Friendly"
                 );
             end
+            getSpecificPlayer(0):Say(
+                "npc Affection after hit: " .. tostring(npcSurvivor.affection)
+            );
         end
         --
         if (weapon ~= nil) and (not weapon:isAimedFirearm()) and (weapon:getPushBackMod() > 0.3) then
@@ -78,7 +92,7 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
             victim:faceThisObject(wielder);
         end
         local bonusDamage = 0;
-        local bodypartIndex = ZombRand(BodyPartType.Hand_L:index(), BodyPartType.MAX:index());
+        local bodypartIndex = ZombRand(BodyPartType.Hand_L:index(), BodyPartType.MAX:index());  -- Cows: Original code, every bodypart had an equal chance to be hit...
         local injuredBodyParts = 0;
         local isDefensePenetrated = true;
         local isBluntWeapon = false; -- Cows: Blunt Damage Type
@@ -135,21 +149,29 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
         end
         -- Cows: Add bonusDamage to weapon damage...
         local bodypartDamage = weapon:getMaxDamage() + bonusDamage;
-        --
-        if (bodypartIndex == BodyPartType.Head:index()) then
+        -- Cows: Head and neck takes 4x damage
+        if (bodypartIndex == BodyPartType.Head:index()
+                or bodypartIndex == BodyPartType.Neck:index()
+            )
+        then
             bodypartDamage = bodypartDamage * 4.0;
         end
-        --
-        if (bodypartIndex == BodyPartType.Neck:index()) then
-            bodypartDamage = bodypartDamage * 4.0;
+        -- Cows: Groin takes 3x damage
+        if (bodypartIndex == BodyPartType.Groin:index()) then
+            bodypartDamage = bodypartDamage * 3.0;
         end
-        --
-        if (bodypartIndex == BodyPartType.Torso_Upper:index()) then
+        -- Cows: Torso and upper leg takes 2x damage
+        if (bodypartIndex == BodyPartType.Torso_Upper:index()
+                or bodypartIndex == BodyPartType.UpperLeg_L:index()
+                or bodypartIndex == BodyPartType.UpperLeg_R:index()
+            )
+        then
             bodypartDamage = bodypartDamage * 2.0;
         end
+        --
         getSpecificPlayer(0):Say(
             "InjuredParts: " .. tostring(injuredBodyParts) ..
-            "Damaged bodyPartIndex: " .. tostring(bodypartIndex) ..
+            " Damaged bodyPartIndex: " .. tostring(bodypartIndex) ..
             " bodyDamage: " .. tostring(bodypartDamage)
         );
         bodydamage:AddDamage(bodypartIndex, bodypartDamage);

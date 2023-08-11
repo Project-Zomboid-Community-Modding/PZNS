@@ -62,7 +62,7 @@ function PZNS_WorldUtils.PZNS_IsSquareInPlayerSpawnRange(playerSurvivor, squareX
     return false;
 end
 
----comment
+--- Cows: Helper function to spawn and despawn/unload NPCs from the game world.
 ---@param npcSurvivor any
 local function spawnNPCIsoPlayer(npcSurvivor)
     --
@@ -104,15 +104,14 @@ end
 --- Cows: There may be some sync issues because the "spawning" depends on the file in the save folder.
 function PZNS_WorldUtils.PZNS_SpawnNPCIfSquareIsLoaded()
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
-    -- Cows: check if activeNPCs is not nil and loaded.
-    if (activeNPCs ~= nil) then
-        --
-        for survivorID, v1 in pairs(activeNPCs) do
-            local npcSurvivor = activeNPCs[survivorID];
-            --
-            spawnNPCIsoPlayer(npcSurvivor);
-        end -- Cows: End for k1, v1 in pairs(activeNPCs)
+    if (activeNPCs == nil) then
+        return;
     end
+    --
+    for survivorID, v1 in pairs(activeNPCs) do
+        local npcSurvivor = activeNPCs[survivorID];
+        spawnNPCIsoPlayer(npcSurvivor);
+    end -- Cows: End for k1, v1 in pairs
 end
 
 --- Cows: Checks if zombie is active/isAlive.

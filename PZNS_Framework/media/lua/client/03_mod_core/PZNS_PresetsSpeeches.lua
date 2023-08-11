@@ -33,6 +33,22 @@ PZNS_PresetsSpeeches.PZNS_JobSpeechIdle = {
 
 PZNS_PresetsSpeeches.PZNS_FriendlyFire = {
     getText("IGUI_PZNS_Speech_Preset_FriendlyFire_01"),
+    getText("IGUI_PZNS_Speech_Preset_FriendlyFire_02"),
+};
+
+PZNS_PresetsSpeeches.PZNS_NeutralHit = {
+    getText("IGUI_PZNS_Speech_Preset_NeutralHit_01"),
+    getText("IGUI_PZNS_Speech_Preset_NeutralHit_02"),
+};
+
+PZNS_PresetsSpeeches.PZNS_NeutralRevenge = {
+    getText("IGUI_PZNS_Speech_Preset_NeutralRevenge_01"),
+};
+
+PZNS_PresetsSpeeches.PZNS_HostileHit = {
+    getText("IGUI_PZNS_Speech_Preset_HostileHit_01"),
+    getText("IGUI_PZNS_Speech_Preset_HostileHit_02"),
+    getText("IGUI_PZNS_Speech_Preset_HostileHit_03"),
 };
 
 return PZNS_PresetsSpeeches;
