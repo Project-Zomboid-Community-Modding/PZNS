@@ -20,7 +20,12 @@ local function calculateNPCDamage(npcIsoPlayer, victim)
     local npcWeapon = npcIsoPlayer:getPrimaryHandItem();
     local actualHitChance = PZNS_CombatUtils.PZNS_CalculateHitChance(npcWeapon, aimingLevel, 0);
     local weaponDamage = npcWeapon:getMaxDamage(); -- Cows: Need to look at redoing weapon damage... otherwise NPC melee weapons will destroy everything at max damage.
-    --
+    -- Cows: If the victim is the local player, activate PVP.
+    if (victim == getSpecificPlayer(0)) then
+        if (IsPVPActive == false) then
+            PZNS_CombatUtils.PZNS_TogglePvP();
+        end
+    end
     if (npcWeapon:isRanged()) then
         if (actualHitChance > ZombRand(100)) then
             victim:Hit(npcWeapon, npcIsoPlayer, weaponDamage, false, 1.0);
