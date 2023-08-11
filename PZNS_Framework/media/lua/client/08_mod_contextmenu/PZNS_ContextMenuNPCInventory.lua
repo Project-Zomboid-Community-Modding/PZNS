@@ -1,4 +1,5 @@
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
+local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
@@ -53,30 +54,28 @@ function PZNS_ContextMenuNPCInventory(mpPlayerID, context, worldobjects)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local groupMembers = PZNS_NPCGroupsManager.getGroupByID(playerGroupID);
     --
-    if (groupMembers ~= nil) then
-        for survivorID, v in pairs(groupMembers) do
-            local npcSurvivor = activeNPCs[survivorID];
-            --
-            if (npcSurvivor ~= nil) then
-                local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-                --
-                if (npcIsoPlayer) then
-                    local npcDistanceFromPlayer = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
-                        playerSurvivor, npcIsoPlayer
-                    );
-                    if (npcIsoPlayer:isAlive() == true and npcDistanceFromPlayer <= 2) then
-                        -- Cows: conditionally set the callback function for the inventorySubMenu_1 option.
-                        local callbackFunction = function()
-                            openNPCInventory(mpPlayerID, npcSurvivor);
-                        end
-                        inventorySubMenu_1:addOption(
-                            npcSurvivor.survivorName,
-                            nil,
-                            callbackFunction
-                        );
-                    end
-                end
-            end
-        end -- Cows: End groupMembers For-loop.
+    if (groupMembers == nil) then
+        return;
     end
+    for survivorID, v in pairs(groupMembers) do
+        local npcSurvivor = activeNPCs[survivorID];
+        --
+        if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
+            local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+            local npcDistanceFromPlayer = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
+                playerSurvivor, npcIsoPlayer
+            );
+            if (npcDistanceFromPlayer <= 2) then
+                -- Cows: conditionally set the callback function for the inventorySubMenu_1 option.
+                local callbackFunction = function()
+                    openNPCInventory(mpPlayerID, npcSurvivor);
+                end
+                inventorySubMenu_1:addOption(
+                    npcSurvivor.survivorName,
+                    nil,
+                    callbackFunction
+                );
+            end
+        end
+    end -- Cows: End groupMembers For-loop.
 end

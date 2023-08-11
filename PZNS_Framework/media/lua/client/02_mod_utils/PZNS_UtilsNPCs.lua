@@ -474,33 +474,28 @@ end
 --- Cows: needType based on values in Java API
 ---@param npcSurvivor any
 function PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevel(npcSurvivor)
-    if (npcSurvivor == nil) then
-        return;
-    end
-    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    if (npcIsoPlayer == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid == false) then
         return;
     end
     --
-    if (npcIsoPlayer:isAlive() == true) then
-        npcIsoPlayer:getStats():setAnger(0.0);
-        npcIsoPlayer:getStats():setBoredom(0.0);
-        npcIsoPlayer:getStats():setDrunkenness(0.0);
-        npcIsoPlayer:getStats():setEndurance(100.0);
-        npcIsoPlayer:getStats():setFatigue(0.0);
-        npcIsoPlayer:getStats():setFear(0.0);
-        npcIsoPlayer:getStats():setHunger(0.0);
-        npcIsoPlayer:getStats():setIdleboredom(0.0);
-        npcIsoPlayer:getStats():setMorale(0.0);
-        npcIsoPlayer:getStats():setPain(0.0);
-        npcIsoPlayer:getStats():setPanic(0.0);
-        npcIsoPlayer:getStats():setSanity(0.0);
-        npcIsoPlayer:getStats():setSickness(0.0);
-        npcIsoPlayer:getStats():setStress(0.0);
-        npcIsoPlayer:getStats():setStressFromCigarettes(0.0);
-        npcIsoPlayer:getStats():setThirst(0.0);
-        npcIsoPlayer:getBodyDamage():AddGeneralHealth(25);
-    end
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    npcIsoPlayer:getStats():setAnger(0.0);
+    npcIsoPlayer:getStats():setBoredom(0.0);
+    npcIsoPlayer:getStats():setDrunkenness(0.0);
+    npcIsoPlayer:getStats():setEndurance(100.0);
+    npcIsoPlayer:getStats():setFatigue(0.0);
+    npcIsoPlayer:getStats():setFear(0.0);
+    npcIsoPlayer:getStats():setHunger(0.0);
+    npcIsoPlayer:getStats():setIdleboredom(0.0);
+    npcIsoPlayer:getStats():setMorale(0.0);
+    npcIsoPlayer:getStats():setPain(0.0);
+    npcIsoPlayer:getStats():setPanic(0.0);
+    npcIsoPlayer:getStats():setSanity(0.0);
+    npcIsoPlayer:getStats():setSickness(0.0);
+    npcIsoPlayer:getStats():setStress(0.0);
+    npcIsoPlayer:getStats():setStressFromCigarettes(0.0);
+    npcIsoPlayer:getStats():setThirst(0.0);
+    npcIsoPlayer:getBodyDamage():AddGeneralHealth(25);
 end
 
 --- Cows: Clears ALL npcs' needs on call.
@@ -544,6 +539,9 @@ function PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor)
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
+        return false;
+    end
+    if (npcIsoPlayer:isAlive() ~= true) then
         return false;
     end
     return true;

@@ -1,4 +1,5 @@
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
+local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 
 ---Cows: Perhaps reset the speech text based on the npc's affection value? Higher = friendlier
 ---@param npcSurvivor any
@@ -77,24 +78,21 @@ end
 --- Cows: PZNS_RenderNPCsText() updates the text above ALL NPC characters.
 function PZNS_RenderNPCsText()
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
-    -- Cows: check if activeNPCs is not nil and loaded.
-    if (activeNPCs ~= nil) then
-        --
-        for survivorID, v in pairs(activeNPCs) do
-            local npcSurvivor = activeNPCs[survivorID];
-            local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-            -- Cows: Only spawned npcSurvivors can speak and check that both core properties are not nil
-            if (npcSurvivor.isSpawned == true and npcSurvivor.textObject and npcIsoPlayer ~= nil) then
-                -- Cows: check if current npcSurvivor is alive
-                if (npcIsoPlayer:isAlive() == true) then
-                    -- Cows: Clear any speech text if over 300 ticks.
-                    if (npcSurvivor.speechTicks > 300) then
-                        resetSpeechText(npcSurvivor);
-                    end
-                    npcSurvivor.speechTicks = npcSurvivor.speechTicks + 1;
-                    drawSpeechText(npcSurvivor);
-                end
-            end
-        end -- Cows: End for-loop Active NPCs
+    if (activeNPCs == nil) then
+        return;
     end
+    --
+    for survivorID, v in pairs(activeNPCs) do
+        local npcSurvivor = activeNPCs[survivorID];
+        if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
+            if (npcSurvivor.textObject) then
+                -- Cows: Clear any speech text if over 300 ticks.
+                if (npcSurvivor.speechTicks > 300) then
+                    resetSpeechText(npcSurvivor);
+                end
+                npcSurvivor.speechTicks = npcSurvivor.speechTicks + 1;
+                drawSpeechText(npcSurvivor);
+            end
+        end
+    end -- Cows: End for-loop Active NPCs
 end

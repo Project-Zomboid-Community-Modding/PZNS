@@ -103,50 +103,47 @@ function PZNS_CreateSquareGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupI
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local groupMembers = PZNS_NPCGroupsManager.getGroupByID(groupID);
     --
-    if (groupMembers) then
-        local playerSurvivor = getSpecificPlayer(mpPlayerID);
-        for survivorID, v in pairs(groupMembers) do
-            local npcSurvivor = activeNPCs[survivorID];
-            local callbackFunction = function()
-                playerSurvivor:Say(npcSurvivor.forename .. ", " ..
-                    PZNS_SquareContextActionsText[orderKey]
-                );
-                if (npcSurvivor.speechTable ~= nil) then
-                    if (npcSurvivor.speechTable.PZNS_OrderConfirmed) then
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
-                        );
-                    end
-                else
+    if (groupMembers == nil) then
+        return;
+    end
+    local playerSurvivor = getSpecificPlayer(mpPlayerID);
+    for survivorID, v in pairs(groupMembers) do
+        local npcSurvivor = activeNPCs[survivorID];
+        local callbackFunction = function()
+            playerSurvivor:Say(npcSurvivor.forename .. ", " ..
+                PZNS_SquareContextActionsText[orderKey]
+            );
+            if (npcSurvivor.speechTable ~= nil) then
+                if (npcSurvivor.speechTable.PZNS_OrderConfirmed) then
                     PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
+                        npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
                     );
                 end
-                --
-                if (orderKey == "GrabCorpse" and deadBody ~= nil) then
-                    PZNS_SquareContextActions[orderKey](npcSurvivor, square, deadBody);
-                else
-                    PZNS_SquareContextActions[orderKey](npcSurvivor, square);
-                end
-                parentContextMenu:setVisible(false);
+            else
+                PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                    npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
+                );
             end
             --
-            if (npcSurvivor ~= nil) then
-                local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-                if (npcIsoPlayer) then
-                    local isNPCSquareLoaded = PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor);
-                    -- Cows: Check and make sure the NPC is both alive and loaded in the current game world.
-                    if (npcIsoPlayer:isAlive() == true and isNPCSquareLoaded == true) then
-                        parentContextMenu:addOption(
-                            npcSurvivor.survivorName,
-                            nil,
-                            callbackFunction
-                        );
-                    end
-                end
+            if (orderKey == "GrabCorpse" and deadBody ~= nil) then
+                PZNS_SquareContextActions[orderKey](npcSurvivor, square, deadBody);
+            else
+                PZNS_SquareContextActions[orderKey](npcSurvivor, square);
+            end
+            parentContextMenu:setVisible(false);
+        end
+        --
+        if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
+            local isNPCSquareLoaded = PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor);
+            if (isNPCSquareLoaded == true) then
+                parentContextMenu:addOption(
+                    npcSurvivor.survivorName,
+                    nil,
+                    callbackFunction
+                );
             end
         end
-    end
+    end -- Cows: End groupMembers for-loop
 
     return parentContextMenu;
 end
