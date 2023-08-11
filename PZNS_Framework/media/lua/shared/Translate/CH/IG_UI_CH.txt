@@ -1,6 +1,16 @@
 IGUI_CH = {
 
 IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "你他媽的朝什麼開槍？!",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "他妈的！注意你射击的对象！",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "你為什麼攻擊我？?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "他媽的！別再打我了!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "我已經受夠你了，你現在就去死吧!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "那個傷疤會成為一個好故事...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "哎喲!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "我已經開始後悔了!",
 
 IGUI_PZNS_Speech_Preset_Confirm_01 = "隨你說做吧",
 IGUI_PZNS_Speech_Preset_Confirm_02 = "知道了",

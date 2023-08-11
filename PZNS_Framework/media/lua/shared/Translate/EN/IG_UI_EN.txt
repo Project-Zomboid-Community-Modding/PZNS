@@ -1,6 +1,16 @@
 IGUI_EN = {
 
 IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "WHAT THE FUCK WERE YOU SHOOTING AT?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Goddamn it! Watch your fire!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Why are you attacking me?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Goddamn it! Stop hitting me!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "I've had enough of your bullshit! You die now!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "That scar will make a good story...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "OW!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "I'm starting to regret this already!",
 
 IGUI_PZNS_Speech_Preset_Confirm_01 = "Whatever you say.",
 IGUI_PZNS_Speech_Preset_Confirm_02 = "I'm on it",
