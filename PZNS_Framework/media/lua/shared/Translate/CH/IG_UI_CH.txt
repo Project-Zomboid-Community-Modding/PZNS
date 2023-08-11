@@ -1,5 +1,7 @@
 IGUI_CH = {
 
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "你他媽的朝什麼開槍？!",
+
 IGUI_PZNS_Speech_Preset_Confirm_01 = "隨你說做吧",
 IGUI_PZNS_Speech_Preset_Confirm_02 = "知道了",
 IGUI_PZNS_Speech_Preset_Confirm_03 = "好吧",
