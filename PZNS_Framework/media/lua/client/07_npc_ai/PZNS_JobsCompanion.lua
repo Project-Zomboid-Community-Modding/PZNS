@@ -72,9 +72,18 @@ end
 local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
     npcSurvivor.idleTicks = 0;
     npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    -- Cows: Auto Close doors
+    if (npcIsoPlayer:getLastSquare() ~= nil) then
+        local cs = npcIsoPlayer:getCurrentSquare();
+        local ls = npcIsoPlayer:getLastSquare();
+        local tempdoor = ls:getDoorTo(cs);
+        if (tempdoor ~= nil and tempdoor:IsOpen()) then
+            tempdoor:ToggleDoor(npcIsoPlayer);
+        end
+    end
     -- Cows: Update the movement calculation every 30 ticks or so, otherwise NPCs become stuck due to animations.
     if (npcSurvivor.actionTicks >= 30) then
-        local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
         local npcSquareX = npcIsoPlayer:getX();
         local npcSquareY = npcIsoPlayer:getY();
         npcIsoPlayer:NPCSetAttack(false);
@@ -92,15 +101,6 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
         local offset = ZombRand(1, CompanionFollowRange);
         targetX = offsetTargetSquare(npcSquareX, targetX, offset);
         targetY = offsetTargetSquare(npcSquareY, targetY, offset);
-        -- Cows: Auto Close doors
-        if (npcIsoPlayer:getLastSquare() ~= nil) then
-            local cs = npcIsoPlayer:getCurrentSquare();
-            local ls = npcIsoPlayer:getLastSquare();
-            local tempdoor = ls:getDoorTo(cs);
-            if (tempdoor ~= nil and tempdoor:IsOpen()) then
-                tempdoor:ToggleDoor(npcIsoPlayer);
-            end
-        end
         PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start running.
         -- Cows: Check the distance from target and start running if too far from target.
         if (distanceFromTarget > CompanionRunRange) then
