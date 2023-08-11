@@ -353,7 +353,7 @@ function PZNS_UtilsNPCs.PZNS_GetNPCActionsQueuedCount(npcSurvivor)
     return actionsCount;
 end
 
---- WIP - Cows: Need to clean up the ISTimedActionQueue queues eventually...
+--- Cows: Adds an action to ISTimedActionQueue; this is a wrapper function that allows the npcSurvivor to be updated without changing ISTimedActionQueue
 ---@param npcSurvivor any
 ---@param npcQueueAction any
 function PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, npcQueueAction)
@@ -547,62 +547,6 @@ function PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor)
         return false;
     end
     return true;
-end
-
---- WIP - Cows: Added this function to check if an NPC is actively hostile to the player
----@param npcSurvivor any
----@return boolean
-function PZNS_UtilsNPCs.PZNS_IsNPCHostileToPlayer(npcSurvivor)
-    --
-    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
-        return false;
-    end
-    --
-    local npcGroupID = npcSurvivor.groupID;
-    local playerGroupID = "Player" .. tostring(0) .. "Group";
-    -- Cows: Check if npc is in the same group as the player
-    if (npcGroupID == playerGroupID) then
-        return false;
-    end
-    -- Cows: Check if NPC affection is above 0
-    if (npcSurvivor.affection > 0) then
-        return false;
-    end
-
-    return false;
-end
-
---- WIP - Cows: Added this function to check if an NPC is actively hostile to another NPC
----@param npcSurvivor any
----@param npcSurvivor2 any
----@return boolean
-function PZNS_UtilsNPCs.PZNS_IsNPCHostileToOtherNPC(npcSurvivor, npcSurvivor2)
-    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
-        return false;
-    end
-    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor2) == false) then
-        return false;
-    end
-    --
-    local npcGroupID = npcSurvivor.groupID;
-    local npcGroupID2 = npcSurvivor2.groupID;
-    local playerGroupID = "Player" .. tostring(0) .. "Group";
-    -- Cows: Check if the 2 NPCs are in the same group
-    if (npcGroupID == npcGroupID2) then
-        return false;
-    end
-    -- Cows: Check if either NPC is hostile to the player and if either said NPC is in the player group.
-    if (PZNS_UtilsNPCs.PZNS_IsNPCHostileToPlayer(npcSurvivor) == false and npcGroupID == playerGroupID
-            or PZNS_UtilsNPCs.PZNS_IsNPCHostileToPlayer(npcSurvivor2) == false and npcGroupID2 == playerGroupID
-        ) then
-        return true;
-    end
-    -- Cows: Check if either NPC is a raider.
-    if (npcSurvivor.isRaider or npcGroupID2.isRaider) then
-        return true;
-    end
-
-    return false;
 end
 
 --- Cows: This is to streamline complete random rolls of stats for NPCs.
