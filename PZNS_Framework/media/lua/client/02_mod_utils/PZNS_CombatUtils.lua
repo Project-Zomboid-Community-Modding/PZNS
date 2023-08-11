@@ -49,9 +49,9 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
         return;
     end
     -- Cows: Check if the wielder/attacker is the local player character.
-    local isWielderPlayerCharacter = false;
+    local isWielderPlayerSurvivor = false;
     if (wielder:isLocalPlayer()) then
-        isWielderPlayerCharacter = true;
+        isWielderPlayerSurvivor = true;
     end
     -- Cows: Check if the victim is not a local player and calculate how much damage the npc will take from the weapon.
     if not (victim:isLocalPlayer()) then
@@ -69,7 +69,7 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
         local isEdgedWeapon = false; -- Cows: Apparently, bladed weapons were treated as "bites" in SS/SSC...
         local isBullet = false;
         -- Cows: Players will get bonus damage based on strength... I haven't figure out how to get the weapon-related skill from the weapon...
-        if (isWielderPlayerCharacter == true) then
+        if (isWielderPlayerSurvivor == true) then
             bonusDamage = wielder:getPerkLevel(Perks.FromString("Strength"));
         end
         --
