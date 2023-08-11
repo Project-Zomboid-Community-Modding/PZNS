@@ -1,4 +1,5 @@
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
+local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
@@ -33,23 +34,16 @@ function PZNS_ContextMenuNPCInfo(mpPlayerID, context, worldobjects)
     if (groupMembers ~= nil) then
         for survivorID, v in pairs(groupMembers) do
             local npcSurvivor = activeNPCs[survivorID];
-            --
-            if (npcSurvivor ~= nil) then
-                local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-                --
-                if (npcIsoPlayer) then
-                    if (npcIsoPlayer:isAlive() == true) then
-                        -- Cows: conditionally set the callback function for the infoSubMenu_1 option.
-                        local callbackFunction = function()
-                            openNPCInfoPanel(npcSurvivor);
-                        end
-                        infoSubMenu_1:addOption(
-                            npcSurvivor.survivorName,
-                            nil,
-                            callbackFunction
-                        );
-                    end
+            if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
+                -- Cows: conditionally set the callback function for the infoSubMenu_1 option.
+                local callbackFunction = function()
+                    openNPCInfoPanel(npcSurvivor);
                 end
+                infoSubMenu_1:addOption(
+                    npcSurvivor.survivorName,
+                    nil,
+                    callbackFunction
+                );
             end
         end -- Cows: End groupMembers For-loop.
     end

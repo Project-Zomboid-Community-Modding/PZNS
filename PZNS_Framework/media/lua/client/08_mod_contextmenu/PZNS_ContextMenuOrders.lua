@@ -94,21 +94,18 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
             end
         end
         --
-        if (npcSurvivor ~= nil) then
-            local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+        if(PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
             local isNPCSquareLoaded = PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor);
-            -- Cows: Check and make sure the NPC is both alive and loaded in the current game world.
-            if (npcIsoPlayer) then
-                if (npcIsoPlayer:isAlive() == true and isNPCSquareLoaded == true) then
-                    parentContextMenu:addOption(
-                        npcSurvivor.survivorName,
-                        nil,
-                        callbackFunction
-                    );
-                end
+            if (isNPCSquareLoaded == true) then
+                parentContextMenu:addOption(
+                    npcSurvivor.survivorName,
+                    nil,
+                    callbackFunction
+                );
             end
         end
-    end
+    end -- Cows: End groupMembers for-loop
+
     return parentContextMenu;
 end
 

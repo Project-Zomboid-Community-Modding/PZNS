@@ -7,11 +7,7 @@ function PZNS_EnterVehicleAsPassenger(npcSurvivor, targetIsoPlayer)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
-    -- Cows: Check if the npc is alive.
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    if (npcIsoPlayer:isAlive() == false) then
-        return;
-    end
     -- Cows: Now get the vehicle and the seats it has.
     local driverVehicle = targetIsoPlayer:getVehicle();
     -- local driverSeat = driverVehicle:getSeat(targetIsoPlayer);
