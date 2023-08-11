@@ -31,4 +31,8 @@ PZNS_PresetsSpeeches.PZNS_JobSpeechIdle = {
     getText("IGUI_PZNS_Speech_Preset_JobSpeechIdle_03"),
 };
 
+PZNS_PresetsSpeeches.PZNS_FriendlyFire = {
+    getText("IGUI_PZNS_Speech_Preset_FriendlyFire_01"),
+};
+
 return PZNS_PresetsSpeeches;

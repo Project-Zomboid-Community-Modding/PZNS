@@ -1,5 +1,7 @@
 IGUI_EN = {
 
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "WHAT THE FUCK WERE YOU SHOOTING AT?",
+
 IGUI_PZNS_Speech_Preset_Confirm_01 = "Whatever you say.",
 IGUI_PZNS_Speech_Preset_Confirm_02 = "I'm on it",
 IGUI_PZNS_Speech_Preset_Confirm_03 = "Alright",
