@@ -41,6 +41,13 @@ end
 ---@param squareY number
 ---@param squareZ number
 function PZNS_WorldUtils.PZNS_IsSquareInPlayerSpawnRange(playerSurvivor, squareX, squareY, squareZ)
+    -- Cows: Only continue to check spawn range if the playerSurvivor not nil and is alive.
+    if (playerSurvivor == nil) then
+        return;
+    end
+    if (playerSurvivor:isAlive() ~= true) then
+        return;
+    end
     local o1x = playerSurvivor:getX();
     local o1y = playerSurvivor:getY();
     local o1z = playerSurvivor:getZ();
