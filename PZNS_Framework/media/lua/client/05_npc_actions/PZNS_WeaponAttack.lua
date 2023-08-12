@@ -16,8 +16,8 @@ local function calculateNPCDamage(npcIsoPlayer, victim)
     local npcWeapon = npcIsoPlayer:getPrimaryHandItem();
     local actualHitChance = PZNS_CombatUtils.PZNS_CalculateHitChance(npcWeapon, aimingLevel, 0);
     local weaponDamage = npcWeapon:getMaxDamage(); -- Cows: Need to look at redoing weapon damage... otherwise NPC melee weapons will destroy everything at max damage.
-    -- Cows: If the victim not an NPC, activate PVP.
-    if (victim:getIsNPC() == false) then
+    -- Cows: Check if the victim is an IsoPlayer and not an NPC
+    if (instanceof(victim, "IsoPlayer") == true and victim:getIsNPC() == false) then
         if (IsPVPActive == false) then
             PZNS_CombatUtils.PZNS_TogglePvP();
         end

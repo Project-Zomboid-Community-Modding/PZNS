@@ -177,7 +177,7 @@ function PZNS_GeneralAI.PZNS_CheckForThreats(npcSurvivor)
         -- Check if the player is inside the spotting range
         if (canSeeTarget == true and distanceFromPlayerSurvivor < spottingRange) then
             priorityThreatDistance = distanceFromPlayerSurvivor;
-            priorityThreatObject = "player0";
+            priorityThreatObject = playerSurvivor;
             isThreatExist = true;
         end
     end
