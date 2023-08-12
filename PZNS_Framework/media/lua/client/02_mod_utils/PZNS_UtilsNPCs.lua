@@ -477,6 +477,11 @@ function PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevel(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid == false) then
         return;
     end
+    local playerGroupID = "Player" .. tostring(0) .. "Group";
+    -- Cows; Check if the npc is in the playerGroup and increase their affection accordingly.
+    if (npcSurvivor.groupID == playerGroupID) then
+        npcSurvivor.affection = npcSurvivor.affection + 10;
+    end
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     npcIsoPlayer:getStats():setAnger(0.0);
