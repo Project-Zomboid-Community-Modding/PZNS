@@ -1,4 +1,5 @@
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
+local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 
 --[[
@@ -51,42 +52,39 @@ function PZNS_GeneralAI.PZNS_IsReloadNeeded(npcSurvivor)
         return false;
     end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    -- Cows: Can only if npcSurvivor is Alive.
-    if (npcIsoPlayer:isAlive() == true) then
-        local npc_inventory = npcIsoPlayer:getInventory();
-        ---@type HandWeapon
-        local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
-        local ammoCount = 0;
-        -- Cows: No Item in hand, no reload needed
-        if (npcHandItem == nil) then
-            return false;
-        end
-        -- Cows: Ranged weapon
-        if (npcHandItem:IsWeapon() == true and npcHandItem:isRanged() == true) then
-            local ammoType = npcHandItem:getAmmoType();
-            ammoCount = npc_inventory:getItemCountRecurse(ammoType);
-            -- Cows: Check if the gun has no ammo and there are ammo in the backpack or there is a magazine type but no magazine is in the gun.
-            if (npcHandItem:getCurrentAmmoCount() == 0 and ammoCount > 0
-                    or (npcHandItem:getMagazineType() ~= nil and npcHandItem:isContainsClip() == false)
-                )
-            then
-                local actionQueue = ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer);
-                local lastAction = actionQueue.queue[#actionQueue.queue];
-                -- Cows: Look at 'ISGrabItemAction:checkQueueList()' in the vanilla TIS code as example reference.
-                if (lastAction) then
-                    -- Cows: Only accept gun-related actions, need to clear the action queue to begin the reload sequence.
-                    if (lastAction.Type ~= "ISEjectMagazine"
-                            and lastAction.Type ~= "ISLoadBulletsInMagazine"
-                            and lastAction.Type ~= "ISInsertMagazine"
-                            and lastAction.Type ~= "ISRackFirearm"
-                            and lastAction.Type ~= "ISReloadWeaponAction"
-                            and lastAction.Type ~= "ISWalkToTimedAction" -- Cows: Well, reload while walking IS possible...
-                        ) then
-                        PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
-                    end
+    local npc_inventory = npcIsoPlayer:getInventory();
+    ---@type HandWeapon
+    local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
+    local ammoCount = 0;
+    -- Cows: No Item in hand, no reload needed
+    if (npcHandItem == nil) then
+        return false;
+    end
+    -- Cows: Ranged weapon
+    if (npcHandItem:IsWeapon() == true and npcHandItem:isRanged() == true) then
+        local ammoType = npcHandItem:getAmmoType();
+        ammoCount = npc_inventory:getItemCountRecurse(ammoType);
+        -- Cows: Check if the gun has no ammo and there are ammo in the backpack or there is a magazine type but no magazine is in the gun.
+        if (npcHandItem:getCurrentAmmoCount() == 0 and ammoCount > 0
+                or (npcHandItem:getMagazineType() ~= nil and npcHandItem:isContainsClip() == false)
+            )
+        then
+            local actionQueue = ISTimedActionQueue.getTimedActionQueue(npcIsoPlayer);
+            local lastAction = actionQueue.queue[#actionQueue.queue];
+            -- Cows: Look at 'ISGrabItemAction:checkQueueList()' in the vanilla TIS code as example reference.
+            if (lastAction) then
+                -- Cows: Only accept gun-related actions, need to clear the action queue to begin the reload sequence.
+                if (lastAction.Type ~= "ISEjectMagazine"
+                        and lastAction.Type ~= "ISLoadBulletsInMagazine"
+                        and lastAction.Type ~= "ISInsertMagazine"
+                        and lastAction.Type ~= "ISRackFirearm"
+                        and lastAction.Type ~= "ISReloadWeaponAction"
+                        and lastAction.Type ~= "ISWalkToTimedAction" -- Cows: Well, reload while walking IS possible...
+                    ) then
+                    PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
                 end
-                return true;
             end
+            return true;
         end
     end
     return false;
@@ -99,22 +97,30 @@ function PZNS_GeneralAI.PZNS_CanSeeAimTarget(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return false;
     end
-    --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    -- Cows: Can only see if npcSurvivor is Alive.
-    if (npcIsoPlayer:isAlive() == true) then
-        --
-        if (PZNS_WorldUtils.PZNS_IsObjectZombieActive(npcSurvivor.aimTarget) == true) then
-            local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
-                npcIsoPlayer,
-                npcSurvivor.aimTarget
-            );
-            if (distanceFromTarget <= 30) then
-                local canSeeTarget = npcIsoPlayer:CanSee(npcSurvivor.aimTarget); -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
-                return canSeeTarget;
-            end
+    -- Cows: No aimed target, return false.
+    if (npcSurvivor.aimTarget == nil) then
+        return false;
+    end
+    local npcWeapon = npcIsoPlayer:getPrimaryHandItem();
+    local aimRange = 2;
+    -- Cows: Check if npcWeapon is a weapon
+    if (npcWeapon ~= nil) then
+        if (npcWeapon:IsWeapon() == true) then
+            aimRange = npcWeapon:getMaxRange();
         end
     end
+    -- Cows: Zombie Check
+    if (PZNS_WorldUtils.PZNS_IsObjectZombieActive(npcSurvivor.aimTarget) == true) then
+        local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
+            npcIsoPlayer,
+            npcSurvivor.aimTarget
+        );
+        if (distanceFromTarget <= aimRange) then
+            return npcIsoPlayer:CanSee(npcSurvivor.aimTarget); -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
+        end
+    end
+
     npcSurvivor.aimTarget = nil;
     return false;
 end
@@ -125,37 +131,33 @@ function PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return false;
     end
-    ---@type IsoPlayer
-    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    -- Cows: Can only aim and/or attack if npcSurvivor is Alive.
-    if (npcIsoPlayer:isAlive() == true) then
-        if (npcSurvivor.aimTarget ~= nil) then
-            PZNS_WeaponAiming(npcSurvivor); -- Cows: Aim before attacking
-            PZNS_WeaponAttack(npcSurvivor); -- Cows: Permission to attack is handled in the function.
-        end
+    -- Cows: Can only aim and/or attack aimTarget exists
+    if (npcSurvivor.aimTarget ~= nil) then
+        PZNS_WeaponAiming(npcSurvivor); -- Cows: Aim before attacking
+        PZNS_WeaponAttack(npcSurvivor); -- Cows: Permission to attack is handled in the function.
     end
 end
 
 --- WIP - Cows: Basically will replace PZNS_CheckZombieThreat() with an added hostile to player check... and other NPCs eventually.
- function PZNS_GeneralAI.PZNS_CheckForThreats(npcSurvivor)
+function PZNS_GeneralAI.PZNS_CheckForThreats(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
     local isNPCHostileToPlayer = PZNS_GeneralAI.PZNS_IsNPCHostileToPlayer(npcSurvivor);
     local playerSurvivor = getSpecificPlayer(0);
-    local distanceFromPlayerSurvivor = 0;
+    local distanceFromPlayerSurvivor = 30;
     local isThreatExist = false;
-    local targetThreatDistance = 30;
-    local targetThreatObject = npcSurvivor.aimTarget;
+    local priorityThreatDistance = spottingRange;
+    local priorityThreatObject = npcSurvivor.aimTarget;
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    -- Cows: Check if npcSurvivor currently has an aimed zombie
-    if (targetThreatObject ~= nil) then
+    -- Cows: Check if npcSurvivor currently has an aimed threat
+    if (priorityThreatObject ~= nil) then
         --
-        local canSeeTarget = npcIsoPlayer:CanSee(targetThreatObject);
-        local isOnSameFloorLevel = targetThreatObject:getZ() == npcIsoPlayer:getZ();
-        targetThreatDistance = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetThreatObject);
+        local canSeeTarget = npcIsoPlayer:CanSee(priorityThreatObject);
+        local isOnSameFloorLevel = priorityThreatObject:getZ() == npcIsoPlayer:getZ();
+        priorityThreatDistance = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, priorityThreatObject);
         -- Cows: Stop if the nearest threat is less than 3 squares away... need to prepare to run or attack.
-        if (canSeeTarget == true and targetThreatDistance < 3 and isOnSameFloorLevel == true) then
+        if (canSeeTarget == true and priorityThreatDistance < 3 and isOnSameFloorLevel == true) then
             return true;
         end
     end
@@ -168,58 +170,80 @@ end
             aimRange = npcWeapon:getMaxRange();
         end
     end
-    --
+    -- Cows: Check if the NPC is hostile to the player ge.
     if (isNPCHostileToPlayer == true) then
-        PZNS_NPCSpeak(npcSurvivor, "I am hostile to the player");
         distanceFromPlayerSurvivor = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, playerSurvivor);
-    end
-    if (PZNS_CellZombiesList == nil and isNPCHostileToPlayer == false) then
-        return isThreatExist;
-    end
-    -- Cows: initailize the first threat as the player, if the NPC is hostile and the distance from the player is inside the spotting range.
-    if (isNPCHostileToPlayer == true) then
-        targetThreatDistance = distanceFromPlayerSurvivor;
-        targetThreatObject = playerSurvivor;
         local canSeeTarget = npcIsoPlayer:CanSee(playerSurvivor);
-        --
+        -- Check if the player is inside the spotting range
         if (canSeeTarget == true and distanceFromPlayerSurvivor < spottingRange) then
+            priorityThreatDistance = distanceFromPlayerSurvivor;
+            priorityThreatObject = "player0";
             isThreatExist = true;
         end
     end
-    --
-    for i = PZNS_CellZombiesList:size() - 1, 0, -1 do
-        local zombie = PZNS_CellZombiesList:get(i);
-        --
-        if (PZNS_WorldUtils.PZNS_IsObjectZombieActive(zombie) == true) then
+    -- Zombies list
+    if (PZNS_CellZombiesList ~= nil) then
+        for i = PZNS_CellZombiesList:size() - 1, 0, -1 do
+            local zombie = PZNS_CellZombiesList:get(i);
             --
-            local currentThreatDistance = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, zombie);
-            local isOnSameFloorLevel = zombie:getZ() == npcIsoPlayer:getZ();
-            local isTargetInAimRange = currentThreatDistance < aimRange;
-            local canSeeTarget = npcIsoPlayer:CanSee(zombie); -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
-            --
-            if (canSeeTarget == true and currentThreatDistance < spottingRange) then
-                isThreatExist = true;
+            if (PZNS_WorldUtils.PZNS_IsObjectZombieActive(zombie) == true) then
+                local currentThreatDistance = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, zombie);
+                local isOnSameFloorLevel = zombie:getZ() == npcIsoPlayer:getZ();
+                local isTargetInAimRange = currentThreatDistance < aimRange;
+                local canSeeTarget = npcIsoPlayer:CanSee(zombie); -- Cows: "vision cone" isn't a thing for NPCs... they can "see" the world objects without facing them.
                 --
-                if (isTargetInAimRange == true) then
-                    -- Cows: Check if the playerSurvivor is currently the nearest threat.
-                    if (isNPCHostileToPlayer == true and distanceFromPlayerSurvivor < currentThreatDistance) then
-                        targetThreatDistance = distanceFromPlayerSurvivor;
-                        targetThreatObject = playerSurvivor;
-                    end
-                    if (targetThreatDistance > currentThreatDistance and isOnSameFloorLevel == true) then
-                        targetThreatDistance = currentThreatDistance;
-                        targetThreatObject = zombie;
-                        -- PZNS_NPCSpeak(npcSurvivor, "Threat Aimed");
-                    end
-                    --
-                    if (targetThreatDistance < 3) then
-                        break;
+                if (canSeeTarget == true and currentThreatDistance < spottingRange) then
+                    isThreatExist = true;
+                    if (isTargetInAimRange == true) then
+                        -- Cows: Check if the playerSurvivor is currently the nearest threat.
+                        if (isNPCHostileToPlayer == true and distanceFromPlayerSurvivor < currentThreatDistance) then
+                            priorityThreatDistance = distanceFromPlayerSurvivor;
+                            priorityThreatObject = playerSurvivor;
+                        end
+                        if (priorityThreatDistance > currentThreatDistance and isOnSameFloorLevel == true) then
+                            priorityThreatDistance = currentThreatDistance;
+                            priorityThreatObject = zombie;
+                        end
+                        -- Cows: Stop and prioritize zombies within 3 squares on the same floor
+                        if (priorityThreatDistance < 3 and isOnSameFloorLevel == true) then
+                            priorityThreatObject = zombie;
+                            PZNS_AimAtTarget(npcSurvivor, priorityThreatObject);
+                            return isThreatExist;
+                        end
                     end
                 end
             end
-        end
-    end -- Cows: End Zombies for loop.
-    PZNS_AimAtTarget(npcSurvivor, targetThreatObject);
+        end -- Cows: End Zombies for loop.
+    end
+    -- Cows: Other NPCs list
+    if (PZNS_CellNPCsList ~= nil) then
+        local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+        for npcID, targetIsoPlayer in pairs(PZNS_CellNPCsList) do
+            local targetNPCSurvivor = activeNPCs[npcID];
+            local isNPCHostileToTargetNPC = PZNS_GeneralAI.PZNS_IsNPCHostileToTargetNPC(npcSurvivor, targetNPCSurvivor);
+            if (npcIsoPlayer:getModData().survivorID ~= npcID) then
+                if (isNPCHostileToTargetNPC == true) then
+                    local canSeeTarget = npcIsoPlayer:CanSee(targetIsoPlayer);
+                    local distanceFromTargetNPC = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer,
+                        targetIsoPlayer);
+                    --
+                    if (canSeeTarget == true and distanceFromTargetNPC < spottingRange) then
+                        local isTargetInAimRange = distanceFromTargetNPC < aimRange;
+                        isThreatExist = true;
+                        --
+                        if (isTargetInAimRange == true) then
+                            -- Cows: Check if the targetNPC is the nearest threat.
+                            if (isNPCHostileToTargetNPC == true and priorityThreatDistance > distanceFromTargetNPC) then
+                                priorityThreatDistance = distanceFromTargetNPC;
+                                priorityThreatObject = targetIsoPlayer;
+                            end
+                        end
+                    end
+                end
+            end
+        end -- Cows: End Other NPCs for loop.
+    end
+    PZNS_AimAtTarget(npcSurvivor, priorityThreatObject);
     return isThreatExist;
 end
 
@@ -476,15 +500,36 @@ function PZNS_GeneralAI.PZNS_IsNPCHostileToPlayer(npcSurvivor)
     return true;
 end
 
+--- WIP - Cows: Added this function to check if an NPC is friendly to the player
+---@param npcSurvivor any
+---@return boolean
+function PZNS_GeneralAI.PZNS_IsNPCFriendlyToPlayer(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
+        return true;
+    end
+    --
+    local npcGroupID = npcSurvivor.groupID;
+    local playerGroupID = "Player" .. tostring(0) .. "Group";
+    -- Cows: Check if npc is in the same group as the player
+    if (npcGroupID == playerGroupID) then
+        return true;
+    end
+    -- Cows: Check if NPC is not a raider and the NPC affection is above 70 to be considered frindly
+    if (npcSurvivor.isRaider ~= true and npcSurvivor.affection > 70) then
+        return true;
+    end
+
+    return false;
+end
+
 --- WIP - Cows: Added this function to check if an NPC is actively hostile to a target NPC
 ---@param npcSurvivor any
 ---@param targetNPCSurvivor any
 ---@return boolean
 function PZNS_GeneralAI.PZNS_IsNPCHostileToTargetNPC(npcSurvivor, targetNPCSurvivor)
-    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
-        return false;
-    end
-    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(targetNPCSurvivor) == false) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false
+            or PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(targetNPCSurvivor) == false
+        ) then
         return false;
     end
     --
@@ -494,39 +539,19 @@ function PZNS_GeneralAI.PZNS_IsNPCHostileToTargetNPC(npcSurvivor, targetNPCSurvi
     if (npcGroupID == targetNPCGroupID) then
         return false;
     end
-    -- Cows: Check if the currentNPC is NOT hostile to the player and the target NPC is hostile.
-    if (PZNS_GeneralAI.isNPCHostileToPlayer(npcSurvivor) == false
-            and PZNS_GeneralAI.isNPCHostileToPlayer(targetNPCSurvivor) == true
-        ) then
+    -- Cows: Check if the currentNPC is friendly to the player and the target NPC is hostile.
+    if (PZNS_GeneralAI.PZNS_IsNPCFriendlyToPlayer(npcSurvivor) == true
+            and PZNS_GeneralAI.PZNS_IsNPCHostileToPlayer(targetNPCSurvivor) == true
+        )
+    then
         return true;
     end
     -- Cows: Check if either NPC is a raider.
-    if (npcSurvivor.isRaider or targetNPCGroupID.isRaider) then
+    if (npcSurvivor.isRaider or targetNPCSurvivor.isRaider) then
         return true;
     end
-
+    -- Cows: Else consider the NPCs neutral to each other.
     return false;
-end
-
---- WIP - Cows: The "PZNS_HostileRoutine" is a simple function to have a hostile NPC attack the player right away.
----@param npcSurvivor any
-function PZNS_GeneralAI.PZNS_HostileRoutine(npcSurvivor)
-    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
-        return;
-    end
-    -- Cows: If the NPC is hostile to the player, add it as a threat to the NPC.
-    if (PZNS_GeneralAI.PZNS_IsNPCHostileToPlayer(npcSurvivor) == true) then
-        ---@type IsoPlayer
-        local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-        --
-        local targetIsoPlayer = getSpecificPlayer(0);
-        local canSeeTarget = npcIsoPlayer:CanSee(targetIsoPlayer);
-        if (canSeeTarget == true) then
-            npcSurvivor.aimTarget = targetIsoPlayer;
-            PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor);
-            return; -- Cows: Stop processing, follow/attack the player.
-        end
-    end
 end
 
 return PZNS_GeneralAI;

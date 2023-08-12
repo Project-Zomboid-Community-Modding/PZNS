@@ -47,8 +47,8 @@ end
 ---@param victim IsoPlayer
 ---@param weapon HandWeapon
 function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
-    -- Cows: Check the Wielder cannot be NPC, or the wielder or victim are IsoPlayer. We don't care about zombies in this function.
-    if (wielder:getIsNPC() == true or instanceof(wielder, "IsoPlayer") ~= true or instanceof(victim, "IsoPlayer") ~= true) then
+    -- Cows: Check the the wielder or victim are IsoPlayer. We don't care about zombies in this function.
+    if (instanceof(wielder, "IsoPlayer") ~= true or instanceof(victim, "IsoPlayer") ~= true) then
         return;
     end
     -- Cows: Check if the victim is an NPC and calculate how much damage the npc will take from the weapon.
@@ -58,29 +58,37 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
             local npcSurvivor = activeNPCs[victim:getModData().survivorID];
             local playerGroupID = "Player" .. tostring(0) .. "Group";
             npcSurvivor.attackTicks = 0; -- Cows: Force reset the NPC attack ticks when they're hit, this prevents them from piling on damage.
-            --
+            -- Cows; Check if the npc struck is in the playerGroup.
             if (npcSurvivor.groupID ~= playerGroupID) then
+                -- Cows: After reaching <= 0 affection
                 if (npcSurvivor.affection <= 0) then
                     PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                         npcSurvivor, PZNS_PresetsSpeeches.PZNS_HostileHit, "Hostile"
                     );
                 else
-                    npcSurvivor.affection = npcSurvivor.affection - 25; -- Cows: Reduce affection whenever hit.
+                    if (wielder == getSpecificPlayer(0)) then
+                        npcSurvivor.affection = npcSurvivor.affection - 25; -- Cows: Reduce affection whenever hit.
+                    end
+                    -- Cows: First time handling <= 0 affection
                     if (npcSurvivor.affection <= 0) then
                         PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                             npcSurvivor, PZNS_PresetsSpeeches.PZNS_NeutralRevenge, "Hostile"
                         );
                     else
+                        -- Cows: Else complain about getting hit
                         PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                             npcSurvivor, PZNS_PresetsSpeeches.PZNS_NeutralHit, "Negative"
                         );
                     end
                 end
             else
-                npcSurvivor.affection = npcSurvivor.affection - 10; -- Cows: Reduce affection whenever hit.
-                PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                    npcSurvivor, PZNS_PresetsSpeeches.PZNS_FriendlyFire, "Friendly"
-                );
+                -- Cows: Check if it is friendly fire handling...
+                if (wielder == getSpecificPlayer(0)) then
+                    npcSurvivor.affection = npcSurvivor.affection - 10; -- Cows: Reduce affection whenever hit.
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_FriendlyFire, "Friendly"
+                    );
+                end
             end
             getSpecificPlayer(0):Say(
                 "npc Affection after hit: " .. tostring(npcSurvivor.affection)
