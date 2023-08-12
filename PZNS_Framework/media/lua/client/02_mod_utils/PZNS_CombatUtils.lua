@@ -90,9 +90,6 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
                     );
                 end
             end
-            getSpecificPlayer(0):Say(
-                "npc Affection after hit: " .. tostring(npcSurvivor.affection)
-            );
         end
         --
         if (weapon ~= nil) and (not weapon:isAimedFirearm()) and (weapon:getPushBackMod() > 0.3) then
