@@ -1,10 +1,6 @@
 local PZNS_CombatUtils = require("02_mod_utils/PZNS_CombatUtils");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 
---[[
-    WIP - Cows: Should add a check for ranged weaponry and if ammo is loaded the gun...
-    Currently as-is, damage is done without ammo consideration
---]]
 local meleeTicks = 40;  -- Cows: As ticks are inconsistent between machines... this should be an option user can set for comfort.
 local rangedTicks = 60; -- Cows: As ticks are inconsistent between machines... this should be an option user can set for comfort.
 
@@ -20,8 +16,8 @@ local function calculateNPCDamage(npcIsoPlayer, victim)
     local npcWeapon = npcIsoPlayer:getPrimaryHandItem();
     local actualHitChance = PZNS_CombatUtils.PZNS_CalculateHitChance(npcWeapon, aimingLevel, 0);
     local weaponDamage = npcWeapon:getMaxDamage(); -- Cows: Need to look at redoing weapon damage... otherwise NPC melee weapons will destroy everything at max damage.
-    -- Cows: If the victim is the local player, activate PVP.
-    if (victim == getSpecificPlayer(0)) then
+    -- Cows: If the victim not an NPC, activate PVP.
+    if (victim:getIsNPC() == false) then
         if (IsPVPActive == false) then
             PZNS_CombatUtils.PZNS_TogglePvP();
         end
@@ -35,7 +31,7 @@ local function calculateNPCDamage(npcIsoPlayer, victim)
     end
 end
 
----comment
+--- Cows: Helper function for NPCs doing melee attack
 ---@param npcSurvivor any
 ---@param npcIsoPlayer IsoPlayer
 ---@param targetObject IsoPlayer | IsoZombie
@@ -47,14 +43,12 @@ local function meleeAttack(npcSurvivor, npcIsoPlayer, targetObject)
             -- PZNS_NPCSpeak(npcSurvivor, "Attacking target");
             npcIsoPlayer:NPCSetAttack(true);
             calculateNPCDamage(npcIsoPlayer, targetObject);
-        else
-            -- PZNS_NPCSpeak(npcSurvivor, "Target is dead");
         end
         npcSurvivor.attackTicks = 0;
     end
 end
 
----comment
+--- Cows: Helper function for NPCs doing ranged attack
 ---@param npcSurvivor any
 ---@param npcIsoPlayer IsoPlayer
 ---@param targetObject IsoPlayer | IsoZombie
@@ -66,14 +60,12 @@ local function rangedAttack(npcSurvivor, npcIsoPlayer, targetObject)
             -- PZNS_NPCSpeak(npcSurvivor, "Attacking target");
             npcIsoPlayer:NPCSetAttack(true);
             calculateNPCDamage(npcIsoPlayer, targetObject);
-        else
-            -- PZNS_NPCSpeak(npcSurvivor, "Target is dead");
         end
         npcSurvivor.attackTicks = 0;
     end
 end
 
----comment
+--- Cows: Main function for NPCs attacking
 ---@param npcSurvivor any
 function PZNS_WeaponAttack(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
@@ -97,6 +89,7 @@ function PZNS_WeaponAttack(npcSurvivor)
     local targetObject = npcSurvivor.aimTarget;
     if (targetObject == nil) then
         npcIsoPlayer:NPCSetAttack(false);
+        npcIsoPlayer:NPCSetAiming(false);
         npcSurvivor.attackTicks = 0;
         return;
     end
@@ -127,22 +120,21 @@ function PZNS_WeaponAttack(npcSurvivor)
     end
     --
     npcSurvivor.attackTicks = npcSurvivor.attackTicks + 1;
-    --
 end
+
 --- Cows: Based on "SuperSurvivorsOnSwing()"
 ---@param isoPlayer any
----@param playerWeapon any
+---@param playerWeapon  HandWeapon
 local function rangeWeaponHandler(isoPlayer, playerWeapon)
-    -- Cows: START DEBUG ONLY
-    if (playerWeapon:getCurrentAmmoCount() == 0) then
-        playerWeapon:setCurrentAmmoCount(5);
+    -- Cows: Infinite Ammo check
+    if (IsInfiniteAmmoActive == true and playerWeapon:getCurrentAmmoCount() == 0) then
+        playerWeapon:setCurrentAmmoCount(playerWeapon:getMaxAmmo());
     end
-    -- Cows: END DEBUG ONLY
     --
     if playerWeapon:haveChamber() then
         playerWeapon:setRoundChambered(false);
     end
-    -- remove ammo, add one to chamber if we still have some
+    -- remove ammo, add one to chamber if we still have ammo after shooting
     if playerWeapon:getCurrentAmmoCount() >= playerWeapon:getAmmoPerShoot() then
         if playerWeapon:haveChamber() then
             playerWeapon:setRoundChambered(true);
@@ -155,12 +147,12 @@ local function rangeWeaponHandler(isoPlayer, playerWeapon)
     end
 end
 
----comment
+--- Cows: The NPC plays the animation/action of attacking with weapon swing, which triggers the event "OnWeaponSwing".
 ---@param isoPlayer IsoPlayer
 ---@param playerWeapon any
 function PZNS_WeaponSwing(isoPlayer, playerWeapon)
     -- These weapon swing rules only applies to NPCs.
-    if (isoPlayer:isNPC() ~= true) then
+    if (isoPlayer:getIsNPC() ~= true) then
         return;
     end
     local npcSurvivorID = isoPlayer:getModData().survivorID;
