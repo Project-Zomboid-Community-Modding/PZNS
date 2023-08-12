@@ -585,4 +585,33 @@ function PZNS_UtilsNPCs.PZNS_SetNPCPerksRandomly(npcSurvivor)
     -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Trapping", from0to3());
     -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "PlantScavenging", from0to3());
 end
+
+--- Cows: This is to streamline complete random rolls of stats for NPCs.
+function PZNS_UtilsNPCs.PZNS_SetLoadedGun(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid == false) then
+        return;
+    end
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    ---@type HandWeapon
+    local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
+    if (npcHandItem == nil) then
+        return;
+    end
+    if (npcHandItem:IsWeapon() == true and npcHandItem:isRanged() == true) then
+        local ammoType = npcHandItem:getAmmoType();
+        local magazineType = npcHandItem:getMagazineType();
+        if (magazineType) then
+            npcHandItem:setContainsClip(true);
+        end
+        if (ammoType) then
+            if (npcHandItem:getCurrentAmmoCount() == 0) then
+                npcHandItem:setCurrentAmmoCount(npcHandItem:getMaxAmmo());
+            end
+        end
+        if npcHandItem:haveChamber() then
+            npcHandItem:setRoundChambered(true);
+        end
+    end
+end
+
 return PZNS_UtilsNPCs;
