@@ -1,8 +1,8 @@
+local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 
 PZNS_ActiveInventoryNPC = {}; -- WIP - Cows: Need to rethink how Global variables are used...
 
-local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_NPCsManager = {};
 
 --- Cows: The PZNS_NPCSurvivor uses the IsoPlayer from the base game as one of its properties.
@@ -112,10 +112,10 @@ function PZNS_NPCsManager.setActiveInventoryNPCBySurvivorID(survivorID)
     PZNS_ActiveInventoryNPC = npcSurvivor;
 end
 
---- WIP - Cows: Spawn a random raider NPC. 
+--- WIP - Cows: Spawn a random raider NPC.
 --- Cows: Go make your own random spawns, this is an example for debugging and testing.
 ---@param targetSquare IsoGridSquare
----@param raiderID string
+---@param raiderID string | nil
 ---@return unknown
 function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raiderID)
     local isFemale = ZombRand(100) > 50; -- Cows: 50/50 roll for female spawn
@@ -168,7 +168,7 @@ end
 --- WIP - Cows: Spawn a random NPC.
 --- Cows: Go make your own random spawns, this is an example for debugging and testing.
 ---@param targetSquare IsoGridSquare
----@param survivorID string
+---@param survivorID string | nil
 ---@return unknown
 function PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare(targetSquare, survivorID)
     local isFemale = ZombRand(100) > 50; -- Cows: 50/50 roll for female spawn
