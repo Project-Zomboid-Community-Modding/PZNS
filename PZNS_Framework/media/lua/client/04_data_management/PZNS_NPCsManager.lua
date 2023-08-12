@@ -138,7 +138,6 @@ function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raider
     );
     raiderSurvivor.isRaider = true;                             -- Cows: MAKE SURE THIS FLAG IS SET TO 'true' - DIFFERENTIATE NORMAL NPCS FROM RAIDERS.
     raiderSurvivor.affection = 0;                               -- Cows: Raiders will never hold any love for players.
-    raiderSurvivor.jobName = "Wander In Cell";
     raiderSurvivor.textObject:setDefaultColors(225, 0, 0, 0.8); -- Red text
     raiderSurvivor.textObject:ReadString(raiderName);
     raiderSurvivor.canSaveData = false;
@@ -153,13 +152,15 @@ function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raider
     local spawnWithGun = ZombRand(0, 100) > 50;
     if (spawnWithGun) then
         PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(raiderSurvivor, "Base.Pistol");
+        PZNS_UtilsNPCs.PZNS_SetLoadedGun(raiderSurvivor);
         PZNS_UtilsNPCs.PZNS_AddItemToInventoryNPCSurvivor(raiderSurvivor, "Base.9mmClip");
         PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(raiderSurvivor, "Base.Bullets9mm", 15);
         PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(raiderSurvivor, "Base.Bullets9mm", 15);
     else
         PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(raiderSurvivor, "Base.BaseballBat");
     end
-    --
+    -- Cows: Set the job last, otherwise the NPC will function as if it didn't have a weapon.
+    raiderSurvivor.jobName = "Wander In Cell";
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     activeNPCs[raiderSurvivorID] = raiderSurvivor; -- Cows: This saves it to modData, which allows the npc to run while in-game, but does not create a save file.
     return raiderSurvivor;
@@ -189,7 +190,6 @@ function PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare(targetSquare, survivorI
         targetSquare
     );
     npcSurvivor.affection = ZombRand(100); -- Cows: Random between 0 and 100 affection, not everyone will love the player.
-    npcSurvivor.jobName = "Wander In Cell";
     npcSurvivor.canSaveData = false;
     -- Cows: Setup the skills and outfit, plus equipment...
     PZNS_UtilsNPCs.PZNS_SetNPCPerksRandomly(npcSurvivor);
@@ -201,17 +201,17 @@ function PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare(targetSquare, survivorI
     local spawnWithGun = ZombRand(0, 100) > 50;
     if (spawnWithGun) then
         PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, "Base.Pistol");
+        PZNS_UtilsNPCs.PZNS_SetLoadedGun(npcSurvivor);
         PZNS_UtilsNPCs.PZNS_AddItemToInventoryNPCSurvivor(npcSurvivor, "Base.9mmClip");
         PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, "Base.Bullets9mm", 15);
         PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, "Base.Bullets9mm", 15);
     else
         PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, "Base.BaseballBat");
     end
-    --
+    -- Cows: Set the job last, otherwise the NPC will function as if it didn't have a weapon.
+    npcSurvivor.jobName = "Wander In Cell";
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     activeNPCs[npcSurvivorID] = npcSurvivor; -- Cows: This saves it to modData, which allows the npc to run while in-game, but does not create a save file.
-    getSpecificPlayer(0):Say("npc affection: " .. tostring(npcSurvivor.affection));
-
     return npcSurvivor;
 end
 

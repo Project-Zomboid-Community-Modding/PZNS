@@ -49,6 +49,7 @@ function PZNS_SpawnJillTester(mpPlayerID)
                     PZNS_UtilsNPCs.PZNS_AddItemToInventoryNPCSurvivor(npcSurvivor, "Base.BaseballBat");
                 end
                 PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, "Base.Pistol");
+                PZNS_UtilsNPCs.PZNS_SetLoadedGun(npcSurvivor);
                 PZNS_UtilsNPCs.PZNS_AddItemToInventoryNPCSurvivor(npcSurvivor, "Base.9mmClip");
                 PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, "Base.Bullets9mm", 15);
                 -- Cows: Set the job...
