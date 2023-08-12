@@ -107,7 +107,7 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
         -- https://projectzomboid.com/modding/zombie/characters/IsoGameCharacter.html#getBodyPartClothingDefense(java.lang.Integer,boolean,boolean)
         local isEdgedWeapon = false; -- Cows: Apparently, bladed weapons were treated as "bites" in SS/SSC...
         local isBullet = false;
-        -- Cows: Players will get bonus damage based on strength... I haven't figure out how to get the weapon-related skill from the weapon...
+        -- Cows: Apply bonus damage based on strength... I haven't figure out how to get the weapon-related skill from the weapon...
         bonusDamage = wielder:getPerkLevel(Perks.FromString("Strength"));
         --
         if (weapon:getCategories():contains("Blunt") or weapon:getCategories():contains("SmallBlunt")) then
@@ -134,9 +134,9 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
         if isDefensePenetrated == false then
             return;
         end
-        victim:addHole(BloodBodyPartType.FromIndex(bodypartIndex));
-        --
+        -- Cows: Didn't seem right that blunt weapons would create holes on clothes 100% of the time...
         if (isEdgedWeapon) then
+            victim:addHole(BloodBodyPartType.FromIndex(bodypartIndex));
             if (ZombRand(0, 6) == 6) then
                 bodypart:generateDeepWound();
             elseif (ZombRand(0, 3) == 3) then
@@ -147,10 +147,12 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
         elseif (isBluntWeapon) then
             if (ZombRand(0, 4) == 4) then
                 bodypart:setCut(true);
+                victim:addHole(BloodBodyPartType.FromIndex(bodypartIndex));
             else
                 bodypart:setScratched(true, true);
             end
         elseif (isBullet) then
+            victim:addHole(BloodBodyPartType.FromIndex(bodypartIndex));
             -- Cows: Update bonus damage to be based on aim level...
             bonusDamage = wielder:getPerkLevel(Perks.FromString("Aiming"));
             bodypart:setHaveBullet(true, 0);
@@ -177,11 +179,6 @@ function PZNS_CombatUtils.PZNS_CalculatePlayerDamage(wielder, victim, weapon)
             bodypartDamage = bodypartDamage * 2.0;
         end
         --
-        getSpecificPlayer(0):Say(
-            "InjuredParts: " .. tostring(injuredBodyParts) ..
-            " Damaged bodyPartIndex: " .. tostring(bodypartIndex) ..
-            " bodyDamage: " .. tostring(bodypartDamage)
-        );
         bodydamage:AddDamage(bodypartIndex, bodypartDamage);
         local stats = victim:getStats();
         --
