@@ -111,7 +111,10 @@ function PZNS_WorldUtils.PZNS_SpawnNPCIfSquareIsLoaded()
     for survivorID, v1 in pairs(activeNPCs) do
         local npcSurvivor = activeNPCs[survivorID];
         spawnNPCIsoPlayer(npcSurvivor);
-    end -- Cows: End for k1, v1 in pairs
+    end
+    --
+    PZNS_WorldUtils.PZNS_UpdateCellNPCsList();    -- Update the loaded NPCs list
+    PZNS_WorldUtils.PZNS_UpdateCellZombiesList(); -- Update the loaded zombies list
 end
 
 --- Cows: Checks if zombie is active/isAlive.
@@ -245,6 +248,24 @@ function PZNS_WorldUtils.PZNS_GetAdjSquare(square, dir)
         return getCell():getGridSquare(square:getX(), square:getY() + 1, square:getZ());
     else
         return getCell():getGridSquare(square:getX() - 1, square:getY(), square:getZ());
+    end
+end
+
+--- Cows: Updates all the zombies and NPCs in the cell, fires after a grid square is loaded.
+function PZNS_WorldUtils.PZNS_UpdateCellZombiesList()
+    PZNS_CellZombiesList = getCell():getZombieList(); -- Cows: Update the PZNS_CellZombiesList
+end
+
+--- Cows: Updates all the zombies and NPCs in the cell, fires after a grid square is loaded.
+function PZNS_WorldUtils.PZNS_UpdateCellNPCsList()
+    local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+    PZNS_CellNPCsList = {}; -- Cows: Update the PZNS_CellNPCsList
+    -- Cows: Go through all the active NPCs and update their job routines
+    for survivorID, v1 in pairs(activeNPCs) do
+        local npcSurvivor = activeNPCs[survivorID];
+        if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
+            PZNS_CellNPCsList[survivorID] = npcSurvivor.npcIsoPlayerObject;
+        end
     end
 end
 
