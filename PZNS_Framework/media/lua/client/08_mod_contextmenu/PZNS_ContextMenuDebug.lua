@@ -231,7 +231,6 @@ function PZNS_ContextMenuDebugWorld(mpPlayerID, context, worldobjects)
         -- Cows: conditionally set the callback function for the context menu option.
         local callbackFunction = function()
             if (debugKey == "SpawnRaider" or debugKey == "SpawnNPCSurvivor") then
-                getSpecificPlayer(0):Say("Spawning Random NPC...");
                 PZNS_DebugWorld[debugKey](square, nil);
             else
                 PZNS_DebugWorld[debugKey](square);
