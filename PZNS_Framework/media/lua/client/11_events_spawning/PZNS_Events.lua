@@ -44,6 +44,8 @@ local function PZNS_Events()
     if (IsNPCsNeedsActive ~= true) then
         Events.EveryHours.Add(PZNS_UtilsNPCs.PZNS_ClearAllNPCsAllNeedsLevel);
     end
+    -- Cows: May need to change this to OnPlayerUpdate to address https://github.com/shadowhunter100/PZNS/issues/34...
+    -- Cows: Maybe not, since the NPCs will be unloaded much more aggressively/sooner at 45 squares, will confirm after more testing.
     Events.EveryOneMinute.Add(PZNS_WorldUtils.PZNS_SpawnNPCIfSquareIsLoaded);
     Events.OnRenderTick.Add(PZNS_UpdateAllJobsRoutines);
     Events.OnRenderTick.Add(PZNS_RenderNPCsText);
