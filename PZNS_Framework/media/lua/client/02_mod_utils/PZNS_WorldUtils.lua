@@ -83,30 +83,40 @@ local function spawnNPCIsoPlayer(npcSurvivor)
         local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
         -- Cows: Check isNPCSquareLoaded
         if (isNPCSquareLoaded == true) then
-            -- Cows: Check if NPC does not exists in the world, set the isSavedInWorld to false so NPC can be saved later if off-screen.
-            if (npcSurvivor.isSpawned ~= true) then
-                if (npcIsoPlayer:getSquare() ~= nil and npcIsoPlayer:isExistInTheWorld() ~= true) then
-                    PZNS_UtilsDataNPCs.PZNS_SpawnNPCFromModData(npcSurvivor);
-                    npcSurvivor.isSavedInWorld = false;
+            local playerSurvivor = getSpecificPlayer(0);
+            local isNPCInSpawnRange = PZNS_WorldUtils.PZNS_IsSquareInPlayerSpawnRange(playerSurvivor,
+                npcSurvivor.squareX, npcSurvivor.squareY, npcSurvivor.squareZ
+            );
+            -- Cows: Check if the NPC is in spawn range
+            if (isNPCInSpawnRange == true) then
+                -- Cows: Check if NPC does not exists in the world, set the isSavedInWorld to false so NPC can be saved later if off-screen.
+                if (npcSurvivor.isSpawned ~= true) then
+                    if (npcIsoPlayer:getSquare() ~= nil and npcIsoPlayer:isExistInTheWorld() ~= true) then
+                        PZNS_UtilsDataNPCs.PZNS_SpawnNPCFromModData(npcSurvivor);
+                        npcSurvivor.isSavedInWorld = false;
+                    end
                 end
-            end
-        else
-            if (npcSurvivor.isSavedInWorld ~= true) then
-                npcSurvivor.isSpawned = false;
-                npcSurvivor.isSavedInWorld = true;
-                PZNS_UtilsDataNPCs.PZNS_SaveNPCData(npcSurvivor.survivorID, npcSurvivor);
-            end
-            -- Cows: Else remove the NPC from the game world to prevent issues from happening.
-            npcIsoPlayer:removeFromWorld();
-            npcIsoPlayer:removeFromSquare();
-            -- Cows: If the npc cannot be saved, permanently remove from game world.
-            if (npcSurvivor.canSaveData == false) then
-                local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
-                activeNPCs[npcSurvivor.survivorID] = nil;
+            else
+                -- Cows: Else remove the NPC from the game world to prevent issues from happening.
+                if (npcSurvivor.isSavedInWorld ~= true) then
+                    npcSurvivor.isSpawned = false;
+                    npcSurvivor.isSavedInWorld = true;
+                    PZNS_UtilsDataNPCs.PZNS_SaveNPCData(npcSurvivor.survivorID, npcSurvivor);
+                end
+                -- Cows: Clear the text string.
+                npcSurvivor.textObject:ReadString("");
+                npcIsoPlayer:removeFromWorld();
+                npcIsoPlayer:removeFromSquare();
+                -- Cows: If the npc cannot be saved, permanently remove from game world.
+                if (npcSurvivor.canSaveData == false) then
+                    local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+                    activeNPCs[npcSurvivor.survivorID] = nil;
+                end
             end
         end
     end
 end
+
 --- Cows: A function to spawn/despawn NPCs when they become unloaded off-screen.
 --- Cows: There may be some sync issues because the "spawning" depends on the file in the save folder.
 function PZNS_WorldUtils.PZNS_SpawnNPCIfSquareIsLoaded()
@@ -272,6 +282,31 @@ function PZNS_WorldUtils.PZNS_UpdateCellNPCsList()
         local npcSurvivor = activeNPCs[survivorID];
         if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
             PZNS_CellNPCsList[survivorID] = npcSurvivor.npcIsoPlayerObject;
+        end
+    end
+end
+
+--- Cows: Checks if the specified npcSurvivor's square is on screen, this was used to debug and test a reported issue
+--- https://github.com/shadowhunter100/PZNS/issues/36
+---@param npcSurvivorID any
+function PZNS_WorldUtils.PlayerSayIsNPCSquareOnScreen(npcSurvivorID)
+    local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+    if (activeNPCs[npcSurvivorID] ~= nil) then
+        local npcSurvivor = activeNPCs[npcSurvivorID];
+        local square = getCell():getGridSquare(
+            npcSurvivor.squareX,
+            npcSurvivor.squareY,
+            npcSurvivor.squareZ
+        );
+        local distanceFromSquare = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(getSpecificPlayer(0), square);
+        if (square == nil) then
+            return;
+        end
+        local isSquareOnScreen = square:IsOnScreen();
+        if (isSquareOnScreen) then
+            getSpecificPlayer(0):Say(npcSurvivorID .. ", isSquareOnScreen: " .. tostring(isSquareOnScreen) ..
+                " | distance: " .. tostring(distanceFromSquare)
+            );
         end
     end
 end
