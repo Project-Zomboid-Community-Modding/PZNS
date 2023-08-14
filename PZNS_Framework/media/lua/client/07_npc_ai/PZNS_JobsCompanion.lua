@@ -143,11 +143,39 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
             jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer);
             -- Cows: Else check if npcSurvivor and follow target are both in a car
         elseif (isTargetInCar ~= nil and isSelfInCar ~= nil) then
+            getSpecificPlayer(0):Say(tostring(npcSurvivor.survivorID) .. " isInCar: " .. tostring(isSelfInCar));
             -- WIP - Cows: perhaps NPCs can attack hostiles while in the car with a gun?...
             npcSurvivor.idleTicks = 0;
-
+            local carWindow = isSelfInCar:getClosestWindow(npcIsoPlayer);
+            getSpecificPlayer(0):Say(tostring(npcSurvivor.survivorID) .. " carWindow: " .. tostring(carWindow));
+            if (carWindow) then
+                local seatWindow = carWindow:findWindow();
+                getSpecificPlayer(0):Say(tostring(npcSurvivor.survivorID) .. " seatWindow: " .. tostring(seatWindow));
+                local canOpenCarWindow = seatWindow:isOpenable();
+                if (canOpenCarWindow and npcSurvivor.canAttack == true) then
+                    getSpecificPlayer(0):Say(tostring(npcSurvivor.survivorID) .. " car window opened");
+                    seatWindow:setOpen(true);
+                end
+                if (seatWindow:isOpen() == true) then
+                    getSpecificPlayer(0):Say(tostring(npcSurvivor.survivorID) .. " car window is open");
+                    if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
+                        getSpecificPlayer(0):Say(tostring(npcSurvivor.survivorID) .. " is now attacking");
+                        return; -- Cows Stop Processing and let the NPC finish its actions.
+                    end
+                end
+            end
             -- Cows: Check if target is NOT in a car and exit the car if self is in one.
         elseif (isTargetInCar == nil and isSelfInCar ~= nil) then
+            local carWindow = isSelfInCar:getClosestWindow(npcIsoPlayer);
+            if (carWindow) then
+                local seatWindow = carWindow:findWindow();
+                if (seatWindow) then
+                    local canOpenCarWindow = seatWindow:isOpenable();
+                    if (canOpenCarWindow) then
+                        seatWindow:setOpen(false);
+                    end
+                end
+            end
             PZNS_ExitVehicle(npcSurvivor);
         else -- Cows: Else assume both npcSurvivor and target are on foot.
             -- Cows: Companion is currently being forced to move, presumably to keep up with the target.
@@ -177,7 +205,11 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
             end
         end
     else
+        local isSelfInCar = npcIsoPlayer:getVehicle();
         -- Cows: Else assume the npcSurvivor is holding in place.
+        if (isSelfInCar ~= nil) then
+            PZNS_ExitVehicle(npcSurvivor);
+        end
         if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
             return; -- Cows Stop Processing and let the NPC finish its actions.
         end
