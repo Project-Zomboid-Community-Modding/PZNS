@@ -108,7 +108,8 @@ function PZNS_DebuggerUtils.LogNPCGroupsModData()
                         memberCount = memberCount + 1;
                     end
                 end
-                PZNS_DebuggerUtils.CreateLogLine("LogNPCGroupsModData", isLoggingLocalFunction, "memberCount: " .. tostring(memberCount));
+                PZNS_DebuggerUtils.CreateLogLine("LogNPCGroupsModData", isLoggingLocalFunction,
+                    "memberCount: " .. tostring(memberCount));
                 PZNS_DebuggerUtils.CreateLogLine("LogNPCGroupsModData", isLoggingLocalFunction, "");
             end
         end
@@ -199,6 +200,8 @@ function PZNS_DebuggerUtils.PZNS_GetAllObjectsInCell()
     local getAddListInCell = getCell():getAddList();                       -- Cows: Returned nothing...
     local getRemoveListInCell = getCell():getRemoveList();                 -- Cows: Returned nothing...
     local getProcessIsoObjectsInCell = getCell():getProcessIsoObjects();   -- Cows: Returns a list of interactive objects (Dryers/Washer, Stove)
+    local getRemoteSurvivorList = getCell():getRemoteSurvivorList();       -- Cows: Returned nothing...
+    local getSurvivorList = getCell():getSurvivorList();                   -- Cows: Returned nothing...
     local getZombieListInCell = getCell():getZombieList();
     --
     local playerSurvivor = getSpecificPlayer(0);
@@ -268,6 +271,22 @@ function PZNS_DebuggerUtils.PZNS_GetAllObjectsInCell()
         );
     end
     --
+    for i = 1, getRemoteSurvivorList:size() - 1 do
+        local currentObj = getRemoteSurvivorList:get(i);
+        --
+        PZNS_DebuggerUtils.CreateLogLine("getRemoteSurvivorList", isLoggingLocalFunction,
+            "currentObj: " .. tostring(currentObj)
+        );
+    end
+    --
+    for i = 1, getSurvivorList:size() - 1 do
+        local currentObj = getSurvivorList:get(i);
+        --
+        PZNS_DebuggerUtils.CreateLogLine("getSurvivorList", isLoggingLocalFunction,
+            "currentObj: " .. tostring(currentObj)
+        );
+    end
+    --
     for i = 1, getZombieListInCell:size() - 1 do
         local currentObj = getZombieListInCell:get(i);
         --
@@ -325,6 +344,51 @@ function PZNS_DebuggerUtils.PZNS_LogPlayerCustomization(mpPlayerID)
     PZNS_DebuggerUtils.CreateLogLine("PZNS_DebuggerUtils", isLoggingLocalFunction,
         "skinTexture: " .. tostring(playerSurvivor:getHumanVisual():getSkinTexture())
     );
+end
+
+--- Cows: This was created to address an issue/question raised about what happens to dead NPCs
+--- Cows: Found out that non-zombified dead NPCs do not "rot" or get auto cleaned up.
+--- https://github.com/shadowhunter100/PZNS/discussions/38
+function PZNS_DebuggerUtils.PZNS_RemoveDeadBodies()
+    local isLoggingLocalFunction = false;
+    local corpsesList = {};
+    local removalRadius = 30;
+    -- Cows:
+    local playerSquareX = getSpecificPlayer(0):getX();
+    local playerSquareY = getSpecificPlayer(0):getY();
+    local playerSquareZ = getSpecificPlayer(0):getZ();
+    --
+    local boundsStartX = playerSquareX - removalRadius;
+    local boundsStartY = playerSquareY - removalRadius;
+    local boundsEndX = playerSquareX + removalRadius;
+    local boundsEndY = playerSquareY + removalRadius;
+    --
+    for xOffset = 0, boundsEndX - boundsStartX do
+        for yOffset = 0, boundsEndY - boundsStartY do
+            local currentSquare = getCell():getGridSquare(
+                boundsStartX + xOffset,
+                boundsStartY + yOffset,
+                playerSquareZ
+            );
+            local currentSqDeadBodys = currentSquare:getDeadBodys();
+            for i = 0, currentSqDeadBodys:size() - 1 do
+                ---@type IsoDeadBody
+                local currentBody = currentSqDeadBodys:get(i);
+                if (currentBody:isZombie() == false) then
+                    table.insert(corpsesList, currentBody);
+                    PZNS_DebuggerUtils.CreateLogLine("PZNS_RemoveDeadBodies", isLoggingLocalFunction,
+                        "currentBody: " .. tostring(currentBody)
+                    );
+                    currentBody:removeFromSquare();
+                    currentBody:removeFromWorld();
+                end
+            end
+        end
+    end
+    PZNS_DebuggerUtils.CreateLogLine("PZNS_RemoveDeadBodies", isLoggingLocalFunction,
+        "corpsesList: " .. tostring(corpsesList)
+    );
+    return corpsesList;
 end
 
 return PZNS_DebuggerUtils;
