@@ -197,7 +197,9 @@ local PZNS_DebugWorldText = {
     SpawnJill = getText("ContextMenu_PZNS_ReSpawn_Jill_Tester"),
     SpawnZombie = getText("ContextMenu_PZNS_Spawn_Zombie"),
     SpawnRaider = getText("ContextMenu_PZNS_Spawn_Raider"),
-    SpawnNPCSurvivor = getText("ContextMenu_PZNS_Spawn_Survivor")
+    SpawnNPCSurvivor = getText("ContextMenu_PZNS_Spawn_Survivor"),
+    RemoveDeadBodies = getText("ContextMenu_PZNS_Remove_Dead_Bodies"),
+    
 };
 ---
 local PZNS_DebugWorld = {
@@ -207,7 +209,8 @@ local PZNS_DebugWorld = {
     SpawnJill = respawnJillTester,
     SpawnZombie = spawnZombieAtSquare,
     SpawnRaider = PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare,
-    SpawnNPCSurvivor = PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare
+    SpawnNPCSurvivor = PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare,
+    RemoveDeadBodies = PZNS_DebuggerUtils.PZNS_RemoveDeadBodies
 };
 
 --- Cows: mpPlayerID is a placeholder, it doesn't do anything and defaults to 0 in a local game.

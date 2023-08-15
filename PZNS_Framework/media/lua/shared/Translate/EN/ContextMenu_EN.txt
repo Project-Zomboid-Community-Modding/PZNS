@@ -19,6 +19,7 @@ ContextMenu_EN = {
 		ContextMenu_PZNS_PZNS_Debug_Build = "PZNS Debug Build",
 		ContextMenu_PZNS_Clear_Player_Needs = "Clear Player Needs",
 		ContextMenu_PZNS_Clear_All_NPCs_Needs = "Clear All NPC Needs",
+		ContextMenu_PZNS_Remove_Dead_Bodies = "Remove Non-Zombie Dead Bodies",
 		ContextMenu_PZNS_ReSpawn_Chris_Tester = "(Re)Spawn Chris Tester",
 		ContextMenu_PZNS_ReSpawn_Jill_Tester = "(Re)Spawn Jill Tester",
 		ContextMenu_PZNS_Spawn_Zombie = "Spawn a Zombie",
