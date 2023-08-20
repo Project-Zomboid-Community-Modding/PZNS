@@ -4,6 +4,8 @@ local PZNS_WorldUtils = require("02_mod_utils/PZNS_WorldUtils");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
 
+PZNS_ContextMenu = PZNS_ContextMenu or {}
+
 ---comment
 ---@param npcSurvivor any
 ---@return ItemContainer | nil
@@ -18,7 +20,7 @@ end
 ---@param mpPlayerID number
 ---@param context any
 ---@param worldobjects any
-function PZNS_ContextMenuNPCInfo(mpPlayerID, context, worldobjects)
+function PZNS_ContextMenu.NPCInfoOptions(mpPlayerID, context, worldobjects)
     local infoSubMenu_1 = context:getNew(context);
     local infoSubMenu_1_Option = context:addOption(
         getText("ContextMenu_PZNS_PZNS_NPC_Info"),
