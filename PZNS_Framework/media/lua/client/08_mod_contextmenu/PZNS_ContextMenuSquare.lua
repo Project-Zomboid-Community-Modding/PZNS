@@ -22,6 +22,9 @@ PZNS_SquareContextActions = {
     WashClothes = PZNS_WashClothesAtSquare,
     WashSelf = PZNS_WashSelfAtSquare
 };
+
+PZNS_ContextMenu = PZNS_ContextMenu or {}
+
 --- @type IsoGridSquare | nil
 local mouseSquareToHighlight = nil;
 
@@ -99,7 +102,7 @@ end
 ---@param square IsoGridSquare
 ---@param deadBody IsoDeadBody | nil
 ---@return any
-function PZNS_CreateSquareGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, orderKey, square, deadBody)
+local function PZNS_CreateSquareGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, orderKey, square, deadBody)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local groupMembers = PZNS_NPCGroupsManager.getGroupByID(groupID);
     --
@@ -152,7 +155,7 @@ end
 ---@param mpPlayerID number
 ---@param context any
 ---@param worldobjects any
-function PZNS_ContextMenuSquareObjects(mpPlayerID, context, worldobjects)
+function PZNS_ContextMenu.SquareObjectsOptions(mpPlayerID, context, worldobjects)
     local playerGroupID = "Player" .. mpPlayerID .. "Group";
     local squareSubMenu = context:getNew(context);
     --

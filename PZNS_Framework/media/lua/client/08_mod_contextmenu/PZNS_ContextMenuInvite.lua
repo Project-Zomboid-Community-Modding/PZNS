@@ -4,11 +4,13 @@ local PZNS_PlayerUtils = require("02_mod_utils/PZNS_PlayerUtils");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
 
+PZNS_ContextMenu = PZNS_ContextMenu or {}
+
 ---comment
 ---@param mpPlayerID number
 ---@param context any
 ---@param worldobjects any
-function PZNS_ContextMenuInvite(mpPlayerID, context, worldobjects)
+function PZNS_ContextMenu.InviteOptions(mpPlayerID, context, worldobjects)
     local invitableCount = 0;
     local playerSurvivor = getSpecificPlayer(mpPlayerID);
     local playerGroupID = "Player" .. tostring(mpPlayerID) .. "Group";

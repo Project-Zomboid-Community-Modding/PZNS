@@ -20,13 +20,15 @@ PZNS_NPCOrderActions = {
     AttackStop = PZNS_StopAttacking
 };
 
+PZNS_ContextMenu = PZNS_ContextMenu or {}
+
 ---comment
 ---@param parentContextMenu any
 ---@param mpPlayerID number
 ---@param groupID any
 ---@param orderKey any
 ---@return any
-function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, orderKey)
+local function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, orderKey)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local groupMembers = PZNS_NPCGroupsManager.getGroupByID(groupID);
     local followTargetID = "Player" .. tostring(mpPlayerID);
@@ -94,7 +96,7 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
             end
         end
         --
-        if(PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
+        if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
             local isNPCSquareLoaded = PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor);
             if (isNPCSquareLoaded == true) then
                 parentContextMenu:addOption(
@@ -113,7 +115,7 @@ end
 ---@param mpPlayerID number
 ---@param context any
 ---@param worldobjects any
-function PZNS_ContextMenuOrders(mpPlayerID, context, worldobjects)
+function PZNS_ContextMenu.OrdersOptions(mpPlayerID, context, worldobjects)
     local orderSubMenu = context:getNew(context);
     local orderSubMenu_Option = context:addOption(
         getText("ContextMenu_PZNS_PZNS_Orders"),

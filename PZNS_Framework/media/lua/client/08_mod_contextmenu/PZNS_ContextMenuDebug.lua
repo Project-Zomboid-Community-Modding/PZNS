@@ -147,14 +147,14 @@ local PZNS_DebugBuild = {
     SpawnTools = addToolsToLocalPlayer,
 };
 
+PZNS_ContextMenu = PZNS_ContextMenu or {}
+PZNS_ContextMenu.Debug = PZNS_ContextMenu.Debug or {}
+
 --- Cows: mpPlayerID is a placeholder, it doesn't do anything.
 ---@param mpPlayerID number
 ---@param context any
 ---@param worldobjects any
-function PZNS_ContextMenuDebugBuild(mpPlayerID, context, worldobjects)
-    if (SandboxVars.PZNS_Framework.IsDebugModeActive ~= true) then
-        return;
-    end
+function PZNS_ContextMenu.Debug.BuildOptions(mpPlayerID, context, worldobjects)
     --
     local submenu_1 = context:getNew(context);
     local submenu_1_Option = context:addOption(
@@ -199,7 +199,7 @@ local PZNS_DebugWorldText = {
     SpawnRaider = getText("ContextMenu_PZNS_Spawn_Raider"),
     SpawnNPCSurvivor = getText("ContextMenu_PZNS_Spawn_Survivor"),
     RemoveDeadBodies = getText("ContextMenu_PZNS_Remove_Dead_Bodies"),
-    
+
 };
 ---
 local PZNS_DebugWorld = {
@@ -217,10 +217,7 @@ local PZNS_DebugWorld = {
 ---@param mpPlayerID number
 ---@param context any
 ---@param worldobjects any
-function PZNS_ContextMenuDebugWorld(mpPlayerID, context, worldobjects)
-    if (SandboxVars.PZNS_Framework.IsDebugModeActive ~= true) then
-        return;
-    end
+function PZNS_ContextMenu.Debug.WorldOptions(mpPlayerID, context, worldobjects)
     local submenu_1 = context:getNew(context);
     local submenu_1_Option = context:addOption(
         getText("ContextMenu_PZNS_PZNS_Debug_World"),
@@ -267,10 +264,7 @@ local PZNS_DebugWipe = {
 ---@param mpPlayerID number
 ---@param context any
 ---@param worldobjects any
-function PZNS_ContextMenuDebugWipe(mpPlayerID, context, worldobjects)
-    if (SandboxVars.PZNS_Framework.IsDebugModeActive ~= true) then
-        return;
-    end
+function PZNS_ContextMenu.Debug.WipeOptions(mpPlayerID, context, worldobjects)
     local submenu_1 = context:getNew(context);
     local submenu_1_Option = context:addOption(
         getText("ContextMenu_PZNS_PZNS_Debug_WipeData"),
