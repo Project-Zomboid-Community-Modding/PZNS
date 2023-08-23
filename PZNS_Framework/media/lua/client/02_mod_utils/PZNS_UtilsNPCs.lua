@@ -378,16 +378,24 @@ function PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor)
     if (npcSurvivor == nil) then
         return false;
     end
+    local npcSquare = nil;
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    --
+    -- Cows: Use the current IsoPlayer's object position if available
     if (npcIsoPlayer) then
-        local npcSquare = npcIsoPlayer:getSquare();
-        --
-        if (npcSquare ~= nil) then
-            return true;
-        end
+        npcSquare = npcIsoPlayer:getSquare();
+    else
+        -- Cows: Else Use the last known/saved position of the NPC
+        npcSquare = getCell():getGridSquare(
+            npcSurvivor.squareX,
+            npcSurvivor.squareY,
+            npcSurvivor.squareZ
+        );
     end
-    return false;
+    -- Cows: if the npcSquare is still nil, the square is unloaded.
+    if (npcSquare == nil) then
+        return false;
+    end
+    return true;
 end
 
 ---comment
@@ -484,23 +492,25 @@ function PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevel(npcSurvivor)
     end
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    npcIsoPlayer:getStats():setAnger(0.0);
-    npcIsoPlayer:getStats():setBoredom(0.0);
-    npcIsoPlayer:getStats():setDrunkenness(0.0);
-    npcIsoPlayer:getStats():setEndurance(100.0);
-    npcIsoPlayer:getStats():setFatigue(0.0);
-    npcIsoPlayer:getStats():setFear(0.0);
-    npcIsoPlayer:getStats():setHunger(0.0);
-    npcIsoPlayer:getStats():setIdleboredom(0.0);
-    npcIsoPlayer:getStats():setMorale(0.0);
-    npcIsoPlayer:getStats():setPain(0.0);
-    npcIsoPlayer:getStats():setPanic(0.0);
-    npcIsoPlayer:getStats():setSanity(0.0);
-    npcIsoPlayer:getStats():setSickness(0.0);
-    npcIsoPlayer:getStats():setStress(0.0);
-    npcIsoPlayer:getStats():setStressFromCigarettes(0.0);
-    npcIsoPlayer:getStats():setThirst(0.0);
-    npcIsoPlayer:getBodyDamage():AddGeneralHealth(25);
+    if (npcIsoPlayer) then
+        npcIsoPlayer:getStats():setAnger(0.0);
+        npcIsoPlayer:getStats():setBoredom(0.0);
+        npcIsoPlayer:getStats():setDrunkenness(0.0);
+        npcIsoPlayer:getStats():setEndurance(100.0);
+        npcIsoPlayer:getStats():setFatigue(0.0);
+        npcIsoPlayer:getStats():setFear(0.0);
+        npcIsoPlayer:getStats():setHunger(0.0);
+        npcIsoPlayer:getStats():setIdleboredom(0.0);
+        npcIsoPlayer:getStats():setMorale(0.0);
+        npcIsoPlayer:getStats():setPain(0.0);
+        npcIsoPlayer:getStats():setPanic(0.0);
+        npcIsoPlayer:getStats():setSanity(0.0);
+        npcIsoPlayer:getStats():setSickness(0.0);
+        npcIsoPlayer:getStats():setStress(0.0);
+        npcIsoPlayer:getStats():setStressFromCigarettes(0.0);
+        npcIsoPlayer:getStats():setThirst(0.0);
+        npcIsoPlayer:getBodyDamage():AddGeneralHealth(25);
+    end
 end
 
 --- Cows: Clears ALL npcs' needs on call.
