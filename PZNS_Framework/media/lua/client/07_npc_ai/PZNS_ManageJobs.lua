@@ -10,7 +10,7 @@ local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager"
 
 -- Cows: Init PZNS_CellZombiesList as an empty table, which can then be used by all NPCs to evaluate the zombie threat.
 PZNS_CellZombiesList = nil; -- WIP - Cows: Need to rethink how Global variables are used...
-PZNS_CellNPCsList = {};    -- WIP - Cows: Need to rethink how Global variables are used...
+PZNS_CellNPCsList = {};     -- WIP - Cows: Need to rethink how Global variables are used...
 
 -- WIP - Cows: Need to rethink how Global variables are used...
 PZNS_JobsText = {
@@ -93,3 +93,17 @@ function PZNS_UpdateAllJobsRoutines()
         PZNS_UpdateNPCJobRoutine(npcSurvivor);
     end
 end
+
+local PZNS_ManageJobs = {};
+
+--- Cows: Input a JobName (without space) and associated JobFunction to make the NPC run on a custom job AI.
+---@param JobName string
+---@param JobFunction any
+function PZNS_ManageJobs.updatePZNSJobsTable(JobName, JobFunction)
+    -- Cows: Check if the JobName is not in the table.
+    if (PZNS_Jobs[JobName] == nil) then
+        PZNS_Jobs[JobName] = JobFunction;
+    end
+end
+
+return PZNS_ManageJobs;
