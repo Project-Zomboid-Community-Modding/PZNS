@@ -72,42 +72,54 @@ end
 --- Cows: Helper function to spawn and despawn/unload NPCs from the game world.
 ---@param npcSurvivor any
 local function spawnNPCIsoPlayer(npcSurvivor)
-    --
     if (npcSurvivor == nil) then
         return;
     end
     --
     if (npcSurvivor.isAlive == true) then
         local isNPCSquareLoaded = PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor);
-        ---@type IsoPlayer
-        local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
         -- Cows: Check isNPCSquareLoaded
         if (isNPCSquareLoaded == true) then
             local playerSurvivor = getSpecificPlayer(0);
+            -- Cows: Realized that there are times when the IsoPlayer object is in the world, but the parent object npcSurvivor isn't updated... 
+            local spawnX = npcSurvivor.squareX;
+            local spawnY = npcSurvivor.squareY;
+            local spawnZ = npcSurvivor.squareZ;
+            ---@type IsoPlayer
+            local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+            -- Cows: Check if the IsoPlayer object exists and use it instead as the most recent NPC location.
+            if (npcIsoPlayer) then
+                spawnX = npcIsoPlayer:getX();
+                spawnY = npcIsoPlayer:getY();
+                spawnZ = npcIsoPlayer:getZ();
+            end
             local isNPCInSpawnRange = PZNS_WorldUtils.PZNS_IsSquareInPlayerSpawnRange(playerSurvivor,
-                npcSurvivor.squareX, npcSurvivor.squareY, npcSurvivor.squareZ
+                spawnX, spawnY, spawnZ
             );
             -- Cows: Check if the NPC is in spawn range
             if (isNPCInSpawnRange == true) then
-                -- Cows: Check if NPC does not exists in the world, set the isSavedInWorld to false so NPC can be saved later if off-screen.
+                -- Cows: Check if npcSurvivor isSpawned
                 if (npcSurvivor.isSpawned ~= true) then
-                    if (npcIsoPlayer:getSquare() ~= nil and npcIsoPlayer:isExistInTheWorld() ~= true) then
-                        PZNS_UtilsDataNPCs.PZNS_SpawnNPCFromModData(npcSurvivor);
-                        npcSurvivor.isSavedInWorld = false;
-                    end
+                    -- Cows: set the isSavedInWorld to false so NPC can be saved later if off-screen.
+                    PZNS_UtilsDataNPCs.PZNS_SpawnNPCFromModData(npcSurvivor);
+                    npcSurvivor.isSavedInWorld = false;
                 end
             else
-                -- Cows: Else remove the NPC from the game world to prevent issues from happening.
+                -- Cows: Else remove the NPC from the game world to prevent issues from happening in the background.
+                -- Cows: Check if the NPC is NOT saved in the world and save its relevant data.
                 if (npcSurvivor.isSavedInWorld ~= true) then
+                    npcSurvivor.textObject:ReadString("");
                     npcSurvivor.isSpawned = false;
                     npcSurvivor.isSavedInWorld = true;
                     PZNS_UtilsDataNPCs.PZNS_SaveNPCData(npcSurvivor.survivorID, npcSurvivor);
                 end
-                -- Cows: Clear the text string.
-                npcSurvivor.textObject:ReadString("");
-                npcIsoPlayer:removeFromWorld();
-                npcIsoPlayer:removeFromSquare();
-                -- Cows: If the npc cannot be saved, permanently remove from game world.
+                -- Cows: Check if the IsoPlayer object exists then remove and reset the npc IsoPlayer Object.
+                if (npcIsoPlayer) then
+                    npcIsoPlayer:removeFromSquare();
+                    npcIsoPlayer:removeFromWorld();
+                    npcSurvivor.npcIsoPlayerObject = nil;
+                end
+                -- Cows: Check if the npc cannot be saved and permanently remove from game world.
                 if (npcSurvivor.canSaveData == false) then
                     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
                     activeNPCs[npcSurvivor.survivorID] = nil;
