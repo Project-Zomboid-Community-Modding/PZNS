@@ -145,6 +145,7 @@ function PZNS_UtilsDataNPCs.PZNS_SpawnNPCFromModData(npcSurvivor)
         npcSurvivor.textObject:setDefaultFont(UIFont.Small);
         npcSurvivor.textObject:setDefaultColors(255, 255, 255);
         npcSurvivor.textObject:ReadString(npcSurvivor.survivorName);
+        npcSurvivor.isSavedInWorld = false;
         npcSurvivor.isSpawned = true;
     end
     return npcSurvivor;
