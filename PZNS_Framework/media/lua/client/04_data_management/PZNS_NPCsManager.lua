@@ -96,8 +96,8 @@ function PZNS_NPCsManager.deleteActiveNPCBySurvivorID(survivorID)
         -- Cows Check if IsoPlayer object exists.
         if (npcIsoPlayer ~= nil) then
             -- Cows: Remove the IsoPlayer from the world then nil the table key-value data.
-            npcIsoPlayer:removeFromWorld();
             npcIsoPlayer:removeFromSquare();
+            npcIsoPlayer:removeFromWorld();
             npcIsoPlayer:removeSaveFile(); -- Cows: Remove the IsoPlayer SaveFile? I am curious about how it tracks the save file...
         end
         activeNPCs[survivorID] = nil;
