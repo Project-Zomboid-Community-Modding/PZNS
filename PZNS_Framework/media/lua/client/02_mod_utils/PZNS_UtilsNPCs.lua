@@ -321,9 +321,11 @@ function PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor)
     end
     -- Cows: Reset the actionTicks, so NPC can restart their actions
     npcSurvivor.actionTicks = 0;
-    -- Cows: Stop aiming and stop attacking
-    npcIsoPlayer:NPCSetAiming(false);
+    -- Cows: Stop attacking and stop aiming
     npcIsoPlayer:NPCSetAttack(false);
+    if (npcIsoPlayer:NPCGetAiming() == true) then
+        npcIsoPlayer:NPCSetAiming(false);
+    end
     ISTimedActionQueue.clear(npcIsoPlayer);
 end
 
@@ -351,7 +353,7 @@ function PZNS_UtilsNPCs.PZNS_GetNPCActionsQueuedCount(npcSurvivor)
     return actionsCount;
 end
 
---- WIP - Cows: Need to clean up the ISTimedActionQueue queues eventually...
+--- Cows: Adds an action to ISTimedActionQueue; this is a wrapper function that allows the npcSurvivor to be updated without changing ISTimedActionQueue
 ---@param npcSurvivor any
 ---@param npcQueueAction any
 function PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, npcQueueAction)
@@ -376,16 +378,24 @@ function PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor)
     if (npcSurvivor == nil) then
         return false;
     end
+    local npcSquare = nil;
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    --
+    -- Cows: Use the current IsoPlayer's object position if available
     if (npcIsoPlayer) then
-        local npcSquare = npcIsoPlayer:getSquare();
-        --
-        if (npcSquare ~= nil) then
-            return true;
-        end
+        npcSquare = npcIsoPlayer:getSquare();
+    else
+        -- Cows: Else Use the last known/saved position of the NPC
+        npcSquare = getCell():getGridSquare(
+            npcSurvivor.squareX,
+            npcSurvivor.squareY,
+            npcSurvivor.squareZ
+        );
     end
-    return false;
+    -- Cows: if the npcSquare is still nil, the square is unloaded.
+    if (npcSquare == nil) then
+        return false;
+    end
+    return true;
 end
 
 ---comment
@@ -472,15 +482,17 @@ end
 --- Cows: needType based on values in Java API
 ---@param npcSurvivor any
 function PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevel(npcSurvivor)
-    if (npcSurvivor == nil) then
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid == false) then
         return;
     end
-    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    if (npcIsoPlayer == nil) then
-        return;
+    local playerGroupID = "Player" .. tostring(0) .. "Group";
+    -- Cows; Check if the npc is in the playerGroup and increase their affection accordingly.
+    if (npcSurvivor.groupID == playerGroupID) then
+        npcSurvivor.affection = npcSurvivor.affection + 10;
     end
     --
-    if (npcIsoPlayer:isAlive() == true) then
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    if (npcIsoPlayer) then
         npcIsoPlayer:getStats():setAnger(0.0);
         npcIsoPlayer:getStats():setBoredom(0.0);
         npcIsoPlayer:getStats():setDrunkenness(0.0);
@@ -537,11 +549,79 @@ function PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor)
     if (npcSurvivor == nil) then
         return false;
     end
+    if (npcSurvivor.isSpawned ~= true) then
+        return false;
+    end
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
         return false;
     end
+    if (npcIsoPlayer:isAlive() ~= true) then
+        return false;
+    end
     return true;
+end
+
+--- Cows: This is to streamline complete random rolls of stats for NPCs.
+function PZNS_UtilsNPCs.PZNS_SetNPCPerksRandomly(npcSurvivor)
+    local from1to10 = function() return ZombRand(1, 10); end;
+    local from1to7 = function() return ZombRand(1, 7); end;
+    local from0to3 = function() return ZombRand(0, 3); end;
+    -- WIP - Cows: There seems to be a conflict with 'More Traits'... unsure which perk is affecting it at the moment.
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Strength", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Fitness", from1to7());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Sprinting", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Lightfoot", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Nimble", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Sneak", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Axe", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Blunt", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "SmallBlunt", from1to7());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "LongBlade", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "SmallBlade", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Spear", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Maintenance", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Woodwork", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Cooking", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Farming", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Doctor", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Electricity", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "MetalWelding", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Mechanics", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Tailoring", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Aiming", from0to3());
+    PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Reloading", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Fishing", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "Trapping", from0to3());
+    -- PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, "PlantScavenging", from0to3());
+end
+
+--- Cows: This is to streamline complete random rolls of stats for NPCs.
+function PZNS_UtilsNPCs.PZNS_SetLoadedGun(npcSurvivor)
+    if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid == false) then
+        return;
+    end
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    ---@type HandWeapon
+    local npcHandItem = npcIsoPlayer:getPrimaryHandItem();
+    if (npcHandItem == nil) then
+        return;
+    end
+    if (npcHandItem:IsWeapon() == true and npcHandItem:isRanged() == true) then
+        local ammoType = npcHandItem:getAmmoType();
+        local magazineType = npcHandItem:getMagazineType();
+        if (magazineType) then
+            npcHandItem:setContainsClip(true);
+        end
+        if (ammoType) then
+            if (npcHandItem:getCurrentAmmoCount() == 0) then
+                npcHandItem:setCurrentAmmoCount(npcHandItem:getMaxAmmo());
+            end
+        end
+        if npcHandItem:haveChamber() then
+            npcHandItem:setRoundChambered(true);
+        end
+    end
 end
 
 return PZNS_UtilsNPCs;

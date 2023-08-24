@@ -68,7 +68,7 @@ function PZNS_JobWanderInCell(npcSurvivor)
         if (distanceFromTarget < 1) then
             -- Cows: Chance the NPC will continue to stay and explore in the current building they are in.
             local isStaying = chanceToStay > ZombRand(1, 100);
-            if (isStaying == true) then
+            if (npcSurvivor.jobSquare:isOutside() == false and isStaying == true) then
                 local targetBuilding = npcSurvivor.jobSquare:getBuilding();
                 PZNS_GeneralAI.PZNS_ExploreTargetBuilding(npcSurvivor, targetBuilding);
                 return;

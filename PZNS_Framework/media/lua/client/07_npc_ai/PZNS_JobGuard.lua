@@ -9,8 +9,16 @@ function PZNS_JobGuard(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;
     end
-    if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
-        return; -- Cows Stop Processing and let the NPC finish its actions.
+    local isNPCArmed = PZNS_GeneralAI.PZNS_IsNPCArmed(npcSurvivor);
+    -- Cows: Only engage in combat if NPC has permission to attack and NPC is also armed.
+    if (npcSurvivor.canAttack == true and isNPCArmed == true) then
+        if (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
+            return; -- Cows Stop Processing and let the NPC finish its actions.
+        end
+    elseif (isNPCArmed == false) then
+        PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_NeedWeapon_01"), "Negative");
+    elseif (npcSurvivor.canAttack == false) then
+        PZNS_NPCSpeak(npcSurvivor, getText("IGUI_PZNS_Speech_Preset_CannotAttack_01"), "InfoOnly");
     end
     -- Cows: No Group means no zone to guard... for now.
     if (npcSurvivor.groupID == nil) then
@@ -29,8 +37,6 @@ function PZNS_JobGuard(npcSurvivor)
             -- Cows: let the guard NPC resume its walking patrol along the zone perimeter.
             npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
             if (npcSurvivor.actionTicks >= 30) then
-                npcIsoPlayer:NPCSetAiming(false);
-                npcIsoPlayer:NPCSetAttack(false);
                 local squareX = npcSurvivor.jobSquare:getX();
                 local squareY = npcSurvivor.jobSquare:getY();
                 local squareZ = npcSurvivor.jobSquare:getZ();
@@ -100,11 +106,11 @@ function PZNS_JobGuard(npcSurvivor)
             end
         end
     else
-        -- Cows: Else assume the npcSurvivor is holding in place.
-        if (npcSurvivor.jobSquare) then
-            local squareX, squareY, squareZ = npcSurvivor.jobSquare:getX(), npcSurvivor.jobSquare:getY(),
-                npcSurvivor.jobSquare:getZ();
-            PZNS_RunToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
+        npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
+        if (npcSurvivor.actionTicks >= 30) then
+            PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
+            PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor);
+            npcSurvivor.actionTicks = 0;
         end
     end
 end

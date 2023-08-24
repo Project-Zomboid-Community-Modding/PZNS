@@ -20,13 +20,15 @@ PZNS_NPCOrderActions = {
     AttackStop = PZNS_StopAttacking
 };
 
+PZNS_ContextMenu = PZNS_ContextMenu or {}
+
 ---comment
 ---@param parentContextMenu any
 ---@param mpPlayerID number
 ---@param groupID any
 ---@param orderKey any
 ---@return any
-function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, orderKey)
+local function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, orderKey)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local groupMembers = PZNS_NPCGroupsManager.getGroupByID(groupID);
     local followTargetID = "Player" .. tostring(mpPlayerID);
@@ -47,16 +49,14 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
             playerSurvivor:Say(npcSurvivor.forename .. ", " .. PZNS_NPCOrdersText[orderKey]);
             --
             if (orderKey == "FollowMe" or orderKey == "AimAtMe") then
-                if (npcSurvivor.speechTable ~= nil) then
-                    if (npcSurvivor.speechTable.PZNS_OrderSpeechFollow) then
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechFollow, "Friendly"
-                        );
-                    else
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechFollow, "Friendly"
-                        );
-                    end
+                if (npcSurvivor.speechTable == nil) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechFollow, "Friendly"
+                    );
+                elseif (npcSurvivor.speechTable.PZNS_OrderSpeechFollow) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechFollow, "Friendly"
+                    );
                 else
                     PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                         npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechFollow, "Friendly"
@@ -64,16 +64,14 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
                 end
                 PZNS_NPCOrderActions[orderKey](npcSurvivor, followTargetID);
             elseif (orderKey == "HoldPosition") then
-                if (npcSurvivor.speechTable ~= nil) then
-                    if (npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition) then
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition, "Friendly"
-                        );
-                    else
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechHoldPosition, "Friendly"
-                        );
-                    end
+                if (npcSurvivor.speechTable == nil) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechHoldPosition, "Friendly"
+                    );
+                elseif (npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, npcSurvivor.speechTable.PZNS_OrderSpeechHoldPosition, "Friendly"
+                    );
                 else
                     PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                         npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderSpeechHoldPosition, "Friendly"
@@ -81,16 +79,14 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
                 end
                 PZNS_NPCOrderActions[orderKey](npcSurvivor, square);
             else
-                if (npcSurvivor.speechTable ~= nil) then
-                    if (npcSurvivor.speechTable.PZNS_OrderConfirmed) then
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
-                        );
-                    else
-                        PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
-                            npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
-                        );
-                    end
+                if (npcSurvivor.speechTable == nil) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
+                    );
+                elseif (npcSurvivor.speechTable.PZNS_OrderConfirmed) then
+                    PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
+                        npcSurvivor, npcSurvivor.speechTable.PZNS_OrderConfirmed, "Friendly"
+                    );
                 else
                     PZNS_UtilsNPCs.PZNS_UseNPCSpeechTable(
                         npcSurvivor, PZNS_PresetsSpeeches.PZNS_OrderConfirmed, "Friendly"
@@ -100,21 +96,18 @@ function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, ord
             end
         end
         --
-        if (npcSurvivor ~= nil) then
-            local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+        if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
             local isNPCSquareLoaded = PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor);
-            -- Cows: Check and make sure the NPC is both alive and loaded in the current game world.
-            if (npcIsoPlayer) then
-                if (npcIsoPlayer:isAlive() == true and isNPCSquareLoaded == true) then
-                    parentContextMenu:addOption(
-                        npcSurvivor.survivorName,
-                        nil,
-                        callbackFunction
-                    );
-                end
+            if (isNPCSquareLoaded == true) then
+                parentContextMenu:addOption(
+                    npcSurvivor.survivorName,
+                    nil,
+                    callbackFunction
+                );
             end
         end
-    end
+    end -- Cows: End groupMembers for-loop
+
     return parentContextMenu;
 end
 
@@ -122,7 +115,7 @@ end
 ---@param mpPlayerID number
 ---@param context any
 ---@param worldobjects any
-function PZNS_ContextMenuOrders(mpPlayerID, context, worldobjects)
+function PZNS_ContextMenu.OrdersOptions(mpPlayerID, context, worldobjects)
     local orderSubMenu = context:getNew(context);
     local orderSubMenu_Option = context:addOption(
         getText("ContextMenu_PZNS_PZNS_Orders"),

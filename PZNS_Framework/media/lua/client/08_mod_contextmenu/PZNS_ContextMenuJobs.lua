@@ -3,10 +3,12 @@ local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_PresetsSpeeches = require("03_mod_core/PZNS_PresetsSpeeches");
 local PZNS_NPCGroupsManager = require("04_data_management/PZNS_NPCGroupsManager");
 
+PZNS_ContextMenu = PZNS_ContextMenu or {}
+
 ---comment
 ---@param groupID any
 ---@param parentContextMenu any
-function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jobName)
+local function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jobName)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local groupMembers = PZNS_NPCGroupsManager.getGroupByID(groupID);
     local followTargetID = "Player" .. mpPlayerID;
@@ -45,28 +47,26 @@ function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jobName)
             parentContextMenu:setVisible(false);
         end
         --
-        if (npcSurvivor ~= nil) then
-            local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-            if (npcIsoPlayer) then
-                local isNPCSquareLoaded = PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor);
-                -- Cows: Check and make sure the NPC is both alive and loaded in the current game world.
-                if (npcIsoPlayer:isAlive() and isNPCSquareLoaded == true) then
-                    parentContextMenu:addOption(
-                        npcSurvivor.survivorName,
-                        nil,
-                        callbackFunction
-                    );
-                end
+        if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
+            local isNPCSquareLoaded = PZNS_UtilsNPCs.PZNS_GetIsNPCSquareLoaded(npcSurvivor);
+            if (isNPCSquareLoaded == true) then
+                parentContextMenu:addOption(
+                    npcSurvivor.survivorName,
+                    nil,
+                    callbackFunction
+                );
             end
         end
-    end
+    end -- Cows: End groupMembers for-loop
+
     return parentContextMenu;
 end
+
 ---comment
 ---@param mpPlayerID number
 ---@param context any
 ---@param worldobjects any
-function PZNS_ContextMenuJobs(mpPlayerID, context, worldobjects)
+function PZNS_ContextMenu.JobsOptions(mpPlayerID, context, worldobjects)
     local jobsSubMenu_1 = context:getNew(context);
     local jobsSubMenu_1_Option = context:addOption(
         getText("ContextMenu_PZNS_PZNS_Jobs"),

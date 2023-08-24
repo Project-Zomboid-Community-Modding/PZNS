@@ -27,6 +27,6 @@ function PZNS_HoldPosition(npcSurvivor, targetSquare)
         )
     then
         npcSurvivor.jobSquare = targetSquare;
-        PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
+        -- PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ); -- Cows: Seems redundant now because job have their movements handlers.
     end
 end

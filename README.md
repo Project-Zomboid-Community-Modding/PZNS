@@ -1,4 +1,4 @@
-# __**PZNS - Project Zomboid NPC Spawner Framework**__  
+# __**PZNS - Project Zomboid NPC Spawning Framework**__  
 A new Lua based framework for managing, spawning, and directing NPCs in Project Zomboid  
   
 This is an effort to standardize NPC management and spawning while offering the flexibility to all modders the ability to create and modify NPCs to their content without worry about all the complicated issues such as AI behaviors, data management, and decompiling PZ source code.  
@@ -56,3 +56,6 @@ The NPC outfits featured in the screenshots and videos are all outfits made by S
 - Jab (jabdoesthings)  
 - Notloc (notloc) - For a workaround on getting NPCs to run with B41 API.
 - Poltergeist (poltergeist_ix)
+
+# Support me on ko-fi!
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U7U0O1ZTH)

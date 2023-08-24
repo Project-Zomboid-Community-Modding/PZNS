@@ -26,17 +26,7 @@ local function PZNS_Events()
     Events.OnWeaponSwing.Add(PZNS_WeaponSwing);
     Events.OnWeaponHitCharacter.Add(PZNS_CombatUtils.PZNS_CalculatePlayerDamage);
     --
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugBuild);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWorld);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuDebugWipe);
-    --
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuZones);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuJobs);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuOrders);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuNPCInventory);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuNPCInfo);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuSquareObjects);
-    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenuInvite);
+    Events.OnFillWorldObjectContextMenu.Add(PZNS_ContextMenu.PZNS_OnFillWorldObjectContextMenu);
     --
     Events.OnRefreshInventoryWindowContainers.Add(PZNS_AddNPCInv);
     Events.OnFillInventoryObjectContextMenu.Add(PZNS_NPCInventoryContext);
@@ -44,6 +34,8 @@ local function PZNS_Events()
     if (IsNPCsNeedsActive ~= true) then
         Events.EveryHours.Add(PZNS_UtilsNPCs.PZNS_ClearAllNPCsAllNeedsLevel);
     end
+    -- Cows: May need to change this to OnPlayerUpdate to address https://github.com/shadowhunter100/PZNS/issues/34...
+    -- Cows: Maybe not, since the NPCs will be unloaded much more aggressively/sooner at 45 squares, will confirm after more testing.
     Events.EveryOneMinute.Add(PZNS_WorldUtils.PZNS_SpawnNPCIfSquareIsLoaded);
     Events.OnRenderTick.Add(PZNS_UpdateAllJobsRoutines);
     Events.OnRenderTick.Add(PZNS_RenderNPCsText);
