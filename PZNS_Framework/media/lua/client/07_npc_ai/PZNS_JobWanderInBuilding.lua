@@ -24,8 +24,10 @@ function PZNS_JobWanderInBuilding(npcSurvivor)
         -- Cows: Check if the npcSurvivor has a destination with jobSquare
         if (npcSurvivor.jobSquare == nil) then
             local npcPlayerSquare = npcIsoPlayer:getSquare();
-            local targetBuilding = npcPlayerSquare:getBuilding();
-            PZNS_GeneralAI.PZNS_ExploreTargetBuilding(npcSurvivor, targetBuilding);
+            if npcPlayerSquare ~= nil then
+                local targetBuilding = npcPlayerSquare:getBuilding();
+                PZNS_GeneralAI.PZNS_ExploreTargetBuilding(npcSurvivor, targetBuilding);
+            end
         else
             -- Cows: use idleTicks instead of action ticks, because the NPC is wandering around without a group goal. Also because other actions may use actionTicks.
             npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
