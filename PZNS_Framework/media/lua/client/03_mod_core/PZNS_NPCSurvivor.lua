@@ -30,12 +30,14 @@ function PZNS_NPCSurvivor:newSurvivor(
         jobSquare = nil,                        -- Cows: The square at which the NPC do its job (pickup item, chop tree, etc.)
         isJobRefreshed = false,                 -- Cows: This is a flag to check for NPCs to "refresh" their job status.
         currentAction = "",                     -- Cows: This is a value to check for NPCs to queue or not queue up more actions.
-        isStuckTicks = 0,                       -- Cows: This is a value to check if NPC is "stuck" or doing nothing even though it has a job.
         followTargetID = "",                    -- Cows: Used to follow a specified object managed by PZNS IDs
         speechTable = nil,                      -- Cows: Used when adding speech table(s), if nil, NPCs should use PresetsSpeeches instead.
         lastEquippedMeleeWeapon = "",           -- WIP - Cows: Added so that NPCs can resume using this melee weapon after completing an action.
         lastEquippedRangeWeapon = "",           -- WIP - Cows: Added so that NPCs can resume using this range weapon after completing an action.
         idleTicks = 0,                          -- Cows: Used to track how long an NPC is idle for before they take some general AI stuff.
+        isStuckTicks = 0,                       -- Cows: Used check if NPC is "stuck" or doing nothing even though it has a job.
+        moveTicks = 0,                          -- Cows: Used to track how long the NPC is moving about. Added to determine how often to update pathing.
+        jobTicks = 0,                           -- Cows: Used to track how often NPCs updates their job routine. This was added because actionTicks is intended for actions only.
         actionTicks = 0,                        -- Cows: This is a value used to determine the frequency of an action being called, most notably with multi-stage actions (such as reloading).
         attackTicks = 0,                        -- Cows: I thought it was stupid at first, but after observing an NPC queue up 20+ attacks in a a single frame...
         speechTicks = 0,                        -- Cows: Tracks the ticks between speech text... ticks are inconsistent, but there are currently no other short duration timers.

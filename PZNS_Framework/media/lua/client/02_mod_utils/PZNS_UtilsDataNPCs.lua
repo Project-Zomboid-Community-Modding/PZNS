@@ -135,7 +135,11 @@ function PZNS_UtilsDataNPCs.PZNS_SpawnNPCFromModData(npcSurvivor)
             npcSurvivorDesc,
             npcSurvivor.squareX, npcSurvivor.squareY, npcSurvivor.squareZ
         );
-        --
+        -- Cows: Reset the ticks counter.
+        npcSurvivor.actionTicks = 0;
+        npcSurvivor.idleTicks = 0;
+        npcSurvivor.isStuckTicks = 0;
+        npcSurvivor.jobTicks = 0;
         npcSurvivor.npcIsoPlayerObject = npcIsoPlayerObject;
         npcSurvivor.npcIsoPlayerObject:load(npcFileName);
         npcSurvivor.npcIsoPlayerObject:setNPC(true);

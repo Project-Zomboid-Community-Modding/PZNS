@@ -529,9 +529,6 @@ end
 ---@param npcSurvivor any
 ---@param tickInterval number
 function PZNS_UtilsNPCs.PZNS_StuckNPCCheck(npcSurvivor, tickInterval)
-    if (npcSurvivor.isStuckTicks == nil) then
-        npcSurvivor.isStuckTicks = 0;
-    end
     -- Cows: 50 Ticks per action on average... also need ticks for animations.
     if (npcSurvivor.isStuckTicks > tickInterval) then
         PZNS_NPCSpeak(npcSurvivor, "I was stuck...", "InfoOnly");
