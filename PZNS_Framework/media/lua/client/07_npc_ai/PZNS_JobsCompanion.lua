@@ -44,7 +44,6 @@ local function jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer)
     local targetZ = targetIsoPlayer:getZ();
     -- Cows: Have the companion make an effort to get near the vehicle before forcing the companion to enter it.
     if (distanceFromTarget > 3) then
-        PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start running.
         PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
     else
         PZNS_EnterVehicleAsPassenger(npcSurvivor, targetIsoPlayer);
@@ -71,7 +70,6 @@ end
 ---@param targetIsoPlayer IsoPlayer
 local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
     npcSurvivor.idleTicks = 0;
-    npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     -- Cows: Auto Close doors
     if (npcIsoPlayer:getLastSquare() ~= nil) then
@@ -82,35 +80,30 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
             tempdoor:ToggleDoor(npcIsoPlayer);
         end
     end
-    -- Cows: Update the movement calculation every 30 ticks or so, otherwise NPCs become stuck due to animations.
-    if (npcSurvivor.actionTicks >= 30) then
-        local npcSquareX = npcIsoPlayer:getX();
-        local npcSquareY = npcIsoPlayer:getY();
-        npcIsoPlayer:NPCSetAttack(false);
-        if (npcIsoPlayer:NPCGetAiming() == true) then
-            npcIsoPlayer:NPCSetAiming(false);
-        end
-        --
-        local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
-        npcIsoPlayer:faceThisObject(targetIsoPlayer);
-        --
-        local targetX = targetIsoPlayer:getX();
-        local targetY = targetIsoPlayer:getY();
-        local targetZ = targetIsoPlayer:getZ();
-        -- Cows: Offset by at least 1 square to ensure the npcSurvivor companion doesn't push into the followed target.
-        local offset = ZombRand(1, CompanionFollowRange);
-        targetX = offsetTargetSquare(npcSquareX, targetX, offset);
-        targetY = offsetTargetSquare(npcSquareY, targetY, offset);
-        PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start running.
-        -- Cows: Check the distance from target and start running if too far from target.
-        if (distanceFromTarget > CompanionRunRange) then
-            npcSurvivor.isForcedMoving = true;
-            PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
-        else
-            npcSurvivor.isForcedMoving = false;
-            PZNS_WalkToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
-        end
-        npcSurvivor.actionTicks = 0;
+    local npcSquareX = npcIsoPlayer:getX();
+    local npcSquareY = npcIsoPlayer:getY();
+    npcIsoPlayer:NPCSetAttack(false);
+    if (npcIsoPlayer:NPCGetAiming() == true) then
+        npcIsoPlayer:NPCSetAiming(false);
+    end
+    --
+    local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
+    npcIsoPlayer:faceThisObject(targetIsoPlayer);
+    --
+    local targetX = targetIsoPlayer:getX();
+    local targetY = targetIsoPlayer:getY();
+    local targetZ = targetIsoPlayer:getZ();
+    -- Cows: Offset by at least 1 square to ensure the npcSurvivor companion doesn't push into the followed target.
+    local offset = ZombRand(1, CompanionFollowRange);
+    targetX = offsetTargetSquare(npcSquareX, targetX, offset);
+    targetY = offsetTargetSquare(npcSquareY, targetY, offset);
+    -- Cows: Check the distance from target and start running if too far from target.
+    if (distanceFromTarget > CompanionRunRange) then
+        npcSurvivor.isForcedMoving = true;
+        PZNS_RunToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
+    else
+        npcSurvivor.isForcedMoving = false;
+        PZNS_WalkToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
     end
 end
 
@@ -128,6 +121,7 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
     if (targetIsoPlayer == nil) then
         return;
     end
+    npcSurvivor.jobTicks = npcSurvivor.jobTicks + 1;
     -- Cows: Sneak if the follow target is sneaking.
     if (targetIsoPlayer:isSneaking()) then
         npcIsoPlayer:setSneaking(true);
@@ -140,7 +134,11 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
         local isSelfInCar = npcIsoPlayer:getVehicle();
         -- Cows: Check if target is in a car and if npcSurvivor is not in a car.
         if (isTargetInCar ~= nil and isSelfInCar == nil) then
-            jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer);
+            -- Cows: Check and make the enter call at set ticks interval to account for animation timing.
+            if (npcSurvivor.jobTicks % 30 == 0) then
+                PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start running.
+                jobCompanion_EnterCar(npcSurvivor, targetIsoPlayer);
+            end
             -- Cows: Else check if npcSurvivor and follow target are both in a car
         elseif (isTargetInCar ~= nil and isSelfInCar ~= nil) then
             -- WIP - Cows: perhaps NPCs can attack hostiles while in the car with a gun?...
@@ -148,25 +146,35 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
 
             -- Cows: Check if target is NOT in a car and exit the car if self is in one.
         elseif (isTargetInCar == nil and isSelfInCar ~= nil) then
-            PZNS_ExitVehicle(npcSurvivor);
-        else -- Cows: Else assume both npcSurvivor and target are on foot.
-            -- Cows: Companion is currently being forced to move, presumably to keep up with the target.
-            if (npcSurvivor.isForcedMoving == true) then
-                jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
-                return; -- Cows: Stop processing and start moving to target.
+            -- Cows: Check and make the exit call at set ticks interval to account for animation timing.
+            if (npcSurvivor.jobTicks % 30 == 0) then
+                PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start running.
+                PZNS_ExitVehicle(npcSurvivor);
             end
-
-            local canSeeTarget = npcIsoPlayer:CanSee(targetIsoPlayer);
-            -- Cows: Check if npcSurvivor is NOT near their follow target...
-            if (isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer) == false or canSeeTarget == false) then
-                jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
+        else -- Cows: Else assume both npcSurvivor and target are on foot.
+            -- Cows: Check if Companion is currently being forced to move or npcSurvivor is NOT near their follow target
+            if (npcSurvivor.isForcedMoving == true or isCompanionInFollowRange(npcIsoPlayer, targetIsoPlayer) == false) then
+                -- Cows: Update the movement calculation at set ticks interval, otherwise NPCs can become stuck due to animations' timing.
+                if (npcSurvivor.jobTicks % 30 == 0) then
+                    PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start running.
+                    jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
+                end
                 return; -- Cows: Stop processing and start moving to target.
                 -- Cows: Else Check if the NPC is busy in combat related stuff.
             elseif (PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor) == true) then
-                return; -- Cows Stop Processing and let the NPC finish its actions.
+                return; -- Cows Stop Processing and let the NPC finish its combat actions.
             end
-            --Cows: Check if companion has idled for too long and take action.
+            local canSeeTarget = npcIsoPlayer:CanSee(targetIsoPlayer);
+            -- WIP - Cows: Check if Companion can't see their target, and move them to a square that is visible within follow range.
+            if (canSeeTarget == false) then
+                -- jobCompanion_Movement(npcSurvivor, targetIsoPlayer);
+                -- return;
+            end
+
+            -- WIP - Cows: Check if companion has idled for too long and take idle action.
             if (npcSurvivor.idleTicks >= CompanionIdleTicks) then
+                npcIsoPlayer:NPCSetAttack(false);
+                npcIsoPlayer:NPCSetAiming(false);
                 -- Cows: Do Idle stuff, eat, wash, read books?
                 -- PZNS_NPCSpeak(npcSurvivor,
                 --     "I am getting bored here... idleTicks: " .. tostring(npcSurvivor.idleTicks), "InfoOnly"
@@ -184,8 +192,8 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
         if (npcSurvivor.jobSquare == nil) then
             return; -- Cows Stop Processing as the NPC has no destination
         end
-        npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
-        if (npcSurvivor.actionTicks >= 30) then
+        -- Cows: Update the path to the jobSquare every 30 ticks or so.
+        if (npcSurvivor.jobTicks % 30 == 0) then
             PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start moving towards jobSquare.
             local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(npcIsoPlayer, targetIsoPlayer);
             local targetX = npcSurvivor.jobSquare:getX();
@@ -203,7 +211,10 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
                 npcSurvivor.isForcedMoving = false;
                 PZNS_WalkToSquareXYZ(npcSurvivor, targetX, targetY, targetZ);
             end
-            npcSurvivor.actionTicks = 0;
         end
+    end
+    -- Cows: Reset the jobTicks to 0 at >= 60 ticks
+    if (npcSurvivor.jobTicks >= 60) then
+        npcSurvivor.jobTicks = 0;
     end
 end
