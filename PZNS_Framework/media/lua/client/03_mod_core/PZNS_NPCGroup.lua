@@ -28,7 +28,7 @@ function Group:new(
     group.groupID = groupID
     group.name = name
     group.leaderID = leaderID
-    group.members = members
+    group.members = members or {}
     group.factionID = factionID
     group.memberCount = #group.members
     setmetatable(group, self)
