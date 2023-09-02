@@ -1,26 +1,37 @@
+require("03_mod_core/init")
+
+local NPCZone = require("03_mod_core/PZNS_NPCZone")
 local PZNS_UtilsDataZones = require("02_mod_utils/PZNS_UtilsDataZones");
 local PZNS_NPCZonesManager = {};
 
+local function getZones()
+    return PZNS_UtilsDataZones.PZNS_GetCreateActiveZonesModData()
+end
+
 ---comment
----@param groupID any
----@param zoneType any
----@return table
+---@param groupID groupID
+---@param zoneType string
+---@return Zone zone
 function PZNS_NPCZonesManager.createZone(
     groupID,
     zoneType
 )
-    local activeZones = PZNS_UtilsDataZones.PZNS_GetCreateActiveZonesModData();
-    local newZone = PZNS_NPCZone:newZone(groupID, zoneType);
-    local groupZoneID = groupID .. "_" .. zoneType;
-    --
-    if (activeZones[groupZoneID] == nil) then
-        activeZones[groupZoneID] = newZone;
+    local zone
+    local zoneID = groupID .. "_" .. zoneType
+    local name = zoneID
+    local zones = getZones()
+    local existingZone = zones[zoneID]
+    if not existingZone then
+        zone = NPCZone:new(zoneID, name, groupID, zoneType)
+        zones[zoneID] = zone
+    else
+        zone = existingZone
     end
-    return newZone;
+    return zone
 end
 
 --- Cows: Get a zone by the input groupID.
----@param groupID string
+---@param groupID groupID
 function PZNS_NPCZonesManager.getZonesByGroupID(groupID)
     local activeZones = PZNS_UtilsDataZones.PZNS_GetCreateActiveZonesModData();
     local groupZones = {};
