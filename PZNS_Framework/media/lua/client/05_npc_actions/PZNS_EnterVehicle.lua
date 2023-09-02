@@ -33,10 +33,12 @@ function PZNS_ExitVehicle(npcSurvivor)
     end
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    local currentVehicle = npcIsoPlayer:getVehicle();
-    local currentSeat = npcIsoPlayer:getVehicle():getSeat(npcIsoPlayer);
+    -- local currentVehicle = npcIsoPlayer:getVehicle();
+    -- local currentSeat = npcIsoPlayer:getVehicle():getSeat(npcIsoPlayer);
     local exitCarAction = ISExitVehicle:new(npcIsoPlayer);
-    local closeCarDoorAction = ISCloseVehicleDoor:new(npcIsoPlayer, currentVehicle, currentSeat);
+    -- local closeCarDoorAction = ISCloseVehicleDoor:new(npcIsoPlayer, currentVehicle, currentSeat);
     PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, exitCarAction);
-    PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, closeCarDoorAction);
+    -- PZNS_UtilsNPCs.PZNS_AddNPCActionToQueue(npcSurvivor, closeCarDoorAction); -- WIP - Cows: NPCs don't seem to close the door on exit no matter what I try...
+    -- WIP - Cows: Curious, I have observed the player actions seems to lock the player keyboard controls randomly when NPCs exit the vehicle...
+    -- WIP - Cows: The current workaround is to open the context menu, and select "Walk to" a square, which then unlocks the player key inputs.
 end
