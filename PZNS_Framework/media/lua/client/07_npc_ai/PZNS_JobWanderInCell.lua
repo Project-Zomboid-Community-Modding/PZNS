@@ -50,14 +50,13 @@ function PZNS_JobWanderInCell(npcSurvivor)
             return;
         end
     else
-        -- Cows: use idleTicks instead of action ticks, because the NPC is wandering around without a group goal. Also because other actions may use actionTicks.
-        npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
+        npcSurvivor.jobTicks = npcSurvivor.jobTicks + 1;
         -- Cows: Else assume the NPC is moving inside the building it is in.
         local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
             npcIsoPlayer, npcSurvivor.jobSquare
         );
         --- Cows: Check if the NPC path is blocked every 60 ticks or so.
-        if (npcSurvivor.idleTicks % 60 == 0) then
+        if (npcSurvivor.jobTicks % 60 == 0) then
             if (PZNS_GeneralAI.PZNS_IsPathBlocked(npcSurvivor) == true) then
                 PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
                 npcSurvivor.jobSquare = nil;

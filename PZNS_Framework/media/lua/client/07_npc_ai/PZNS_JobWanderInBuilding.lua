@@ -29,14 +29,13 @@ function PZNS_JobWanderInBuilding(npcSurvivor)
                 PZNS_GeneralAI.PZNS_ExploreTargetBuilding(npcSurvivor, targetBuilding);
             end
         else
-            -- Cows: use idleTicks instead of action ticks, because the NPC is wandering around without a group goal. Also because other actions may use actionTicks.
-            npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
+            npcSurvivor.jobTicks = npcSurvivor.jobTicks + 1;
             -- Cows: Else assume the NPC is moving inside the building it is in.
             local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
                 npcIsoPlayer, npcSurvivor.jobSquare
             );
             --- Cows: Check if the NPC path is blocked every 60 ticks or so.
-            if (npcSurvivor.idleTicks % 60 == 0) then
+            if (npcSurvivor.jobTicks % 60 == 0) then
                 if (PZNS_GeneralAI.PZNS_IsPathBlocked(npcSurvivor) == true) then
                     PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
                     npcSurvivor.jobSquare = nil;
@@ -46,7 +45,7 @@ function PZNS_JobWanderInBuilding(npcSurvivor)
             -- Cows: Check if the NPC is near its destination...
             if (distanceFromTarget < 1) then
                 -- Cows: Allow the NPC to idle for a moment before restarting its routine.
-                if (npcSurvivor.idleTicks >= 600) then
+                if (npcSurvivor.jobTicks >= 600) then
                     PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
                     npcSurvivor.jobSquare = nil;
                 end
@@ -56,8 +55,7 @@ function PZNS_JobWanderInBuilding(npcSurvivor)
             end
         end
     else
-        -- Cows: Else assume the npcSurvivor is holding in place, but will attempt to walk to any assigned jobSquare.
-        npcSurvivor.idleTicks = npcSurvivor.idleTicks + 1;
+        PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
         PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor);
     end
 end

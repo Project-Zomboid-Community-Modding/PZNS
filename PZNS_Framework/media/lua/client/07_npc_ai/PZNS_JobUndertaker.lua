@@ -99,8 +99,8 @@ function PZNS_JobUndertaker(npcSurvivor)
     --
     debugDropSquare = groupDropSquare;
     -- Cows: Check the job every 30 ticks or so, which should ease the burden of doing everything every tick.
-    npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
-    if (npcSurvivor.actionTicks >= 30) then
+    npcSurvivor.jobTicks = npcSurvivor.jobTicks + 1;
+    if (npcSurvivor.jobTicks >= 30) then
         -- Cows: Check if the NPC has a male corpse in the inventory.
         local inventoryCorpse = npcIsoPlayer:getInventory():FindAndReturn("CorpseMale");
         -- Cows: Then check if there is no corpse in the inventory and look for a female corpse.
@@ -172,6 +172,6 @@ function PZNS_JobUndertaker(npcSurvivor)
                 end
             end -- Cows: End cellCorpseSquares loop.
         end
-        npcSurvivor.actionTicks = 0;
+        npcSurvivor.jobTicks = 0;
     end
 end

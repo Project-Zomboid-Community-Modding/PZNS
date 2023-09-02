@@ -35,8 +35,8 @@ function PZNS_JobGuard(npcSurvivor)
         --
         if (npcSurvivor.jobSquare ~= nil) then
             -- Cows: let the guard NPC resume its walking patrol along the zone perimeter.
-            npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
-            if (npcSurvivor.actionTicks >= 30) then
+            npcSurvivor.jobTicks = npcSurvivor.jobTicks + 1;
+            if (npcSurvivor.jobTicks >= 30) then
                 local squareX = npcSurvivor.jobSquare:getX();
                 local squareY = npcSurvivor.jobSquare:getY();
                 local squareZ = npcSurvivor.jobSquare:getZ();
@@ -49,7 +49,7 @@ function PZNS_JobGuard(npcSurvivor)
                 -- );
                 PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start moving.
                 PZNS_WalkToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
-                npcSurvivor.actionTicks = 0;
+                npcSurvivor.jobTicks = 0;
             end
             local distanceFromTarget = PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects(
                 playerSquare,
@@ -106,11 +106,7 @@ function PZNS_JobGuard(npcSurvivor)
             end
         end
     else
-        npcSurvivor.actionTicks = npcSurvivor.actionTicks + 1;
-        if (npcSurvivor.actionTicks >= 30) then
-            PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
-            PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor);
-            npcSurvivor.actionTicks = 0;
-        end
+        PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
+        PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor);
     end
 end
