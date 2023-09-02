@@ -133,6 +133,7 @@ function PZNS_GeneralAI.PZNS_NPCAimAttack(npcSurvivor)
     end
     -- Cows: Can only aim and/or attack aimTarget exists
     if (npcSurvivor.aimTarget ~= nil) then
+        -- WIP - Cows: Should add a check to see if enemy is in range... 
         PZNS_WeaponAiming(npcSurvivor); -- Cows: Aim before attacking
         PZNS_WeaponAttack(npcSurvivor); -- Cows: Permission to attack is handled in the function.
     end
@@ -327,7 +328,7 @@ function PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor)
     end
     -- Cows: Else Update the movement calculation every 200 ticks to reduce action queuing and resume the movement.
     local moveTickInterval = 200;
-    if (npcSurvivor.idleTicks >= moveTickInterval) then
+    if (npcSurvivor.moveTicks >= moveTickInterval) then
         -- Cows: Check the NPC at regular intervals to see if it is stuck in the same square...
         local isStuck = npcIsoPlayer:getLastSquare() == npcPlayerSquare;
         if (isStuck == true) then
@@ -348,8 +349,9 @@ function PZNS_GeneralAI.PZNS_WalkToJobSquare(npcSurvivor)
             PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor); -- Cows: Clear the actions queue and start moving.
             PZNS_WalkToSquareXYZ(npcSurvivor, squareX, squareY, squareZ);
         end
-        npcSurvivor.idleTicks = 0;
+        npcSurvivor.moveTicks = 0;
     end
+    npcSurvivor.moveTicks = npcSurvivor.moveTicks + 1;
 end
 
 -- Cows: Helper function for exploring a specified target building.
