@@ -10,7 +10,7 @@ PZNS_ContextMenu = PZNS_ContextMenu or {}
 ---@param parentContextMenu any
 local function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jobName)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
-    local groupMembers = PZNS_NPCGroupsManager.getGroupByID(groupID);
+    local groupMembers = PZNS_NPCGroupsManager.getMembers(groupID);
     local followTargetID = "Player" .. mpPlayerID;
     --
     -- Cows: Stop if there are no active npcs. or groupMembers
@@ -18,8 +18,8 @@ local function PZNS_CreateJobNPCsMenu(parentContextMenu, mpPlayerID, groupID, jo
         return;
     end
     --
-    for survivorID, v in pairs(groupMembers) do
-        local npcSurvivor = activeNPCs[survivorID];
+    for i = 1, #groupMembers do
+        local npcSurvivor = activeNPCs[groupMembers[i]];
         -- Cows: conditionally set the callback function for the context menu option.
         local callbackFunction = function()
             npcSurvivor.jobSquare = nil;

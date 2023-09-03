@@ -104,14 +104,14 @@ end
 ---@return any
 local function PZNS_CreateSquareGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, orderKey, square, deadBody)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
-    local groupMembers = PZNS_NPCGroupsManager.getGroupByID(groupID);
+    local groupMembers = PZNS_NPCGroupsManager.getMembers(groupID);
     --
     if (groupMembers == nil) then
         return;
     end
     local playerSurvivor = getSpecificPlayer(mpPlayerID);
-    for survivorID, v in pairs(groupMembers) do
-        local npcSurvivor = activeNPCs[survivorID];
+    for i = 1, #groupMembers do
+        local npcSurvivor = activeNPCs[groupMembers[i]];
         local callbackFunction = function()
             playerSurvivor:Say(npcSurvivor.forename .. ", " ..
                 PZNS_SquareContextActionsText[orderKey]

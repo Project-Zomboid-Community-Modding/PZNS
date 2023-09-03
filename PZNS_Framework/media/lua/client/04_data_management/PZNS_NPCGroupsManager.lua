@@ -9,7 +9,6 @@ local Group = require("03_mod_core/PZNS_NPCGroup")
 local fmt = string.format
 
 
-
 ---@return Group?
 local function getGroup(groupID)
     local activeGroups = PZNS_UtilsDataGroups.PZNS_GetCreateActiveGroupsModData()
@@ -98,10 +97,9 @@ function PZNS_NPCGroupsManager.deleteGroup(groupID)
     local members = Group.getMembers(group)
     for i = 1, #members do
         local npc = getNPC(members[i])
-        assert(npc, fmt("NPC not found! ID: %s", npc))
-        assert(npc.groupID == groupID, fmt("NPC is not in group! ID: %s; groupID: %s", npc, groupID))
-        if not npc then return end
-        NPC.unsetGroupID(npc)
+        if npc then
+            NPC.unsetGroupID(npc)
+        end
     end
     if group.factionID then
         print("Not yet implemented")
@@ -142,7 +140,7 @@ function PZNS_NPCGroupsManager.addNPCToGroup(npcSurvivor, groupID)
     local survivorID = npcSurvivor.survivorID;
 
     local group = getGroup(groupID)
-    verifyGroup(groupID)
+    -- verifyGroup(groupID)
     if not group then return end
     assert(not npcSurvivor.groupID, fmt("NPC is already a member of another group! ID: %s", survivorID))
     assert(npcSurvivor.groupID ~= groupID,
@@ -151,16 +149,30 @@ function PZNS_NPCGroupsManager.addNPCToGroup(npcSurvivor, groupID)
     NPC.setGroupID(npcSurvivor, groupID)
 end
 
+--- Cows: Add a npcSurvivor to the specified group
+---@param survivorID survivorID
+---@param groupID groupID
+function PZNS_NPCGroupsManager.addNPCToGroupById(survivorID, groupID)
+    local group = getGroup(groupID)
+    local npc = getNPC(survivorID)
+    if not npc then return end
+    -- verifyGroup(groupID)
+    if not group then return end
+    Group.addMember(group, survivorID)
+    NPC.setGroupID(npc, groupID)
+end
+
 --- Cows: Remove a npcSurvivor to the specified group
 ---@param groupID groupID
 ---@param survivorID survivorID
 function PZNS_NPCGroupsManager.removeNPCFromGroup(groupID, survivorID)
     local group = getGroup(groupID)
-    verifyGroup(groupID)
+    -- verifyGroup(groupID)
     if not group then return end
     local npc = getNPC(survivorID)
-    assert(npc, fmt("NPC not found! ID: %s", npc))
-    assert(npc.groupID == groupID, fmt("NPC is not in group! ID: %s; groupID: %s", npc, groupID))
+    -- assert(npc, fmt("NPC not found! ID: %s", survivorID))
+    -- assert(npc.groupID == groupID, fmt("NPC is not in group! ID: %s; groupID: %s", survivorID, groupID))
+    if not npc then return end
     --
     if group then
         Group.removeMember(group, survivorID)
@@ -173,7 +185,7 @@ end
 ---@return table<survivorID>
 function PZNS_NPCGroupsManager.getMembers(groupID)
     local group = getGroup(groupID)
-    verifyGroup(groupID)
+    -- verifyGroup(groupID)
     if not group then return {} end
     return Group.getMembers(group)
 end
@@ -189,10 +201,11 @@ end
 
 function PZNS_NPCGroupsManager.setLeader(groupID, leaderID)
     local group = getGroup(groupID)
-    verifyGroup(groupID)
+    -- verifyGroup(groupID)
     if not group then return end
     local npc = getNPC(leaderID)
-    assert(npc, fmt("NPC not found! leaderID: %s; groupID: %s", leaderID, groupID))
+    if not npc then return end
+    -- assert(npc, fmt("NPC not found! leaderID: %s; groupID: %s", leaderID, groupID))
     assert(not npc.groupID or npc.groupID == npc.groupID,
         "NPC is already a member of another group! leaderID: %s; groupID: %s", leaderID, groupID)
 
@@ -205,7 +218,7 @@ end
 
 function PZNS_NPCGroupsManager.setGroupName(groupID, newName)
     local group = getGroup(groupID)
-    verifyGroup(groupID)
+    -- verifyGroup(groupID)
     if not group then return end
     Group.setName(group, newName)
 end

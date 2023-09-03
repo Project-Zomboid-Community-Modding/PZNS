@@ -35,7 +35,7 @@ function PZNS_PlayerUtils.PZNS_AddPlayerToGroup(mpPlayerID, groupID)
     local stringID = "player" .. tostring(mpPlayerID);
     --
     if (group ~= nil) then
-        group[stringID] = stringID;
+        PZNS_NPCGroupsManager.addNPCToGroupById(stringID, groupID)
     end
 end
 
@@ -47,7 +47,7 @@ function PZNS_PlayerUtils.PZNS_RemovePlayerFromGroup(mpPlayerID, groupID)
     local stringID = "player" .. tostring(mpPlayerID);
     --
     if (group ~= nil) then
-        group[stringID] = nil;
+        PZNS_NPCGroupsManager.removeNPCFromGroup(groupID, stringID)
     end
 end
 

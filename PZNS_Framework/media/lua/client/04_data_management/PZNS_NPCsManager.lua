@@ -131,20 +131,20 @@ end
 
 ---Set NPC group ID to groupID
 ---@param survivorID survivorID
----@param groupID groupID|nil
+---@param groupID groupID?
 function PZNS_NPCsManager.setGroupID(survivorID, groupID)
     local npc = PZNS_NPCsManager.getNPC(survivorID)
-    assert(npc, fmt("NPC not found! ID: %s", survivorID))
+    -- assert(npc, fmt("NPC not found! ID: %s", survivorID))
     if not npc then return end
     local group = getGroup(groupID)
-    assert(group, fmt("Group not found! ID: %s", groupID))
+    -- assert(group, fmt("Group not found! ID: %s", groupID))
     if not group then return end
     NPC.setGroupID(npc, groupID)
 end
 
 ---Cows: Get a npcSurvivor by specified survivorID
----@param survivorID any
----@return any
+---@param survivorID survivorID
+---@return NPC?
 function PZNS_NPCsManager.getActiveNPCBySurvivorID(survivorID)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     if (activeNPCs[survivorID] ~= nil) then
@@ -154,7 +154,7 @@ function PZNS_NPCsManager.getActiveNPCBySurvivorID(survivorID)
 end
 
 ---Cows: Delete a npcSurvivor by specified survivorID
----@param survivorID any
+---@param survivorID survivorID
 function PZNS_NPCsManager.deleteActiveNPCBySurvivorID(survivorID)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local npcSurvivor = activeNPCs[survivorID];
@@ -173,7 +173,7 @@ function PZNS_NPCsManager.deleteActiveNPCBySurvivorID(survivorID)
 end
 
 ---comment
----@param survivorID any
+---@param survivorID survivorID
 function PZNS_NPCsManager.setActiveInventoryNPCBySurvivorID(survivorID)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local npcSurvivor = activeNPCs[survivorID];

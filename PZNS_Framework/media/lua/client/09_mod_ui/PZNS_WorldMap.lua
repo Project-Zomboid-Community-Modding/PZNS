@@ -65,14 +65,15 @@ function PZNS_UpdateISWorldMapRender()
             return;
         end
         local playerGroupID = "Player0Group";
-        local group = PZNS_NPCGroupsManager.getGroupByID(playerGroupID);
+        local members = PZNS_NPCGroupsManager.getMembers(playerGroupID);
         local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
         -- Cows: check if activeNPCs is not nil and loaded.
-        if (activeNPCs == nil or group == nil) then
+        if (activeNPCs == nil or members == {}) then
             return;
         end
         -- Cows: iterate through the survivorIDs of the group.
-        for survivorID, v in pairs(group) do
+        for i = 1, #members do
+            local survivorID = members[i]
             local npcSurvivor = activeNPCs[survivorID];
             --
             if (npcSurvivor ~= nil) then
@@ -83,38 +84,38 @@ function PZNS_UpdateISWorldMapRender()
                     if (npcIsoPlayer:isAlive() == true) then
                         local x = self.mapAPI:worldToUIX(npcIsoPlayer:getX(), npcIsoPlayer:getY()) - 3;
                         local y = self.mapAPI:worldToUIY(npcIsoPlayer:getX(), npcIsoPlayer:getY()) - 3;
-                        self:drawRect(x, y, 6, 6, 1, 0, 0, 1);     -- Cows: This draws the square dot on the map.
+                        self:drawRect(x, y, 6, 6, 1, 0, 0, 1); -- Cows: This draws the square dot on the map.
                         local name_size = getTextManager():MeasureStringX(UIFont.NewSmall, survivorName);
                         self:drawRect(
-                            x - 6,             -- y offset, should put the box above the dot and the text in middle.
-                            y - 28,            -- y offset, should put the box above the dot and the text in center.
-                            name_size + 3,     -- Width
-                            24,                -- Height
-                            0.5,               -- Transparency
-                            0,                 -- R
-                            0,                 -- G
-                            0                  -- B
-                        );                     -- Cows: This draws the namebox background
+                            x - 6,         -- y offset, should put the box above the dot and the text in middle.
+                            y - 28,        -- y offset, should put the box above the dot and the text in center.
+                            name_size + 3, -- Width
+                            24,            -- Height
+                            0.5,           -- Transparency
+                            0,             -- R
+                            0,             -- G
+                            0              -- B
+                        );                 -- Cows: This draws the namebox background
                         self:drawText(survivorName, x - 5, y - (28 + 1), 1, 1, 1, 1, UIFont.NewSmall);
                     end
                 elseif (npcSurvivor.isAlive == true) then
                     local x = self.mapAPI:worldToUIX(npcSurvivor.squareX, npcSurvivor.squareY) - 3;
                     local y = self.mapAPI:worldToUIY(npcSurvivor.squareX, npcSurvivor.squareY) - 3;
-                    self:drawRect(x, y, 6, 6, 1, 0, 0, 1);     -- Cows: This draws the square dot on the map.
+                    self:drawRect(x, y, 6, 6, 1, 0, 0, 1); -- Cows: This draws the square dot on the map.
                     local name_size = getTextManager():MeasureStringX(UIFont.NewSmall, survivorName);
                     self:drawRect(
-                        x - 6,             -- y offset, should put the box above the dot and the text in middle.
-                        y - 28,            -- y offset, should put the box above the dot and the text in center.
-                        name_size + 3,     -- Width
-                        24,                -- Height
-                        0.5,               -- Transparency
-                        0,                 -- R
-                        0,                 -- G
-                        0                  -- B
-                    );                     -- Cows: This draws the namebox background
+                        x - 6,         -- y offset, should put the box above the dot and the text in middle.
+                        y - 28,        -- y offset, should put the box above the dot and the text in center.
+                        name_size + 3, -- Width
+                        24,            -- Height
+                        0.5,           -- Transparency
+                        0,             -- R
+                        0,             -- G
+                        0              -- B
+                    );                 -- Cows: This draws the namebox background
                     self:drawText(survivorName, x - 5, y - (28 + 1), 1, 1, 1, 1, UIFont.NewSmall);
                 end
             end
-        end     -- Cows: End group for-loop
+        end -- Cows: End group for-loop
     end
 end
