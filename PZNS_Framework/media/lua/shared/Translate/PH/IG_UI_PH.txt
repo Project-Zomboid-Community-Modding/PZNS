@@ -1,0 +1,62 @@
+IGUI_PH = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Ano ang fuck na binaril mo?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Goddamn ito!Panoorin ang iyong apoy!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Bakit mo ako inaatake?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Goddamn ito!Itigil ang paghagupit sa akin!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Sapat na ang aking kalokohan!Namatay ka ngayon!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Ang peklat na iyon ay gagawa ng magandang kwento ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Nagsisimula na akong magsisisi!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Kahit anong sabihin mo.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "ginagawa ko na; inaayos ko na",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Sige",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Naunawaan, hahawakan ko ang lugar na ito.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Hawak ko na ngayon ang lokasyong ito ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Guard duty huh ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Naiintindihan, sumusunod",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Nakuha ko ang iyong likod",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Sige, mamuno sa daan.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Fine, aalis na ako noon",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Bakit ako?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Ikinalulungkot mo ang desisyon na ito!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Kailangan ko ng isang bagay na gawin dito ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Ano ang susunod kong gawain?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Ito ay isang mabagal na araw sa trabaho ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Wala akong sandata!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Walang pahintulot na atake",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Walang workzone para sa Undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "Ok",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Nakuha ko",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Papunta na ako.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Naunawaan, pupunta ako rito",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Kopyahin, may hawak na posisyon.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Pupunta ako rito pagkatapos.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Nasa anim na ako.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Paparating na ngayon.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Kunin ang punto.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Sigurado ka ba? Ingatan mo ang sarili mo.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Maghanap para sa mga freaks.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Huwag pabayaan ang iyong bantay.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Nag -aaksaya kami ng oras dito ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Huwag asahan akong gumawa ng sandwich ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Ano ang dapat kong gawin sa susunod? ...",
+
+}
+

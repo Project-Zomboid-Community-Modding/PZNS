@@ -1,0 +1,26 @@
+Sandbox_HU = {
+	Sandbox_PZNS_Framework = "PZNS keretrendszer",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Aktiválja a hibakeresési módot",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Ellenőrizze az aktiválást, törölje a jelölést a deaktiváláshoz",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "Az NPC -nek van végtelen lőszere?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Ellenőrizze, hogy aktiválja -e a jelölést, hogy deaktiválja - az NPC -k továbbra is lövöldöznek anélkül, hogy aktiválva kell leltárba lőni.",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) Az NPC -nek szüksége van",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Ellenőrizze az aktiválását, ne jelölje meg a kikapcsolást - Az NPC -knek aktiválása esetén élelmezésre és vízre lesz szükségük",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) csoportméret korlát",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) beállítja az NPC -k határát",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Companion követi a tartományt",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Beállítja azt a távolságot, amelyen az NPC -k megpróbálják követni a lejátszót",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Társfutási tartomány",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Beállítja azt a távolságot, amelyen az NPC -k elkezdenek futni, hogy utolérjék",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Companion alapjárat a kullancson",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) beállítja azt a kullancs számlálót, amelyen az NPC -k alapjáraton kezdenek viselkedést",
+
+
+}

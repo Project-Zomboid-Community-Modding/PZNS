@@ -1,0 +1,26 @@
+Sandbox_PH = {
+	Sandbox_PZNS_Framework = "PZNS Framework",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Isaaktibo ang debug mode",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Suriin upang maisaaktibo, alisan ng tsek sa pag -deactivate",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "Ang NPC ay may walang katapusang munisyon?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Suriin upang maisaaktibo, alisan ng tsek sa pag -deactivate - ang mga NPC ay magpapanatili ng pagbaril nang hindi nangangailangan ng munisyon sa imbentaryo kung isinaaktibo",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) May mga pangangailangan ang NPC",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Suriin upang maisaaktibo, alisan ng tsek ang pag -deactivate - kakailanganin ng NPCS ng pagkain at tubig kung isinaaktibo",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Limitasyon ng laki ng pangkat",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(Wip) nagtatakda ng limitasyon ng mga NPC na maaaring magkaroon ng isang pangkat",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Kasamang Sundin ang Saklaw",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Itinatakda ang distansya kung saan susubukan ng mga NPC na sundin ang player",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Kasamang saklaw ng Run",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Itinatakda ang distansya kung saan magsisimulang tumakbo ang mga NPC upang makahabol",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Kasamang Idles sa Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) Nagtatakda ng Tick Counter kung saan magsisimula ang mga NPC",
+
+
+}

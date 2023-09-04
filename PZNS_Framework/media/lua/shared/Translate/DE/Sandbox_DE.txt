@@ -1,0 +1,26 @@
+Sandbox_DE = {
+	Sandbox_PZNS_Framework = "PZNS -Framework",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Aktivieren Sie den Debug -Modus",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Überprüfen Sie, ob Sie aktivieren können, um zu deaktivieren, um zu deaktivieren",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC hat unendliche Munition?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Überprüfen Sie, ob Sie aktivieren können, um zu deaktivieren - NPCs haben immer wieder Aufnahmen, ohne dass Munition im Inventar erforderlich ist, wenn sie aktiviert ist",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC hat Bedürfnisse",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Überprüfen Sie, ob Sie aktivieren können, um zu deaktivieren - NPCs benötigen Lebensmittel und Wasser, wenn Sie aktiviert sind",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Gruppengrößenbegrenzung",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) legt die Grenze von NPCs fest, die eine Gruppe haben kann",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Begleiter folgen Reichweite",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Legt die Entfernung fest, in der NPCs versuchen, dem Spieler zu folgen",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Begleiter Run Range",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Legt die Entfernung fest, in der NPCs ausgeführt werden, um aufzuholen",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Begleiter im Leerlauf bei Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) Legt den Zeckenschalter fest, an dem NPCs das Leerlaufverhalten beginnen",
+
+
+}

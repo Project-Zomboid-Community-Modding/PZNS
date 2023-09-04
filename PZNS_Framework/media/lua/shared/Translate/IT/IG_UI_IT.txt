@@ -1,0 +1,62 @@
+IGUI_IT = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "A che cazzo stavi sparando?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Dannazione!Guarda il tuo fuoco!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Perché mi stai attaccando?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Dannazione!Smettila di colpirmi!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Ne ho abbastanza delle tue cazzate!Muori adesso!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Quella cicatrice farà una bella storia ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ow!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Comincio a pentirmi già!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Qualsiasi cosa tu dica.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "ci sto lavorando",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Bene",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Capito, terrò questo posto.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Ora sto tenendo questa posizione ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Guard Duty Huh ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Compreso, seguendo",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Ti ho preso le spalle",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Va bene, apri la strada.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Bene, me ne vado allora",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Perché io?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Ti pentirai di questa decisione!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Ho bisogno di qualcosa da fare qui ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Qual è il mio prossimo compito?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "È una giornata lenta al lavoro ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Non ho un'arma!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Nessun permesso di attaccare",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "NessunZone di lavoro per Undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "OK",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Fatto",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Sulla mia strada.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Capito, sarò qui",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Copia, posizione di detenzione.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Poi sarò qui.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Sono ai tuoi sei.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Venendo adesso.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Prendi il punto.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Sei sicuro?Prendersi cura di se stessi.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Cerca quei mostri.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Non abbassare la guardia.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Stiamo perdendo tempo qui ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Non aspettarti che io preparassi un panino ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Cosa dovrei fare dopo?...",
+
+}
+

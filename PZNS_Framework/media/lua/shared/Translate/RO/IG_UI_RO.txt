@@ -1,0 +1,62 @@
+IGUI_RO = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "La ce dracu ai tras?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "La naiba!Urmărește -ți focul!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "De ce ma ataci?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "La naiba!Nu mai lovește -mă!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Am avut destul de mult din rahatul tău!Muri!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Cicatricea asta va face o poveste bună ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "AU!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Încep să regret deja asta!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Orice ai spune.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "ma ocup",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Bine",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Înțeles, voi ține acest loc.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Acum țin această locație ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Garda de pază, nu ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Înțeles, urmând",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Ți -am luat spatele",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Bine, conduceți drumul.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Bine, plec atunci",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "De ce eu?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Vei regreta această decizie!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Am nevoie de ceva de făcut aici ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Care este următoarea mea sarcină?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Este o zi lentă la serviciu ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Nu am o armă!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Fără permisiunea de a ataca",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Fără zona de lucru pentru Undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "Bine",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Am înţeles",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Pe drum.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Înțeles, voi fi aici",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Copiați, poziția de deținere.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Voi fi peste aici.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Sunt pe șase.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Venind acum.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Ia punctul.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Esti sigur?Aveți grijă de dumneavoastră.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Privește -te pentru acele freaks.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Nu -ți lăsa garda jos.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Pierdem timpul aici ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Nu vă așteptați să fac un sandwich ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Ce trebuie să fac în continuare?...",
+
+}
+

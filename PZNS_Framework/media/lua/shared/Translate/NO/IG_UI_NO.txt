@@ -1,0 +1,62 @@
+IGUI_NO = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Hva faen skjøt du på?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Jævla det!Se på ilden din!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Hvorfor angriper du meg?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Jævla det!Slutt å slå meg!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Jeg har fått nok av tullet ditt!Du dør nå!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Det arret vil gjøre en god historie ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ow!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Jeg begynner å angre på dette allerede!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Hva enn du sier.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "Jeg er på det",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Ok",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Forstått, vil jeg holde dette stedet.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Jeg holder nå dette stedet ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Guard Duty Huh ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Forstått, følge",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Jeg støtter deg",
+IGUI_PZNS_Speech_Preset_Follow_03 = "OK, leder an.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Fint, jeg drar da",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Hvorfor meg?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Du vil angre på denne avgjørelsen!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Jeg trenger noe å gjøre her ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Hva er min neste oppgave?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Det er en treg dag på jobben ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Jeg har ikke et våpen!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Ingen tillatelse til å angripe",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Ingen arbeidssone for Undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "Ok",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Har det",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "På vei.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Forstått, jeg skal være her",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Kopier, holdestilling.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Jeg er her borte da.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Jeg er på dine seks.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Kommer over nå.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Ta poenget.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Er du sikker? Ta vare på deg selv.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Se opp for de freaks.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Ikke la vakten ned.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Vi kaster bort tid her ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Ikke forvent at jeg skal lage en sandwich ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Hva skal jeg gjøre videre? ...",
+
+}
+

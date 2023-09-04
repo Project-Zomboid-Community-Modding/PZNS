@@ -1,0 +1,26 @@
+Sandbox_UA = {
+	Sandbox_PZNS_Framework = "Рамки PZNS",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Активуйте режим налагодження",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Перевірте, щоб активувати, зняти прапорець, щоб деактивувати",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC має нескінченні боєприпаси?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Перевірте, щоб активувати, знімайте прапорець до деактивування - NPC продовжуватимуть стріляти, не потребуючи боєприпасів в інвентаризації, якщо активовано",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC має потреби",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Перевірте, щоб активувати, зняти прапорець до деактивування - NPC потребуватиме їжі та води, якщо активовано",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) обмеження розміру групи",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) встановлює межу NPC, що може мати група",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Супутник слідує за діапазоном",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Встановлює відстань, на якій NPC намагатимуться слідувати за гравцем",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Діапазон супутника",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Встановлює відстань, на якій NPC почнуть бігати, щоб наздогнати",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Супутники холостого тику",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) Встановлює лічильник кліщів, на якому NPC розпочнуть простою поведінку",
+
+
+}

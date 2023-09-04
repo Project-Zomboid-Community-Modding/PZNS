@@ -1,0 +1,26 @@
+Sandbox_RO = {
+	Sandbox_PZNS_Framework = "Cadrul PZNS",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Activați modul de depanare",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Verificați pentru a activa, debifați pentru a dezactiva",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC are muniție infinită?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Verificați pentru a activa, debifați -vă pentru a dezactiva - NPC -urile vor continua să filmeze fără a avea nevoie de muniție în inventar dacă sunt activate",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC are nevoi",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Verificați pentru a activa, debifați pentru a dezactiva - NPC -urile vor avea nevoie de alimente și apă dacă sunt activate",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Limită de dimensiune a grupului",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) stabilește limita NPC -urilor pe care un grup le poate avea",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Gama de urmărire însoțitoare",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Stabilește distanța la care NPC -urile vor încerca să urmeze jucătorul",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Gama de rulare însoțitoare",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Stabilește distanța la care NPC -urile vor începe să funcționeze pentru a ajunge la pas",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Însoțitor la ralanti la căpușă",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) stabilește contorul de căpușă la care NPC -urile vor începe comportamentele inactive",
+
+
+}

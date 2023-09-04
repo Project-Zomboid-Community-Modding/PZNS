@@ -1,0 +1,26 @@
+Sandbox_AR = {
+	Sandbox_PZNS_Framework = "Marco PZNS",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Activar el modo de depuración",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Verificar para activar, desmarque para desactivar",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC tiene munición infinita?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Verifique para activar, desactivar para desactivar: los NPCs seguirán disparando sin necesidad de munición en inventario si se activa",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC tiene necesidades",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Verifique que se active, desmarque para desactivar - NPCS necesitará alimentos y agua si se activa si se activa",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Límite de tamaño de grupo",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) establece el límite de NPCS que un grupo puede tener",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Rango de seguimiento de compañeros",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Establece la distancia a la que los NPC intentarán seguir al jugador",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Rango de ejecución de compañeros",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Establece la distancia a la que los NPC comenzarán a correr para ponerse al día",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Companion Idles en Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) Establece el contador de garrapatas en el que los NPC comenzarán los comportamientos inactivos",
+
+
+}

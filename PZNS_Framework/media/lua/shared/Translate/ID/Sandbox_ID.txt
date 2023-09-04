@@ -1,0 +1,26 @@
+Sandbox_ID = {
+	Sandbox_PZNS_Framework = "Kerangka PZNS",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Aktifkan Mode Debug",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Periksa untuk mengaktifkan, hapus centang untuk menonaktifkan",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC memiliki amunisi tak terbatas?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Periksa untuk mengaktifkan, hapus centang untuk menonaktifkan - NPC akan terus menembak tanpa memerlukan amunisi dalam inventaris jika diaktifkan",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC memiliki kebutuhan",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Periksa untuk mengaktifkan, hapus centang untuk menonaktifkan - NPC akan membutuhkan makanan dan air jika diaktifkan",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Batas ukuran kelompok",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) menetapkan batas NPC yang mungkin dimiliki grup",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Rentang ikuti teman",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Menetapkan jarak di mana NPC akan mencoba mengikuti pemain",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Range run pendamping",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Menetapkan jarak di mana NPC akan mulai berlari untuk mengejar ketinggalan",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Idles pendamping saat kutu",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) menetapkan penghitung centang di mana NPC akan memulai perilaku menganggur",
+
+
+}

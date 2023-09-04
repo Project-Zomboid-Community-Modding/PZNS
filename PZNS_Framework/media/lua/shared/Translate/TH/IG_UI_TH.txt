@@ -1,0 +1,62 @@
+IGUI_TH = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "คุณยิงอะไรกัน?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "goddamn มัน!ดูไฟของคุณ!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "ทำไมคุณถึงโจมตีฉัน?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "goddamn มัน!หยุดตีฉัน!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "ฉันมีเรื่องไร้สาระมากพอ!คุณตายแล้ว!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "แผลเป็นนั้นจะทำให้เป็นเรื่องดี ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "โอ๊ย!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "ฉันเริ่มเสียใจแล้ว!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "อะไรก็ตามที่คุณพูด.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "ฉันอยู่ในนั้น",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "ใช้ได้",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "เข้าใจฉันจะถือสถานที่นี้",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "ตอนนี้ฉันถือตำแหน่งนี้ ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "หน้าที่ยามฮะ ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "เข้าใจแล้ว",
+IGUI_PZNS_Speech_Preset_Follow_02 = "ฉันได้รับหลังของคุณ",
+IGUI_PZNS_Speech_Preset_Follow_03 = "เอาล่ะนำทาง",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "สบายดีฉันจะจากไปแล้ว",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "ทำไมต้องเป็นฉัน?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "คุณจะเสียใจกับการตัดสินใจครั้งนี้!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "ฉันต้องการอะไรทำที่นี่ ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "งานต่อไปของฉันคืออะไร?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "เป็นวันที่ช้าในการทำงาน ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "ฉันไม่มีอาวุธ!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "ไม่อนุญาตให้โจมตี",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "ไม่มีเวชภัณฑ์สำหรับ Undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "ตกลง",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "เข้าใจแล้ว",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "ระหว่างทาง",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "เข้าใจฉันจะอยู่ที่นี่",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "คัดลอกตำแหน่งถือ",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "ฉันจะมาที่นี่แล้ว",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "ฉันอายุหกขวบ",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "มาตอนนี้",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "ใช้จุด",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "คุณแน่ใจไหม?ดูแลตัวเองด้วยนะ.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "มองหาคนประหลาดเหล่านั้น",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "อย่าทำให้ยามของคุณผิดหวัง",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "เรากำลังเสียเวลาที่นี่ ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "อย่าคาดหวังว่าฉันจะทำแซนวิช ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "ฉันควรทำอย่างไรต่อไป ...",
+
+}
+
