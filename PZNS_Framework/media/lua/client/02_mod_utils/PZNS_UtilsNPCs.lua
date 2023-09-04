@@ -172,9 +172,9 @@ function PZNS_UtilsNPCs.PZNS_EquipLastWeaponNPCSurvivor(npcSurvivor)
     local weaponItem = nil
     --
     if (npcSurvivor.isMeleeOnly == true) then -- TODO reuse item from inventory if any of the same type
-        weaponItem = instanceItem(npcSurvivor.lastEquippedMeleeWeapon);
+        weaponItem = instanceItem(npcSurvivor.lastEquippedMeleeWeapon or "");
     else
-        weaponItem = instanceItem(npcSurvivor.lastEquippedRangeWeapon);
+        weaponItem = instanceItem(npcSurvivor.lastEquippedRangeWeapon or "");
     end
     --
     if (weaponItem ~= nil) then

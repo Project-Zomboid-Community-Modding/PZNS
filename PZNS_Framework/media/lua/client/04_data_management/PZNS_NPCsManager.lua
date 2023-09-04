@@ -1,60 +1,116 @@
+require("00_references/init")
+
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
+local PZNS_UtilsDataGroups = require("02_mod_utils/PZNS_UtilsDataGroups")
+local NPC = require("03_mod_core/PZNS_NPCSurvivor")
+local fmt = string.format
 
 PZNS_ActiveInventoryNPC = {}; -- WIP - Cows: Need to rethink how Global variables are used...
 
 local PZNS_NPCsManager = {};
 
---- Cows: The PZNS_NPCSurvivor uses the IsoPlayer from the base game as one of its properties.
---- Best to think of the other properties of PZNS_NPCSurvivor as extended properties for PZNS.
----@param survivorID any -- Cows: Need a way to guarantee this is unique...
+---Get NPC by its survivorID
+---@param survivorID survivorID
+---@return NPC?
+function PZNS_NPCsManager.getNPC(survivorID)
+    local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+    return activeNPCs[survivorID]
+end
+
+---Try to find NPC by its isoObject
+---@param isoPlayer IsoPlayer
+---@return NPC?
+function PZNS_NPCsManager.findNPCByIsoObject(isoPlayer)
+    local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
+    for _, npc in pairs(activeNPCs) do
+        if npc.npcIsoPlayerObject == isoPlayer then
+            return npc
+        end
+    end
+end
+
+---Get Group by its groupID
+---@param groupID groupID
+---@return Group?
+local function getGroup(groupID)
+    local activeGroups = PZNS_UtilsDataGroups.PZNS_GetCreateActiveGroupsModData()
+    return activeGroups[groupID]
+end
+
+---Create IsoPlayer object with provided params at `square`
+---@param square IsoGridSquare Square that NPC will spawn on
 ---@param isFemale boolean
 ---@param surname string
 ---@param forename string
----@param square IsoGridSquare
----@return unknown
+---@param survivorID survivorID unique ID, will be set to isoPlayer modData
+---@return IsoPlayer isoPlayer player object
+---@return integer squareZ Z-level that NPC was created at
+local function createIsoPlayer(square, isFemale, surname, forename, survivorID)
+    local squareZ = 0;
+    -- Cows: It turns out this check is needed, otherwise NPCs may spawn in the air and fall...
+    if (square:isSolidFloor()) then
+        squareZ = square:getZ();
+    end
+    --
+    local survivorDescObject = PZNS_UtilsDataNPCs.PZNS_CreateNPCSurvivorDescObject(isFemale, surname, forename);
+    local npcIsoPlayerObject = IsoPlayer.new(
+        getWorld():getCell(),
+        survivorDescObject,
+        square:getX(),
+        square:getY(),
+        squareZ
+    );
+    --
+    npcIsoPlayerObject:getModData().survivorID = survivorID;
+    --
+    npcIsoPlayerObject:setForname(forename); -- Cows: In case forename wasn't set...
+    npcIsoPlayerObject:setSurname(surname);  -- Cows: Apparently the surname set at survivorDesc isn't automatically set to IsoPlayer...
+    npcIsoPlayerObject:setNPC(true);
+    npcIsoPlayerObject:setSceneCulled(false);
+    return npcIsoPlayerObject, squareZ
+end
+
+--- Cows: The PZNS_NPCSurvivor uses the IsoPlayer from the base game as one of its properties.
+--- Best to think of the other properties of PZNS_NPCSurvivor as extended properties for PZNS.
+---@param survivorID survivorID -- Cows: Need a way to guarantee this is unique...
+---@param isFemale boolean
+---@param surname string
+---@param forename string
+---@param square IsoGridSquare Square that NPC will spawn on
+---@param isoPlayer IsoPlayer? if passed - skip IsoPlayer creation
+---@return NPC
 function PZNS_NPCsManager.createNPCSurvivor(
     survivorID,
     isFemale,
     surname,
     forename,
-    square
+    square,
+    isoPlayer
 )
     -- Cows: Check if the survivorID is present before proceeding.
     if (survivorID == nil) then
-        return nil;
+        error("survivorID not set")
     end
-    local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local npcSurvivor = nil;
     -- Cows: Now add the npcSurvivor to the PZNS_NPCsManager if the ID does not exist.
-    if (activeNPCs[survivorID] == nil) then
-        local squareZ = 0;
-        -- Cows: It turns out this check is needed, otherwise NPCs may spawn in the air and fall...
-        if (square:isSolidFloor()) then
-            squareZ = square:getZ();
-        end
-        --
-        local survivorDescObject = PZNS_UtilsDataNPCs.PZNS_CreateNPCSurvivorDescObject(isFemale, surname, forename);
-        local npcIsoPlayerObject = IsoPlayer.new(
-            getWorld():getCell(),
-            survivorDescObject,
-            square:getX(),
-            square:getY(),
-            squareZ
-        );
-        --
-        npcIsoPlayerObject:getModData().survivorID = survivorID;
-        --
-        npcIsoPlayerObject:setForname(forename); -- Cows: In case forename wasn't set...
-        npcIsoPlayerObject:setSurname(surname);  -- Cows: Apparently the surname set at survivorDesc isn't automatically set to IsoPlayer...
-        npcIsoPlayerObject:setNPC(true);
-        npcIsoPlayerObject:setSceneCulled(false);
+    local npc = PZNS_NPCsManager.getNPC(survivorID)
+    local squareZ = 0
+    if (not npc) then
         local survivorName = forename .. " " .. surname; -- Cows: in case getName() functions break down or can't be used...
         --
-        npcSurvivor = PZNS_NPCSurvivor:newSurvivor(
+        if not isoPlayer then
+            isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID)
+        else
+            assert(instanceof(isoPlayer, "IsoPlayer"), "isoPlayer is not valid!")
+            squareZ = isoPlayer:getSquare():getZ()
+        end
+
+        ---@type NPC
+        npcSurvivor = NPC:new(
             survivorID,
             survivorName,
-            npcIsoPlayerObject
+            isoPlayer
         );
         npcSurvivor.isFemale = isFemale;
         npcSurvivor.forename = forename;
@@ -69,14 +125,38 @@ function PZNS_NPCsManager.createNPCSurvivor(
         npcSurvivor.textObject:ReadString(survivorName);
     else
         -- WIP - Cows: Alert player the ID is already used and the NPC cannot be created.
+        npcSurvivor = npc
+        if not isoPlayer then
+            isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID)
+        end
+        assert(isoPlayer, "IsoPlayer missing, can't create NPC")
+        npcSurvivor.npcIsoPlayerObject = isoPlayer
     end
-
     return npcSurvivor;
 end
 
+---Set NPC group ID to groupID
+---@param survivorID survivorID
+---@param groupID groupID? leave empty to unset group
+function PZNS_NPCsManager.setGroupID(survivorID, groupID)
+    local npc = PZNS_NPCsManager.getNPC(survivorID)
+    if not npc then
+        print(fmt("NPC not found! ID: %s", survivorID))
+        return
+    end
+    if groupID then
+        local group = getGroup(groupID)
+        if not group then
+            print(fmt("Group not found! ID: %s", groupID))
+            return
+        end
+    end
+    NPC.setGroupID(npc, groupID)
+end
+
 ---Cows: Get a npcSurvivor by specified survivorID
----@param survivorID any
----@return any
+---@param survivorID survivorID
+---@return NPC?
 function PZNS_NPCsManager.getActiveNPCBySurvivorID(survivorID)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     if (activeNPCs[survivorID] ~= nil) then
@@ -86,7 +166,7 @@ function PZNS_NPCsManager.getActiveNPCBySurvivorID(survivorID)
 end
 
 ---Cows: Delete a npcSurvivor by specified survivorID
----@param survivorID any
+---@param survivorID survivorID
 function PZNS_NPCsManager.deleteActiveNPCBySurvivorID(survivorID)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local npcSurvivor = activeNPCs[survivorID];
@@ -105,7 +185,7 @@ function PZNS_NPCsManager.deleteActiveNPCBySurvivorID(survivorID)
 end
 
 ---comment
----@param survivorID any
+---@param survivorID survivorID
 function PZNS_NPCsManager.setActiveInventoryNPCBySurvivorID(survivorID)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     local npcSurvivor = activeNPCs[survivorID];
@@ -114,9 +194,9 @@ end
 
 --- WIP - Cows: Spawn a random raider NPC.
 --- Cows: Go make your own random spawns, this is an example for debugging and testing.
----@param targetSquare IsoGridSquare
----@param raiderID string | nil
----@return unknown
+---@param targetSquare IsoGridSquare square to spawn NPC on
+---@param raiderID string | nil if provided - will be used as survivorID for NPC
+---@return NPC raider created raider NPC
 function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raiderID)
     local isFemale = ZombRand(100) > 50; -- Cows: 50/50 roll for female spawn
     local raiderForeName = SurvivorFactory.getRandomForename(isFemale);
@@ -168,9 +248,9 @@ end
 
 --- WIP - Cows: Spawn a random NPC.
 --- Cows: Go make your own random spawns, this is an example for debugging and testing.
----@param targetSquare IsoGridSquare
----@param survivorID string | nil
----@return unknown
+---@param targetSquare IsoGridSquare square to spawn NPC on
+---@param survivorID string | nil if provided - will be used as survivorID for NPC
+---@return NPC survivor created survivor NPC
 function PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare(targetSquare, survivorID)
     local isFemale = ZombRand(100) > 50; -- Cows: 50/50 roll for female spawn
     local npcForeName = SurvivorFactory.getRandomForename(isFemale);
