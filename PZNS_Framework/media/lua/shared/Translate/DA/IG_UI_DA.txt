@@ -1,0 +1,62 @@
+IGUI_DA = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Hvad fanden skyder du på?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "For helvede!Se din ild!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Hvorfor angriber du mig?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "For helvede!Stop med at slå mig!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Jeg har fået nok af din bullshit!Du dør nu!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Det ar vil gøre en god historie ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ow!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Jeg begynder allerede at fortryde dette!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Hvad end du siger.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "Jeg er på det",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "I orden",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Forstået, jeg vil holde dette sted.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Jeg holder nu denne placering ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Vagt told he ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Forstået efter",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Jeg fik din ryg",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Okay, før vejen.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Fint, jeg rejser da",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Hvorfor mig?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Du vil fortryde denne beslutning!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Jeg har brug for noget at gøre her ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Hvad er min næste opgave?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Det er en langsom dag på arbejdet ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Jeg har ikke et våben!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Ingen tilladelse til at angribe",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Ingen arbejdszone til Undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "Okay",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Forstået",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "På vej.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Forstået, jeg vil være her",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Kopier, holdning.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Jeg er herover.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Jeg er på dine seks.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Kommer over nu.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Tag pointen.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Er du sikker? Pas på dig selv.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Se efter disse freaks.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Lad ikke din vagt ned.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Vi spilder tid her ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Forvent ikke, at jeg laver en sandwich ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Hvad skal jeg gøre næste? ...",
+
+}
+

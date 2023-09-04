@@ -1,0 +1,62 @@
+IGUI_JP = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "何を撮影していましたか？",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "goddamn it！あなたの火を見てください！",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "なぜあなたは私を攻撃しているのですか？",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "goddamn it！私を打つのをやめなさい！",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "私はあなたのでたらめを十分に持っていました！あなたは今死ぬ！",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "その傷は良い話になるでしょう...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "ああ！",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "私はすでにこれを後悔し始めています！",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "あなたが言うことは何でも。",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "やってる",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "大丈夫",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "理解して、私はこの場所を保持します。",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "私は今この場所を持っています...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "ガードデューティハッ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "以下に理解された",
+IGUI_PZNS_Speech_Preset_Follow_02 = "私はあなたの背中を得ました",
+IGUI_PZNS_Speech_Preset_Follow_03 = "さて、先導してください。",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "大丈夫、私は去ります",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "なんでわたし？",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "この決定を後悔します！",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "ここで何かする必要があります...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "私の次の仕事は何ですか？",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "仕事で遅い日です...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "私は武器を持っていません！",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "攻撃の許可はありません",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "アンダーテイカーのためのワークゾーンはありません...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "わかりました",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "わかった",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "行く途中です。",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "理解されて、私はここにいます",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "コピー、保持位置。",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "私はここにいます。",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "私はあなたの6つにいます。",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "今やってくる。",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "ポイントを取ります。",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "本気ですか？自分を大事にして下さい。",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "それらのフリークを探してください。",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "あなたの警備員を失望させないでください。",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "ここで時間を無駄にしています...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "サンドイッチを作ることを期待しないでください...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "次に何をすべきですか？...",
+
+}
+

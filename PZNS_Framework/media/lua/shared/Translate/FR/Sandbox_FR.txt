@@ -1,0 +1,26 @@
+Sandbox_FR = {
+	Sandbox_PZNS_Framework = "Framework PZNS",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Activer le mode de débogage",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Vérifiez pour activer, décochez pour désactiver",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC a des munitions infinies?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Vérifiez pour activer, décochez pour désactiver - les PNJ auront continuer de tirer sans avoir besoin de munitions en inventaire si elle est activée",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC a des besoins",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Vérifiez l'activation, décochez pour désactiver - les PNJ auront besoin de nourriture et d'eau en cas d'activation",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Limite de taille de groupe",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) fixe la limite des PNJ un groupe peut avoir",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Compagnon Suivez la plage",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Définit la distance à laquelle les PNJ essaieront de suivre le joueur",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Gamme de run compagnard",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Définit la distance à laquelle les PNJ commenceront à courir pour rattraper",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Compagnon au ralenti à Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) Définit le compteur de tiques auxquels les PNJ commenceront les comportements inactifs",
+
+
+}

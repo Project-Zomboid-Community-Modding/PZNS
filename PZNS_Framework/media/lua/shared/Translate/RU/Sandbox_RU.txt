@@ -1,0 +1,26 @@
+Sandbox_RU = {
+	Sandbox_PZNS_Framework = "PZNS Framework",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Активировать режим отладки",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Проверьте, чтобы активировать, снять с ума до дезактивации",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "У NPC есть бесконечные боеприпасы?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Проверьте, чтобы активировать, снять с ума до дезактивации - NPC будет продолжать стрелять без необходимости боеприпасов в инвентаре, если активируется",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC имеет потребности",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Проверьте, чтобы активировать, не деактивируйте - NPC нуждаются в пище и воде, если активируется",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Предел размера группы",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) устанавливает предел NPC, который может иметь группа",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Компаньон Следуйте диапазон",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Устанавливает расстояние, на котором NPC будет пытаться следовать за игроком",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Диапазон компаньона",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Устанавливает расстояние, на котором NPC начнут работать, чтобы наверстать упущенное",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Companion Idles на Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) устанавливает счетчик клещей, на котором NPC начнут простоя поведение",
+
+
+}

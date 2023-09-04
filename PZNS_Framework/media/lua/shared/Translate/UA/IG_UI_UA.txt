@@ -1,0 +1,62 @@
+IGUI_UA = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "На чому ти, блядь, ви знімали?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Трясця!Дивіться свій вогонь!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Чому ти нападаєш на мене?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Трясця!Перестаньте мене вдарити!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Мені вистачило вашої фігня!Ти вмираєш зараз!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Цей шрам зробить гарну історію ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ой!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Я вже починаю шкодувати про це!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Що б ти не сказав.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "Я на ньому",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Добре",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Зрозуміло, я буду утримувати це місце.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Зараз я тримаю це місце ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Охоронець, так ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Зрозумілий, слідуючи",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Я повернув твою",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Гаразд, веду дорогу.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Чудово, я йду тоді",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Чому я?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Ви пошкодуєте про це рішення!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Мені тут потрібно щось зробити ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Яке моє наступне завдання?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Це повільний день на роботі ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "У мене немає зброї!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Немає дозволу на атаку",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Немає робочої зони для Громадянина ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "в порядку",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Зрозумів",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "На моєму шляху.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Зрозумів, я буду тут",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Копія, утримання позиції.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Тоді я буду сюди.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Я на твоїх шести.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Приходячи зараз.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Візьміть сенс.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Ти впевнений? Бувай здоров.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Слідкуйте за цими виродками.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Не підведіть свого охоронця.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Тут ми витрачаємо час ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Не чекайте, що я зроблю бутерброд ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Що мені робити далі? ...",
+
+}
+

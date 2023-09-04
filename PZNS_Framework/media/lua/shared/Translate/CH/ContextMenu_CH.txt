@@ -5,7 +5,7 @@ ContextMenu_CH = {
 		ContextMenu_PZNS_Guard = "守衛",
 		ContextMenu_PZNS_Undertaker = "送葬者",
 		ContextMenu_PZNS_Remove_From_Group = "強行離開",
-		
+
 		ContextMenu_PZNS_Spawn_Medical = "贈送醫療物品",
 		ContextMenu_PZNS_Spawn_Books = "贈送書籍",
 		ContextMenu_PZNS_Spawn_5_Canned_Tuna = "贈送 5 個魚罐頭",
@@ -31,12 +31,12 @@ ContextMenu_CH = {
 		ContextMenu_PZNS_Wipe_Zones_Data = "PZNS 刪除地圖區域數據",
 		ContextMenu_PZNS_Wipe_All_Data = "PZNS 刪除所有數據",
 		ContextMenu_PZNS_PZNS_Debug_WipeData = "PZNS 刪除數據",
-		
+
 		ContextMenu_PZNS_PZNS_Invite = "邀請 NPC",
 		ContextMenu_PZNS_PZNS_Jobs = "NPC 職業",
 		ContextMenu_PZNS_PZNS_NPC_Info = "NPC 資料",
 		ContextMenu_PZNS_PZNS_Inventory = "NPC 背包",
-		
+
 		ContextMenu_PZNS_Hold_Position = "保留位置",
 		ContextMenu_PZNS_Follow_Me = "跟我來",
 		ContextMenu_PZNS_Attack_Aimed_Target = "開始攻擊",
@@ -75,8 +75,6 @@ ContextMenu_CH = {
 		ContextMenu_PZNS_NPCEquipSecondary = "NPC: 裝備副手",
 		ContextMenu_PZNS_NPCDropItem = "NPC: 放下物品",
 		ContextMenu_PZNS_NPCUnquipItem = "NPC: 拿下裝備"
-		
-
 
 }
 

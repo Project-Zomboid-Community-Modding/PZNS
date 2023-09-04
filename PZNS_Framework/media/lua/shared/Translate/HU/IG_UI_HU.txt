@@ -1,0 +1,62 @@
+IGUI_HU = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Mi a francot lőttél?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Az Isten verje meg!Nézze meg a tüzet!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Miért támadsz meg engem?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Az Isten verje meg!Ne ütj meg engem!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Elég volt a baromságod!Most meghalsz!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Ez a heg jó történetet fog készíteni ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ó!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Már kezdem ezt megbánni!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Akármit mondasz.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "Rajta vagyok",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Rendben",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Megértettem, megtartom ezt a helyet.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Most tartom ezt a helyet ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Őrszolgálat, mi ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Megértett, követve",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Fedezlek",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Rendben, vezesse az utat.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Rendben, akkor elmegyek",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Miért én?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Megbánja ezt a döntést!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Szükségem van valamire itt ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Mi a következő feladatom?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Ez egy lassú munka a munkahelyen ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Nincs fegyverem!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Nincs engedély a támadásra",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Nincs munkászóna az Undertaker számára ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "rendben",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Megvan",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Úton vagyok.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Megértettem, itt leszek",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Másolat, tartási pozíció.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Akkor itt leszek.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "A hatodban vagyok.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Most jön át.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Vegye ki a pontot.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "biztos vagy ebben? Vigyázz magadra.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Vigyázz azokra a furcsaságokra.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Ne engedd le az őrét.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Ide pazarolunk időt ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Ne várja el, hogy készítsek egy szendvicset ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Mit tegyek ezután? ...",
+
+}
+

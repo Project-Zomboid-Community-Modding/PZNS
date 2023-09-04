@@ -1,0 +1,26 @@
+Sandbox_CS = {
+	Sandbox_PZNS_Framework = "PZNS Framework",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Aktivujte režim ladění",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Zkontrolujte, zda aktivujte, zrušte zaškrtnutí zaškrtnutí zaškrtnutí a deaktivace",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC má nekonečné munici?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Zkontrolujte, zda se aktivujete, zrušte zaškrtnutí zaškrtnutí a deaktivace - NPCS bude mít střelbu, aniž by bylo nutné muničit v inventáři, pokud je aktivován",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC má potřeby",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Zkontrolujte, zda se aktivujete, zrušte zaškrtnutí deaktivace - NPC budou potřebovat jídlo a vodu, pokud budou aktivovány",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Limit velikosti skupiny",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) Nastavuje limit NPC, které může mít skupina",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Společník sleduje řadu",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Nastaví vzdálenost, ve které se NPC pokusí sledovat hráče",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Společenský rozsah",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Nastaví vzdálenost, ve které se NPC začnou běžet, aby to dohonily",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Companion Isles At Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) Nastavuje čítač klíšťat, ve kterém NPC začnou chování nečinnosti",
+
+
+}

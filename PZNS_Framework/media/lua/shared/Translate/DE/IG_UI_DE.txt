@@ -1,0 +1,62 @@
+IGUI_DE = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Was zum Teufel hast du gedreht?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Gottverdammt!Beobachten Sie Ihr Feuer!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Warum greifst du mich an?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Gottverdammt! Hör auf mich zu schlagen!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Ich hatte genug von deinem Bullshit!Du stirbst jetzt!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Diese Narbe wird eine gute Geschichte machen ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "OW!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Ich fange bereits an, das schon zu bereuen!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Was auch immer du sagst.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "Ich arbeite daran",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "In Ordnung",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Verständnis, ich werde diesen Ort halten.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Ich halte jetzt diesen Ort ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Wachdienst, oder",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Verstanden, folgt",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Ich habe deinen Rücken bekommen",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Okay, führe den Weg.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Gut, ich gehe dann dann",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Warum ich?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Sie werden diese Entscheidung bereuen!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Ich brauche hier etwas zu tun ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Was ist meine nächste Aufgabe?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Es ist ein langsamer Arbeitstag ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Ich habe keine Waffe!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Keine Erlaubnis zum Angriff",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Kein Workzone für Undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "OK",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Habe es",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Auf meinem Weg.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Verstanden, ich werde hier sein",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Kopie, Holding -Position.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Ich werde dann hier sein.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Ich bin auf deinen sechs.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Jetzt vorbeikommen.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Nimm den Punkt.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Bist du sicher?Pass auf dich auf.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Achten Sie auf diese Freaks.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Lass deine Wache nicht im Stich.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Wir verschwenden Zeit hier ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Erwarten Sie nicht, dass ich ein Sandwich mache ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Was soll ich als nächstes tun? ...",
+
+}
+

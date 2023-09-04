@@ -1,0 +1,62 @@
+IGUI_KO = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "당신은 무엇을 쏘고 있었습니까?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "젠장!당신의 불을보세요!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "왜 나를 공격하고 있습니까?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "젠장!나를 때리지 마라!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "나는 당신의 헛소리가 충분했습니다!당신은 지금 죽습니다!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "그 흉터는 좋은 이야기를 만들 것입니다 ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "야,",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "나는 이미 이것을 후회하기 시작했다!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "너가 말하는거 아무거나.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "알겠습니다",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "괜찮은",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "이해할 수 있습니다. 나는이 장소를 잡을 것입니다.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "나는 지금이 위치를 잡고있다 ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "가드 듀티 응 ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "다음에 이해되었습니다",
+IGUI_PZNS_Speech_Preset_Follow_02 = "나는 당신의 등을 얻었습니다",
+IGUI_PZNS_Speech_Preset_Follow_03 = "좋아, 길을 이끌어라.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "좋아, 그때 떠나야 해요",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "왜 나야?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "이 결정을 후회할 것입니다!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "여기서 할 일이 필요합니다 ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "내 다음 과제는 무엇입니까?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "직장에서 느린 하루입니다 ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "나는 무기가 없다!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "공격 허가가 없습니다",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Undertaker를위한 Workzone이 없습니다 ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "좋아요",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "알았어요",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "도중에.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "이해할 것입니다",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "복사, 유지 위치.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "그럼 여기에 올게요.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "나는 당신의 여섯에 있습니다.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "지금오고 있습니다.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "요점을 잡으십시오.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "확실합니까?몸 조심하세요.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "그 괴물을 찾으십시오.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "당신의 경비를 실망시키지 마십시오.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "우리는 여기서 시간을 낭비하고 있습니다 ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "내가 샌드위치를 만들기를 기대하지 마세요 ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "다음에 무엇을해야합니까? ...",
+
+}
+

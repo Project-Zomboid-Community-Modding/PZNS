@@ -59,3 +59,4 @@ IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "別指望我做三明治...",
 IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "接下來我應該怎麼做?...",
 
 }
+

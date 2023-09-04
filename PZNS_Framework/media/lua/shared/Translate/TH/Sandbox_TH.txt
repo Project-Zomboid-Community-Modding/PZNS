@@ -1,0 +1,26 @@
+Sandbox_TH = {
+	Sandbox_PZNS_Framework = "เฟรมเวิร์ก PZNS",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "เปิดใช้งานโหมดดีบัก",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "ตรวจสอบเพื่อเปิดใช้งานยกเลิกการเลือกเพื่อปิดการใช้งาน",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC มีกระสุนไม่มีที่สิ้นสุดหรือไม่?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "ตรวจสอบเพื่อเปิดใช้งานยกเลิกการเลือกเพื่อปิดการใช้งาน - NPCs จะทำการถ่ายทำต่อไปโดยไม่จำเป็นต้องใช้กระสุนในสินค้าคงคลังหากเปิดใช้งาน",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC มีความต้องการ",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) ตรวจสอบการเปิดใช้งานยกเลิกการเลือกปิดใช้งาน - NPCs จะต้องใช้อาหารและน้ำหากเปิดใช้งาน",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) ขีด จำกัด ขนาดกลุ่ม",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) ตั้งค่าขีด จำกัด ของ NPC ที่กลุ่มอาจมี",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "สหายติดตามช่วง",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "กำหนดระยะทางที่ NPCs จะพยายามติดตามผู้เล่น",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Range Run",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "ตั้งค่าระยะทางที่ NPCs จะเริ่มทำงานเพื่อให้ทัน",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) สหายไม่ได้ใช้งานที่ติ๊ก",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) ตั้งค่าเคาน์เตอร์ติ๊กที่ NPCS จะเริ่มพฤติกรรมที่ไม่ได้ใช้งาน",
+
+
+}

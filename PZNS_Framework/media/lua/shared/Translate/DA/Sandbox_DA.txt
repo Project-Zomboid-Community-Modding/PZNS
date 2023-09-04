@@ -1,0 +1,26 @@
+Sandbox_DA = {
+	Sandbox_PZNS_Framework = "PZNS Framework",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Aktivér debugtilstand",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Kontroller for at aktivere, fjerne markeringen for at deaktivere",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC har uendelig ammunition?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Kontroller for at aktivere, fjerne markeringen for at deaktivere - NPC'er vil have fortsat skyde uden at have brug for ammunition i lager, hvis det er aktiveret",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC har behov",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Kontroller for at aktivere, fjerne markeringen for at deaktivere - NPC'er har brug for mad og vand, hvis de aktiveres",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Gruppestørrelsesgrænse",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) indstiller grænsen for NPC'er, som en gruppe kan have",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Ledsager følger rækkevidde",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Indstiller den afstand, hvormed NPC'er vil forsøge at følge spilleren",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Companion Run Range",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Indstiller den afstand, hvormed NPC'er begynder at løbe for at indhente",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Companion Idles ved Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) indstiller flåtælleren, hvor NPC'er begynder inaktiv adfærd",
+
+
+}

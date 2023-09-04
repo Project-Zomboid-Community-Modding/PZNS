@@ -1,0 +1,26 @@
+Sandbox_PL = {
+	Sandbox_PZNS_Framework = "PZNS Framework",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Aktywuj tryb debugowania",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Sprawdź, czy aktywować, odznacz do dezaktywacji",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC ma nieskończoną amunicję?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Sprawdź, aby aktywować, odznacz do dezaktywacji - NPC będą kręcić bez konieczności amunicji w zapasach, jeśli zostanie aktywowane",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC ma potrzeby",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Sprawdź aktywację, odznacz do dezaktywacji - NPC będą potrzebować żywności i wody, jeśli się aktywuje",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Limit wielkości grupy",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) ustawia limit NPC, jakie może mieć grupa",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Towarzysząca się zasięg",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Ustawia odległość, z jaką NPC będą próbowały śledzić gracza",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Zakres biegów towarzyszący",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Ustawia odległość, z jaką NPC zaczną działać, aby nadrobić zaległości",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) towarzysz jałowy w kleszczu",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) Ustawia licznik kleszczy, przy którym NPC rozpoczną bezczynne zachowania",
+
+
+}

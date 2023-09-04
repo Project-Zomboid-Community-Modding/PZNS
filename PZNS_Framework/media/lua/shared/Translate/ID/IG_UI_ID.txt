@@ -1,0 +1,62 @@
+IGUI_ID = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Apa yang kamu tembak?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Persetan!Perhatikan Api Anda!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Mengapa Anda menyerang saya?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Persetan!Berhenti memukulku!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Aku sudah cukup omong kosong!Kamu mati sekarang!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Bekas luka itu akan menjadi cerita yang bagus ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Bah!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Saya sudah mulai menyesali ini!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Terserah apa kata anda.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "saya ikut",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Baiklah",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Mengerti, saya akan memegang tempat ini.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Saya sekarang memegang lokasi ini ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Tugas penjaga ya ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Mengerti, mengikuti",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Aku mendukungmu",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Baiklah, pimpin jalannya.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Baik, aku akan pergi",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Kenapa aku?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Anda akan menyesali keputusan ini!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Saya butuh sesuatu untuk dilakukan di sini ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Apa tugas saya selanjutnya?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Ini hari yang lambat di tempat kerja ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Saya tidak punya senjata!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Tidak ada izin untuk menyerang",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Tidak ada workzone untuk undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "OKE",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Mengerti",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Dalam perjalanan.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Mengerti, saya akan berada di sini",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Salin, memegang posisi.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Aku akan ke sini kalau begitu.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Saya berada di enam Anda.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Datang sekarang.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Ambil poinnya.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Apa kamu yakin?Jaga dirimu.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Carilah orang -orang aneh itu.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Jangan biarkan penjaga Anda turun.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Kami membuang -buang waktu di sini ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Jangan berharap saya membuat sandwich ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Apa yang harus saya lakukan selanjutnya? ...",
+
+}
+

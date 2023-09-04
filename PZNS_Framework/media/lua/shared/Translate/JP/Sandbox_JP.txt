@@ -1,0 +1,26 @@
+Sandbox_JP = {
+	Sandbox_PZNS_Framework = "PZNSフレームワーク",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "デバッグモードをアクティブにします",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "アクティブ化するために確認し、チェックして非アクティブ化します",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPCには無限の弾薬がありますか？",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "アクティブ化するために確認し、チェックして非アクティブ化-NPCは、アクティブ化された場合、在庫の弾薬を必要とせずに撮影を続けます",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "（WIP）NPCにはニーズがあります",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "（WIP）アクティブ化するためにチェック、チェックして無効にする-NPCは、活性化された場合に食物と水が必要です",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "（WIP）グループサイズの制限",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "（WIP）グループが持つ可能性のあるNPCの制限を設定します",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "コンパニオンフォロー範囲",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "NPCSがプレーヤーをフォローしようとする距離を設定します",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "コンパニオンランレンジ",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "NPCが実行を開始して追いつく距離を設定します",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "（WIP）ティックでのコンパニオンアイドル",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "（WIP）NPCがアイドル動作を開始するティックカウンターを設定します",
+
+
+}
