@@ -1,0 +1,26 @@
+Sandbox_NO = {
+	Sandbox_PZNS_Framework = "PZNS Framework",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Aktiver feilsøkingsmodus",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Sjekk for å aktivere, fjerne merket for å deaktivere",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC har uendelig ammunisjon?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Kontroller for å aktivere, fjerne merket for å deaktivere - NPC -er vil ha fortsette å skyte uten å trenge ammunisjon i varelager hvis de er aktivert",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC har behov",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Kontroller for å aktivere, fjerne merket for å deaktivere - NPC -er trenger mat og vann hvis de er aktivert",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Gruppestørrelsesgrense",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) angir grensen for NPCs en gruppe kan ha",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Ledsager følg rekkevidde",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Setter avstanden som NPC -er vil prøve å følge spilleren",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Companion Run Range",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Angir avstanden som NPCer vil begynne å løpe for å ta igjen",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) følgesvenn tomgang på flått",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) Angir flåttelleren som NPCer vil begynne på tomgangsatferd",
+
+
+}

@@ -1,0 +1,26 @@
+Sandbox_TR = {
+	Sandbox_PZNS_Framework = "PZNS Çerçevesi",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Hata ayıklama modunu etkinleştir",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Etkinleştirmek için kontrol edin, devre dışı bırakmayı işaretleyin",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC'nin sonsuz cephanesi var mı?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Etkinleştirmek için kontrol edin, devre dışı bırakmayı işaretleyin - NPC'ler etkinleştirilirse envanterde cephaneye ihtiyaç duymadan çekim yapmaya devam edecek",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC'nin ihtiyaçları var",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Etkinleştirmek için kontrol edin, devre dışı bırakmayı işaretleyin - NPC'lerin etkinleştirilmesi durumunda yiyecek ve suya ihtiyaç duyacaktır",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Grup Boyut Sınırı",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) bir grubun sahip olabileceği NPC'lerin sınırını ayarlar",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Refakatçi Takip Menzili",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "NPC'lerin oyuncuyu takip etmeye çalışacağı mesafeyi ayarlar",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Companion Run Menzil",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "NPC'lerin yetişmek için çalışmaya başlayacağı mesafeyi ayarlar",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) COODION REDLES",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) NPC'lerin boş davranışlara başlayacağı kene sayacını ayarlar",
+
+
+}

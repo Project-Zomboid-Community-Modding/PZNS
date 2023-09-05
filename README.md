@@ -50,6 +50,11 @@ The NPC outfits featured in the screenshots and videos are all outfits made by S
 - Chris - https://steamcommunity.com/sharedfiles/filedetails/?id=2903317798
 - Jill - https://steamcommunity.com/sharedfiles/filedetails/?id=2903870282
 
+Other NPC Mods - Aiteron NPC and SS/SSC GitHub
+- https://github.com/shadowhunter100/SuperbSurvivorsSteam20230425
+- https://github.com/shadowhunter100/SuperbSurvivorsContinued
+- Aiteron NPC - https://github.com/aiteron/NPC
+
 # Special Thanks - Consultations (Discord)
 - Aiteron (aiteron)  
 - Chuck (chuck)  

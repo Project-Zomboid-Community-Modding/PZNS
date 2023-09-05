@@ -1,0 +1,62 @@
+IGUI_CA = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Què coi estaves disparant?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Maleïda sigui!Mireu el vostre foc!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Per què m’ataceu?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Maleïda sigui!Deixa de colpejar -me!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "N’he tingut prou amb la vostra merda!Moris ara!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Aquesta cicatriu farà una bona història ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ow!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Ja estic començant a penedir -ho!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "El que tu diguis.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "Estic en això",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Bé",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Entès, celebraré aquest lloc.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Ara tinc aquesta ubicació ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Deure de guàrdia eh ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Entès, seguint",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Tinc l’esquena",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Molt bé, condueix el camí.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Molt bé, marxo llavors",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Per què jo?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Us penedireu d’aquesta decisió!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Necessito alguna cosa per fer aquí ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Quina és la meva propera tasca?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "És un dia lent a la feina ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "No tinc arma!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Sense permís per atacar",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "No hi ha zones de treball per a Undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "D'acord",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Ho tinc",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "De camí.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Entès, estaré aquí",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Còpia, posició de manteniment.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Ja passaré aquí.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Estic a les teves sis anys.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Arribant ara.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Preneu -vos el punt.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Estàs segur?Cuida’t.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Mireu aquests freaks.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "No deixeu la guàrdia cap avall.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Estem perdent el temps aquí ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "No espereu que faci un sandvitx ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Què he de fer després? ...",
+
+}
+

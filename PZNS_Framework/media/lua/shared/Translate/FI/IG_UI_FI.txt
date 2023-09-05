@@ -1,0 +1,62 @@
+IGUI_FI = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Missä vittua ammut?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Hitto vieköön!Katso tulta!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Miksi hyökkäät minua?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Hitto vieköön!Lopeta lyöminen minua!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Minulla on ollut tarpeeksi paskaa!Kuolet nyt!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Tuo arpi tekee hyvän tarinan ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ow!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Olen jo pahoittelemassa tätä!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Mitätahansa sanot.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "Olen siinä",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Hyvä on",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Ymmärrän, pidän tätä paikkaa.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Minulla on nyt tämä sijainti ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Vartija velvollisuus ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Ymmärretty seurauksena",
+IGUI_PZNS_Speech_Preset_Follow_02 = "turvaan selustasi",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Selvä, johtakaa tietä.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Hieno, lähden silloin",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Miksi minä?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Pahoittelet tätä päätöstä!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Tarvitsen jotain tekemistä täällä ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Mikä on seuraava tehtäväni?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Se on hidas päivä työssä ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Minulla ei ole asetta!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Ei lupaa hyökätä",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Ei työpöytä Undertakerille ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "Hyvä",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Sain sen",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Matkalla.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Ymmärrän, olen täällä",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Kopioi, pidätyspaikka.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Olen täällä silloin täällä.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Olen kuusi.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Tulossa nyt.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Ota kohta.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Oletko varma? Pidä itsestäsi huolta.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Varo nuo kummajaiset.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Älä anna vartijasi alas.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Tuhlamme aikaa täällä ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Älä odota minun tekevän voileivän ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Mitä minun pitäisi tehdä seuraavaksi? ...",
+
+}
+

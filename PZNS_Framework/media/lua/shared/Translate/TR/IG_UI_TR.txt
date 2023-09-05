@@ -1,0 +1,62 @@
+IGUI_TR = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Neye ateş ediyordun?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Allah kahretsin!Ateşinizi izle!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Neden bana saldırıyorsun?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Allah kahretsin!Bana vurmayı bırak!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Senin saçmalıklarını yeterince aldım!Şimdi ölüyorsun!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Bu yara izi iyi bir hikaye yapacak ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ow!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Zaten pişman olmaya başlıyorum!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Sen ne dersen.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "İş üstündeyim",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Peki",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Anladım, bu yeri tutacağım.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Şimdi bu yeri tutuyorum ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Nöbetçi görev ha ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Anlaşıldı, takip etti",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Sırtını aldım",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Pekala, öncülük et.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Güzel, gidiyorum o zaman",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Neden ben?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Bu karardan pişman olacaksınız!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Burada yapacak bir şeye ihtiyacım var ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Bir sonraki görevim nedir?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "İş yerinde yavaş bir gün ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Silahım yok!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Saldırı İzni Yok",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Undertaker için çalışmaze yok ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "TAMAM",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Anladım",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Yolumun üzerinde.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Anladım, burada olacağım",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Kopyala, tutma pozisyonu.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "O zaman burada olacağım.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Altı senin içindeyim.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Şimdi geliyor.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Anlaşın.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Emin misin?Kendine dikkat et.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Bu ucubelere dikkat edin.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Muhafızlarını hayal kırıklığına uğratmayın.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Burada zaman harcıyoruz ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Sandviç yapmamı beklemeyin ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Sonra ne yapmalıyım?...",
+
+}
+

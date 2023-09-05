@@ -1,0 +1,26 @@
+Sandbox_KO = {
+	Sandbox_PZNS_Framework = "PZNS 프레임 워크",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "디버그 모드를 활성화합니다",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "활성화하여 확인하지 않고 비활성화하십시오",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC에는 무한 탄약이 있습니까?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "활성화하고, 비활성화를 선택 취소 -NPCS는 활성화 된 경우 재고로 탄약이 필요하지 않고 계속 촬영할 수 있습니다.",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC에는 필요합니다",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) 활성화하고 비활성화를 선택 취소 -NPC는 활성화되면 음식과 물이 필요합니다.",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) 그룹 크기 제한",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) 그룹이 가질 수있는 NPC의 한도를 설정합니다.",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "동반자는 범위를 따릅니다",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "NPC가 플레이어를 따라 가려고하는 거리를 설정합니다.",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "동반자 실행 범위",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "NPC가 따라 잡기 시작하는 거리를 따라 잡습니다.",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) 진드기에 동반자 유휴",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) NPC가 유휴 행동을 시작하는 진드기 카운터를 설정합니다.",
+
+
+}

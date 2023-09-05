@@ -1,0 +1,62 @@
+IGUI_CS = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Na co jsi natáčel?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Sakra!Sledujte svůj oheň!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Proč na mě útočíš?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Sakra!Přestaň mě bít!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Měl jsem dost tvých keců!Teď zemřeš!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Tato jizva udělá dobrý příběh ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ow!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Už toho začínám litovat!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Cokoliv řekneš.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "Jdu na to",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "V pořádku",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Pochopil jsem, že toto místo budu držet.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Nyní držím toto místo ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Strážce, co ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Pochopeno, následování",
+IGUI_PZNS_Speech_Preset_Follow_02 = "kryju ti záda",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Dobře, vede cestu.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Dobře, odcházím tehdy",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Proč já?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Budete litovat tohoto rozhodnutí!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Potřebuji něco dělat tady ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Jaký je můj další úkol?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Je to pomalý den v práci ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Nemám zbraň!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Žádné povolení k útoku",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Žádná práce pro Undertakera ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "OK",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Mám to",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Jsem na cestě.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Pochopeno, budu tady",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Kopírovat, držení pozice.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Potom tu budu.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Jsem na vašich šesti.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Přicházím teď.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Vezměte si to.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Jsi si jistá? Opatruj se.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Podívejte se na ty šílence.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Nenechte se stráž.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Ztrácíme tu čas ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Neočekávejte, že si vyrobíte sendvič ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Co mám dělat dál? ...",
+
+}
+

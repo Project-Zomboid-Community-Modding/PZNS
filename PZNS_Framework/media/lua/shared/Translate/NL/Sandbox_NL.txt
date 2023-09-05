@@ -1,0 +1,26 @@
+Sandbox_NL = {
+	Sandbox_PZNS_Framework = "PZNS -framework",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Activeer de foutopsporingsmodus",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Controleer om te activeren, schakel uit om te deactiveren",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC heeft oneindige munitie?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Controleer om te activeren, schakel uit naar deactiveren - NPC's zullen blijven fotograferen zonder munitie in inventaris te hebben als geactiveerd",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC heeft behoeften",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Controleer om te activeren, schakel uit naar deactiveren - NPC's hebben voedsel en water nodig indien geactiveerd",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Limiet van de groepsgrootte",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) stelt de limiet van NPC's in die een groep kan hebben",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Metgezel volg het bereik",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Stelt de afstand in welke NPC's zullen proberen de speler te volgen",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Begeleidende run -reeks",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Stelt de afstand in welke NPC's beginnen te rennen om in te halen",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) metgezel IDles op Tick",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) Stelt het tekenteller in waarbij NPC's beginnen met inactief gedrag",
+
+
+}

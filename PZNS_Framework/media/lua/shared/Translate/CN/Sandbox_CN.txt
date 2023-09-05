@@ -1,26 +1,26 @@
 Sandbox_CN = {
-Sandbox_PZNS_Framework = "PZNS 框架",
+	Sandbox_PZNS_Framework = "PZNS 框架",
 	
-Sandbox_PZNS_Framework_IsDebugModeActive = "打开调试模式",
-Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "选中以打开，取消选中以关闭",
+	Sandbox_PZNS_Framework_IsDebugModeActive = "打开调试模式",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "选中以打开，取消选中以关闭",
 
-Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC 拥有无限弹药?",
-Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "选中以打开，取消选中以关闭",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC 拥有无限弹药?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "选中以打开，取消选中以关闭",
 
-Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(未完成)NPC 有生活需求",
-Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(未完成)选中以打开，取消选中以关闭，NPC 需要食物和水",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(未完成)NPC 有生活需求",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(未完成)选中以打开，取消选中以关闭，NPC 需要食物和水",
 
-Sandbox_PZNS_Framework_GroupSizeLimit = "(未完成)派系大小限制",
-Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(未完成)设置派系的大小限制",
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(未完成)派系大小限制",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(未完成)设置派系的大小限制",
 
-Sandbox_PZNS_Framework_CompanionFollowRange = "同伴跟随范围",
-Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "设置 NPC 跟随玩家的距离",
+	Sandbox_PZNS_Framework_CompanionFollowRange = "同伴跟随范围",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "设置 NPC 跟随玩家的距离",	
 
-Sandbox_PZNS_Framework_CompanionRunRange = "同伴跑步范围",
-Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "设置 NPC 开始奔跑追赶的距离",
+	Sandbox_PZNS_Framework_CompanionRunRange = "同伴跑步范围",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "设置 NPC 开始奔跑追赶的距离",
 
-Sandbox_PZNS_Framework_CompanionIdleTicks = "(未完成)同伴在滴答点处闲置",
-Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(未完成)同伴在滴答点处闲置",
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(未完成)同伴在滴答点处闲置",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(未完成)同伴在滴答点处闲置",
 
 
 }

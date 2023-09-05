@@ -1,0 +1,26 @@
+Sandbox_FI = {
+	Sandbox_PZNS_Framework = "PZNS -kehys",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Aktivoi Debug -tila",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Tarkista aktivointi, poista valinta deaktivoidaksesi",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC: llä on ääretön ammus?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Tarkista aktivointi, poista valinta deaktivoidaksesi - NPC: t jatkavat ammuntaa tarvitsematta ammuksia varastossa, jos aktivoidaan",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC: llä on tarpeita",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Tarkista aktivointi, poista deaktivoitumiseen - NPC: t tarvitsevat ruokaa ja vettä, jos aktivoidaan",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Ryhmän kokoraja",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(WIP) asettaa NPC: n rajan, jolla ryhmällä voi olla",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Seuralainen seuraa aluetta",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Asettaa etäisyyden, jolla NPC: t yrittävät seurata pelaajaa",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Seurakunta -alue",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Asettaa etäisyyden, jolla NPC: t alkavat juoksua kiinni",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) kumppanin joutokäynnillä",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(WIP) asettaa punkinlaskurin, jossa NPC: t alkavat tyhjäkäynnillä",
+
+
+}

@@ -1,0 +1,26 @@
+Sandbox_CA = {
+	Sandbox_PZNS_Framework = "Marc PZNS",
+	
+	Sandbox_PZNS_Framework_IsDebugModeActive = "Activa el mode de depuració",
+	Sandbox_PZNS_Framework_IsDebugModeActive_tooltip = "Comproveu per activar -lo, desactivar -lo per desactivar -lo",
+
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC té una munició infinita?",
+	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Comproveu -ho, desmarqueu -ho per desactivar - els NPCs hauran de seguir disparant sense necessitat de munició en inventari si s’activen",
+
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP) NPC té necessitats",
+	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP) Comproveu per activar, desmarcar -se fins a desactivar - els NPC necessitaran aliments i aigua si s'activen",
+
+	Sandbox_PZNS_Framework_GroupSizeLimit = "(WIP) Límit de mida del grup",
+	Sandbox_PZNS_Framework_GroupSizeLimit_tooltip = "(Wip) estableix el límit de NPCS que pot tenir un grup",
+
+	Sandbox_PZNS_Framework_CompanionFollowRange = "Range de seguiment de companys",
+	Sandbox_PZNS_Framework_CompanionFollowRange_tooltip = "Estableix la distància a la qual els NPC intentaran seguir el jugador",	
+
+	Sandbox_PZNS_Framework_CompanionRunRange = "Gamma de recorreguts de companys",
+	Sandbox_PZNS_Framework_CompanionRunRange_tooltip = "Estableix la distància amb la qual els NPC començaran a funcionar per posar -se al dia",
+
+	Sandbox_PZNS_Framework_CompanionIdleTicks = "(WIP) Idles de companys a la paparra",
+	Sandbox_PZNS_Framework_CompanionIdleTicks_tooltip = "(Wip) estableix el comptador de paparres en què els NPC començaran comportaments ociosos",
+
+
+}

@@ -1,0 +1,62 @@
+IGUI_NL = {
+
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Waar was je verdomme aan het fotograferen?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Godverdomme!Let op je vuur!",
+
+IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Waarom val je me aan?",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Godverdomme!Stop met me te slaan!",
+
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Ik heb genoeg van je onzin gehad!Je sterft nu!",
+
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Dat litteken zal een goed verhaal maken ...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ow!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Ik begin hier al spijt van te krijgen!",
+
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Wat je ook zegt.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "ik ben er mee bezig",
+IGUI_PZNS_Speech_Preset_Confirm_03 = "Akkoord",
+
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Begrepen, ik zal deze plaats innemen.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Ik houd deze locatie nu vast ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Guard plicht Huh ...",
+
+IGUI_PZNS_Speech_Preset_Follow_01 = "Begrepen, volgend",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Ik heb je rug gekregen",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Oké, loop voorop.",
+
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Prima, ik vertrek dan",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Waarom ik?",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Je zult spijt krijgen van deze beslissing!",
+
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Ik heb hier iets nodig om te doen ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Wat is mijn volgende taak?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Het is een langzame dag op het werk ...",
+
+IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "Ik heb geen wapen!",
+
+IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Geen toestemming om aan te vallen",
+
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Geen werkzone voor Undertaker ...",
+
+IGUI_PZNS_Speech_JillTester_Confirm_01 = "OK",
+IGUI_PZNS_Speech_JillTester_Confirm_02 = "Begrepen",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Ik ben onderweg.",
+
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Begrepen, ik zal hier zijn",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Kopieer, houd de positie.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Ik ben hier dan.",
+
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Ik ben op je zes.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Nu langskomen.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Neem het punt.",
+
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Weet je het zeker? Zorg voor jezelf.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Kijk uit voor die freaks.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Laat uw wacht niet in de steek.",
+
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "We verspillen hier tijd ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Verwacht niet dat ik een sandwich maak ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Wat zou ik vervolgens doen?...",
+
+}
+
