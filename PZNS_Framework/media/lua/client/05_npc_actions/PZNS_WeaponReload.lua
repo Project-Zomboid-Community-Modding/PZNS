@@ -1,6 +1,6 @@
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 ---comment
----@param npcSurvivor NPC
+---@param npcSurvivor PZNS_NPCSurvivor
 function PZNS_WeaponReload(npcSurvivor)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
         return;

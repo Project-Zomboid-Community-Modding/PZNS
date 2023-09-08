@@ -1,6 +1,6 @@
 require("00_references/init")
 
----@class NPC
+---@class PZNS_NPCSurvivor
 ---@field survivorID survivorID               Unique identifier for this NPC
 ---@field groupID groupID?                    Unique identifier of the group this NPC belongs to, if any
 ---@field survivorName string                 NPC name
@@ -40,14 +40,14 @@ require("00_references/init")
 ---@field squareY integer?              Cows: Placeholder; technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
 ---@field squareZ integer?              Cows: Placeholder; technically part of IsoPlayer; used when PZNS needs to use it before IsoPlayer is loaded.
 ---@field npcIsoPlayerObject IsoPlayer  Cows: objects cannot be saved to moddata...
-local NPC = {}
+local PZNS_NPCSurvivor = {}
 
 --- Cows: Construct the PZNS_NPCSurvivor.
 ---@param survivorID survivorID         -- Cows: Unique Identifier for the current NPC
 ---@param survivorName any              -- Cows: Current NPC's name
 ---@param npcIsoPlayerObject IsoPlayer  -- Cows: The actual IsoPlayer object the current NPC is spawned in as. NPCUtils will mostly interact with this object.
 ---@return table
-function NPC:new(
+function PZNS_NPCSurvivor:new(
     survivorID,
     survivorName,
     npcIsoPlayerObject
@@ -102,8 +102,8 @@ end
 
 ---Assigns groupID to NPC
 ---@param groupID groupID?
-function NPC:setGroupID(groupID)
+function PZNS_NPCSurvivor:setGroupID(groupID)
     self.groupID = groupID
 end
 
-return NPC
+return PZNS_NPCSurvivor
