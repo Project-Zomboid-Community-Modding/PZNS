@@ -1,10 +1,10 @@
-local u = {}
+local PZNS_Utils = {}
 local fmt = string.format
 
 ---@param group Group?
 ---@param groupID groupID
 ---@return boolean exist
-u.groupCheck = function(group, groupID)
+PZNS_Utils.groupCheck = function(group, groupID)
     if not group then
         print(fmt("Group not found! ID: %s", groupID))
         return false
@@ -15,7 +15,7 @@ end
 ---@param npc NPC?
 ---@param survivorID survivorID
 ---@return boolean exist
-u.npcCheck = function(npc, survivorID)
+PZNS_Utils.npcCheck = function(npc, survivorID)
     if not npc then
         print(fmt("NPC not found! ID: %s", survivorID))
         return false
@@ -23,4 +23,4 @@ u.npcCheck = function(npc, survivorID)
     return true
 end
 
-return u
+return PZNS_Utils
