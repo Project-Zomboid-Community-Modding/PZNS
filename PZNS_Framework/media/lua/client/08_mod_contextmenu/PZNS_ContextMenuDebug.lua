@@ -227,6 +227,13 @@ function PZNS_ContextMenu.Debug.WorldOptions(mpPlayerID, context, worldobjects)
     local square = PZNS_PlayerUtils.PZNS_GetPlayerMouseGridSquare(0);
     context:addSubMenu(submenu_1_Option, submenu_1);
     --
+    -- make sure we have playerGroup created
+    local groups = PZNS_UtilsDataGroups.PZNS_GetCreateActiveGroupsModData()
+    local playerGroup = "Player0Group"
+    if not groups[playerGroup] then
+        print(string.format("%s not found, will create new.", playerGroup))
+        PZNS_LocalPlayerGroupCreation()
+    end
     for debugKey, debugText in pairs(PZNS_DebugWorldText) do
         -- Cows: conditionally set the callback function for the context menu option.
         local callbackFunction = function()

@@ -54,13 +54,10 @@ function PZNS_ContextMenu.NPCInventoryOptions(mpPlayerID, context, worldobjects)
     local playerSurvivor = getSpecificPlayer(mpPlayerID);
     local playerGroupID = "Player" .. tostring(mpPlayerID) .. "Group";
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
-    local groupMembers = PZNS_NPCGroupsManager.getGroupByID(playerGroupID);
+    local groupMembers = PZNS_NPCGroupsManager.getMembers(playerGroupID);
     --
-    if (groupMembers == nil) then
-        return;
-    end
-    for survivorID, v in pairs(groupMembers) do
-        local npcSurvivor = activeNPCs[survivorID];
+    for i = 1, #groupMembers do
+        local npcSurvivor = activeNPCs[groupMembers[i]];
         --
         if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == true) then
             local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;

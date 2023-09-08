@@ -29,6 +29,7 @@ function PZNS_ContextMenu.InviteOptions(mpPlayerID, context, worldobjects)
             -- Cows: Check and make sure it is NOT the current player and is alive
             if (currentObj ~= playerSurvivor and currentObj:isAlive() == true) then
                 local npcSurvivor = PZNS_NPCsManager.getActiveNPCBySurvivorID(currentObj:getModData().survivorID);
+                if not npcSurvivor then return end
                 local callbackFunction = function()
                     -- Cows: Remove the npcSurvivor from its original group if it was in a group
                     if (npcSurvivor.groupID ~= nil) then

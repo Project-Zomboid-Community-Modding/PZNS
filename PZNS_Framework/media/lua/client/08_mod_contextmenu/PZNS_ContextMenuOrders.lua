@@ -30,16 +30,16 @@ PZNS_ContextMenu = PZNS_ContextMenu or {}
 ---@return any
 local function PZNS_CreateGroupNPCsSubMenu(parentContextMenu, mpPlayerID, groupID, orderKey)
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
-    local groupMembers = PZNS_NPCGroupsManager.getGroupByID(groupID);
+    local groupMembers = PZNS_NPCGroupsManager.getMembers(groupID);
     local followTargetID = "Player" .. tostring(mpPlayerID);
     local square = PZNS_PlayerUtils.PZNS_GetPlayerMouseGridSquare(mpPlayerID);
     -- Cows: Stop if the square isn't in a loaded visible square or there are no active npcs.
-    if (square == nil or activeNPCs == nil or groupMembers == nil) then
+    if (square == nil or activeNPCs == nil or groupMembers == {}) then
         return;
     end
     --
-    for survivorID, v in pairs(groupMembers) do
-        local npcSurvivor = activeNPCs[survivorID];
+    for i = 1, #groupMembers do
+        local npcSurvivor = activeNPCs[groupMembers[i]];
         -- Cows: Conditionally set the callback function for the context menu option.
         local callbackFunction = function()
             npcSurvivor.jobSquare = nil;
