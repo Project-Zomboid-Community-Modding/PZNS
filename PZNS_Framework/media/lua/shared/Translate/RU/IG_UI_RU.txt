@@ -1,62 +1,62 @@
 IGUI_RU = {
 
-IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "Какого хрена ты снимал?",
-IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Проклятье!Смотрите свой огонь!",
+IGUI_PZNS_Speech_Preset_FriendlyFire_01 = "ТЫ КУДА СТРЕЛЯЕШЬ, ДЯТЕЛ?",
+IGUI_PZNS_Speech_Preset_FriendlyFire_02 = "Бля! Смотри куда целишься!",
 
 IGUI_PZNS_Speech_Preset_NeutralHit_01 = "Почему ты нападаешь на меня?",
-IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Проклятье!Перестань бить меня!",
+IGUI_PZNS_Speech_Preset_NeutralHit_02 = "Эй! Перестань меня бить!",
 
-IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "У меня было достаточно твоей чушь!Вы умрете сейчас!",
+IGUI_PZNS_Speech_Preset_NeutralRevenge_01 = "Мне надоела твоя чушь! Теперь ты умрешь!",
 
-IGUI_PZNS_Speech_Preset_HostileHit_01 = "Этот шрам сделает хорошую историю ...",
-IGUI_PZNS_Speech_Preset_HostileHit_02 = "Ой!",
-IGUI_PZNS_Speech_Preset_HostileHit_03 = "Я уже начинаю сожалеть об этом!",
+IGUI_PZNS_Speech_Preset_HostileHit_01 = "Этот шрам станет хорошей историей...",
+IGUI_PZNS_Speech_Preset_HostileHit_02 = "АЙ!",
+IGUI_PZNS_Speech_Preset_HostileHit_03 = "Я уже начинаю жалеть об этом!",
 
-IGUI_PZNS_Speech_Preset_Confirm_01 = "Что бы вы ни говорили.",
-IGUI_PZNS_Speech_Preset_Confirm_02 = "Я на этом",
+IGUI_PZNS_Speech_Preset_Confirm_01 = "Ясно.",
+IGUI_PZNS_Speech_Preset_Confirm_02 = "Я займусь этим",
 IGUI_PZNS_Speech_Preset_Confirm_03 = "Хорошо",
 
-IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Понятно, я буду держать это место.",
-IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Я сейчас держу это место ...",
-IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Охраняемая обязанность да ...",
+IGUI_PZNS_Speech_Preset_HoldPosition_01 = "Понятно, я буду удерживать эту позицию.",
+IGUI_PZNS_Speech_Preset_HoldPosition_02 = "Я сейчас удерживаю эту позицию...",
+IGUI_PZNS_Speech_Preset_HoldPosition_03 = "Буду сторожить, хех...",
 
-IGUI_PZNS_Speech_Preset_Follow_01 = "Понято, следуя",
-IGUI_PZNS_Speech_Preset_Follow_02 = "я тебя прикрою",
-IGUI_PZNS_Speech_Preset_Follow_03 = "Хорошо, пройдите.",
+IGUI_PZNS_Speech_Preset_Follow_01 = "Принято, следую",
+IGUI_PZNS_Speech_Preset_Follow_02 = "Я тебя прикрою",
+IGUI_PZNS_Speech_Preset_Follow_03 = "Хорошо, я за тобой.",
 
-IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Хорошо, тогда я уезжаю",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_01 = "Хорошо, я ухожу",
 IGUI_PZNS_Speech_Preset_RemoveFromGroup_02 = "Почему я?",
-IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Вы пожалеете об этом решении!",
+IGUI_PZNS_Speech_Preset_RemoveFromGroup_03 = "Вы пожалеете об этом!",
 
-IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "Мне нужно что -то сделать здесь ...",
-IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Какова моя следующая задача?",
-IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Это медленный день на работе ...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_01 = "У меня тут было одно дело...",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_02 = "Что мне делать дальше?",
+IGUI_PZNS_Speech_Preset_JobSpeechIdle_03 = "Как же медленно идет время...",
 
 IGUI_PZNS_Speech_Preset_NeedWeapon_01 = "У меня нет оружия!",
 
 IGUI_PZNS_Speech_Preset_CannotAttack_01 = "Нет разрешения на атаку",
 
-IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Нет рабочей зоны для Гробовщика ...",
+IGUI_PZNS_Speech_Preset_NoWorkZone_Undertaker = "Нет рабочей зоны для сборщика трупов ...",
 
 IGUI_PZNS_Speech_JillTester_Confirm_01 = "ХОРОШО",
 IGUI_PZNS_Speech_JillTester_Confirm_02 = "Понятно",
-IGUI_PZNS_Speech_JillTester_Confirm_03 = "На моем пути.",
+IGUI_PZNS_Speech_JillTester_Confirm_03 = "Я в пути.",
 
-IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Понял, я буду здесь",
-IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Копировать, удерживать позицию.",
-IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Я буду здесь.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_01 = "Поняла, я буду здесь",
+IGUI_PZNS_Speech_JillTester_HoldPosition_02 = "Ясно, удерживаю позицию.",
+IGUI_PZNS_Speech_JillTester_HoldPosition_03 = "Я буду здесь тогда.",
 
-IGUI_PZNS_Speech_JillTester_Follow_01 = "Я в твоей шесть.",
-IGUI_PZNS_Speech_JillTester_Follow_02 = "Переход сейчас.",
-IGUI_PZNS_Speech_JillTester_Follow_03 = "Возьмите точку.",
+IGUI_PZNS_Speech_JillTester_Follow_01 = "Я за тобой.",
+IGUI_PZNS_Speech_JillTester_Follow_02 = "Сейчас приду.",
+IGUI_PZNS_Speech_JillTester_Follow_03 = "Следую за тобой.",
 
-IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Вы уверены?Береги себя.",
-IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Ищите эти уроды.",
-IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Не подводите свою охрану.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_01 = "Ты уверен? Береги себя.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_02 = "Берегись этих уродов.",
+IGUI_PZNS_Speech_JillTester_RemoveFromGroup_03 = "Держи ухо востро.",
 
-IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Мы тратим время здесь ...",
-IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Не ожидайте, что я сделаю бутерброд ...",
-IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Что я должен делать дальше?...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_01 = "Мы тратим время впустую ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_02 = "Не жди, что я сделаю бутерброд ...",
+IGUI_PZNS_Speech_JillTester_JobSpeechIdle_03 = "Чем я должна заняться теперь?...",
 
 }
 

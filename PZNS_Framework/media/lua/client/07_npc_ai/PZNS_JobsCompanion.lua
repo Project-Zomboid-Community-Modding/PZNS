@@ -108,7 +108,7 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
 end
 
 --- Cows: The "Companion" Job only works if the npcSurvivor and its target exists.
----@param npcSurvivor any
+---@param npcSurvivor NPC
 ---@param targetID string
 function PZNS_JobCompanion(npcSurvivor, targetID)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
@@ -116,6 +116,15 @@ function PZNS_JobCompanion(npcSurvivor, targetID)
     end
     ---@type IsoPlayer
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
+    if targetID ~= "" and targetID ~= npcSurvivor.followTargetID then
+        npcSurvivor.followTargetID = targetID
+    end
+    if not targetID or targetID == "" then
+        print(string.format("Invalid targetID (%s) for Companion job", targetID))
+        PZNS_NPCSpeak(npcSurvivor, string.format("Can't follow '%s' (invalid target)!", targetID))
+        PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Wander In Cell")
+        return
+    end
     local targetIsoPlayer = getTargetIsoPlayerByID(targetID);
     --
     if (targetIsoPlayer == nil) then

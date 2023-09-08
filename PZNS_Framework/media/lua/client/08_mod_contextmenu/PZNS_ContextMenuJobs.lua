@@ -80,12 +80,12 @@ function PZNS_ContextMenu.JobsOptions(mpPlayerID, context, worldobjects)
     for jobKey, jobText in pairs(PZNS_JobsText) do
         local jobSubMenu_2 = jobsSubMenu_1:getNew(context);
         local jobSubMenu_2_Option = jobsSubMenu_1:addOption(
-            jobText,
+            jobText[2],
             worldobjects,
             nil
         );
         local npcSubMenu_3 = jobSubMenu_2:getNew(context);
-        PZNS_CreateJobNPCsMenu(npcSubMenu_3, mpPlayerID, playerGroupID, jobText);
+        PZNS_CreateJobNPCsMenu(npcSubMenu_3, mpPlayerID, playerGroupID, jobText[1]);
         --
         jobsSubMenu_1:addSubMenu(jobSubMenu_2_Option, jobSubMenu_2);
         jobSubMenu_2:addSubMenu(jobSubMenu_2_Option, npcSubMenu_3);
