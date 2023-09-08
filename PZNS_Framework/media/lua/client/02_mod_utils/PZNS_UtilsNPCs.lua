@@ -266,7 +266,12 @@ function PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, jobName)
     end
 
     if (jobName) then
-        npcSurvivor.jobName = jobName;
+        for _, job in pairs(PZNS_JobsText) do
+            if job and job[1] == jobName then
+                npcSurvivor.jobName = jobName
+                return
+            end
+        end
     end
 end
 

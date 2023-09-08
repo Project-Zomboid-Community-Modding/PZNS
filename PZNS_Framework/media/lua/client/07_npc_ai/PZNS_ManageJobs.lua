@@ -14,14 +14,14 @@ PZNS_CellNPCsList = {};     -- WIP - Cows: Need to rethink how Global variables 
 
 -- WIP - Cows: Need to rethink how Global variables are used...
 PZNS_JobsText = {
-    Companion = getText("ContextMenu_PZNS_Companion"),
+    Companion = { "Companion", getText("ContextMenu_PZNS_Companion") },
     -- Farmer = getText("ContextMenu_PZNS_Farmer"),     -- WIP - Cows: Commented out until implementation is ready.
     -- Engineer = getText("ContextMenu_PZNS_Engineer"),, -- WIP - Cows: Commented out until implementation is ready.
-    Guard = getText("ContextMenu_PZNS_Guard"),
-    Undertaker = getText("ContextMenu_PZNS_Undertaker"),
-    Remove = getText("ContextMenu_PZNS_Remove_From_Group"),
-    WanderInBuilding = "Wander In Building",
-    WanderInCell = "Wander In Cell"
+    Guard = { "Guard", getText("ContextMenu_PZNS_Guard") },
+    Undertaker = { "Undertaker", getText("ContextMenu_PZNS_Undertaker") },
+    Remove = { "Remove From Group", getText("ContextMenu_PZNS_Remove_From_Group") },
+    WanderInBuilding = { "Wander In Building", "Wander In Building" },
+    WanderInCell = { "Wander In Cell", "Wander In Cell" }
 };
 
 -- WIP - Cows: Need to rethink how Global variables are used...
@@ -97,12 +97,20 @@ end
 local PZNS_ManageJobs = {};
 
 --- Cows: Input a JobName (without space) and associated JobFunction to make the NPC run on a custom job AI.
+---
+--- Optionally, you can provide translation string code which will be used in context menu.
+--- If not provided -`JobName` will be used instead.
 ---@param JobName string
----@param JobFunction any
-function PZNS_ManageJobs.updatePZNSJobsTable(JobName, JobFunction)
+---@param JobFunction function
+---@param jobTranslation? string translation code for job (getText("`_`"))
+function PZNS_ManageJobs.updatePZNSJobsTable(JobName, JobFunction, jobTranslation)
     -- Cows: Check if the JobName is not in the table.
+    jobTranslation = jobTranslation and getTextOrNull(jobTranslation) or JobName
     if (PZNS_Jobs[JobName] == nil) then
         PZNS_Jobs[JobName] = JobFunction;
+        PZNS_JobsText[JobName] = { JobName, jobTranslation }
+    else
+        print(string.format("Job '%s' already registered!", JobName))
     end
 end
 
