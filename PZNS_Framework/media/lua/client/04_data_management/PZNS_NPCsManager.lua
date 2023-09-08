@@ -3,10 +3,10 @@ require("00_references/init")
 local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_UtilsDataGroups = require("02_mod_utils/PZNS_UtilsDataGroups")
+local PZNS_Utils = require("02_mod_utils/PZNS_Utils")
 local NPC = require("03_mod_core/PZNS_NPCSurvivor")
 local Group = require("03_mod_core/PZNS_NPCGroup")
 
-local u = require("02_mod_utils/PZNS_Utils")
 
 PZNS_ActiveInventoryNPC = {}; -- WIP - Cows: Need to rethink how Global variables are used...
 
@@ -148,10 +148,10 @@ end
 ---@param groupID groupID? leave empty to unset group
 function PZNS_NPCsManager.setGroupID(survivorID, groupID)
     local npc = PZNS_NPCsManager.getNPC(survivorID)
-    if not u.npcCheck(npc, survivorID) then return end ---@cast npc NPC
+    if not PZNS_Utils.npcCheck(npc, survivorID) then return end ---@cast npc NPC
     if groupID then
         local group = getGroup(groupID)
-        if not u.groupCheck(group, groupID) then return end
+        if not PZNS_Utils.groupCheck(group, groupID) then return end
         if not Group.isMember(group, survivorID) then
             Group.addMember(group, survivorID)
         end
