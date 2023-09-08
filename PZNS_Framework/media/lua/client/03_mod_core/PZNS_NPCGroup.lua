@@ -1,13 +1,13 @@
 require("00_references/init")
 
----@class Group
+---@class PZNS_NPCGroup
 ---@field groupID groupID           Unique group identifier
 ---@field name string               Group name
 ---@field leaderID survivorID       NPC ID of group leader
 ---@field members table<survivorID> list of group members
 ---@field memberCount integer       number of members in group
 ---@field factionID factionID?      Faction this group belongs to
-local Group = {}
+local PZNS_NPCGroup = {}
 
 -- - Cows: can set the group leader later.
 --- Creates new group with provided parameters and puts it to registry
@@ -16,8 +16,8 @@ local Group = {}
 ---@param leaderID survivorID
 ---@param members? table<survivorID>
 ---@param factionID? factionID
----@return Group
-function Group:new(
+---@return PZNS_NPCGroup
+function PZNS_NPCGroup:new(
     groupID,
     name,
     leaderID,
@@ -39,13 +39,13 @@ end
 
 ---Sets new leader for group
 ---@param newLeaderID survivorID `survivorID` of new leader
-function Group:setLeader(newLeaderID)
+function PZNS_NPCGroup:setLeader(newLeaderID)
     self.leaderID = newLeaderID
 end
 
 ---Get list of members (`survivorID`)
 ---@return table<survivorID>
-function Group:getMembers()
+function PZNS_NPCGroup:getMembers()
     local res = {}
     for i = 1, #self.members do
         res[i] = self.members[i]
@@ -54,14 +54,14 @@ function Group:getMembers()
 end
 
 ---Get number of group members
-function Group:getMemberCount()
+function PZNS_NPCGroup:getMemberCount()
     return self.memberCount
 end
 
----Check if `survivorID` is in `Group.members`
+---Check if `survivorID` is in `PZNS_NPCGroup.members`
 ---@param survivorID survivorID
 ---@return boolean isIn
-function Group:isMember(survivorID)
+function PZNS_NPCGroup:isMember(survivorID)
     for i = 1, #self.members do
         if self.members[i] == survivorID then
             return true
@@ -72,7 +72,7 @@ end
 
 ---Adds `memberID` to group members
 ---@param memberID survivorID NPC survivorID of newly added member
-function Group:addMember(memberID)
+function PZNS_NPCGroup:addMember(memberID)
     if not memberID then return end
     self.members[self.memberCount + 1] = memberID
     self.memberCount = self.memberCount + 1
@@ -80,7 +80,7 @@ end
 
 ---Removes `memberID` from Group members
 ---@param memberID survivorID NPC survivorID of member to remove
-function Group:removeMember(memberID)
+function PZNS_NPCGroup:removeMember(memberID)
     if not memberID then return end
     if memberID == self.leaderID then
         self.leaderID = nil
@@ -96,7 +96,7 @@ end
 
 ---Rename group
 ---@param newName string  New name for group (length<250)
-function Group:setName(newName)
+function PZNS_NPCGroup:setName(newName)
     local limit = 250
     if not newName or newName == "" then
         print("Name not valid:" .. tostring(newName))
@@ -109,4 +109,4 @@ function Group:setName(newName)
     self.name = newName
 end
 
-return Group
+return PZNS_NPCGroup

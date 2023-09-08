@@ -1,7 +1,7 @@
 local PZNS_Utils = {}
 local fmt = string.format
 
----@param group Group?
+---@param group PZNS_NPCGroup?
 ---@param groupID groupID
 ---@return boolean exist
 PZNS_Utils.groupCheck = function(group, groupID)
@@ -12,7 +12,7 @@ PZNS_Utils.groupCheck = function(group, groupID)
     return true
 end
 
----@param npc NPC?
+---@param npc PZNS_NPCSurvivor?
 ---@param survivorID survivorID
 ---@return boolean exist
 PZNS_Utils.npcCheck = function(npc, survivorID)
