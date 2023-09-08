@@ -133,7 +133,7 @@ function PZNS_NPCsManager.createNPCSurvivor(
         -- WIP - Cows: Alert player the ID is already used and the NPC cannot be created.
         print(string.format("NPC already exist! ID: %s", survivorID))
         npcSurvivor = npc
-        if not isoPlayer or not npcSurvivor.npcIsoPlayerObject then
+        if not isoPlayer then
             isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID)
         end
         if not npcSurvivor.npcIsoPlayerObject then
