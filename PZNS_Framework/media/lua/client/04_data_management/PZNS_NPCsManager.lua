@@ -4,7 +4,9 @@ local PZNS_UtilsDataNPCs = require("02_mod_utils/PZNS_UtilsDataNPCs");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 local PZNS_UtilsDataGroups = require("02_mod_utils/PZNS_UtilsDataGroups")
 local NPC = require("03_mod_core/PZNS_NPCSurvivor")
-local fmt = string.format
+local Group = require("03_mod_core/PZNS_NPCGroup")
+
+local u = require("02_mod_utils/PZNS_Utils")
 
 PZNS_ActiveInventoryNPC = {}; -- WIP - Cows: Need to rethink how Global variables are used...
 
@@ -102,8 +104,12 @@ function PZNS_NPCsManager.createNPCSurvivor(
         if not isoPlayer then
             isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID)
         else
-            assert(instanceof(isoPlayer, "IsoPlayer"), "isoPlayer is not valid!")
-            squareZ = isoPlayer:getSquare():getZ()
+            if not instanceof(isoPlayer, "IsoPlayer") then
+                print(string.format("IsoPlayer is not valid for '%s'! Will create new one", survivorID))
+                isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID)
+            else
+                squareZ = isoPlayer:getSquare():getZ()
+            end
         end
 
         ---@type NPC
@@ -125,30 +131,29 @@ function PZNS_NPCsManager.createNPCSurvivor(
         npcSurvivor.textObject:ReadString(survivorName);
     else
         -- WIP - Cows: Alert player the ID is already used and the NPC cannot be created.
+        print(string.format("NPC already exist! ID: %s", survivorID))
         npcSurvivor = npc
-        if not isoPlayer then
+        if not isoPlayer or not npcSurvivor.npcIsoPlayerObject then
             isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID)
         end
-        assert(isoPlayer, "IsoPlayer missing, can't create NPC")
-        npcSurvivor.npcIsoPlayerObject = isoPlayer
+        if not npcSurvivor.npcIsoPlayerObject then
+            npcSurvivor.npcIsoPlayerObject = isoPlayer
+        end
     end
     return npcSurvivor;
 end
 
----Set NPC group ID to groupID
+---Set `NPC` group ID to `groupID`
 ---@param survivorID survivorID
 ---@param groupID groupID? leave empty to unset group
 function PZNS_NPCsManager.setGroupID(survivorID, groupID)
     local npc = PZNS_NPCsManager.getNPC(survivorID)
-    if not npc then
-        print(fmt("NPC not found! ID: %s", survivorID))
-        return
-    end
+    if not u.npcCheck(npc, survivorID) then return end ---@cast npc NPC
     if groupID then
         local group = getGroup(groupID)
-        if not group then
-            print(fmt("Group not found! ID: %s", groupID))
-            return
+        if not u.groupCheck(group, groupID) then return end
+        if not Group.isMember(group, survivorID) then
+            Group.addMember(group, survivorID)
         end
     end
     NPC.setGroupID(npc, groupID)
@@ -240,7 +245,7 @@ function PZNS_NPCsManager.spawnRandomRaiderSurvivorAtSquare(targetSquare, raider
         PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(raiderSurvivor, "Base.BaseballBat");
     end
     -- Cows: Set the job last, otherwise the NPC will function as if it didn't have a weapon.
-    raiderSurvivor.jobName = "Wander In Cell";
+    PZNS_UtilsNPCs.PZNS_SetNPCJob(raiderSurvivor, "Wander In Cell")
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     activeNPCs[raiderSurvivorID] = raiderSurvivor; -- Cows: This saves it to modData, which allows the npc to run while in-game, but does not create a save file.
     return raiderSurvivor;
@@ -289,7 +294,7 @@ function PZNS_NPCsManager.spawnRandomNPCSurvivorAtSquare(targetSquare, survivorI
         PZNS_UtilsNPCs.PZNS_AddEquipWeaponNPCSurvivor(npcSurvivor, "Base.BaseballBat");
     end
     -- Cows: Set the job last, otherwise the NPC will function as if it didn't have a weapon.
-    npcSurvivor.jobName = "Wander In Cell";
+    PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Wander In Cell")
     local activeNPCs = PZNS_UtilsDataNPCs.PZNS_GetCreateActiveNPCsModData();
     activeNPCs[npcSurvivorID] = npcSurvivor; -- Cows: This saves it to modData, which allows the npc to run while in-game, but does not create a save file.
     return npcSurvivor;
