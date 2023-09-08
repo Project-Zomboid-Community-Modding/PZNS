@@ -272,7 +272,6 @@ function PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, jobName)
                 return
             end
         end
-        print(string.format("Job not found: %s", jobName))
     end
 end
 
