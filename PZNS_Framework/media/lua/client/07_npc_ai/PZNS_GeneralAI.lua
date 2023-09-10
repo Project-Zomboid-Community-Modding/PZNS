@@ -62,6 +62,12 @@ function PZNS_GeneralAI.PZNS_IsReloadNeeded(npcSurvivor)
     end
     -- Cows: Ranged weapon
     if (npcHandItem:IsWeapon() == true and npcHandItem:isRanged() == true) then
+        -- Cows: Refill the gun to full capacity if infinite ammo is active.
+        if (IsInfiniteAmmoActive == true and npcHandItem:getCurrentAmmoCount() == 0) then
+            PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
+            PZNS_UtilsNPCs.PZNS_SetLoadedGun(npcSurvivor);
+            return false;
+        end
         local ammoType = npcHandItem:getAmmoType();
         ammoCount = npc_inventory:getItemCountRecurse(ammoType);
         -- Cows: Check if the gun has no ammo and there are ammo in the backpack or there is a magazine type but no magazine is in the gun.
