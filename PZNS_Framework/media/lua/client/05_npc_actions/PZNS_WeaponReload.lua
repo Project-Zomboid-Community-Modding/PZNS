@@ -22,7 +22,6 @@ function PZNS_WeaponReload(npcSurvivor)
     local lastAction = actionQueue.queue[#actionQueue.queue];
     -- Cows: Magazine based reload
     local magazineType = npcHandItem:getMagazineType();
-    local weaponAmmoType = npcHandItem:getAmmoType();
     if (magazineType ~= nil) then
         -- Cows: If there are more than 3 actions queued, reset the queue so the NPC can start reloading right away.
         if (actionsCount > 3) then
@@ -40,9 +39,6 @@ function PZNS_WeaponReload(npcSurvivor)
                     PZNS_UtilsNPCs.PZNS_ClearQueuedNPCActions(npcSurvivor);
                 end
             end
-            if (IsInfiniteAmmoActive == true and npcHandItem:getCurrentAmmoCount() == 0) then
-                PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, weaponAmmoType, npcHandItem:getMaxAmmo());
-            end
             -- PZNS_NPCSpeak(npcSurvivor, "Reloading... Inserting Mag into Gun");
             PZNS_GunMagazineInsert(npcSurvivor);
         else
@@ -57,9 +53,6 @@ function PZNS_WeaponReload(npcSurvivor)
         end
         -- End Magazine based reload
     else
-        if (IsInfiniteAmmoActive == true and npcHandItem:getCurrentAmmoCount() == 0) then
-            PZNS_UtilsNPCs.PZNS_AddItemsToInventoryNPCSurvivor(npcSurvivor, weaponAmmoType, npcHandItem:getMaxAmmo());
-        end
         -- Cows: Testing this out, but ISReloadWeaponAction seems to have worked for SS/SSC...
         ISTimedActionQueue.add(ISReloadWeaponAction:new(npcIsoPlayer, npcHandItem));
     end
