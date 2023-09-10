@@ -108,7 +108,7 @@ local function jobCompanion_Movement(npcSurvivor, targetIsoPlayer)
 end
 
 --- Cows: The "Companion" Job only works if the npcSurvivor and its target exists.
----@param npcSurvivor NPC
+---@param npcSurvivor PZNS_NPCSurvivor
 ---@param targetID string
 function PZNS_JobCompanion(npcSurvivor, targetID)
     if (PZNS_UtilsNPCs.IsNPCSurvivorIsoPlayerValid(npcSurvivor) == false) then
