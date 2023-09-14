@@ -50,8 +50,8 @@ function PZNS_NPCSpeak(npcSurvivor, text, intention)
     if (npcSurvivor ~= nil) then
         -- Cows: Colored text based on intention.
         npcSurvivor.textObject:setOutlineColors(0, 0, 0, 255); -- Black text outline
-        -- Cows: Raiders are always red text, <= 0 NPCs are also always hostile.
-        if (npcSurvivor.isRaider or npcSurvivor.affection <= 0) then
+        -- Cows: NPCs with affection <= 0 and Raiders are always hostile with red text,
+        if (npcSurvivor.affection <= 0 or npcSurvivor.isRaider == true) then
             npcSurvivor.textObject:setDefaultColors(225, 0, 0, 0.8); -- Red
         else
             if (intention == nil or intention == "InfoOnly") then
