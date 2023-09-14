@@ -79,8 +79,11 @@ end
 
 ---comment
 ---@param square any
----@return unknown
+---@return unknown | nil
 local function getSquareDeadBody(square)
+    if (square == nil) then
+        return;
+    end
     local squareDeadBodys = square:getDeadBodys();
     local deadBody = nil;
     --
