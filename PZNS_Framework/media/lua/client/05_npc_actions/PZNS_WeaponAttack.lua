@@ -1,5 +1,17 @@
+-- oZumbiAnalitico 16092023: In my attempt to understand the AI thing and create hostile npc's for my mod I noticed that:
+-- 1. The damage happens before the swing animation and sound.
+-- 2. Often there is more damage hits than animation and sound. 
+-- 3. Sometimes there is damage and no Animation and no Sound.
+-- 4. That problem happens in both melee and ranged weapons.
+-- ... First I thought that this problem was caused by the OnRenderTick being too fast, so as I still don't know how to use ticks variables I first tried to use a 1 == ZombRand(1,tick) to emulate a tick period and slow down the frequency of calls. But now I believe that the damage 'calculateNPCDamage' should be called on swing time 'PZNS_WeaponSwing', after the sound trigger, instead of being called right after 'npcIsoPlayer:NPCSetAttack(true)'.
+-- The call should be something like this: 
+-- ... npcIsoPlayer:NPCSetAttack(true) --> ... --> Trigger OnWeaponSwing Event --> calls PZNS_WeaponSwing() --> Play Sound --> calls calculateNPCDamage()
+-- Instead of the original: 
+-- ... npcIsoPlayer:NPCSetAttack(true) --> calculateNPCDamage()
+
 local PZNS_CombatUtils = require("02_mod_utils/PZNS_CombatUtils");
 local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
+local PZNS_NPCsManager = require("04_data_management/PZNS_NPCsManager");
 
 local meleeTicks = 40;  -- Cows: As ticks are inconsistent between machines... this should be an option user can set for comfort.
 local rangedTicks = 60; -- Cows: As ticks are inconsistent between machines... this should be an option user can set for comfort.
@@ -35,14 +47,14 @@ end
 ---@param npcSurvivor any
 ---@param npcIsoPlayer IsoPlayer
 ---@param targetObject IsoPlayer | IsoZombie
-local function meleeAttack(npcSurvivor, npcIsoPlayer, targetObject)
+local function meleeAttack(npcSurvivor, npcIsoPlayer, targetObject) 
     if (npcSurvivor.attackTicks >= meleeTicks) then
         local isTargetAlive = targetObject:isAlive();
         --
         if (isTargetAlive == true) then
             -- PZNS_NPCSpeak(npcSurvivor, "Attacking target");
             npcIsoPlayer:NPCSetAttack(true);
-            calculateNPCDamage(npcIsoPlayer, targetObject);
+            -- oZumbiAnalitico -- calculateNPCDamage(npcIsoPlayer, targetObject); 
         end
         npcSurvivor.attackTicks = 0;
     end
@@ -59,7 +71,7 @@ local function rangedAttack(npcSurvivor, npcIsoPlayer, targetObject)
         if (isTargetAlive == true) then
             -- PZNS_NPCSpeak(npcSurvivor, "Attacking target");
             npcIsoPlayer:NPCSetAttack(true);
-            calculateNPCDamage(npcIsoPlayer, targetObject);
+            -- oZumbiAnalitico -- calculateNPCDamage(npcIsoPlayer, targetObject);
         end
         npcSurvivor.attackTicks = 0;
     end
@@ -115,7 +127,7 @@ function PZNS_WeaponAttack(npcSurvivor)
     if (npcHandItem:isRanged() == true) then
         rangedAttack(npcSurvivor, npcIsoPlayer, targetObject);
     else
-        npcIsoPlayer:NPCSetMelee(true);
+        -- oZumbiAnalitico -- npcIsoPlayer:NPCSetMelee(true); -- I believe this is related to shove thing
         meleeAttack(npcSurvivor, npcIsoPlayer, targetObject);
     end
     --
@@ -163,7 +175,9 @@ function PZNS_WeaponSwing(isoPlayer, playerWeapon)
             rangeWeaponHandler(isoPlayer, playerWeapon);
         end
         -- Cows: Play the weapon sound if a round is chambered.
-        if (playerWeapon:isRoundChambered()) then
+		-- oZumbiAnalitico: Here I added "or not playerWeapon:haveChamber()" to play sound for melee weapon
+		-- oZumbiAnalitico: Seems that some firearms don't trigger sound effect, like doublebarrel shotgun, must be because some weapons don't have "chamber thing action", like revolvers or the double barrels. Not fixed yet ... 
+        if playerWeapon:isRoundChambered() or (not playerWeapon:haveChamber()) or (not playerWeapon:isRanged()) then
             local range = playerWeapon:getSoundRadius();
             local volume = playerWeapon:getSoundVolume();
             addSound(isoPlayer, isoPlayer:getX(), isoPlayer:getY(), isoPlayer:getZ(), range, volume);
@@ -171,7 +185,46 @@ function PZNS_WeaponSwing(isoPlayer, playerWeapon)
                 playerWeapon:getSwingSound(), isoPlayer:getCurrentSquare(), 0.5, range, 1.0, false
             );
         end
+		-- oZumbiAnalitico: idk if the PlayWorldSound is concurrent, but i believe the damage needs to be after the sound to prevent multiple damages with no animation and sound. 
+		-- oZumbiAnalitico: There is another problem, that "multiple-attacks before animation and sound" happens with ranged weapons too, could be an improvement to put the damage here on weapon swing for both.
+		
+        -- oZumbiAnalitico: Still seems that there is a double call to swing the weapon. The NPC always seems to double-tab. The ZombRand thing is a workaround ...
+        local npcSurvivor = PZNS_NPCsManager.getActiveNPCBySurvivorID(npcSurvivorID)
+        if npcSurvivor and 1 == ZombRand(1,2) then calculateNPCDamage(isoPlayer, npcSurvivor.aimTarget) end
+		
         isoPlayer:NPCSetAttack(false);
         isoPlayer:NPCSetMelee(false);
     end
 end
+
+-- Notation:
+-- 1. A || B means that B is inside A, or A calls B, B is inside A structure. Example is a function A() calling a subfunction B()
+-- 2. A | B means that B is executed after A, but in same context level of A. Example let C be a function that calls A() and in the next line calls B()
+-- 3. % is a conditional control structure
+-- 4. & is a loop structure
+-- 5. $ is a variable or object construction
+-- 6. *% is a conditional checkpoint, often in beginning of function
+-- 7. ? A, B, C means a random choice between A, B, C, ...
+-- 8. { A, B, C } in the end of statements means that the end part of statement use A, B, C functions or operations in a way decided when implemented. Is an abstraction that means "A,B,C will be used in some way".
+-- 9. { A, B, C } in beginning of statements means that the statement follows when conditions A, B, C are met. 
+-- 10. _function() is not a reference to a real function, is a reference to a concept that could be used in an actual function. That name becomes a suffix to an implemented function.
+
+-- Logic 16092023: PZNS_WeaponAttack() || PZNS_WeaponSwing()
+
+-- Logic [ PZNS_WeaponAttack ] 16092023
+-- 1. PZNS_WeaponAttack() || *% | $ npcHandItem | ... | *% | % npcHandItem:isRanged() | % not npcHandItem:isRanged() || meleeAttack()
+-- 2. PZNS_WeaponAttack() || *% | $ npcHandItem | ... | *% | % npcHandItem:isRanged() || rangedAttack()
+-- 3. meleeAttack() || { npcIsoPlayer:NPCSetAttack(true) }
+-- 4. rangedAttack() || { npcIsoPlayer:NPCSetAttack(true) }
+-- 5. npcIsoPlayer:NPCSetAttack(true) || Event OnWeapon Swing || PZNS_WeaponSwing()
+
+-- oZumbiAnalitico: I'm assuming NPCSetAttack triggers the weapon swing animation that triggers the event.
+
+-- Logic [ PZNS_WeaponSwing ] 16092023
+-- 1. PZNS_WeaponSwing() || *% | % npcSurvivorID || "Ranged Weapon Handler" | "weapon sound" | "Weapon do Damage" || % chance || calculateNPCDamage()
+-- 2. PZNS_WeaponSwing() || *% | % npcSurvivorID || "Ranged Weapon Handler" | "weapon sound" || { addSound, PlayWorldSound }
+-- 3. PZNS_WeaponSwing() || *% | % npcSurvivorID || "Ranged Weapon Handler" || % || rangeWeaponHandler()
+
+
+
+
