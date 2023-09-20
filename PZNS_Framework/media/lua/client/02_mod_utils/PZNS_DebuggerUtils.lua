@@ -370,17 +370,19 @@ function PZNS_DebuggerUtils.PZNS_RemoveDeadBodies()
                 boundsStartY + yOffset,
                 playerSquareZ
             );
-            local currentSqDeadBodys = currentSquare:getDeadBodys();
-            for i = 0, currentSqDeadBodys:size() - 1 do
-                ---@type IsoDeadBody
-                local currentBody = currentSqDeadBodys:get(i);
-                if (currentBody:isZombie() == false) then
-                    table.insert(corpsesList, currentBody);
-                    PZNS_DebuggerUtils.CreateLogLine("PZNS_RemoveDeadBodies", isLoggingLocalFunction,
-                        "currentBody: " .. tostring(currentBody)
-                    );
-                    currentBody:removeFromSquare();
-                    currentBody:removeFromWorld();
+            if (currentSquare ~= nil) then
+                local currentSqDeadBodys = currentSquare:getDeadBodys();
+                for i = 0, currentSqDeadBodys:size() - 1 do
+                    ---@type IsoDeadBody
+                    local currentBody = currentSqDeadBodys:get(i);
+                    if (currentBody:isZombie() == false) then
+                        table.insert(corpsesList, currentBody);
+                        PZNS_DebuggerUtils.CreateLogLine("PZNS_RemoveDeadBodies", isLoggingLocalFunction,
+                            "currentBody: " .. tostring(currentBody)
+                        );
+                        currentBody:removeFromSquare();
+                        currentBody:removeFromWorld();
+                    end
                 end
             end
         end
