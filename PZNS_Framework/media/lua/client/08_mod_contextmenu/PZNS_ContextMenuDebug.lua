@@ -22,12 +22,12 @@ end
 
 local function addFiveNailsBoxesToLocalPlayer()
     local playerSurvivor = getSpecificPlayer(0);
-    for i = 1, 3 do
+    for i = 1, 5 do
         playerSurvivor:getInventory():AddItem("Base.NailsBox");
     end
 end
 
-local function addFivePropanTanksToLocalPlayer()
+local function addFivePropaneTanksToLocalPlayer()
     local playerSurvivor = getSpecificPlayer(0);
     for i = 1, 5 do
         playerSurvivor:getInventory():AddItem("Base.PropaneTank");
@@ -140,7 +140,7 @@ local PZNS_DebugBuild = {
     SpawnCannedTuna = addFiveCannedTunasToLocalPlayer,
     SpawnNails = addFiveNailsBoxesToLocalPlayer,
     SpawnPlanks = addTenPlanksToLocalPlayer,
-    SpawnPropaneTank = addFivePropanTanksToLocalPlayer,
+    SpawnPropaneTank = addFivePropaneTanksToLocalPlayer,
     SpawnMetalSheets = addMetalSheetsToLocalPlayer,
     SpawnBigFenceGate = addBigPoleFenceGate,
     SpawnBigWiredWall = addBigWiredWallMaterialsToLocalPlayer,
