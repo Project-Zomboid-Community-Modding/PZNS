@@ -169,7 +169,10 @@ function PZNS_WorldUtils.PZNS_ClearZombiesFromSquare(targetSquare, squareRadius)
     local npcSquareY = targetSquare:getY();
     local npcSquareZ = targetSquare:getZ();
     local zombiesRemoved = 0;
-    --
+    -- Cows: Assign npcSquareZ to 0 if it is nil for whatever reason.
+    if (npcSquareZ == nil) then
+        npcSquareZ = 0;
+    end
     for xSquare = (npcSquareX - squareRadius), (npcSquareX + squareRadius) do
         --
         for ySquare = (npcSquareY - squareRadius), (npcSquareY + squareRadius) do

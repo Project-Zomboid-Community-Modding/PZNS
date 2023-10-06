@@ -4,7 +4,7 @@ local PZNS_UtilsNPCs = require("02_mod_utils/PZNS_UtilsNPCs");
 ---Cows: Perhaps reset the speech text based on the npc's affection value? Higher = friendlier
 ---@param npcSurvivor any
 local function resetSpeechText(npcSurvivor)
-    if (npcSurvivor.isRaider) then
+    if (npcSurvivor.affection <= 0 or npcSurvivor.isRaider == true) then
         npcSurvivor.textObject:setDefaultColors(225, 0, 0, 0.8);     -- Red text
     else
         npcSurvivor.textObject:setDefaultColors(230, 230, 230, 0.8); -- White text
