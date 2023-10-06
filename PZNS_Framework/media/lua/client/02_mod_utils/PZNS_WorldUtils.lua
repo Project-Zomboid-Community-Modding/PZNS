@@ -162,14 +162,18 @@ end
 ---@param targetSquare IsoGridSquare
 ---@param squareRadius number
 function PZNS_WorldUtils.PZNS_ClearZombiesFromSquare(targetSquare, squareRadius)
+    if (targetSquare == nil) then
+        return;
+    end
     local npcSquareX = targetSquare:getX();
     local npcSquareY = targetSquare:getY();
+    local npcSquareZ = targetSquare:getZ();
     local zombiesRemoved = 0;
     --
     for xSquare = (npcSquareX - squareRadius), (npcSquareX + squareRadius) do
         --
         for ySquare = (npcSquareY - squareRadius), (npcSquareY + squareRadius) do
-            local currentSquare = getCell():getGridSquare(xSquare, ySquare, 0);
+            local currentSquare = getCell():getGridSquare(xSquare, ySquare, npcSquareZ);
             -- Cows: Needed to add a check for current square - because if it's off-screen and the square data is unloaded, the function will throw an error.
             if (currentSquare ~= nil) then
                 local Objs = currentSquare:getMovingObjects();
