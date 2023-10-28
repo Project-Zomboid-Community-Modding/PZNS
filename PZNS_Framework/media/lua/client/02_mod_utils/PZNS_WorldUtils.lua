@@ -206,6 +206,7 @@ end
 ---@return IsoRoom
 function PZNS_WorldUtils.PZNS_GetCellRandomRoom(roomsList)
     local listSize = roomsList:size() - 1;
+    if listSize < 0 then return nil end -- oZumbiAnalitico: small fix, in places without rooms this function raise exception. Ocurred with Wander in Cell Job. 
     local randomSelect = ZombRand(0, listSize);
     local randomRoom = roomsList:get(randomSelect);
     return randomRoom;
