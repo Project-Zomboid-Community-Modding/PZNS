@@ -78,16 +78,19 @@ function PZNS_ContextMenu.JobsOptions(mpPlayerID, context, worldobjects)
     local playerGroupID = "Player" .. tostring(mpPlayerID) .. "Group";
     --
     for jobKey, jobText in pairs(PZNS_JobsText) do
-        local jobSubMenu_2 = jobsSubMenu_1:getNew(context);
-        local jobSubMenu_2_Option = jobsSubMenu_1:addOption(
-            jobText[2],
-            worldobjects,
-            nil
-        );
-        local npcSubMenu_3 = jobSubMenu_2:getNew(context);
-        PZNS_CreateJobNPCsMenu(npcSubMenu_3, mpPlayerID, playerGroupID, jobText[1]);
-        --
-        jobsSubMenu_1:addSubMenu(jobSubMenu_2_Option, jobSubMenu_2);
-        jobSubMenu_2:addSubMenu(jobSubMenu_2_Option, npcSubMenu_3);
+        -- oZumbiAnalitico: Ignore jobs with tags Enemy and Debug
+        if not string.find(jobText[1],"Enemy") and not string.find(jobText[1],"Debug") then
+            local jobSubMenu_2 = jobsSubMenu_1:getNew(context);
+            local jobSubMenu_2_Option = jobsSubMenu_1:addOption(
+                jobText[2],
+                worldobjects,
+                nil
+            );
+            local npcSubMenu_3 = jobSubMenu_2:getNew(context);
+            PZNS_CreateJobNPCsMenu(npcSubMenu_3, mpPlayerID, playerGroupID, jobText[1]);
+            --
+            jobsSubMenu_1:addSubMenu(jobSubMenu_2_Option, jobSubMenu_2);
+            jobSubMenu_2:addSubMenu(jobSubMenu_2_Option, npcSubMenu_3);
+        end
     end
 end
