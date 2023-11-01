@@ -70,6 +70,7 @@ function PZNS_WorldUtils.PZNS_IsSquareInPlayerSpawnRange(playerSurvivor, squareX
 end
 
 --- Cows: Helper function to spawn and despawn/unload NPCs from the game world.
+--- oZumbiAnalitico: Modified 01112023 to solve the crash issues when the isoplayer is removed from world.
 ---@param npcSurvivor any
 local function spawnNPCIsoPlayer(npcSurvivor)
     if (npcSurvivor == nil) then
@@ -102,6 +103,23 @@ local function spawnNPCIsoPlayer(npcSurvivor)
                 if (npcSurvivor.isSpawned ~= true) then
                     -- Cows: set the isSavedInWorld to false so NPC can be saved later if off-screen.
                     PZNS_UtilsDataNPCs.PZNS_SpawnNPCFromModData(npcSurvivor);
+                    if npcSurvivor.npcIsoPlayerObject then 
+						npcSurvivor.npcIsoPlayerObject:setGhostMode(false)
+						if npcSurvivor.jobName == "Debug Nil Job" then
+							if npcSurvivor.previousJobName ~= nil then -- oZumbiAnalitico: that new variable previousJobName is necessary to change from "nil job" to the older actual job. 
+                            -- oZumbiAnalitico: The idea of nil job is, instead of removing the isoplayer from world, which leaves nil references and raise exception, change the isoplayer to a dummy job and remove the reference from npcSurvivor object, leaving the removal of isoplayer object to the garbage collector.
+								PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, npcSurvivor.previousJobName) 
+							else 
+                                -- oZumbiAnalitico: If there is no previousJobName then set "Wander In Cell" job
+                                -- oZumbiAnalitico: The .previousJobName variable seems to not be saved automatically, so when restart the game the .previousJobName becomes nil. I don't know how the save and load data works, so I'm leaving this way ...
+                                if not npcSurvivor.groupID then
+                                    PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Wander In Cell") 
+                                else 
+                                    PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Guard") -- oZumbiAnalitico: Every member npc saved with "nil job" will become a guard.
+                                end
+							end
+						end
+					end
                     npcSurvivor.isSavedInWorld = false;
                 end
             else
@@ -115,9 +133,17 @@ local function spawnNPCIsoPlayer(npcSurvivor)
                 end
                 -- Cows: Check if the IsoPlayer object exists then remove and reset the npc IsoPlayer Object.
                 if (npcIsoPlayer) then
-                    npcIsoPlayer:removeFromSquare();
-                    npcIsoPlayer:removeFromWorld();
-                    npcSurvivor.npcIsoPlayerObject = nil;
+                    --if false then -- not preventNPCdespawnWithZombies(npcIsoPlayer) then
+                        -- oZumbiAnalitico: when zombies are neaby this part generate a nil reference issue for functions triggered by zombies (update boredom)
+                        --npcIsoPlayer:removeFromSquare();
+                        --npcIsoPlayer:removeFromWorld();
+                        --npcSurvivor.npcIsoPlayerObject = nil;
+                    --else
+                        npcIsoPlayer:setGhostMode(true)
+						npcSurvivor.previousJobName = npcSurvivor.jobName
+                        PZNS_UtilsNPCs.PZNS_SetNPCJob(npcSurvivor, "Debug Nil Job") -- nil job don't do anything, the queue is cleared, the aimTarget is cleared.
+                        npcSurvivor.npcIsoPlayerObject = nil; -- oZumbiAnalitico: I believe that the extra isoplayer will eventually be discarded by garbage collector, as no reference object. To work that extra isoplayer can't be stored on any other external table.
+                    --end
                 end
                 -- Cows: Check if the npc cannot be saved and permanently remove from game world.
                 if (npcSurvivor.canSaveData == false) then
