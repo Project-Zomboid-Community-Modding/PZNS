@@ -265,7 +265,7 @@ end
 --]]
 
 -- ====================================================================
---[[                  >>> PZNS JOBS ANALYSIS <<<
+---[[                  >>> PZNS JOBS ANALYSIS <<<
 
 -- [ Job ] : Is the main function for AI processing.
 
@@ -290,12 +290,26 @@ end
 -- 2. one should take care putting loops on _event_change, Job Function is called OnRenderTick.
 -- 3. N := npcSurvivor
 -- 4. NPCS := Active NPCs
+-- 5. Job State Processing could be used in different Job Functions.
 -- -------------------------------------------------------------------
 --> Events.OnRenderTick.Add o _AllJobs || & N in NPCS || _JobSelect(N) || %% || _Job(N)
 --> _Job() || _state_change() | _state_processing() || %% "state" || { ... }
 --> _Job() || _state_change() || % _event_change() || { ... }
 --> _Job() || _state_change() || % _event_change(), _timed_change() || _stay(), _change() || { ... }
 
+-- Possible Common Events:
+-- 1. Threat 5 Squares Close ; T5SC
+-- 2. Threat 2 Squares Close ; T2SC
+-- 3. Threat 10 Squares Distant ; T10SD
+-- 4. Health Below 10 ; HB10
+-- 5. Health Below 50 ; HB50
+-- 6. Can Attack Target ; CAT
+-- 7. Being Targeted By NPC ; BTN
+-- 8. Zombie Bite ; ZB
+-- ----------------------------------------
+-- ZB > HB10 > T2SC > T5SC > CAT > BTN
+
+-- ...
 
 -- Logic [ Loot Filler ]
 -- 1. Using a Backpack the NPC will fill that Backpack with items.
