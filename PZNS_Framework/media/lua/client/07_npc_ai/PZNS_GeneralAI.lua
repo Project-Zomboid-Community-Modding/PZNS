@@ -254,6 +254,19 @@ function PZNS_GeneralAI.PZNS_CheckForThreats(npcSurvivor)
     return isThreatExist;
 end
 
+-- oZumbiAnalitico: these extra annotations are for performance updates ...
+-- ... Zombie List can become very big for a function called "OnRenderTick"wise, strategies: 
+-- ... 1. Break the loop earlier.
+-- ... 2. Find threat searching for squares around the npc instead of searching on cell lists.
+-- ... 3. Random search with limited number of iterations.
+
+-- [ PZNS_GeneralAI.PZNS_CheckForThreats ] --> Has Zombie List Loop and NPC Loop, so affect performance !!!
+-- 1. G := PZNS_GeneralAI.PZNS_CheckForThreats
+-- ------------------------------------------------
+--> G() || *% | $ isNPCHostileToPlayer | $ priorityThreatObject | % priorityThreatObject || % ... || G <- true
+--> G() || *% | $ isNPCHostileToPlayer | $ priorityThreatObject | % priorityThreatObject | $ npcWeapon, aimRange | % "attack player" | % "zombie list" || & PZNS_CellZombiesList || % PZNS_WorldUtils.PZNS_IsObjectZombieActive() || { PZNS_WorldUtils.PZNS_GetDistanceBetweenTwoObjects, PZNS_AimAtTarget }
+--> G() || *% | $ isNPCHostileToPlayer | $ priorityThreatObject | % priorityThreatObject | $ npcWeapon, aimRange | % "attack player" | % "zombie list" | % "npc list" || & PZNS_CellNPCsList || { ... }
+
 --- Cows: This function forces the npcSurvivor to look for threats nearby.
 ---@param npcSurvivor any
 ---@return boolean
@@ -277,6 +290,16 @@ function PZNS_GeneralAI.PZNS_NPCFoundThreat(npcSurvivor)
     end
     return false;
 end
+
+-- oZumbiAnalitico: these extra annotations are for performance updates ...
+-- [ PZNS_GeneralAI.PZNS_NPCFoundThreat ]
+-- 1. F := PZNS_GeneralAI.PZNS_NPCFoundThreat
+-- 2. S := PZNS_GeneralAI.PZNS_CanSeeAimTarget(npcSurvivor)
+-- 3. C := PZNS_GeneralAI.PZNS_CheckForThreats(npcSurvivor) --> Has Zombie List Loop and NPC Loop, so affect performance !!!
+-- ----------------------------------------------
+--> F() || *% | % S() || F <- true
+--> F() || *% | % S() | % C() || F <- true
+--> F() || *% | % S() | % C() | F <- false
 
 --- Cows: This should unify the combat AI code...
 ---@param npcSurvivor any
@@ -318,6 +341,19 @@ function PZNS_GeneralAI.PZNS_IsNPCBusyCombat(npcSurvivor)
     end
     return false;
 end
+
+-- oZumbiAnalitico: these extra annotations are for performance updates ...
+-- [ PZNS_GeneralAI.PZNS_IsNPCBusyCombat ]
+-- 1. C := PZNS_GeneralAI.PZNS_IsNPCBusyCombat
+-- 2. F := PZNS_GeneralAI.PZNS_NPCFoundThreat --> Has Zombie List Loop and NPC Loop, so affect performance !!!
+-- 3. A := PZNS_GeneralAI.PZNS_NPCAimAttack
+-- --------------------------------------------------------------------
+--> _combat_handler() || % C() || _combat_handler <- *
+--> C() || *% | _reset_action_tick_count() | _reload_handler() || _check_tick() || PZNS_WeaponReload() | _set_action_tick_to_zero()
+--> C() || *% | _reset_action_tick_count() | _reload_handler() || _check_tick() | _set_idle_tick_to_zero() | C <- true
+--> C() || *% | _reset_action_tick_count() | _reload_handler() | % F() || A() | _reset_idle_tick() | C <- true
+--> C() || *% | _reset_action_tick_count() | _reload_handler() | % F() | _no_threat_reset() || { NPCSetAttack, NPCGetAiming, NPCSetAiming }
+--> C() || *% | _reset_action_tick_count() | _reload_handler() | % F() | _no_threat_reset() | C <- false
 
 --- WIP - Cows: This is a simplified movement function, doesn't update as often as companion movement because non-companions do not need to keep up with their target.
 ---@param npcSurvivor any

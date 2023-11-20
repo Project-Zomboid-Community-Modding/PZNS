@@ -484,6 +484,64 @@ function PZNS_UtilsNPCs.PZNS_SetNPCNeedLevel(npcSurvivor, needType, needValue)
     end
 end
 
+--- oZumbiAnalitico: Auxiliar function to PZNS_ClearNPCAllNeedsLevelOnPlayerUpdate
+local function clearNeedsIsoPlayer(npcIsoPlayer)
+    if IsNPCsNeedsActive then return nil end
+    if not npcIsoPlayer then return nil end
+    local BODYDAMAGE = npcIsoPlayer:getBodyDamage()
+    if not BODYDAMAGE then return nil end
+    if BODYDAMAGE:getOverallBodyHealth() == 0 then return nil end -- don't update on missing dead isoplayers objects
+    local STATS = npcIsoPlayer:getStats()
+    if not STATS then return nil end
+    -- oZumbiAnalitico: The purpose of this function is to address an issue of unknown death of npc, difficult to reproduce.
+    -- ... if there is any missing IsoPlayer object (without npcSurvivor reference) they will not die from thirst or starvation or anything else.
+    -- ... this function don't substitute PZNS_ClearAllNPCsAllNeedsLevel yet
+    if STATS:getThirst() > 0.0 then -- for this time, avoid double clear from the PZNS_ClearAllNPCsAllNeedsLevel
+        STATS:setAnger(0.0);
+        STATS:setBoredom(0.0);
+        STATS:setDrunkenness(0.0);
+        STATS:setEndurance(100.0);
+        STATS:setFatigue(0.0);
+        STATS:setFear(0.0);
+        STATS:setHunger(0.0);
+        STATS:setIdleboredom(0.0);
+        STATS:setMorale(0.0);
+        STATS:setPain(0.0);
+        STATS:setPanic(0.0);
+        STATS:setSanity(0.0);
+        STATS:setSickness(0.0);
+        STATS:setStress(0.0);
+        STATS:setStressFromCigarettes(0.0);
+        STATS:setThirst(0.0);
+        BODYDAMAGE:AddGeneralHealth(25);
+    end
+end
+
+--- oZumbiAnalitico: Alternative to PZNS_ClearNPCAllNeedsLevel
+-- ... to be used with event OnPlayerUpdate.
+-- ... don't know the impact on performance.
+local currentTime = nil -- variable to control the time, the update only occurs each hour
+local updateTime = nil -- variable to control the time, the update only occurs each hour
+function PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevelOnPlayerUpdate(npcIsoPlayer)
+    if not npcIsoPlayer:getIsNPC() then return nil end -- if is the actual local player then do nothing
+    -- currentTime : update on call
+    -- updateTime : the time of the last update
+	local GameTime = getGameTime()
+    currentTime = GameTime:getHour() -- update current time
+	if not currentTime then return nil end -- maybe unnecessary, 
+    if not updateTime then -- means the first time
+        updateTime = currentTime 
+        clearNeedsIsoPlayer(npcIsoPlayer)
+        return nil
+    end
+    if currentTime and updateTime then -- do update each hour
+        if math.abs(currentTime - updateTime) >= 1 then -- each hour update
+            updateTime = currentTime
+            clearNeedsIsoPlayer(npcIsoPlayer)
+        end
+    end
+end
+
 --- Cows: needType based on values in Java API
 ---@param npcSurvivor any
 function PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevel(npcSurvivor)
@@ -497,7 +555,10 @@ function PZNS_UtilsNPCs.PZNS_ClearNPCAllNeedsLevel(npcSurvivor)
     end
     --
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
-    if (npcIsoPlayer) then
+    
+    -- oZumbiAnalitico: should deprecate this part, leaving the update to PZNS_ClearNPCAllNeedsLevel_Alternative
+    -- ... i'm leaving this for next updates, perhaps.
+    if (npcIsoPlayer) then 
         npcIsoPlayer:getStats():setAnger(0.0);
         npcIsoPlayer:getStats():setBoredom(0.0);
         npcIsoPlayer:getStats():setDrunkenness(0.0);
