@@ -265,7 +265,7 @@ end
 --]]
 
 -- ====================================================================
----[[                  >>> PZNS JOBS ANALYSIS <<<
+--[[                  >>> PZNS JOBS ANALYSIS <<<
 
 -- [ Job ] : Is the main function for AI processing.
 
@@ -285,29 +285,150 @@ end
 -- 2. Timed - Random Changes ~ Using tick function and the control if 1 == ZombRand(1,ticks) then ... end
 -- 3. Timed - Periodic Changes ~ Using tick variables if _tick_counter % _ticks == 0 then ... end
 
--- Logic [ State Change x Processing ]
+-- [ Job Event ] : Is different from vanilla events, Job Events are paths inside the Job function which are triggered imediatly from specific circunstances. 
+-- 1. To program the response to events you should insert a table argument with a dictionary of callbacks.
+-- 2. Events should return true to send a message to job to continue the event.
+
+-- Logic [ Perception | State Change x Processing ]
 -- 1. _event_change are forced changes based on special priority circunstances. For example, an attack threat, close zombie, health need.
 -- 2. one should take care putting loops on _event_change, Job Function is called OnRenderTick.
 -- 3. N := npcSurvivor
 -- 4. NPCS := Active NPCs
 -- 5. Job State Processing could be used in different Job Functions.
+-- 6. Event Change can process imediatly without registering the event name.
+-- 7. Perception will build the variables necessary to test events. It's recommended to not put loops there, substitute with random functions.
+-- 8. _P := _perception , this part will build variables used to check events.
+-- 9. _C := _state_change , this part will change state event based or send message to change state based on time ticks.
+-- 10. _E := _event_change
+-- 11. _T := _timed_change
 -- -------------------------------------------------------------------
 --> Events.OnRenderTick.Add o _AllJobs || & N in NPCS || _JobSelect(N) || %% || _Job(N)
---> _Job() || _state_change() | _state_processing() || %% "state" || { ... }
---> _Job() || _state_change() || % _event_change() || { ... }
---> _Job() || _state_change() || % _event_change(), _timed_change() || _stay(), _change() || { ... }
+--> _Job() || _P() | _C() | _state_processing() || %% "state" || { ... }
+--> _Job() || _P() | _C() || % _E() || { ... }
+--> _Job() || _P() | _C() || % _E(), _T() || _stay(), _change() || { ... }
+
+-- [ JEOF ] Job Event Outer Function
+-- 1. _P ; Signal Perception
+-- 2. _I ; Interpretation of Signals
+-- 2. _E ; Event Callback calls
+-- -----------------------------------
+-- 1. _JEOF() || _P() | _I() | _E() 
 
 -- Possible Common Events:
--- 1. Threat 5 Squares Close ; T5SC
+-- 1. Threat 5 Squares Close ; T5SC ; 
 -- 2. Threat 2 Squares Close ; T2SC
 -- 3. Threat 10 Squares Distant ; T10SD
 -- 4. Health Below 10 ; HB10
 -- 5. Health Below 50 ; HB50
 -- 6. Can Attack Target ; CAT
 -- 7. Being Targeted By NPC ; BTN
--- 8. Zombie Bite ; ZB
+-- 8. Zombie Bite Attack ; ZBA
 -- ----------------------------------------
--- ZB > HB10 > T2SC > T5SC > CAT > BTN
+-- ZBA > HB10 > T2SC > T5SC > CAT > BTN
+
+-- ZBA > HB10 > TTC > CAT > BTN
+
+-- This -> Is a model to build a Job function decomposing in Job Outer Function and JobEventCallbacks dictionary
+-- ... 21112023:1817
+local TICK = TNP_customRandomFunctions.tickPeriod
+-- _Job(npcSurvivor) := _Job_Outer o EventCallbacks (npcSurvivor)
+local function _JobOuter(_JobEventCallbacks,npcSurvivor) 
+    -- _Job() || _P() | $ hp_health, zombie, raider_npc
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject
+    if not npcIsoPlayer then return nil end
+    local BODYDAMAGE = npcIsoPlayer:getBodyDamage()
+    local hp_health = BODYDAMAGE:getOverallBodyHealth()
+    local zombie = getRandomNearIsoZombie(npcIsoPlayer)
+    local zombie_dist = Vector2Lib.isoPlayerDist(npcIsoPlayer,zombie)
+    local raider_npc = getFirstClosestRaiderLimitedIteration(npcSurvivor)
+    local raider_npc_isoplayer = raider_npc.npcIsoPlayerObject
+    local raider_dist = Vector2Lib.isoPlayerDist(npcIsoPlayer,raider_npc_isoplayer)
+    -- _Job() || _P() | _C()
+    -- _Job() || _P() | _C() || % _E()
+    npcSurvivor.currentAction = JobEventCallbacks.name
+    if hp_health < 10 then 
+        if _JobEventCallbacks.OnHealthBelowTen(npcSurvivor) then return nil end
+    elseif zombie_dist and zombie_dist < 5 then 
+        if _JobEventCallbacks.OnZombieTooClose(npcSurvivor) then return nil end
+    elseif isCanAttackTarget() then 
+        if _JobEventCallbacks.OnCanAttackTarget(npcSurvivor) then return nil end
+    end
+    -- _Job() || _P() | _C() || % _E(), _T()
+    -- _Job() || _P() | _C() || % _E(), _T() || _stay()
+    if stayInCurrentAction(npcSurvivor) then 
+        
+    -- _Job() || _P() | _C() || % _E(), _T() || _stay(), _change()
+    else 
+        -- { TICK, npcSurvivor.currentAction..tostring() }
+    end
+    -- _Job() || _P() | _C() | _state_processing()
+    if npcSurvivor.currentAction == _JobEventCallbacks.name then 
+        -- Do First Things
+    else 
+        -- { npcSurvivor.currentAction }
+    end
+end
+
+local EVENT_HB10 = "Health Below 10"
+local EVENT_TTC = "Threat Too Close"
+local EVENT_CAT = "Can Attack Target"
+local function JEOF_BasicThreatResponse(BasicThreatResponseCallbacks,npcSurvivor)
+    -- _JEOF() || _Perception()
+    local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject
+    if not npcIsoPlayer then return nil end
+    local BODYDAMAGE = npcIsoPlayer:getBodyDamage()
+    local hp_health = BODYDAMAGE:getOverallBodyHealth()
+    local raider_npc = getFirstClosestRaiderLimitedIteration(npcSurvivor)
+    local zombie = getRandomNearIsoZombie(npcIsoPlayer)
+    local raider_npc_isoplayer = raider_npc.npcIsoPlayerObject
+    local zombie_dist = Vector2Lib.isoPlayerDist(npcIsoPlayer,zombie)
+    local raider_dist = Vector2Lib.isoPlayerDist(npcIsoPlayer,raider_npc_isoplayer)
+    local is_zombie_in_range, z_range = Vector2Lib.isInWeaponRange(zombie, npcIsoPlayer)
+    local is_raider_in_range, r_range = Vector2Lib.isInWeaponRange(raider_npc_isoplayer, npcIsoPlayer)
+    local current_event = nil
+    -- _JEOF() || _Perception() | _Interpretation()
+    if hp_health < 10 then 
+        current_event = EVENT_HB10 
+    else
+        if zombie_dist and zombie_dist <= math.max( 1, z_range/2 ) then 
+            current_event = EVENT_TTC 
+        elseif raider_dist and raider_dist <= math.max( 1, r_range/2 ) then 
+            current_event = EVENT_TTC
+        else 
+            if zombie_dist and raider_dist then 
+                if raider_dist <= zombie_dist then 
+                    if raider_dist <= r_range then
+                        npcSurvivor.aimTarget = raider_npc_isoplayer
+                        current_event = EVENT_CAT
+                    end 
+                else 
+                    if zombie_dist <= z_range then
+                        npcSurvivor.aimTarget = zombie
+                        current_event = EVENT_CAT
+                    end 
+                end
+            elseif zombie_dist then 
+                if zombie_dist <= z_range then
+                    npcSurvivor.aimTarget = zombie
+                    current_event = EVENT_CAT
+                end 
+            elseif raider_dist then 
+                if raider_dist <= r_range then
+                    npcSurvivor.aimTarget = raider_npc_isoplayer
+                    current_event = EVENT_CAT
+                end 
+            end
+        end
+    end
+    -- _JEOF() || _Perception() | _Interpretation() | _Action() 
+    if current_event == EVENT_HB10  then 
+        if BasicThreatResponseCallbacks.OnHealthBelowTen(npcSurvivor) then return nil end
+    elseif current_event == EVENT_TTC then 
+        if BasicThreatResponseCallbacks.OnThreatTooClose(npcSurvivor) then return nil end
+    elseif current_event == EVENT_CAT then 
+        if BasicThreatResponseCallbacks.OnCanAttackTarget(npcSurvivor) then return nil end
+    end
+end
 
 -- ...
 
