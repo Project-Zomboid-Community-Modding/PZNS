@@ -46,9 +46,10 @@ end
 ---@param surname string
 ---@param forename string
 ---@param survivorID survivorID unique ID, will be set to isoPlayer modData
+---@param outfit string Name of the outfit you want to apply
 ---@return IsoPlayer isoPlayer player object
 ---@return integer squareZ Z-level that NPC was created at
-local function createIsoPlayer(square, isFemale, surname, forename, survivorID)
+local function createIsoPlayer(square, isFemale, surname, forename, survivorID, outfit)
     local squareZ = 0;
     -- Cows: It turns out this check is needed, otherwise NPCs may spawn in the air and fall...
     if (square:isSolidFloor()) then
@@ -56,6 +57,9 @@ local function createIsoPlayer(square, isFemale, surname, forename, survivorID)
     end
     --
     local survivorDescObject = PZNS_UtilsDataNPCs.PZNS_CreateNPCSurvivorDescObject(isFemale, surname, forename);
+    if outfit ~= nil then
+        survivorDescObject:dressInNamedOutfit(outfit)
+    end
     local npcIsoPlayerObject = IsoPlayer.new(
         getWorld():getCell(),
         survivorDescObject,
@@ -81,6 +85,7 @@ end
 ---@param forename string
 ---@param square IsoGridSquare Square that NPC will spawn on
 ---@param isoPlayer IsoPlayer? if passed - skip IsoPlayer creation
+---@param outfit string? Name of the outfit you want to apply
 ---@return PZNS_NPCSurvivor
 function PZNS_NPCsManager.createNPCSurvivor(
     survivorID,
@@ -88,7 +93,8 @@ function PZNS_NPCsManager.createNPCSurvivor(
     surname,
     forename,
     square,
-    isoPlayer
+    isoPlayer,
+    outfit
 )
     -- Cows: Check if the survivorID is present before proceeding.
     if (survivorID == nil) then
@@ -102,11 +108,11 @@ function PZNS_NPCsManager.createNPCSurvivor(
         local survivorName = forename .. " " .. surname; -- Cows: in case getName() functions break down or can't be used...
         --
         if not isoPlayer then
-            isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID)
+            isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID, outfit)
         else
             if not instanceof(isoPlayer, "IsoPlayer") then
                 print(string.format("IsoPlayer is not valid for '%s'! Will create new one", survivorID))
-                isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID)
+                isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID, outfit)
             else
                 squareZ = isoPlayer:getSquare():getZ()
             end
@@ -134,7 +140,7 @@ function PZNS_NPCsManager.createNPCSurvivor(
         print(string.format("NPC already exist! ID: %s", survivorID))
         npcSurvivor = npc
         if not isoPlayer then
-            isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID)
+            isoPlayer, squareZ = createIsoPlayer(square, isFemale, surname, forename, survivorID, outfit)
         end
         if not npcSurvivor.npcIsoPlayerObject then
             npcSurvivor.npcIsoPlayerObject = isoPlayer
