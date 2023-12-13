@@ -158,9 +158,9 @@ function PZNS_ContextMenu.Debug.BuildOptions(mpPlayerID, context, worldobjects)
     --
     local submenu_1 = context:getNew(context);
     local submenu_1_Option = context:addOption(
-        getText("ContextMenu_PZNS_PZNS_Debug_Build"),
-        worldobjects,
-        nil
+            getText("ContextMenu_PZNS_PZNS_Debug_Build"),
+            worldobjects,
+            nil
     );
     context:addSubMenu(submenu_1_Option, submenu_1);
     --
@@ -170,9 +170,9 @@ function PZNS_ContextMenu.Debug.BuildOptions(mpPlayerID, context, worldobjects)
         end
         --
         submenu_1:addOption(
-            debugText,
-            nil,
-            callbackFunction
+                debugText,
+                nil,
+                callbackFunction
         );
     end
 end
@@ -189,8 +189,13 @@ local function respawnJillTester()
     PZNS_SpawnJillTester();
 end
 
+local function PZNS_DebugStats()
+    PZNS_ISGeneralDebug.OnOpenPanel()
+end
+
 --
 local PZNS_DebugWorldText = {
+    DebugStats = getText("ContextMenu_PZNS_Debug_Stats"),
     ClearPlayerNeeds = getText("ContextMenu_PZNS_Clear_Player_Needs"),
     ClearAllNPCsNeeds = getText("ContextMenu_PZNS_Clear_All_NPCs_Needs"),
     SpawnChris = getText("ContextMenu_PZNS_ReSpawn_Chris_Tester"),
@@ -203,6 +208,7 @@ local PZNS_DebugWorldText = {
 };
 ---
 local PZNS_DebugWorld = {
+    DebugStats = PZNS_DebugStats,
     ClearPlayerNeeds = PZNS_PlayerUtils.PZNS_ClearPlayerAllNeeds,
     ClearAllNPCsNeeds = PZNS_UtilsNPCs.PZNS_ClearAllNPCsAllNeedsLevel,
     SpawnChris = respawnChristTester,
@@ -220,9 +226,9 @@ local PZNS_DebugWorld = {
 function PZNS_ContextMenu.Debug.WorldOptions(mpPlayerID, context, worldobjects)
     local submenu_1 = context:getNew(context);
     local submenu_1_Option = context:addOption(
-        getText("ContextMenu_PZNS_PZNS_Debug_World"),
-        worldobjects,
-        nil
+            getText("ContextMenu_PZNS_PZNS_Debug_World"),
+            worldobjects,
+            nil
     );
     local square = PZNS_PlayerUtils.PZNS_GetPlayerMouseGridSquare(0);
     context:addSubMenu(submenu_1_Option, submenu_1);
@@ -245,9 +251,9 @@ function PZNS_ContextMenu.Debug.WorldOptions(mpPlayerID, context, worldobjects)
         end
         --
         submenu_1:addOption(
-            debugText,
-            nil,
-            callbackFunction
+                debugText,
+                nil,
+                callbackFunction
         );
     end
 end
@@ -274,9 +280,9 @@ local PZNS_DebugWipe = {
 function PZNS_ContextMenu.Debug.WipeOptions(mpPlayerID, context, worldobjects)
     local submenu_1 = context:getNew(context);
     local submenu_1_Option = context:addOption(
-        getText("ContextMenu_PZNS_PZNS_Debug_WipeData"),
-        worldobjects,
-        nil
+            getText("ContextMenu_PZNS_PZNS_Debug_WipeData"),
+            worldobjects,
+            nil
     );
     context:addSubMenu(submenu_1_Option, submenu_1);
     --
@@ -286,9 +292,9 @@ function PZNS_ContextMenu.Debug.WipeOptions(mpPlayerID, context, worldobjects)
         end
         --
         submenu_1:addOption(
-            debugText,
-            nil,
-            callbackFunction
+                debugText,
+                nil,
+                callbackFunction
         );
     end
 end
