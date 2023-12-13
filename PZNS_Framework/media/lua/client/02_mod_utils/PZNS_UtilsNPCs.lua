@@ -25,12 +25,13 @@ end
 function PZNS_UtilsNPCs.PZNS_AddNPCSurvivorPerkLevel(npcSurvivor, perkName, levels)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
-        return;
+        return ;
     end
     -- Verify the perk exists and level it based on the levels number input.
-    if (PerkFactory.getPerkFromName(perkName)) then
+    local perk = Perks.FromString(perkName)
+    if perk ~= nil then
         for i = 1, levels do
-            npcIsoPlayer:LevelPerk(Perks.FromString(perkName));
+            npcIsoPlayer:LevelPerk(perk);
         end
     end
 
@@ -44,10 +45,12 @@ end
 function PZNS_UtilsNPCs.PZNS_GetNPCSurvivorPerkLevel(npcSurvivor, perkName)
     local npcIsoPlayer = npcSurvivor.npcIsoPlayerObject;
     if (npcIsoPlayer == nil) then
-        return;
+        return ;
     end
     -- Verify the perk exists and level it based on the levels number input.
-    if (PerkFactory.getPerkFromName(perkName)) then
+    local perk = Perks.FromString(perkName)
+
+    if perk ~= nil then
         return npcIsoPlayer:getPerkLevel(Perks.FromString(perkName));
     end
 
