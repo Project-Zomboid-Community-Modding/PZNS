@@ -148,7 +148,9 @@ function PZNS_UtilsDataNPCs.PZNS_SpawnNPCFromModData(npcSurvivor)
         npcSurvivor.textObject:setAllowAnyImage(true);
         npcSurvivor.textObject:setDefaultFont(UIFont.Small);
         npcSurvivor.textObject:setDefaultColors(255, 255, 255);
-        npcSurvivor.textObject:ReadString(npcSurvivor.survivorName);
+		if not SandboxVars.PZNS_Framework.HideNpcNameTags then		
+			npcSurvivor.textObject:ReadString(survivorName);
+		end	
         npcSurvivor.isSavedInWorld = false;
         npcSurvivor.isSpawned = true;
     end

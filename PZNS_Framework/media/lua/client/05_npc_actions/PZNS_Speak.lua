@@ -9,9 +9,13 @@ local function resetSpeechText(npcSurvivor)
     else
         npcSurvivor.textObject:setDefaultColors(230, 230, 230, 0.8); -- White text
     end
-    npcSurvivor.textObject:ReadString(
-        npcSurvivor.survivorName
-    );
+	if not SandboxVars.PZNS_Framework.HideNpcNameTags then	
+		npcSurvivor.textObject:ReadString(
+			npcSurvivor.survivorName
+		);
+	else
+		npcSurvivor.textObject:ReadString("");	
+	end
     npcSurvivor.speechTicks = 0;
 end
 
@@ -69,9 +73,13 @@ function PZNS_NPCSpeak(npcSurvivor, text, intention)
             end
         end
         npcSurvivor.speechTicks = 0; -- Cows: Reset speechTicks so the text stays rendered.
-        npcSurvivor.textObject:ReadString(
-            text .. "\n" .. npcSurvivor.survivorName
-        );
+		if not SandboxVars.PZNS_Framework.HideNpcNameTags then
+			npcSurvivor.textObject:ReadString(
+				text .. "\n" .. npcSurvivor.survivorName
+			);
+		else
+			npcSurvivor.textObject:ReadString(text);		
+		end	
     end
 end
 

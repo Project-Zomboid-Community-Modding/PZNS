@@ -7,6 +7,9 @@ Sandbox_EN = {
 	Sandbox_PZNS_Framework_IsInfiniteAmmoActive = "NPC has Infinite Ammo?",
 	Sandbox_PZNS_Framework_IsInfiniteAmmoActive_tooltip = "Check to activate, uncheck to deactivate - NPCs will have keep shooting without needing ammo in inventory if activated",
 
+	Sandbox_PZNS_Framework_HideNpcNameTags = "Hide NPC Names",
+	Sandbox_PZNS_Framework_HideNpcNameTags_tooltip = "Check to activate, uncheck to deactivate - NPCs names wont be visible if activated",
+
 	Sandbox_PZNS_Framework_IsNPCsNeedsActive = "(WIP)NPC has needs",
 	Sandbox_PZNS_Framework_IsNPCsNeedsActive_tooltip = "(WIP)Check to activate, uncheck to deactivate - NPCs will need food and water if activated",
 

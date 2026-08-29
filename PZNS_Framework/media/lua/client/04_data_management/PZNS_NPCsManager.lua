@@ -134,7 +134,9 @@ function PZNS_NPCsManager.createNPCSurvivor(
         npcSurvivor.textObject:setAllowAnyImage(true);
         npcSurvivor.textObject:setDefaultFont(UIFont.Small);
         npcSurvivor.textObject:setDefaultColors(255, 255, 255);
-        npcSurvivor.textObject:ReadString(survivorName);
+		if not SandboxVars.PZNS_Framework.HideNpcNameTags then		
+			npcSurvivor.textObject:ReadString(survivorName);
+		end	
     else
         -- WIP - Cows: Alert player the ID is already used and the NPC cannot be created.
         print(string.format("NPC already exist! ID: %s", survivorID))
